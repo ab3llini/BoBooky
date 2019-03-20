@@ -28,6 +28,6 @@ schemes:
 - "https"
 - "http"
 paths:
-    /books:
-    /user:
-    /cart:
+  /books:
+  /user:
+  /cart:
