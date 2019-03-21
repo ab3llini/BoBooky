@@ -1,7 +1,10 @@
-#TODO: change the first section (info - host - tags) from petstore to bookstore
+---
 swagger: "2.0"
 info:
-  description: "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  description: "This is a sample server Petstore server.  You can find out more about\
+    \     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,\
+    \ #swagger](http://swagger.io/irc/).      For this sample, you can use the api\
+    \ key `special-key` to test the authorization     filters."
   version: "1.0.0"
   title: "Book Store"
   termsOfService: "http://swagger.io/terms/"
@@ -12,19 +15,6 @@ info:
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "petstore.swagger.io"
 basePath: "/v2"
-tags:
-- name: "pet"
-  description: "Everything about your Pets"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
-- name: "store"
-  description: "Access to Petstore orders"
-- name: "user"
-  description: "Operations about user"
-  externalDocs:
-    description: "Find out more about our store"
-    url: "http://swagger.io"
 schemes:
 - "https"
 - "http"
@@ -41,14 +31,15 @@ paths:
       parameters:
       - name: "offset"
         in: "query"
-        description: "Pagination offset. Default is 0."
         required: false
         type: "integer"
+        description: "Pagination offset. Default is 0."
       - name: "limit"
         in: "query"
-        description: "Maximum number of items per page. Default is 20 and cannot exceed 500."
         required: false
         type: "integer"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
       responses:
         200:
           description: "A collection of Books"
@@ -57,8 +48,66 @@ paths:
             items:
               $ref: "#/definitions/Book"
         404:
-          description: "Unexpected error"
-      x-swagger-router-controller: "Book"
+          description: "Book not found"
+    post:
+      tags:
+      - "book"
+      summary: "Add new book"
+      description: "Add a new book to the library"
+      operationId: "booksPOST"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        200:
+          description: "The book has been added to the database"
+        400:
+          description: "Error adding the object to the db"
+    put:
+      tags:
+      - "book"
+      summary: "Update an existing book"
+      description: "Updates an existing book with the informations provided"
+      operationId: "bookPUT"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        200:
+          description: "The book has been updated"
+        400:
+          description: "Invalid book ID provided"
+        404:
+          description: "Book ID not found"
+    delete:
+      tags:
+      - "book"
+      summary: "Delete an existing book"
+      description: "Deletes the book specified in the id"
+      operationId: "bookDELETE"
+      parameters:
+      - name: "bookID"
+        in: "query"
+        required: true
+        type: "integer"
+        description: "The id of the book to delete"
+      responses:
+        200:
+          description: "The book has been successfully deleted"
+        400:
+          description: "The book id provided is invalid"
+        404:
+          description: "Book id not found"
   /books/{bookId}:
     get:
       tags:
@@ -68,13 +117,7 @@ paths:
       operationId: "getBookById"
       produces:
       - "application/json"
-      parameters:
-      - name: "bookId"
-        in: "path"
-        description: "ID of book to return"
-        required: true
-        type: "integer"
-        format: "int64"
+      parameters: []
       responses:
         200:
           description: "successful operation"
@@ -84,7 +127,13 @@ paths:
           description: "Invalid ID supplied"
         404:
           description: "Book not found"
-      x-swagger-router-controller: "Book"
+    parameters:
+    - name: "bookId"
+      in: "path"
+      required: true
+      type: "integer"
+      format: "int64"
+      description: "ID of book to return"
   /books/findByName:
     get:
       tags:
@@ -97,9 +146,9 @@ paths:
       parameters:
       - name: "bookName"
         in: "query"
-        description: "Name of the book"
         required: true
         type: "string"
+        description: "Name of the book"
       responses:
         200:
           description: "successful operation"
@@ -107,9 +156,8 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Book"
-  /user:
-  /cart:
-
+        404:
+          description: "Book not found"
 definitions:
   Book:
     type: "object"
@@ -133,7 +181,6 @@ definitions:
         enum:
         - "available"
         - "out of stock"
-    title: "Book"
     description: "A book for sale in the store"
     example:
       id: 0
@@ -162,7 +209,6 @@ definitions:
       value: 11
   Currency:
     type: "string"
-    pattern: "^[A-Z]{3,3}$"
     description: "some description\n"
     example: "eur"
   User:
@@ -176,7 +222,6 @@ definitions:
         type: "string"
       creditcard:
         type: "string"
-    title: "User"
     description: "A user"
     example:
       id: 1
