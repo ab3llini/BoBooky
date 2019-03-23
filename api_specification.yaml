@@ -197,6 +197,68 @@ paths:
           description: "Order placed"
         400:
           description: "Wrong IDs"
+  /user/login:
+    post:
+      tags:
+      - "user"
+      summary: "Login"
+      description: "Login with a form"
+      operationId: "userLoginPOST"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesfull login"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/logout:
+      get:
+        tags:
+        - "user"
+        summary: "Logs out the current user session"
+        description: "Logout"
+        operationId: "userLogoutGET"
+        produces:
+        - "application/json"
+        parameters: []
+        responses:
+          default:
+            description: "successfully logged out"
+  /user/register:
+      post:
+        tags:
+        - "user"
+        summary: "Registration"
+        description: "Register into the bookstore"
+        operationId: "userRegisterPOST"
+        consumes:
+        - "application/x-www-form-urlencoded"
+        produces:
+        - "application/json"
+        parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/User" #manca la definitions dello user
+        responses:
+          200:
+            description: "succesfull registration"
+          404:
+            description: "unauthorized"
+        x-swagger-router-controller: "User"
 definitions:
   Book:
     type: "object"
