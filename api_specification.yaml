@@ -283,6 +283,45 @@ paths:
           description: "Order placed"
         400:
           description: "Wrong IDs"
+  /store/order/{id}:
+    get:
+      tags:
+      - "store"
+      summary: "Get a single order by id"
+      operationId: "orderByIdGET"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Review"
+        400:
+          description: "Invalid id"
+        404:
+          description: "id not found"
+    delete:
+      tags:
+      - "store"
+      summary: "Delete an existing order"
+      operationId: "orderByIdDELETE"
+      parameters:
+      - name: "userId"
+        in: "header"
+        required: true
+        type: "integer"
+        description: "The ID of the user"
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Invalid user or order id"
+        404:
+          description: "order not found"
+    parameters:
+    - name: "id"
+      in: "path"
+      required: true
+      type: "string"
   /user/login:
     post:
       tags:
