@@ -19,6 +19,53 @@ schemes:
 - "https"
 - "http"
 paths:
+  /author:
+    get:
+      tags:
+      - "author"
+      summary: "List all the authors in the database"
+      parameters:
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        description: "Page offset. Defaults to 0"
+      - name: "limit"
+        in: "query"
+        required: false
+        type: "integer"
+        description: "Result limit. Defaults to 20, max 500."
+      responses:
+        200:
+          description: "Returns the list of authors in the specified range."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Author"
+        400:
+          description: "Unable to fetch all authors"
+        404:
+          description: "Unable to find the specified resource"
+  /author/{id}:
+    get:
+      tags:
+      - "author"
+      summary: "Fetch a specific author"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/Author"
+        400:
+          description: "Unable to fetch this author."
+        404:
+          description: "Unable to find this author."
+    parameters:
+    - name: "id"
+      in: "path"
+      required: true
+      type: "string"
   /books:
     get:
       tags:
@@ -108,7 +155,7 @@ paths:
           description: "The book id provided is invalid"
         404:
           description: "Book id not found"
-  /books/{bookId}:
+  /books/{id}:
     get:
       tags:
       - "book"
@@ -128,13 +175,52 @@ paths:
         404:
           description: "Book not found"
     parameters:
-    - name: "bookId"
+    - name: "id"
       in: "path"
       required: true
       type: "integer"
       format: "int64"
       description: "ID of book to return"
-  /books/findByName:
+  /books/{id}/reviews:
+    get:
+      tags:
+      - "book"
+      - "user"
+      summary: "Fetches all the reviews for this book"
+      operationId: "bookReviewsGET"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        400:
+          description: "wrong book id"
+        404:
+          description: "Book id not found"
+    post:
+      tags:
+      - "review"
+      summary: "Add a review"
+      operationId: "addReviewPOST"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Review"
+      responses:
+        200:
+          description: "Status 200"
+    parameters:
+    - name: "id"
+      in: "path"
+      required: true
+      type: "string"
+  /books/search:
     get:
       tags:
       - "book"
@@ -144,7 +230,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "bookName"
+      - name: "name"
         in: "query"
         required: true
         type: "string"
@@ -206,8 +292,6 @@ paths:
       operationId: "userLoginPOST"
       consumes:
       - "application/x-www-form-urlencoded"
-      produces:
-      - "application/json"
       parameters:
       - name: "username"
         in: "formData"
@@ -222,43 +306,48 @@ paths:
           description: "succesfull login"
         404:
           description: "unauthorized"
-      x-swagger-router-controller: "User"
   /user/logout:
-      get:
-        tags:
-        - "user"
-        summary: "Logs out the current user session"
-        description: "Logout"
-        operationId: "userLogoutGET"
-        produces:
-        - "application/json"
-        parameters: []
-        responses:
-          default:
-            description: "successfully logged out"
+    get:
+      tags:
+      - "user"
+      summary: "Logs out the current user session"
+      description: "Logout"
+      operationId: "userLogoutGET"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
   /user/register:
-      post:
-        tags:
-        - "user"
-        summary: "Registration"
-        description: "Register into the bookstore"
-        operationId: "userRegisterPOST"
-        consumes:
-        - "application/x-www-form-urlencoded"
-        produces:
-        - "application/json"
-        parameters:
-        - in: "body"
-          name: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/User" #manca la definitions dello user
-        responses:
-          200:
-            description: "succesfull registration"
-          404:
-            description: "unauthorized"
-        x-swagger-router-controller: "User"
+    post:
+      tags:
+      - "user"
+      summary: "Registration"
+      description: "Register into the bookstore"
+      operationId: "userRegisterPOST"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "id"
+        in: "formData"
+        required: false
+        type: "integer"
+      - name: "name"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "address"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "creditcard"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "succesfull registration"
+        404:
+          description: "unauthorized"
 definitions:
   Book:
     type: "object"
@@ -355,3 +444,46 @@ definitions:
       : 1,\n  \"title\": \"Il deserto dei tartari\",\n  \"author\": \"Dino Buzzati\"\
       ,\n  \"price\": {\n    \"value\": 10,\n    \"currency\": \"eur\"\n  },\n  \"\
       status\": \"available\"\n}\n  ]\n}"
+  Review:
+    type: "object"
+    required:
+    - "author"
+    - "book"
+    - "id"
+    - "rating"
+    - "timestamp"
+    - "title"
+    properties:
+      id:
+        type: "integer"
+      author:
+        type: "integer"
+        description: "ID of the user to which this review refers"
+      timestamp:
+        type: "string"
+        format: "date-time"
+      title:
+        type: "string"
+      body:
+        type: "string"
+      rating:
+        type: "number"
+      book:
+        type: "integer"
+        description: "ID of the book to which this review refers."
+    description: "This is a review object."
+  Author:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+      image_url:
+        type: "string"
+      period:
+        type: "string"
+      type:
+        type: "array"
+        items:
+          type: "string"
