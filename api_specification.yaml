@@ -108,7 +108,7 @@ paths:
           description: "The book id provided is invalid"
         404:
           description: "Book id not found"
-  /books/{bookId}:
+  /books/{id}:
     get:
       tags:
       - "book"
@@ -128,13 +128,89 @@ paths:
         404:
           description: "Book not found"
     parameters:
-    - name: "bookId"
+    - name: "id"
       in: "path"
       required: true
       type: "integer"
       format: "int64"
       description: "ID of book to return"
-  /books/findByName:
+  /books/{id}/reviews:
+    get:
+      tags:
+      - "book"
+      - "user"
+      summary: "Fetches all the reviews for this book"
+      operationId: "bookReviewsGET"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        400:
+          description: "wrong book id"
+        404:
+          description: "Book id not found"
+    post:
+      tags:
+      - "review"
+      summary: "Add a review"
+      operationId: "addReviewPOST"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Review"
+      responses:
+        200:
+          description: "Status 200"
+    put:
+      tags:
+      - "review"
+      summary: "Update an existing review for the selected book"
+      operationId: "updateReviewPUT"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Review"
+      responses:
+        200:
+          description: "The review has been updated"
+        400:
+          description: "Invalid update request"
+        404:
+          description: "Book or author not found"
+    delete:
+      tags:
+      - "review"
+      summary: "Delete and existing review"
+      operationId: "updateReviewDELETE"
+      parameters:
+      - name: "userID"
+        in: "query"
+        required: true
+        type: "integer"
+        description: "The id of the user that wrote the review"
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "invalid request"
+        404:
+          description: "Error"
+    parameters:
+    - name: "id"
+      in: "path"
+      required: true
+      type: "string"
+  /books/search:
     get:
       tags:
       - "book"
@@ -144,7 +220,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "bookName"
+      - name: "name"
         in: "query"
         required: true
         type: "string"
@@ -197,6 +273,45 @@ paths:
           description: "Order placed"
         400:
           description: "Wrong IDs"
+  /store/order/{id}:
+    get:
+      tags:
+      - "store"
+      summary: "Get a single order by id"
+      operationId: "orderByIdGET"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Review"
+        400:
+          description: "Invalid id"
+        404:
+          description: "id not found"
+    delete:
+      tags:
+      - "store"
+      summary: "Delete an existing order"
+      operationId: "orderByIdDELETE"
+      parameters:
+      - name: "userId"
+        in: "header"
+        required: true
+        type: "integer"
+        description: "The ID of the user"
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Invalid user or order id"
+        404:
+          description: "order not found"
+    parameters:
+    - name: "id"
+      in: "path"
+      required: true
+      type: "string"
   /user/login:
     post:
       tags:
@@ -206,8 +321,6 @@ paths:
       operationId: "userLoginPOST"
       consumes:
       - "application/x-www-form-urlencoded"
-      produces:
-      - "application/json"
       parameters:
       - name: "username"
         in: "formData"
@@ -222,43 +335,48 @@ paths:
           description: "succesfull login"
         404:
           description: "unauthorized"
-      x-swagger-router-controller: "User"
   /user/logout:
-      get:
-        tags:
-        - "user"
-        summary: "Logs out the current user session"
-        description: "Logout"
-        operationId: "userLogoutGET"
-        produces:
-        - "application/json"
-        parameters: []
-        responses:
-          default:
-            description: "successfully logged out"
+    get:
+      tags:
+      - "user"
+      summary: "Logs out the current user session"
+      description: "Logout"
+      operationId: "userLogoutGET"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
   /user/register:
-      post:
-        tags:
-        - "user"
-        summary: "Registration"
-        description: "Register into the bookstore"
-        operationId: "userRegisterPOST"
-        consumes:
-        - "application/x-www-form-urlencoded"
-        produces:
-        - "application/json"
-        parameters:
-        - in: "body"
-          name: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/User" #manca la definitions dello user
-        responses:
-          200:
-            description: "succesfull registration"
-          404:
-            description: "unauthorized"
-        x-swagger-router-controller: "User"
+    post:
+      tags:
+      - "user"
+      summary: "Registration"
+      description: "Register into the bookstore"
+      operationId: "userRegisterPOST"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: "id"
+        in: "formData"
+        required: false
+        type: "integer"
+      - name: "name"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "address"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "creditcard"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "succesfull registration"
+        404:
+          description: "unauthorized"
 definitions:
   Book:
     type: "object"
@@ -355,3 +473,31 @@ definitions:
       : 1,\n  \"title\": \"Il deserto dei tartari\",\n  \"author\": \"Dino Buzzati\"\
       ,\n  \"price\": {\n    \"value\": 10,\n    \"currency\": \"eur\"\n  },\n  \"\
       status\": \"available\"\n}\n  ]\n}"
+  Review:
+    type: "object"
+    required:
+    - "author"
+    - "book"
+    - "id"
+    - "rating"
+    - "timestamp"
+    - "title"
+    properties:
+      id:
+        type: "integer"
+      author:
+        type: "integer"
+        description: "ID of the user to which this review refers"
+      timestamp:
+        type: "string"
+        format: "date-time"
+      title:
+        type: "string"
+      body:
+        type: "string"
+      rating:
+        type: "number"
+      book:
+        type: "integer"
+        description: "ID of the book to which this review refers."
+    description: "This is a review object."
