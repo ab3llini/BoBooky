@@ -1,10 +1,7 @@
 ---
 swagger: "2.0"
 info:
-  description: "This is a sample server Petstore server.  You can find out more about\
-    \     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,\
-    \ #swagger](http://swagger.io/irc/).      For this sample, you can use the api\
-    \ key `special-key` to test the authorization     filters."
+  description: "Welcome to the nodejs backend of Booboky!"
   version: "1.0.0"
   title: "Book Store"
   termsOfService: "http://swagger.io/terms/"
@@ -13,8 +10,8 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "petstore.swagger.io"
-basePath: "/v2"
+host: "localhost"
+basePath: "/api"
 schemes:
 - "https"
 - "http"
@@ -24,17 +21,18 @@ paths:
       tags:
       - "author"
       summary: "List all the authors in the database"
+      operationId: "authorGET"
       parameters:
       - name: "offset"
         in: "query"
+        description: "Page offset. Defaults to 0"
         required: false
         type: "integer"
-        description: "Page offset. Defaults to 0"
       - name: "limit"
         in: "query"
+        description: "Result limit. Defaults to 20, max 500."
         required: false
         type: "integer"
-        description: "Result limit. Defaults to 20, max 500."
       responses:
         200:
           description: "Returns the list of authors in the specified range."
@@ -46,12 +44,18 @@ paths:
           description: "Unable to fetch all authors"
         404:
           description: "Unable to find the specified resource"
+      x-swagger-router-controller: "Author"
   /author/{id}:
     get:
       tags:
       - "author"
       summary: "Fetch a specific author"
-      parameters: []
+      operationId: "authorIdGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
       responses:
         200:
           description: "Status 200"
@@ -61,11 +65,7 @@ paths:
           description: "Unable to fetch this author."
         404:
           description: "Unable to find this author."
-    parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      x-swagger-router-controller: "Author"
   /books:
     get:
       tags:
@@ -78,15 +78,15 @@ paths:
       parameters:
       - name: "offset"
         in: "query"
+        description: "Pagination offset. Default is 0."
         required: false
         type: "integer"
-        description: "Pagination offset. Default is 0."
       - name: "limit"
         in: "query"
-        required: false
-        type: "integer"
         description: "Maximum number of items per page. Default is 20 and cannot exceed\
           \ 500."
+        required: false
+        type: "integer"
       responses:
         200:
           description: "A collection of Books"
@@ -96,6 +96,7 @@ paths:
               $ref: "#/definitions/Book"
         404:
           description: "Book not found"
+      x-swagger-router-controller: "Book"
     post:
       tags:
       - "book"
@@ -105,8 +106,8 @@ paths:
       consumes:
       - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
+      - in: "body"
+        name: "body"
         required: true
         schema:
           $ref: "#/definitions/Book"
@@ -115,6 +116,7 @@ paths:
           description: "The book has been added to the database"
         400:
           description: "Error adding the object to the db"
+      x-swagger-router-controller: "Book"
     put:
       tags:
       - "book"
@@ -124,8 +126,8 @@ paths:
       consumes:
       - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
+      - in: "body"
+        name: "body"
         required: true
         schema:
           $ref: "#/definitions/Book"
@@ -136,6 +138,7 @@ paths:
           description: "Invalid book ID provided"
         404:
           description: "Book ID not found"
+      x-swagger-router-controller: "Book"
     delete:
       tags:
       - "book"
@@ -145,9 +148,9 @@ paths:
       parameters:
       - name: "bookID"
         in: "query"
+        description: "The id of the book to delete"
         required: true
         type: "integer"
-        description: "The id of the book to delete"
       responses:
         200:
           description: "The book has been successfully deleted"
@@ -155,6 +158,7 @@ paths:
           description: "The book id provided is invalid"
         404:
           description: "Book id not found"
+      x-swagger-router-controller: "Book"
   /books/{id}:
     get:
       tags:
@@ -164,7 +168,13 @@ paths:
       operationId: "getBookById"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of book to return"
+        required: true
+        type: "integer"
+        format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -174,13 +184,7 @@ paths:
           description: "Invalid ID supplied"
         404:
           description: "Book not found"
-    parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "integer"
-      format: "int64"
-      description: "ID of book to return"
+      x-swagger-router-controller: "Book"
   /books/{id}/reviews:
     get:
       tags:
@@ -188,7 +192,11 @@ paths:
       - "user"
       summary: "Fetches all the reviews for this book"
       operationId: "bookReviewsGET"
-      parameters: []
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
       responses:
         200:
           description: "Status 200"
@@ -200,6 +208,7 @@ paths:
           description: "wrong book id"
         404:
           description: "Book id not found"
+      x-swagger-router-controller: "Book"
     post:
       tags:
       - "review"
@@ -207,19 +216,19 @@ paths:
       operationId: "addReviewPOST"
       consumes: []
       parameters:
-      - name: "body"
-        in: "body"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
         required: true
         schema:
           $ref: "#/definitions/Review"
       responses:
         200:
           description: "Status 200"
-    parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      x-swagger-router-controller: "Review"
   /books/search:
     get:
       tags:
@@ -232,9 +241,9 @@ paths:
       parameters:
       - name: "name"
         in: "query"
+        description: "Name of the book"
         required: true
         type: "string"
-        description: "Name of the book"
       responses:
         200:
           description: "successful operation"
@@ -244,6 +253,7 @@ paths:
               $ref: "#/definitions/Book"
         404:
           description: "Book not found"
+      x-swagger-router-controller: "Book"
   /store/order:
     post:
       tags:
@@ -253,28 +263,11 @@ paths:
       consumes:
       - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
+      - in: "body"
+        name: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "BookIDs"
-          - "OrderID"
-          - "UserID"
-          properties:
-            OrderID:
-              type: "integer"
-              description: "The id of the order"
-            UserID:
-              type: "integer"
-              description: "The id of the user that placed the order"
-            BookIDs:
-              type: "array"
-              description: "The ids of the books in the order"
-              items:
-                type: "integer"
-          description: "The details for the order"
+          $ref: "#/definitions/body"
         x-examples:
           application/json: "{\n  \"OrderID\": 0,\n  \"UserID\"; 0,\n  \"BookIDs\"\
             : [\n  0,1,2\n  ]\n}"
@@ -283,13 +276,18 @@ paths:
           description: "Order placed"
         400:
           description: "Wrong IDs"
+      x-swagger-router-controller: "Store"
   /store/order/{id}:
     get:
       tags:
       - "store"
       summary: "Get a single order by id"
       operationId: "orderByIdGET"
-      parameters: []
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
       responses:
         200:
           description: "Success"
@@ -299,17 +297,22 @@ paths:
           description: "Invalid id"
         404:
           description: "id not found"
+      x-swagger-router-controller: "Store"
     delete:
       tags:
       - "store"
       summary: "Delete an existing order"
       operationId: "orderByIdDELETE"
       parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
       - name: "userId"
         in: "header"
+        description: "The ID of the user"
         required: true
         type: "integer"
-        description: "The ID of the user"
       responses:
         200:
           description: "Success"
@@ -317,11 +320,7 @@ paths:
           description: "Invalid user or order id"
         404:
           description: "order not found"
-    parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      x-swagger-router-controller: "Store"
   /user/login:
     post:
       tags:
@@ -345,6 +344,7 @@ paths:
           description: "succesfull login"
         404:
           description: "unauthorized"
+      x-swagger-router-controller: "User"
   /user/logout:
     get:
       tags:
@@ -356,6 +356,7 @@ paths:
       responses:
         200:
           description: "Status 200"
+      x-swagger-router-controller: "User"
   /user/register:
     post:
       tags:
@@ -387,6 +388,7 @@ paths:
           description: "succesfull registration"
         404:
           description: "unauthorized"
+      x-swagger-router-controller: "User"
 definitions:
   Book:
     type: "object"
@@ -511,6 +513,14 @@ definitions:
         type: "integer"
         description: "ID of the book to which this review refers."
     description: "This is a review object."
+    example:
+      author: 6
+      book: 5
+      rating: 1.46581298050294517310021547018550336360931396484375
+      id: 0
+      title: "title"
+      body: "body"
+      timestamp: "2000-01-23T04:56:07.000+00:00"
   Author:
     type: "object"
     required:
@@ -526,3 +536,29 @@ definitions:
         type: "array"
         items:
           type: "string"
+    example:
+      period: "period"
+      image_url: "image_url"
+      name: "name"
+      type:
+      - "type"
+      - "type"
+  body:
+    type: "object"
+    required:
+    - "BookIDs"
+    - "OrderID"
+    - "UserID"
+    properties:
+      OrderID:
+        type: "integer"
+        description: "The id of the order"
+      UserID:
+        type: "integer"
+        description: "The id of the user that placed the order"
+      BookIDs:
+        type: "array"
+        description: "The ids of the books in the order"
+        items:
+          type: "integer"
+    description: "The details for the order"
