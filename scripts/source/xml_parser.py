@@ -60,6 +60,8 @@ class XMLParser:
 
         self.book_to_genre[self.__book_idx] = list(genres)
 
+        book_description = str(book.find('description').text).replace('\n', '<br>')
+
         self.__add_book(book.find('title').text,
                         author_idx,
                         book.find('description').text,
@@ -82,7 +84,7 @@ class XMLParser:
     def get_associations_set(self) -> set:
         ans = set()
         for _book in self.related_books.keys():
-            related = [rel for rel in self.related_books[_book][0:10]]
+            related = [rel for rel in self.related_books[_book][:]]
             for _related in related:
                 ans.add(tuple(sorted((_book, _related))))
 
