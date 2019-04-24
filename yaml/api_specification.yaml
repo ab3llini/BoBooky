@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Welcome to the nodejs backend of Booboky!"
   version: "1.0.0"
-  title: "Book Store"
+  title: "Booboky"
   termsOfService: "http://swagger.io/terms/"
   contact:
     email: "apiteam@swagger.io"
@@ -14,6 +14,10 @@ host: "localhost"
 basePath: "/api"
 schemes:
 - "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
 paths:
   /author:
     get:
@@ -43,6 +47,28 @@ paths:
           description: "Unable to fetch all authors"
         404:
           description: "Unable to find the specified resource"
+    post:
+      tags:
+      - "author"
+      summary: "Add new author"
+      description: "Add a new book to the library"
+      operationId: "authorPOST"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Author"
+      responses:
+        200:
+          description: "The author has been added to the database"
+        400:
+          description: "Error adding the object to the db"
+      security:
+      - OAuth2:
+        - "admin"
   /author/{id}:
     get:
       tags:
@@ -59,6 +85,47 @@ paths:
           description: "Unable to fetch this author."
         404:
           description: "Unable to find this author."
+    put:
+      tags:
+      - "author"
+      summary: "Update an existing author"
+      description: "Updates an existing author with the informations provided"
+      operationId: "authorIdPUT"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Author"
+      responses:
+        200:
+          description: "The author has been updated"
+        400:
+          description: "Invalid author ID provided"
+        404:
+          description: "Author ID not found"
+      security:
+      - OAuth2:
+        - "admin"
+    delete:
+      tags:
+      - "author"
+      summary: "Delete an existing author"
+      description: "Deletes the author specified in the id"
+      operationId: "authorIdDELETE"
+      parameters: []
+      responses:
+        200:
+          description: "The author has been successfully deleted"
+        400:
+          description: "The author id provided is invalid"
+        404:
+          description: "Author id not found"
+      security:
+      - OAuth2:
+        - "admin"
     parameters:
     - name: "id"
       in: "path"
@@ -107,6 +174,10 @@ paths:
       responses:
         200:
           description: "Status 200"
+      security:
+      - OAuth2:
+        - "user"
+        - "admin"
     delete:
       tags:
       - "author"
@@ -126,6 +197,10 @@ paths:
           description: "invalid review id"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     parameters:
     - name: "id"
       in: "path"
@@ -166,7 +241,7 @@ paths:
       - "book"
       summary: "Add new book"
       description: "Add a new book to the library"
-      operationId: "booksPOST"
+      operationId: "bookPOST"
       consumes:
       - "application/json"
       parameters:
@@ -180,6 +255,9 @@ paths:
           description: "The book has been added to the database"
         400:
           description: "Error adding the object to the db"
+      security:
+      - OAuth2:
+        - "admin"
   /book/{id}:
     get:
       tags:
@@ -204,7 +282,7 @@ paths:
       - "book"
       summary: "Update an existing book"
       description: "Updates an existing book with the informations provided"
-      operationId: "bookPUT"
+      operationId: "bookIdPUT"
       consumes:
       - "application/json"
       parameters:
@@ -220,12 +298,15 @@ paths:
           description: "Invalid book ID provided"
         404:
           description: "Book ID not found"
+      security:
+      - OAuth2:
+        - "admin"
     delete:
       tags:
       - "book"
       summary: "Delete an existing book"
       description: "Deletes the book specified in the id"
-      operationId: "bookDELETE"
+      operationId: "bookIdDELETE"
       parameters: []
       responses:
         200:
@@ -234,6 +315,9 @@ paths:
           description: "The book id provided is invalid"
         404:
           description: "Book id not found"
+      security:
+      - OAuth2:
+        - "admin"
     parameters:
     - name: "id"
       in: "path"
@@ -307,6 +391,10 @@ paths:
       responses:
         200:
           description: "Status 200"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     delete:
       tags:
       - "author"
@@ -326,6 +414,10 @@ paths:
           description: "invalid review id"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     parameters:
     - name: "id"
       in: "path"
@@ -337,7 +429,7 @@ paths:
       - "book"
       summary: "Find books by name"
       description: "Return a list of books"
-      operationId: "getBooksByName"
+      operationId: "bookSearchGET"
       produces:
       - "application/json"
       parameters:
@@ -385,27 +477,18 @@ paths:
       description: "Register into the bookstore"
       operationId: "userRegisterPOST"
       consumes:
-      - "application/x-www-form-urlencoded"
+      - "application/json"
       parameters:
-      - name: "id"
-        in: "formData"
-        required: false
-        type: "integer"
-      - name: "name"
-        in: "formData"
-        required: false
-        type: "string"
-      - name: "address"
-        in: "formData"
-        required: false
-        type: "string"
-      - name: "creditcard"
-        in: "formData"
-        required: false
-        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
       responses:
         200:
           description: "succesfull registration"
+        400:
+          description: "User already present"
         404:
           description: "unauthorized"
   /user/login:
@@ -416,16 +499,21 @@ paths:
       description: "Login with a form"
       operationId: "userLoginPOST"
       consumes:
-      - "application/x-www-form-urlencoded"
+      - "application/json"
       parameters:
-      - name: "username"
-        in: "formData"
+      - name: "body"
+        in: "body"
         required: true
-        type: "string"
-      - name: "password"
-        in: "formData"
-        required: true
-        type: "string"
+        schema:
+          type: "object"
+          required:
+          - "password"
+          - "username"
+          properties:
+            username:
+              type: "string"
+            password:
+              type: "string"
       responses:
         200:
           description: "succesfull login"
@@ -442,6 +530,10 @@ paths:
       responses:
         200:
           description: "Status 200"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
   /user/{id}/address:
     get:
       tags:
@@ -459,6 +551,10 @@ paths:
               $ref: "#/definitions/Address"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     post:
       tags:
       - "address"
@@ -477,6 +573,10 @@ paths:
           description: "Status 200"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     put:
       tags:
       - "address"
@@ -503,7 +603,14 @@ paths:
           description: "Invalid address ID - the address to update does not exists"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     delete:
+      tags:
+      - "user"
+      - "address"
       summary: "Delete an existing address for the user"
       operationId: "userAddressDELETE"
       parameters:
@@ -519,6 +626,10 @@ paths:
           description: "The address id is invalid"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     parameters:
     - name: "id"
       in: "path"
@@ -540,6 +651,10 @@ paths:
               $ref: "#/definitions/Book"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     delete:
       tags:
       - "user"
@@ -558,6 +673,10 @@ paths:
           description: "Invalid book id - the book is not presenti on the whishlist"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     parameters:
     - name: "id"
       in: "path"
@@ -575,6 +694,10 @@ paths:
           description: "Status 200"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     parameters:
     - name: "id"
       in: "path"
@@ -584,6 +707,7 @@ paths:
     get:
       tags:
       - "user"
+      - "chart"
       summary: "Get the user's current chart"
       operationId: "userChartGET"
       parameters: []
@@ -594,6 +718,10 @@ paths:
             $ref: "#/definitions/Chart"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     put:
       tags:
       - "user"
@@ -619,9 +747,14 @@ paths:
       responses:
         200:
           description: "Status 200"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     delete:
       tags:
-      - "book"
+      - "user"
+      - "chart"
       summary: "Delete the current chart"
       operationId: "userChartDELETE"
       parameters: []
@@ -630,6 +763,10 @@ paths:
           description: "Status 200"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
     parameters:
     - name: "id"
       in: "path"
@@ -673,6 +810,9 @@ paths:
           description: "invalid event object"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
   /event/{id}:
     get:
       tags:
@@ -693,7 +833,7 @@ paths:
       tags:
       - "event"
       summary: "Update an event"
-      operationId: "eventPUT"
+      operationId: "eventIdPUT"
       consumes:
       - "application/json"
       parameters:
@@ -709,15 +849,21 @@ paths:
           description: "Status 400"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
     delete:
       summary: "Delete an event"
-      operationId: "eventDELETE"
+      operationId: "eventIdDELETE"
       parameters: []
       responses:
         200:
           description: "Status 200"
         404:
           description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
     parameters:
     - name: "id"
       in: "path"
@@ -790,6 +936,14 @@ paths:
           description: "At least one query parameter must exist"
         404:
           description: "Status 404"
+securityDefinitions:
+  OAuth2:
+    type: "oauth2"
+    tokenUrl: "https://localhost/api/auth"
+    flow: "password"
+    scopes:
+      admin: "Website administrator"
+      user: "Registred user"
 definitions:
   Book:
     type: "object"
