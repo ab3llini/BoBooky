@@ -15,89 +15,12 @@ basePath: "/api"
 schemes:
 - "https"
 paths:
-  /store/order:
-    post:
-      tags:
-      - "store"
-      summary: "Place an order for some books"
-      operationId: "orderPOST"
-      consumes:
-      - "application/json"
-      parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          type: "object"
-          required:
-          - "BookIDs"
-          - "OrderID"
-          - "UserID"
-          properties:
-            OrderID:
-              type: "integer"
-              description: "The id of the order"
-            UserID:
-              type: "integer"
-              description: "The id of the user that placed the order"
-            BookIDs:
-              type: "array"
-              description: "The ids of the books in the order"
-              items:
-                type: "integer"
-          description: "The details for the order"
-        x-examples:
-          application/json: "{\n  \"OrderID\": 0,\n  \"UserID\"; 0,\n  \"BookIDs\"\
-            : [\n  0,1,2\n  ]\n}"
-      responses:
-        200:
-          description: "Order placed"
-        400:
-          description: "Wrong IDs"
-  /store/order/{id}:
-    get:
-      tags:
-      - "store"
-      summary: "Get a single order by id"
-      operationId: "orderByIdGET"
-      parameters: []
-      responses:
-        200:
-          description: "Success"
-          schema:
-            $ref: "#/definitions/Review"
-        400:
-          description: "Invalid id"
-        404:
-          description: "id not found"
-    delete:
-      tags:
-      - "store"
-      summary: "Delete an existing order"
-      operationId: "orderByIdDELETE"
-      parameters:
-      - name: "userId"
-        in: "header"
-        required: true
-        type: "integer"
-        description: "The ID of the user"
-      responses:
-        200:
-          description: "Success"
-        400:
-          description: "Invalid user or order id"
-        404:
-          description: "order not found"
-    parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
   /author:
     get:
       tags:
       - "author"
       summary: "List all the authors in the database"
+      operationId: "authorGET"
       parameters:
       - name: "offset"
         in: "query"
@@ -125,6 +48,7 @@ paths:
       tags:
       - "author"
       summary: "Fetch a specific author"
+      operationId: "authorIdGET"
       parameters: []
       responses:
         200:
@@ -213,7 +137,7 @@ paths:
       - "book"
       summary: "Books available in the inventory"
       description: "List of books available in the inventory"
-      operationId: "booksGET"
+      operationId: "bookGET"
       produces:
       - "application/json"
       parameters:
@@ -256,6 +180,25 @@ paths:
           description: "The book has been added to the database"
         400:
           description: "Error adding the object to the db"
+  /book/{id}:
+    get:
+      tags:
+      - "book"
+      summary: "Find book by ID"
+      description: "Returns a book"
+      operationId: "bookIdGET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Book not found"
     put:
       tags:
       - "book"
@@ -283,12 +226,7 @@ paths:
       summary: "Delete an existing book"
       description: "Deletes the book specified in the id"
       operationId: "bookDELETE"
-      parameters:
-      - name: "bookID"
-        in: "query"
-        required: true
-        type: "integer"
-        description: "The id of the book to delete"
+      parameters: []
       responses:
         200:
           description: "The book has been successfully deleted"
@@ -296,25 +234,6 @@ paths:
           description: "The book id provided is invalid"
         404:
           description: "Book id not found"
-  /book/{id}:
-    get:
-      tags:
-      - "book"
-      summary: "Find book by ID"
-      description: "Returns a book"
-      operationId: "getBookById"
-      produces:
-      - "application/json"
-      parameters: []
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Book"
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Book not found"
     parameters:
     - name: "id"
       in: "path"
@@ -716,6 +635,161 @@ paths:
       in: "path"
       required: true
       type: "string"
+  /event:
+    get:
+      tags:
+      - "event"
+      summary: "Get the complete list of events"
+      operationId: "eventGET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        404:
+          description: "Status 404"
+    post:
+      tags:
+      - "event"
+      summary: "Add new event"
+      operationId: "eventPOST"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Event"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "invalid event object"
+        404:
+          description: "Status 404"
+  /event/{id}:
+    get:
+      tags:
+      - "event"
+      summary: "Get event for a given id"
+      operationId: "eventIdGET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/Event"
+        404:
+          description: "Status 404"
+    put:
+      tags:
+      - "event"
+      summary: "Update an event"
+      operationId: "eventPUT"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Event"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "Status 400"
+        404:
+          description: "Status 404"
+    delete:
+      summary: "Delete an event"
+      operationId: "eventDELETE"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+        404:
+          description: "Status 404"
+    parameters:
+    - name: "id"
+      in: "path"
+      required: true
+      type: "string"
+  /event/search:
+    get:
+      tags:
+      - "event"
+      summary: "Search for an event"
+      operationId: "eventSearchGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "query_string"
+        in: "query"
+        required: false
+        type: "string"
+        description: "The search query"
+      - name: "name"
+        in: "query"
+        required: false
+        type: "string"
+        description: "The name of the event"
+      - name: "author_name"
+        in: "query"
+        required: false
+        type: "string"
+        description: "The name of the author for the event"
+      - name: "author_id"
+        in: "query"
+        required: false
+        type: "integer"
+        description: "The id of the author for the event"
+      - name: "book_name"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "book_id"
+        in: "query"
+        required: false
+        type: "integer"
+      - name: "date"
+        in: "query"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "date_from"
+        in: "query"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "date_to"
+        in: "query"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "Location"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        400:
+          description: "At least one query parameter must exist"
+        404:
+          description: "Status 404"
 definitions:
   Book:
     type: "object"
@@ -849,7 +923,7 @@ definitions:
     type: "object"
     required:
     - "description"
-    - "location_id"
+    - "location"
     - "name"
     - "timestamp"
     properties:
@@ -859,12 +933,16 @@ definitions:
         type: "string"
       description:
         type: "string"
-      location_id:
-        type: "integer"
-        description: "Id for the address"
+      location:
+        $ref: "#/definitions/Address"
       timestamp:
         type: "string"
         format: "date-time"
+      image_urls:
+        type: "array"
+        description: "Array with the images of the event"
+        items:
+          type: "string"
     description: "An event, oc -.-"
   Order:
     type: "object"
