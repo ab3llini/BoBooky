@@ -12,6 +12,11 @@ const client = new Client({
 
 client.connect();
 
+module.exports.bookGET = (offset, limit) => {
+    return new Promise((resolve, reject) => {
+
+    })
+}
 
 client.query(query.bookGET(0, 10))
     .then(res => console.log(res.rows))

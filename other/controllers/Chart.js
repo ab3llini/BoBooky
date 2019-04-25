@@ -9,7 +9,8 @@ module.exports.userChartDELETE = function userChartDELETE (req, res, next) {
     .then(function (response) {
       utils.writeJson(res, response);
     })
-    .catch(function (response) {
+    .catch(
+        function (response) {
       utils.writeJson(res, response);
     });
 };

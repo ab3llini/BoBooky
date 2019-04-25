@@ -13,29 +13,29 @@ info:
 host: "localhost"
 basePath: "/api"
 schemes:
-- "https"
+  - "https"
 consumes:
-- "application/json"
+  - "application/json"
 produces:
-- "application/json"
+  - "application/json"
 paths:
   /author:
     get:
       tags:
-      - "author"
+        - "author"
       summary: "List all the authors in the database"
       operationId: "authorGET"
       parameters:
-      - name: "offset"
-        in: "query"
-        required: false
-        type: "integer"
-        description: "Page offset. Defaults to 0"
-      - name: "limit"
-        in: "query"
-        required: false
-        type: "integer"
-        description: "Result limit. Defaults to 20, max 500."
+        - name: "offset"
+          in: "query"
+          required: false
+          type: "integer"
+          description: "Page offset. Defaults to 0"
+        - name: "limit"
+          in: "query"
+          required: false
+          type: "integer"
+          description: "Result limit. Defaults to 20, max 500."
       responses:
         200:
           description: "Returns the list of authors in the specified range."
@@ -49,30 +49,30 @@ paths:
           description: "Unable to find the specified resource"
     post:
       tags:
-      - "author"
+        - "author"
       summary: "Add new author"
       description: "Add a new book to the library"
       operationId: "authorPOST"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Author"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Author"
       responses:
         200:
           description: "The author has been added to the database"
         400:
           description: "Error adding the object to the db"
       security:
-      - OAuth2:
-        - "admin"
+        - OAuth2:
+            - "admin"
   /author/{id}:
     get:
       tags:
-      - "author"
+        - "author"
       summary: "Fetch a specific author"
       operationId: "authorIdGET"
       parameters: []
@@ -87,18 +87,18 @@ paths:
           description: "Unable to find this author."
     put:
       tags:
-      - "author"
+        - "author"
       summary: "Update an existing author"
       description: "Updates an existing author with the informations provided"
       operationId: "authorIdPUT"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Author"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Author"
       responses:
         200:
           description: "The author has been updated"
@@ -107,11 +107,11 @@ paths:
         404:
           description: "Author ID not found"
       security:
-      - OAuth2:
-        - "admin"
+        - OAuth2:
+            - "admin"
     delete:
       tags:
-      - "author"
+        - "author"
       summary: "Delete an existing author"
       description: "Deletes the author specified in the id"
       operationId: "authorIdDELETE"
@@ -124,22 +124,22 @@ paths:
         404:
           description: "Author id not found"
       security:
-      - OAuth2:
-        - "admin"
+        - OAuth2:
+            - "admin"
     parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /author/{id}/review:
     get:
       tags:
-      - "author"
-      - "review"
+        - "author"
+        - "review"
       summary: "Get reviews for a given author"
       operationId: "authorReviewGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -154,42 +154,42 @@ paths:
           description: "Status 404"
     post:
       tags:
-      - "book"
-      - "review"
+        - "book"
+        - "review"
       summary: "Add new review for the given author"
       operationId: "authorReviewPOST"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "userID"
-        in: "query"
-        required: true
-        type: "integer"
-        description: "The user that wrote the review"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Review"
+        - name: "userID"
+          in: "query"
+          required: true
+          type: "integer"
+          description: "The user that wrote the review"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Review"
       responses:
         200:
           description: "Status 200"
       security:
-      - OAuth2:
-        - "user"
-        - "admin"
+        - OAuth2:
+            - "user"
+            - "admin"
     delete:
       tags:
-      - "author"
-      - "review"
+        - "author"
+        - "review"
       summary: "Delete a review from a given user"
       operationId: "authorReviewDELETE"
       parameters:
-      - name: "reviewID"
-        in: "query"
-        required: true
-        type: "integer"
-        description: "The id of the review to be removed"
+        - name: "reviewID"
+          in: "query"
+          required: true
+          type: "integer"
+          description: "The id of the review to be removed"
       responses:
         200:
           description: "Status 200"
@@ -198,34 +198,34 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /book:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Books available in the inventory"
       description: "List of books available in the inventory"
       operationId: "bookGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "offset"
-        in: "query"
-        required: false
-        type: "integer"
-        description: "Pagination offset. Default is 0."
-      - name: "limit"
-        in: "query"
-        required: false
-        type: "integer"
-        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+        - name: "offset"
+          in: "query"
+          required: false
+          type: "integer"
+          description: "Pagination offset. Default is 0."
+        - name: "limit"
+          in: "query"
+          required: false
+          type: "integer"
+          description: "Maximum number of items per page. Default is 20 and cannot exceed\
           \ 500."
       responses:
         200:
@@ -238,35 +238,35 @@ paths:
           description: "Book not found"
     post:
       tags:
-      - "book"
+        - "book"
       summary: "Add new book"
       description: "Add a new book to the library"
       operationId: "bookPOST"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Book"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Book"
       responses:
         200:
           description: "The book has been added to the database"
         400:
           description: "Error adding the object to the db"
       security:
-      - OAuth2:
-        - "admin"
+        - OAuth2:
+            - "admin"
   /book/{id}:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Find book by ID"
       description: "Returns a book"
       operationId: "bookIdGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -279,18 +279,18 @@ paths:
           description: "Book not found"
     put:
       tags:
-      - "book"
+        - "book"
       summary: "Update an existing book"
       description: "Updates an existing book with the informations provided"
       operationId: "bookIdPUT"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Book"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Book"
       responses:
         200:
           description: "The book has been updated"
@@ -299,11 +299,11 @@ paths:
         404:
           description: "Book ID not found"
       security:
-      - OAuth2:
-        - "admin"
+        - OAuth2:
+            - "admin"
     delete:
       tags:
-      - "book"
+        - "book"
       summary: "Delete an existing book"
       description: "Deletes the book specified in the id"
       operationId: "bookIdDELETE"
@@ -316,23 +316,23 @@ paths:
         404:
           description: "Book id not found"
       security:
-      - OAuth2:
-        - "admin"
+        - OAuth2:
+            - "admin"
     parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "integer"
-      format: "int64"
-      description: "ID of book to return"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+        description: "ID of book to return"
   /book/{id}/related:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Get the related books for the given book id"
       operationId: "bookRelatedGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -344,19 +344,19 @@ paths:
         404:
           description: "Status 404"
     parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /book/{id}/review:
     get:
       tags:
-      - "author"
-      - "review"
+        - "author"
+        - "review"
       summary: "Get reviews for a given book"
       operationId: "bookReviewGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -371,42 +371,42 @@ paths:
           description: "Status 404"
     post:
       tags:
-      - "book"
-      - "review"
+        - "book"
+        - "review"
       summary: "Add new review for the given book"
       operationId: "bookReviewPOST"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "userID"
-        in: "query"
-        required: true
-        type: "integer"
-        description: "The user that wrote the review"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Review"
+        - name: "userID"
+          in: "query"
+          required: true
+          type: "integer"
+          description: "The user that wrote the review"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Review"
       responses:
         200:
           description: "Status 200"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     delete:
       tags:
-      - "author"
-      - "review"
+        - "author"
+        - "review"
       summary: "Delete a review from a given user"
       operationId: "bookReviewDELETE"
       parameters:
-      - name: "reviewID"
-        in: "query"
-        required: true
-        type: "integer"
-        description: "The id of the review to be removed"
+        - name: "reviewID"
+          in: "query"
+          required: true
+          type: "integer"
+          description: "The id of the review to be removed"
       responses:
         200:
           description: "Status 200"
@@ -415,49 +415,49 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /book/search:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Find books by name"
       description: "Return a list of books"
       operationId: "bookSearchGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "query"
-        in: "query"
-        required: false
-        type: "string"
-        description: "generic search query for the book"
-      - name: "isbn"
-        in: "query"
-        required: false
-        type: "string"
-      - name: "genre"
-        in: "query"
-        required: false
-        type: "string"
-      - name: "year"
-        in: "query"
-        required: false
-        type: "integer"
-      - name: "author"
-        in: "query"
-        required: false
-        type: "string"
-      - name: "publisher"
-        in: "query"
-        required: false
-        type: "string"
+        - name: "query"
+          in: "query"
+          required: false
+          type: "string"
+          description: "generic search query for the book"
+        - name: "isbn"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "genre"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "year"
+          in: "query"
+          required: false
+          type: "integer"
+        - name: "author"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "publisher"
+          in: "query"
+          required: false
+          type: "string"
       responses:
         200:
           description: "successful operation"
@@ -472,18 +472,18 @@ paths:
   /user/register:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Registration"
       description: "Register into the bookstore"
       operationId: "userRegisterPOST"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
       responses:
         200:
           description: "succesfull registration"
@@ -494,26 +494,26 @@ paths:
   /user/login:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Login"
       description: "Login with a form"
       operationId: "userLoginPOST"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          type: "object"
-          required:
-          - "password"
-          - "username"
-          properties:
-            username:
-              type: "string"
-            password:
-              type: "string"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            type: "object"
+            required:
+              - "password"
+              - "username"
+            properties:
+              username:
+                type: "string"
+              password:
+                type: "string"
       responses:
         200:
           description: "succesfull login"
@@ -522,7 +522,7 @@ paths:
   /user/logout:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Logs out the current user session"
       description: "Logout"
       operationId: "userLogoutGET"
@@ -531,14 +531,14 @@ paths:
         200:
           description: "Status 200"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
   /user/{id}/address:
     get:
       tags:
-      - "user"
-      - "address"
+        - "user"
+        - "address"
       summary: "Get the list of addresses for the user"
       operationId: "userAddressGET"
       parameters: []
@@ -552,50 +552,50 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     post:
       tags:
-      - "address"
-      - "user"
+        - "address"
+        - "user"
       summary: "Add new address for the user"
       operationId: "userAddressPOST"
       consumes: []
       parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Address"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Address"
       responses:
         200:
           description: "Status 200"
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     put:
       tags:
-      - "address"
-      - "user"
+        - "address"
+        - "user"
       summary: "Update an exsisting address"
       operationId: "userAddressPUT"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "addressID"
-        in: "query"
-        required: true
-        type: "integer"
-        description: "The identifier for the address to update"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Address"
+        - name: "addressID"
+          in: "query"
+          required: true
+          type: "integer"
+          description: "The identifier for the address to update"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Address"
       responses:
         200:
           description: "Status 200"
@@ -604,21 +604,21 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     delete:
       tags:
-      - "user"
-      - "address"
+        - "user"
+        - "address"
       summary: "Delete an existing address for the user"
       operationId: "userAddressDELETE"
       parameters:
-      - name: "addressID"
-        in: "query"
-        required: true
-        type: "integer"
-        description: "The id of the address to be removed"
+        - name: "addressID"
+          in: "query"
+          required: true
+          type: "integer"
+          description: "The id of the address to be removed"
       responses:
         200:
           description: "The address has been removed"
@@ -627,18 +627,18 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /user/{id}/whishlist:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Get the list of books in the whishlist"
       operationId: "userWhishlistGET"
       parameters: []
@@ -652,20 +652,20 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     delete:
       tags:
-      - "user"
+        - "user"
       summary: "Removes one book from the whishlist"
       operationId: "userWhishlistDELETE"
       parameters:
-      - name: "bookID"
-        in: "query"
-        required: true
-        type: "integer"
-        description: "The id of the book to be removed from the whishlist"
+        - name: "bookID"
+          in: "query"
+          required: true
+          type: "integer"
+          description: "The id of the book to be removed from the whishlist"
       responses:
         200:
           description: "Status 200"
@@ -674,18 +674,18 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /user/{id}/order:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Get the orders for a given user"
       operationId: "userOrderGET"
       parameters: []
@@ -695,19 +695,19 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /user/{id}/chart:
     get:
       tags:
-      - "user"
-      - "chart"
+        - "user"
+        - "chart"
       summary: "Get the user's current chart"
       operationId: "userChartGET"
       parameters: []
@@ -719,42 +719,42 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     put:
       tags:
-      - "user"
-      - "chart"
+        - "user"
+        - "chart"
       summary: "Updates the current chart"
       operationId: "userChartPUT"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          type: "object"
-          required:
-          - "bookID"
-          - "qty"
-          properties:
-            bookID:
-              type: "integer"
-            qty:
-              type: "integer"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            type: "object"
+            required:
+              - "bookID"
+              - "qty"
+            properties:
+              bookID:
+                type: "integer"
+              qty:
+                type: "integer"
       responses:
         200:
           description: "Status 200"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     delete:
       tags:
-      - "user"
-      - "chart"
+        - "user"
+        - "chart"
       summary: "Delete the current chart"
       operationId: "userChartDELETE"
       parameters: []
@@ -764,22 +764,22 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
-        - "user"
+        - OAuth2:
+            - "admin"
+            - "user"
     parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /event:
     get:
       tags:
-      - "event"
+        - "event"
       summary: "Get the complete list of events"
       operationId: "eventGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -792,17 +792,17 @@ paths:
           description: "Status 404"
     post:
       tags:
-      - "event"
+        - "event"
       summary: "Add new event"
       operationId: "eventPOST"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Event"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Event"
       responses:
         200:
           description: "Status 200"
@@ -811,16 +811,16 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
+        - OAuth2:
+            - "admin"
   /event/{id}:
     get:
       tags:
-      - "event"
+        - "event"
       summary: "Get event for a given id"
       operationId: "eventIdGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -831,17 +831,17 @@ paths:
           description: "Status 404"
     put:
       tags:
-      - "event"
+        - "event"
       summary: "Update an event"
       operationId: "eventIdPUT"
       consumes:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Event"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Event"
       responses:
         200:
           description: "Status 200"
@@ -850,8 +850,8 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
+        - OAuth2:
+            - "admin"
     delete:
       summary: "Delete an event"
       operationId: "eventIdDELETE"
@@ -862,69 +862,69 @@ paths:
         404:
           description: "Status 404"
       security:
-      - OAuth2:
-        - "admin"
+        - OAuth2:
+            - "admin"
     parameters:
-    - name: "id"
-      in: "path"
-      required: true
-      type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /event/search:
     get:
       tags:
-      - "event"
+        - "event"
       summary: "Search for an event"
       operationId: "eventSearchGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "query_string"
-        in: "query"
-        required: false
-        type: "string"
-        description: "The search query"
-      - name: "name"
-        in: "query"
-        required: false
-        type: "string"
-        description: "The name of the event"
-      - name: "author_name"
-        in: "query"
-        required: false
-        type: "string"
-        description: "The name of the author for the event"
-      - name: "author_id"
-        in: "query"
-        required: false
-        type: "integer"
-        description: "The id of the author for the event"
-      - name: "book_name"
-        in: "query"
-        required: false
-        type: "string"
-      - name: "book_id"
-        in: "query"
-        required: false
-        type: "integer"
-      - name: "date"
-        in: "query"
-        required: false
-        type: "string"
-        format: "date"
-      - name: "date_from"
-        in: "query"
-        required: false
-        type: "string"
-        format: "date"
-      - name: "date_to"
-        in: "query"
-        required: false
-        type: "string"
-        format: "date"
-      - name: "Location"
-        in: "query"
-        required: false
-        type: "string"
+        - name: "query_string"
+          in: "query"
+          required: false
+          type: "string"
+          description: "The search query"
+        - name: "name"
+          in: "query"
+          required: false
+          type: "string"
+          description: "The name of the event"
+        - name: "author_name"
+          in: "query"
+          required: false
+          type: "string"
+          description: "The name of the author for the event"
+        - name: "author_id"
+          in: "query"
+          required: false
+          type: "integer"
+          description: "The id of the author for the event"
+        - name: "book_name"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "book_id"
+          in: "query"
+          required: false
+          type: "integer"
+        - name: "date"
+          in: "query"
+          required: false
+          type: "string"
+          format: "date"
+        - name: "date_from"
+          in: "query"
+          required: false
+          type: "string"
+          format: "date"
+        - name: "date_to"
+          in: "query"
+          required: false
+          type: "string"
+          format: "date"
+        - name: "Location"
+          in: "query"
+          required: false
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -948,10 +948,13 @@ definitions:
   Book:
     type: "object"
     required:
-    - "author"
-    - "price"
-    - "publisher"
-    - "title"
+      - "author"
+      - "image_href"
+      - "isbn"
+      - "price"
+      - "publication_year"
+      - "publisher"
+      - "title"
     properties:
       id:
         type: "integer"
@@ -960,18 +963,29 @@ definitions:
         type: "string"
       author:
         type: "string"
+      description:
+        type: "string"
+      publisher:
+        type: "string"
       price:
-        $ref: "#/definitions/Amount"
-      image_url:
-        type: "array"
-        items:
-          type: "string"
+        type: "number"
+      isbn:
+        type: "string"
+        description: "Book ISBN"
+      isbn13:
+        type: "string"
+      publication_year:
+        type: "integer"
+      publication_month:
+        type: "integer"
+      image_href:
+        type: "string"
+      image_href_small:
+        type: "string"
       genres:
         type: "array"
         items:
           type: "string"
-      publisher:
-        type: "string"
     description: "A book for sale in the store"
     example: "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino\
       \ Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url:\
@@ -979,7 +993,7 @@ definitions:
   Amount:
     type: "object"
     required:
-    - "value"
+      - "value"
     properties:
       value:
         type: "number"
@@ -991,9 +1005,9 @@ definitions:
   User:
     type: "object"
     required:
-    - "email"
-    - "name"
-    - "surname"
+      - "email"
+      - "name"
+      - "surname"
     properties:
       id:
         type: "integer"
@@ -1012,11 +1026,11 @@ definitions:
   Review:
     type: "object"
     required:
-    - "author"
-    - "book_author"
-    - "rating"
-    - "timestamp"
-    - "title"
+      - "author"
+      - "book_author"
+      - "rating"
+      - "timestamp"
+      - "title"
     properties:
       id:
         type: "integer"
@@ -1039,7 +1053,7 @@ definitions:
   Author:
     type: "object"
     required:
-    - "name"
+      - "name"
     properties:
       id:
         type: "integer"
@@ -1052,11 +1066,11 @@ definitions:
   Address:
     type: "object"
     required:
-    - "address_line_1"
-    - "cap"
-    - "city"
-    - "country"
-    - "name"
+      - "address_line_1"
+      - "cap"
+      - "city"
+      - "country"
+      - "name"
     properties:
       id:
         type: "integer"
@@ -1076,10 +1090,10 @@ definitions:
   Event:
     type: "object"
     required:
-    - "description"
-    - "location"
-    - "name"
-    - "timestamp"
+      - "description"
+      - "location"
+      - "name"
+      - "timestamp"
     properties:
       id:
         type: "integer"
@@ -1101,10 +1115,10 @@ definitions:
   Order:
     type: "object"
     required:
-    - "Books"
-    - "User"
-    - "amount"
-    - "timestamp"
+      - "Books"
+      - "User"
+      - "amount"
+      - "timestamp"
     properties:
       OrderID:
         type: "integer"
@@ -1116,8 +1130,8 @@ definitions:
         description: "The list of books ordered"
         items:
           required:
-          - "book"
-          - "qty"
+            - "book"
+            - "qty"
           type: "object"
           properties:
             book:
@@ -1141,10 +1155,10 @@ definitions:
   Chart:
     type: "object"
     required:
-    - "Books"
-    - "User"
-    - "timestamp"
-    - "total_amount"
+      - "Books"
+      - "User"
+      - "timestamp"
+      - "total_amount"
     properties:
       User:
         $ref: "#/definitions/User"
@@ -1153,8 +1167,8 @@ definitions:
         description: "The list of books ordered"
         items:
           required:
-          - "book"
-          - "qty"
+            - "book"
+            - "qty"
           type: "object"
           properties:
             book:

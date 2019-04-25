@@ -1,7 +1,5 @@
 'use strict';
 
-var db = require('../db/Database.js');
-
 /**
  * Add new review for the given author
  *
