@@ -10,7 +10,8 @@ module.exports.book_genres = (book_id) => {
         text: 'select g.name as genres from book join book_to_genre btg on book.id = btg.book_id join genre g on btg.genre_id = g.id where book.id = $1',
         values: [book_id]
     }
-}
+};
+
 module.exports.author = (offset, limit) => {
     return {
         text: 'select id, name, image as image_url, description from author limit $2 offset $1',
@@ -36,3 +37,18 @@ module.exports.authorIdReview = (id) => {
 };
 
 
+module.exports.event = () => {
+    return {
+        text: 'select e.id, name, description, location as address, timestamp' +
+            'from event e join event_to_image eti on e.id = eti.event_id join image i on eti.image_id = i.id'
+    }
+};
+
+module.exports.eventAddress = (id) => {
+    return {
+        text: 'select a.*' +
+            'from address a join event e on a.id = e.location' +
+            'where e.id = $1',
+        values: [id]
+    }
+};

@@ -10,6 +10,8 @@ exports.eventGET = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
+  "related_book" : 1,
+  "related_author" : 6,
   "name" : "name",
   "description" : "description",
   "image_urls" : [ "image_urls", "image_urls" ],
@@ -25,6 +27,8 @@ exports.eventGET = function() {
   "id" : 0,
   "timestamp" : "2000-01-23T04:56:07.000+00:00"
 }, {
+  "related_book" : 1,
+  "related_author" : 6,
   "name" : "name",
   "description" : "description",
   "image_urls" : [ "image_urls", "image_urls" ],
@@ -72,6 +76,8 @@ exports.eventIdGET = function(id) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
+  "related_book" : 1,
+  "related_author" : 6,
   "name" : "name",
   "description" : "description",
   "image_urls" : [ "image_urls", "image_urls" ],
@@ -142,6 +148,8 @@ exports.eventSearchGET = function(query_string,name,author_name,author_id,book_n
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
+  "related_book" : 1,
+  "related_author" : 6,
   "name" : "name",
   "description" : "description",
   "image_urls" : [ "image_urls", "image_urls" ],
@@ -157,6 +165,8 @@ exports.eventSearchGET = function(query_string,name,author_name,author_id,book_n
   "id" : 0,
   "timestamp" : "2000-01-23T04:56:07.000+00:00"
 }, {
+  "related_book" : 1,
+  "related_author" : 6,
   "name" : "name",
   "description" : "description",
   "image_urls" : [ "image_urls", "image_urls" ],

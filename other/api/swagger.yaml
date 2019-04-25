@@ -1200,8 +1200,14 @@ definitions:
         description: "Array with the images of the event"
         items:
           type: "string"
+      related_author:
+        type: "integer"
+      related_book:
+        type: "integer"
     description: "An event, oc -.-"
     example:
+      related_book: 1
+      related_author: 6
       name: "name"
       description: "description"
       image_urls:
