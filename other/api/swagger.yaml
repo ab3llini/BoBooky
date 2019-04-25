@@ -1,0 +1,1306 @@
+---
+swagger: "2.0"
+info:
+  description: "Welcome to the nodejs backend of Booboky!"
+  version: "1.0.0"
+  title: "Booboky"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost"
+basePath: "/api"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /author:
+    get:
+      tags:
+      - "author"
+      summary: "List all the authors in the database"
+      operationId: "authorGET"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Page offset. Defaults to 0"
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Result limit. Defaults to 20, max 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "Returns the list of authors in the specified range."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Author"
+        400:
+          description: "Unable to fetch all authors"
+        404:
+          description: "Unable to find the specified resource"
+      x-swagger-router-controller: "Author"
+    post:
+      tags:
+      - "author"
+      summary: "Add new author"
+      description: "Add a new book to the library"
+      operationId: "authorPOST"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Author"
+      responses:
+        200:
+          description: "The author has been added to the database"
+        400:
+          description: "Error adding the object to the db"
+      security:
+      - OAuth2:
+        - "admin"
+      x-swagger-router-controller: "Author"
+  /author/{id}:
+    get:
+      tags:
+      - "author"
+      summary: "Fetch a specific author"
+      operationId: "authorIdGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/Author"
+        400:
+          description: "Unable to fetch this author."
+        404:
+          description: "Unable to find this author."
+      x-swagger-router-controller: "Author"
+    put:
+      tags:
+      - "author"
+      summary: "Update an existing author"
+      description: "Updates an existing author with the informations provided"
+      operationId: "authorIdPUT"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Author"
+      responses:
+        200:
+          description: "The author has been updated"
+        400:
+          description: "Invalid author ID provided"
+        404:
+          description: "Author ID not found"
+      security:
+      - OAuth2:
+        - "admin"
+      x-swagger-router-controller: "Author"
+    delete:
+      tags:
+      - "author"
+      summary: "Delete an existing author"
+      description: "Deletes the author specified in the id"
+      operationId: "authorIdDELETE"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The author has been successfully deleted"
+        400:
+          description: "The author id provided is invalid"
+        404:
+          description: "Author id not found"
+      security:
+      - OAuth2:
+        - "admin"
+      x-swagger-router-controller: "Author"
+  /author/{id}/review:
+    get:
+      tags:
+      - "author"
+      - "review"
+      summary: "Get reviews for a given author"
+      operationId: "authorReviewGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        400:
+          description: "Bad author id"
+        404:
+          description: "Status 404"
+      x-swagger-router-controller: "Author"
+    post:
+      tags:
+      - "book"
+      - "review"
+      summary: "Add new review for the given author"
+      operationId: "authorReviewPOST"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "userID"
+        in: "query"
+        description: "The user that wrote the review"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Review"
+      responses:
+        200:
+          description: "Status 200"
+      security:
+      - OAuth2:
+        - "user"
+        - "admin"
+      x-swagger-router-controller: "Book"
+    delete:
+      tags:
+      - "author"
+      - "review"
+      summary: "Delete a review from a given user"
+      operationId: "authorReviewDELETE"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "reviewID"
+        in: "query"
+        description: "The id of the review to be removed"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "invalid review id"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "Author"
+  /book:
+    get:
+      tags:
+      - "book"
+      summary: "Books available in the inventory"
+      description: "List of books available in the inventory"
+      operationId: "bookGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Pagination offset. Default is 0."
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "A collection of Books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+    post:
+      tags:
+      - "book"
+      summary: "Add new book"
+      description: "Add a new book to the library"
+      operationId: "bookPOST"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        200:
+          description: "The book has been added to the database"
+        400:
+          description: "Error adding the object to the db"
+      security:
+      - OAuth2:
+        - "admin"
+      x-swagger-router-controller: "Book"
+  /book/{id}:
+    get:
+      tags:
+      - "book"
+      summary: "Find book by ID"
+      description: "Returns a book"
+      operationId: "bookIdGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of book to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+    put:
+      tags:
+      - "book"
+      summary: "Update an existing book"
+      description: "Updates an existing book with the informations provided"
+      operationId: "bookIdPUT"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of book to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        200:
+          description: "The book has been updated"
+        400:
+          description: "Invalid book ID provided"
+        404:
+          description: "Book ID not found"
+      security:
+      - OAuth2:
+        - "admin"
+      x-swagger-router-controller: "Book"
+    delete:
+      tags:
+      - "book"
+      summary: "Delete an existing book"
+      description: "Deletes the book specified in the id"
+      operationId: "bookIdDELETE"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of book to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "The book has been successfully deleted"
+        400:
+          description: "The book id provided is invalid"
+        404:
+          description: "Book id not found"
+      security:
+      - OAuth2:
+        - "admin"
+      x-swagger-router-controller: "Book"
+  /book/{id}/related:
+    get:
+      tags:
+      - "book"
+      summary: "Get the related books for the given book id"
+      operationId: "bookRelatedGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Status 404"
+      x-swagger-router-controller: "Book"
+  /book/{id}/review:
+    get:
+      tags:
+      - "author"
+      - "review"
+      summary: "Get reviews for a given book"
+      operationId: "bookReviewGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        400:
+          description: "Bad author id"
+        404:
+          description: "Status 404"
+      x-swagger-router-controller: "Author"
+    post:
+      tags:
+      - "book"
+      - "review"
+      summary: "Add new review for the given book"
+      operationId: "bookReviewPOST"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "userID"
+        in: "query"
+        description: "The user that wrote the review"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Review"
+      responses:
+        200:
+          description: "Status 200"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "Book"
+    delete:
+      tags:
+      - "author"
+      - "review"
+      summary: "Delete a review from a given user"
+      operationId: "bookReviewDELETE"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "reviewID"
+        in: "query"
+        description: "The id of the review to be removed"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "invalid review id"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "Author"
+  /book/search:
+    get:
+      tags:
+      - "book"
+      summary: "Find books by name"
+      description: "Return a list of books"
+      operationId: "bookSearchGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "query"
+        in: "query"
+        description: "generic search query for the book"
+        required: false
+        type: "string"
+      - name: "isbn"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "genre"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "year"
+        in: "query"
+        required: false
+        type: "integer"
+      - name: "author"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "publisher"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        400:
+          description: "At least one parameter must be specified"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /user/register:
+    post:
+      tags:
+      - "user"
+      summary: "Registration"
+      description: "Register into the bookstore"
+      operationId: "userRegisterPOST"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "succesfull registration"
+        400:
+          description: "User already present"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/login:
+    post:
+      tags:
+      - "user"
+      summary: "Login"
+      description: "Login with a form"
+      operationId: "userLoginPOST"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/body"
+      responses:
+        200:
+          description: "succesfull login"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/logout:
+    get:
+      tags:
+      - "user"
+      summary: "Logs out the current user session"
+      description: "Logout"
+      operationId: "userLogoutGET"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "User"
+  /user/{id}/address:
+    get:
+      tags:
+      - "user"
+      - "address"
+      summary: "Get the list of addresses for the user"
+      operationId: "userAddressGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Address"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "User"
+    post:
+      tags:
+      - "address"
+      - "user"
+      summary: "Add new address for the user"
+      operationId: "userAddressPOST"
+      consumes: []
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Address"
+      responses:
+        200:
+          description: "Status 200"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "Address"
+    put:
+      tags:
+      - "address"
+      - "user"
+      summary: "Update an exsisting address"
+      operationId: "userAddressPUT"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "addressID"
+        in: "query"
+        description: "The identifier for the address to update"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Address"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "Invalid address ID - the address to update does not exists"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "Address"
+    delete:
+      tags:
+      - "user"
+      - "address"
+      summary: "Delete an existing address for the user"
+      operationId: "userAddressDELETE"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "addressID"
+        in: "query"
+        description: "The id of the address to be removed"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "The address has been removed"
+        400:
+          description: "The address id is invalid"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "User"
+  /user/{id}/whishlist:
+    get:
+      tags:
+      - "user"
+      summary: "Get the list of books in the whishlist"
+      operationId: "userWhishlistGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "user"
+      summary: "Removes one book from the whishlist"
+      operationId: "userWhishlistDELETE"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "bookID"
+        in: "query"
+        description: "The id of the book to be removed from the whishlist"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "Invalid book id - the book is not presenti on the whishlist"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "User"
+  /user/{id}/order:
+    get:
+      tags:
+      - "user"
+      summary: "Get the orders for a given user"
+      operationId: "userOrderGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "User"
+  /user/{id}/chart:
+    get:
+      tags:
+      - "user"
+      - "chart"
+      summary: "Get the user's current chart"
+      operationId: "userChartGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/Chart"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "user"
+      - "chart"
+      summary: "Updates the current chart"
+      operationId: "userChartPUT"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/body_1"
+      responses:
+        200:
+          description: "Status 200"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "user"
+      - "chart"
+      summary: "Delete the current chart"
+      operationId: "userChartDELETE"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+        - "user"
+      x-swagger-router-controller: "User"
+  /event:
+    get:
+      tags:
+      - "event"
+      summary: "Get the complete list of events"
+      operationId: "eventGET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        404:
+          description: "Status 404"
+      x-swagger-router-controller: "Event"
+    post:
+      tags:
+      - "event"
+      summary: "Add new event"
+      operationId: "eventPOST"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Event"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "invalid event object"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+      x-swagger-router-controller: "Event"
+  /event/{id}:
+    get:
+      tags:
+      - "event"
+      summary: "Get event for a given id"
+      operationId: "eventIdGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/Event"
+        404:
+          description: "Status 404"
+      x-swagger-router-controller: "Event"
+    put:
+      tags:
+      - "event"
+      summary: "Update an event"
+      operationId: "eventIdPUT"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Event"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "Status 400"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+      x-swagger-router-controller: "Event"
+    delete:
+      summary: "Delete an event"
+      operationId: "eventIdDELETE"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "admin"
+      x-swagger-router-controller: "Default"
+  /event/search:
+    get:
+      tags:
+      - "event"
+      summary: "Search for an event"
+      operationId: "eventSearchGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "query_string"
+        in: "query"
+        description: "The search query"
+        required: false
+        type: "string"
+      - name: "name"
+        in: "query"
+        description: "The name of the event"
+        required: false
+        type: "string"
+      - name: "author_name"
+        in: "query"
+        description: "The name of the author for the event"
+        required: false
+        type: "string"
+      - name: "author_id"
+        in: "query"
+        description: "The id of the author for the event"
+        required: false
+        type: "integer"
+      - name: "book_name"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "book_id"
+        in: "query"
+        required: false
+        type: "integer"
+      - name: "date"
+        in: "query"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "date_from"
+        in: "query"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "date_to"
+        in: "query"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "Location"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        400:
+          description: "At least one query parameter must exist"
+        404:
+          description: "Status 404"
+      x-swagger-router-controller: "Event"
+securityDefinitions:
+  OAuth2:
+    type: "oauth2"
+    tokenUrl: "https://localhost/api/auth"
+    flow: "password"
+    scopes:
+      admin: "Website administrator"
+      user: "Registred user"
+definitions:
+  Book:
+    type: "object"
+    required:
+    - "author"
+    - "price"
+    - "publisher"
+    - "title"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      title:
+        type: "string"
+      author:
+        type: "string"
+      price:
+        $ref: "#/definitions/Amount"
+      image_url:
+        type: "array"
+        items:
+          type: "string"
+      genres:
+        type: "array"
+        items:
+          type: "string"
+      publisher:
+        type: "string"
+    description: "A book for sale in the store"
+    example: "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino\
+      \ Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url:\
+      \ \"https://test.com\"\n}"
+  Amount:
+    type: "object"
+    required:
+    - "value"
+    properties:
+      value:
+        type: "number"
+        format: "double"
+        minimum: 0.01
+        maximum: 1000
+    description: "Price\n"
+    example: "{\n  currency: \"eur\",\n  value: 11\n}"
+  User:
+    type: "object"
+    required:
+    - "email"
+    - "name"
+    - "surname"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      surname:
+        type: "string"
+      email:
+        type: "string"
+      birthdate:
+        type: "string"
+        format: "date"
+    description: "A user"
+    example: "{\n  id: 1,\n  name: \"Alan\",\n  surname: \"Turing\",\n  email: \"\
+      alan.turing@example.com\"\n  birthdate: \"1989-01-01\"\n}"
+  Review:
+    type: "object"
+    required:
+    - "author"
+    - "book_author"
+    - "rating"
+    - "timestamp"
+    - "title"
+    properties:
+      id:
+        type: "integer"
+      author:
+        type: "integer"
+        description: "ID of the user to which this review refers"
+      timestamp:
+        type: "string"
+        format: "date-time"
+      title:
+        type: "string"
+      body:
+        type: "string"
+      rating:
+        type: "number"
+      book_author:
+        type: "integer"
+        description: "ID of the book (or author) to which this review refers."
+    description: "This is a review object."
+    example:
+      author: 6
+      rating: 1.46581298050294517310021547018550336360931396484375
+      book_author: 5
+      id: 0
+      title: "title"
+      body: "body"
+      timestamp: "2000-01-23T04:56:07.000+00:00"
+  Author:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      image_url:
+        type: "string"
+      description:
+        type: "string"
+    example:
+      image_url: "image_url"
+      name: "name"
+      description: "description"
+      id: 0
+  Address:
+    type: "object"
+    required:
+    - "address_line_1"
+    - "cap"
+    - "city"
+    - "country"
+    - "name"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      address_line_1:
+        type: "string"
+      address_line_2:
+        type: "string"
+      cap:
+        type: "integer"
+      city:
+        type: "string"
+      country:
+        type: "string"
+    description: "An address -.-"
+    example:
+      country: "country"
+      cap: 6
+      city: "city"
+      name: "name"
+      address_line_1: "address_line_1"
+      id: 0
+      address_line_2: "address_line_2"
+  Event:
+    type: "object"
+    required:
+    - "description"
+    - "location"
+    - "name"
+    - "timestamp"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      location:
+        $ref: "#/definitions/Address"
+      timestamp:
+        type: "string"
+        format: "date-time"
+      image_urls:
+        type: "array"
+        description: "Array with the images of the event"
+        items:
+          type: "string"
+    description: "An event, oc -.-"
+    example:
+      name: "name"
+      description: "description"
+      image_urls:
+      - "image_urls"
+      - "image_urls"
+      location:
+        country: "country"
+        cap: 6
+        city: "city"
+        name: "name"
+        address_line_1: "address_line_1"
+        id: 0
+        address_line_2: "address_line_2"
+      id: 0
+      timestamp: "2000-01-23T04:56:07.000+00:00"
+  Order:
+    type: "object"
+    required:
+    - "Books"
+    - "User"
+    - "amount"
+    - "timestamp"
+    properties:
+      OrderID:
+        type: "integer"
+        description: "The identifier of the order"
+      User:
+        $ref: "#/definitions/User"
+      Books:
+        type: "array"
+        description: "The list of books ordered"
+        items:
+          $ref: "#/definitions/Order_Books"
+      amount:
+        type: "number"
+        description: "Amount to pay for this order"
+      timestamp:
+        type: "string"
+        format: "date-time"
+    description: "An order for some books"
+    example: "{\n  OrderID: 123456789,\n  User: \n  {\n   id: 1,\n   name: \"Alan\"\
+      ,\n   surname: \"Turing\",\n   email: \"alan.turing@example.com\"\n   birthdate:\
+      \ \"1989-01-01\"\n}\n  Books: [\n  {\n  id: 0,\n  title: \"Il deserto dei tartari\"\
+      ,\n  author: \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"\
+      eur\"\n  }\n\n},\n{\n  id: 1,\n  title: \"Il deserto dei tartari\",\n  author:\
+      \ \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  }\n\
+      }\n  ]\n}"
+  Chart:
+    type: "object"
+    required:
+    - "Books"
+    - "User"
+    - "timestamp"
+    - "total_amount"
+    properties:
+      User:
+        $ref: "#/definitions/User"
+      Books:
+        type: "array"
+        description: "The list of books ordered"
+        items:
+          $ref: "#/definitions/Order_Books"
+      total_amount:
+        type: "number"
+        description: "Amount to pay for this order"
+      timestamp:
+        type: "string"
+        format: "date-time"
+    description: "An order for some books"
+    example: "{\n  OrderID: 123456789,\n  User: \n  {\n   id: 1,\n   name: \"Alan\"\
+      ,\n   surname: \"Turing\",\n   email: \"alan.turing@example.com\"\n   birthdate:\
+      \ \"1989-01-01\"\n}\n  Books: [\n  {\n  id: 0,\n  title: \"Il deserto dei tartari\"\
+      ,\n  author: \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"\
+      eur\"\n  }\n\n},\n{\n  id: 1,\n  title: \"Il deserto dei tartari\",\n  author:\
+      \ \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  }\n\
+      }\n  ]\n}"
+  body:
+    type: "object"
+    required:
+    - "password"
+    - "username"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+  body_1:
+    type: "object"
+    required:
+    - "bookID"
+    - "qty"
+    properties:
+      bookID:
+        type: "integer"
+      qty:
+        type: "integer"
+  Order_Books:
+    required:
+    - "book"
+    - "qty"
+    properties:
+      book:
+        $ref: "#/definitions/Book"
+      qty:
+        type: "integer"
