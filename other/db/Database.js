@@ -13,7 +13,7 @@ const client = new Client({
 client.connect();
 
 let process_book = (book) => {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         client.query(query.authorId(book.author))
             .then(author => {
                 book.author = author.rows[0]
@@ -22,6 +22,9 @@ let process_book = (book) => {
                         book.genres = genres.rows.map( object => object.name );
                         resolve(book)
                     })
+            })
+            .catch(error => {
+                reject()
             })
     })
 }
@@ -39,6 +42,24 @@ module.exports.bookGET = (offset, limit) => {
                             }
                         })
                 })
+            })
+            .catch(error => {
+                reject()
+            })
+    })
+};
+
+module.exports.bookIdGET = (id) => {
+    return new Promise((resolve, reject) => {
+        client.query(query.bookID(id))
+            .then(book => {
+                process_book(book.rows[0])
+                    .then(processed => {
+                        resolve(processed)
+                    })
+            })
+            .catch(error => {
+                reject()
             })
     })
 };

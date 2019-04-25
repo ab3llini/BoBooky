@@ -11,7 +11,9 @@ module.exports.bookGET = function bookGET (req, res, next) {
       utils.writeJson(res, response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+
+      let payload = utils.respondWithCode(400, response);
+      utils.writeJson(res, payload);
     });
 };
 

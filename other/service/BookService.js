@@ -17,7 +17,7 @@ exports.bookGET = function(offset = 0,limit = 20) {
           resolve(books)
         })
         .catch(error => {
-          resolve()
+          reject()
         })
   });
 }
@@ -46,13 +46,13 @@ exports.bookIdDELETE = function(id) {
  **/
 exports.bookIdGET = function(id) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url: \"https://test.com\"\n}";
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    db.bookIdGET(id)
+        .then(book => {
+          resolve(book)
+        })
+        .catch(error => {
+          reject()
+        })
   });
 }
 
