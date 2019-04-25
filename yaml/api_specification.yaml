@@ -135,7 +135,6 @@ paths:
     get:
       tags:
         - "author"
-        - "review"
       summary: "Get reviews for a given author"
       operationId: "authorReviewGET"
       produces:
@@ -154,8 +153,7 @@ paths:
           description: "Status 404"
     post:
       tags:
-        - "book"
-        - "review"
+        - "author"
       summary: "Add new review for the given author"
       operationId: "authorReviewPOST"
       consumes:
@@ -181,7 +179,6 @@ paths:
     delete:
       tags:
         - "author"
-        - "review"
       summary: "Delete a review from a given user"
       operationId: "authorReviewDELETE"
       parameters:
@@ -351,8 +348,7 @@ paths:
   /book/{id}/review:
     get:
       tags:
-        - "author"
-        - "review"
+        - "book"
       summary: "Get reviews for a given book"
       operationId: "bookReviewGET"
       produces:
@@ -372,7 +368,6 @@ paths:
     post:
       tags:
         - "book"
-        - "review"
       summary: "Add new review for the given book"
       operationId: "bookReviewPOST"
       consumes:
@@ -397,8 +392,7 @@ paths:
             - "user"
     delete:
       tags:
-        - "author"
-        - "review"
+        - "book"
       summary: "Delete a review from a given user"
       operationId: "bookReviewDELETE"
       parameters:
@@ -538,7 +532,6 @@ paths:
     get:
       tags:
         - "user"
-        - "address"
       summary: "Get the list of addresses for the user"
       operationId: "userAddressGET"
       parameters: []
@@ -557,7 +550,6 @@ paths:
             - "user"
     post:
       tags:
-        - "address"
         - "user"
       summary: "Add new address for the user"
       operationId: "userAddressPOST"
@@ -579,7 +571,6 @@ paths:
             - "user"
     put:
       tags:
-        - "address"
         - "user"
       summary: "Update an exsisting address"
       operationId: "userAddressPUT"
@@ -610,7 +601,6 @@ paths:
     delete:
       tags:
         - "user"
-        - "address"
       summary: "Delete an existing address for the user"
       operationId: "userAddressDELETE"
       parameters:
@@ -707,7 +697,6 @@ paths:
     get:
       tags:
         - "user"
-        - "chart"
       summary: "Get the user's current chart"
       operationId: "userChartGET"
       parameters: []
@@ -725,7 +714,6 @@ paths:
     put:
       tags:
         - "user"
-        - "chart"
       summary: "Updates the current chart"
       operationId: "userChartPUT"
       consumes:
@@ -754,7 +742,6 @@ paths:
     delete:
       tags:
         - "user"
-        - "chart"
       summary: "Delete the current chart"
       operationId: "userChartDELETE"
       parameters: []
@@ -853,6 +840,8 @@ paths:
         - OAuth2:
             - "admin"
     delete:
+      tags:
+        - "event"
       summary: "Delete an event"
       operationId: "eventIdDELETE"
       parameters: []

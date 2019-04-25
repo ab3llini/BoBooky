@@ -50,6 +50,19 @@ exports.eventGET = function() {
 
 
 /**
+ * Delete an event
+ *
+ * id String 
+ * no response value expected for this operation
+ **/
+exports.eventIdDELETE = function(id) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
+
+
+/**
  * Get event for a given id
  *
  * id String 

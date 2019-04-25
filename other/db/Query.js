@@ -11,3 +11,28 @@ module.exports.book_genres = (book_id) => {
         values: [book_id]
     }
 }
+module.exports.author = (offset, limit) => {
+    return {
+        text: 'select id, name, image as image_url, description from author limit $2 offset $1',
+        values: [offset, limit]
+    }
+};
+
+module.exports.authorId = (id) => {
+    return {
+        text: 'select id, name, image as image_url, description from author where id = $1',
+        values: [id]
+    }
+};
+
+
+module.exports.authorIdReview = (id) => {
+    return {
+        text: 'select u.name, author, timestamp, title, content as body, rating, book_author as author_id' +
+            'from author_review join "user" u on author_review.author = u.id' +
+            'where book_author = $1',
+        values: [id]
+    }
+};
+
+

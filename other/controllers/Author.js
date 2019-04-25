@@ -83,21 +83,11 @@ module.exports.authorReviewGET = function authorReviewGET (req, res, next) {
     });
 };
 
-module.exports.bookReviewDELETE = function bookReviewDELETE (req, res, next) {
+module.exports.authorReviewPOST = function authorReviewPOST (req, res, next) {
   var id = req.swagger.params['id'].value;
-  var reviewID = req.swagger.params['reviewID'].value;
-  Author.bookReviewDELETE(id,reviewID)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.bookReviewGET = function bookReviewGET (req, res, next) {
-  var id = req.swagger.params['id'].value;
-  Author.bookReviewGET(id)
+  var userID = req.swagger.params['userID'].value;
+  var body = req.swagger.params['body'].value;
+  Author.authorReviewPOST(id,userID,body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

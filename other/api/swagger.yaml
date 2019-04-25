@@ -147,7 +147,6 @@ paths:
     get:
       tags:
       - "author"
-      - "review"
       summary: "Get reviews for a given author"
       operationId: "authorReviewGET"
       produces:
@@ -171,8 +170,7 @@ paths:
       x-swagger-router-controller: "Author"
     post:
       tags:
-      - "book"
-      - "review"
+      - "author"
       summary: "Add new review for the given author"
       operationId: "authorReviewPOST"
       consumes:
@@ -199,11 +197,10 @@ paths:
       - OAuth2:
         - "user"
         - "admin"
-      x-swagger-router-controller: "Book"
+      x-swagger-router-controller: "Author"
     delete:
       tags:
       - "author"
-      - "review"
       summary: "Delete a review from a given user"
       operationId: "authorReviewDELETE"
       parameters:
@@ -389,8 +386,7 @@ paths:
   /book/{id}/review:
     get:
       tags:
-      - "author"
-      - "review"
+      - "book"
       summary: "Get reviews for a given book"
       operationId: "bookReviewGET"
       produces:
@@ -411,11 +407,10 @@ paths:
           description: "Bad author id"
         404:
           description: "Status 404"
-      x-swagger-router-controller: "Author"
+      x-swagger-router-controller: "Book"
     post:
       tags:
       - "book"
-      - "review"
       summary: "Add new review for the given book"
       operationId: "bookReviewPOST"
       consumes:
@@ -445,8 +440,7 @@ paths:
       x-swagger-router-controller: "Book"
     delete:
       tags:
-      - "author"
-      - "review"
+      - "book"
       summary: "Delete a review from a given user"
       operationId: "bookReviewDELETE"
       parameters:
@@ -470,7 +464,7 @@ paths:
       - OAuth2:
         - "admin"
         - "user"
-      x-swagger-router-controller: "Author"
+      x-swagger-router-controller: "Book"
   /book/search:
     get:
       tags:
@@ -582,7 +576,6 @@ paths:
     get:
       tags:
       - "user"
-      - "address"
       summary: "Get the list of addresses for the user"
       operationId: "userAddressGET"
       parameters:
@@ -606,7 +599,6 @@ paths:
       x-swagger-router-controller: "User"
     post:
       tags:
-      - "address"
       - "user"
       summary: "Add new address for the user"
       operationId: "userAddressPOST"
@@ -630,10 +622,9 @@ paths:
       - OAuth2:
         - "admin"
         - "user"
-      x-swagger-router-controller: "Address"
+      x-swagger-router-controller: "User"
     put:
       tags:
-      - "address"
       - "user"
       summary: "Update an exsisting address"
       operationId: "userAddressPUT"
@@ -665,11 +656,10 @@ paths:
       - OAuth2:
         - "admin"
         - "user"
-      x-swagger-router-controller: "Address"
+      x-swagger-router-controller: "User"
     delete:
       tags:
       - "user"
-      - "address"
       summary: "Delete an existing address for the user"
       operationId: "userAddressDELETE"
       parameters:
@@ -771,7 +761,6 @@ paths:
     get:
       tags:
       - "user"
-      - "chart"
       summary: "Get the user's current chart"
       operationId: "userChartGET"
       parameters:
@@ -794,7 +783,6 @@ paths:
     put:
       tags:
       - "user"
-      - "chart"
       summary: "Updates the current chart"
       operationId: "userChartPUT"
       consumes:
@@ -820,7 +808,6 @@ paths:
     delete:
       tags:
       - "user"
-      - "chart"
       summary: "Delete the current chart"
       operationId: "userChartDELETE"
       parameters:
@@ -931,6 +918,8 @@ paths:
         - "admin"
       x-swagger-router-controller: "Event"
     delete:
+      tags:
+      - "event"
       summary: "Delete an event"
       operationId: "eventIdDELETE"
       parameters:
@@ -946,7 +935,7 @@ paths:
       security:
       - OAuth2:
         - "admin"
-      x-swagger-router-controller: "Default"
+      x-swagger-router-controller: "Event"
   /event/search:
     get:
       tags:
@@ -1028,7 +1017,10 @@ definitions:
     type: "object"
     required:
     - "author"
+    - "image_href"
+    - "isbn"
     - "price"
+    - "publication_year"
     - "publisher"
     - "title"
     properties:
@@ -1039,18 +1031,29 @@ definitions:
         type: "string"
       author:
         type: "string"
+      description:
+        type: "string"
+      publisher:
+        type: "string"
       price:
-        $ref: "#/definitions/Amount"
-      image_url:
-        type: "array"
-        items:
-          type: "string"
+        type: "number"
+      isbn:
+        type: "string"
+        description: "Book ISBN"
+      isbn13:
+        type: "string"
+      publication_year:
+        type: "integer"
+      publication_month:
+        type: "integer"
+      image_href:
+        type: "string"
+      image_href_small:
+        type: "string"
       genres:
         type: "array"
         items:
           type: "string"
-      publisher:
-        type: "string"
     description: "A book for sale in the store"
     example: "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino\
       \ Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url:\
