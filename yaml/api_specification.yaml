@@ -28,14 +28,14 @@ paths:
       parameters:
         - name: "offset"
           in: "query"
+          description: "Page offset. Defaults to 0"
           required: false
           type: "integer"
-          description: "Page offset. Defaults to 0"
         - name: "limit"
           in: "query"
+          description: "Result limit. Defaults to 20, max 500."
           required: false
           type: "integer"
-          description: "Result limit. Defaults to 20, max 500."
       responses:
         200:
           description: "Returns the list of authors in the specified range."
@@ -47,6 +47,7 @@ paths:
           description: "Unable to fetch all authors"
         404:
           description: "Unable to find the specified resource"
+      x-swagger-router-controller: "Author"
     post:
       tags:
         - "author"
@@ -56,8 +57,8 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "body"
-          in: "body"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/Author"
@@ -69,13 +70,18 @@ paths:
       security:
         - OAuth2:
             - "admin"
+      x-swagger-router-controller: "Author"
   /author/{id}:
     get:
       tags:
         - "author"
       summary: "Fetch a specific author"
       operationId: "authorIdGET"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -85,6 +91,7 @@ paths:
           description: "Unable to fetch this author."
         404:
           description: "Unable to find this author."
+      x-swagger-router-controller: "Author"
     put:
       tags:
         - "author"
@@ -94,8 +101,12 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "body"
-          in: "body"
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/Author"
@@ -109,13 +120,18 @@ paths:
       security:
         - OAuth2:
             - "admin"
+      x-swagger-router-controller: "Author"
     delete:
       tags:
         - "author"
       summary: "Delete an existing author"
       description: "Deletes the author specified in the id"
       operationId: "authorIdDELETE"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "The author has been successfully deleted"
@@ -126,11 +142,7 @@ paths:
       security:
         - OAuth2:
             - "admin"
-    parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "string"
+      x-swagger-router-controller: "Author"
   /author/{id}/review:
     get:
       tags:
@@ -139,7 +151,11 @@ paths:
       operationId: "authorReviewGET"
       produces:
         - "application/json"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -151,6 +167,7 @@ paths:
           description: "Bad author id"
         404:
           description: "Status 404"
+      x-swagger-router-controller: "Author"
     post:
       tags:
         - "author"
@@ -159,13 +176,17 @@ paths:
       consumes:
         - "application/json"
       parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
         - name: "userID"
           in: "query"
+          description: "The user that wrote the review"
           required: true
           type: "integer"
-          description: "The user that wrote the review"
-        - name: "body"
-          in: "body"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/Review"
@@ -176,17 +197,22 @@ paths:
         - OAuth2:
             - "user"
             - "admin"
+      x-swagger-router-controller: "Author"
     delete:
       tags:
         - "author"
       summary: "Delete a review from a given user"
       operationId: "authorReviewDELETE"
       parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
         - name: "reviewID"
           in: "query"
+          description: "The id of the review to be removed"
           required: true
           type: "integer"
-          description: "The id of the review to be removed"
       responses:
         200:
           description: "Status 200"
@@ -198,11 +224,7 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
-    parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "string"
+      x-swagger-router-controller: "Author"
   /book:
     get:
       tags:
@@ -215,15 +237,20 @@ paths:
       parameters:
         - name: "offset"
           in: "query"
+          description: "Pagination offset. Default is 0."
           required: false
           type: "integer"
-          description: "Pagination offset. Default is 0."
+          default: 0
+          minimum: 0
         - name: "limit"
           in: "query"
-          required: false
-          type: "integer"
           description: "Maximum number of items per page. Default is 20 and cannot exceed\
           \ 500."
+          required: false
+          type: "integer"
+          default: 20
+          maximum: 500
+          minimum: 1
       responses:
         200:
           description: "A collection of Books"
@@ -233,6 +260,7 @@ paths:
               $ref: "#/definitions/Book"
         404:
           description: "Book not found"
+      x-swagger-router-controller: "Book"
     post:
       tags:
         - "book"
@@ -242,8 +270,8 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "body"
-          in: "body"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/Book"
@@ -255,6 +283,7 @@ paths:
       security:
         - OAuth2:
             - "admin"
+      x-swagger-router-controller: "Book"
   /book/{id}:
     get:
       tags:
@@ -264,7 +293,13 @@ paths:
       operationId: "bookIdGET"
       produces:
         - "application/json"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of book to return"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -274,6 +309,7 @@ paths:
           description: "Invalid ID supplied"
         404:
           description: "Book not found"
+      x-swagger-router-controller: "Book"
     put:
       tags:
         - "book"
@@ -283,8 +319,14 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "body"
-          in: "body"
+        - name: "id"
+          in: "path"
+          description: "ID of book to return"
+          required: true
+          type: "integer"
+          format: "int64"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/Book"
@@ -298,13 +340,20 @@ paths:
       security:
         - OAuth2:
             - "admin"
+      x-swagger-router-controller: "Book"
     delete:
       tags:
         - "book"
       summary: "Delete an existing book"
       description: "Deletes the book specified in the id"
       operationId: "bookIdDELETE"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of book to return"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "The book has been successfully deleted"
@@ -315,13 +364,7 @@ paths:
       security:
         - OAuth2:
             - "admin"
-    parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "integer"
-        format: "int64"
-        description: "ID of book to return"
+      x-swagger-router-controller: "Book"
   /book/{id}/related:
     get:
       tags:
@@ -330,7 +373,11 @@ paths:
       operationId: "bookRelatedGET"
       produces:
         - "application/json"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -340,11 +387,7 @@ paths:
               $ref: "#/definitions/Book"
         404:
           description: "Status 404"
-    parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "string"
+      x-swagger-router-controller: "Book"
   /book/{id}/review:
     get:
       tags:
@@ -353,7 +396,11 @@ paths:
       operationId: "bookReviewGET"
       produces:
         - "application/json"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -365,6 +412,7 @@ paths:
           description: "Bad author id"
         404:
           description: "Status 404"
+      x-swagger-router-controller: "Book"
     post:
       tags:
         - "book"
@@ -373,13 +421,17 @@ paths:
       consumes:
         - "application/json"
       parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
         - name: "userID"
           in: "query"
+          description: "The user that wrote the review"
           required: true
           type: "integer"
-          description: "The user that wrote the review"
-        - name: "body"
-          in: "body"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/Review"
@@ -390,17 +442,22 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
+      x-swagger-router-controller: "Book"
     delete:
       tags:
         - "book"
       summary: "Delete a review from a given user"
       operationId: "bookReviewDELETE"
       parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
         - name: "reviewID"
           in: "query"
+          description: "The id of the review to be removed"
           required: true
           type: "integer"
-          description: "The id of the review to be removed"
       responses:
         200:
           description: "Status 200"
@@ -412,11 +469,7 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
-    parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "string"
+      x-swagger-router-controller: "Book"
   /book/search:
     get:
       tags:
@@ -429,9 +482,9 @@ paths:
       parameters:
         - name: "query"
           in: "query"
+          description: "generic search query for the book"
           required: false
           type: "string"
-          description: "generic search query for the book"
         - name: "isbn"
           in: "query"
           required: false
@@ -463,6 +516,7 @@ paths:
           description: "At least one parameter must be specified"
         404:
           description: "Book not found"
+      x-swagger-router-controller: "Book"
   /user/register:
     post:
       tags:
@@ -473,8 +527,8 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "body"
-          in: "body"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/User"
@@ -485,6 +539,7 @@ paths:
           description: "User already present"
         404:
           description: "unauthorized"
+      x-swagger-router-controller: "User"
   /user/login:
     post:
       tags:
@@ -495,24 +550,17 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "body"
-          in: "body"
+        - in: "body"
+          name: "body"
           required: true
           schema:
-            type: "object"
-            required:
-              - "password"
-              - "username"
-            properties:
-              username:
-                type: "string"
-              password:
-                type: "string"
+            $ref: "#/definitions/body"
       responses:
         200:
           description: "succesfull login"
         404:
           description: "unauthorized"
+      x-swagger-router-controller: "User"
   /user/logout:
     get:
       tags:
@@ -528,13 +576,18 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
+      x-swagger-router-controller: "User"
   /user/{id}/address:
     get:
       tags:
         - "user"
       summary: "Get the list of addresses for the user"
       operationId: "userAddressGET"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -548,6 +601,7 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
+      x-swagger-router-controller: "User"
     post:
       tags:
         - "user"
@@ -555,8 +609,12 @@ paths:
       operationId: "userAddressPOST"
       consumes: []
       parameters:
-        - name: "body"
-          in: "body"
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/Address"
@@ -569,6 +627,7 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
+      x-swagger-router-controller: "User"
     put:
       tags:
         - "user"
@@ -577,13 +636,17 @@ paths:
       consumes:
         - "application/json"
       parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
         - name: "addressID"
           in: "query"
+          description: "The identifier for the address to update"
           required: true
           type: "integer"
-          description: "The identifier for the address to update"
-        - name: "body"
-          in: "body"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/Address"
@@ -598,17 +661,22 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
+      x-swagger-router-controller: "User"
     delete:
       tags:
         - "user"
       summary: "Delete an existing address for the user"
       operationId: "userAddressDELETE"
       parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
         - name: "addressID"
           in: "query"
+          description: "The id of the address to be removed"
           required: true
           type: "integer"
-          description: "The id of the address to be removed"
       responses:
         200:
           description: "The address has been removed"
@@ -620,18 +688,18 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
-    parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "string"
+      x-swagger-router-controller: "User"
   /user/{id}/whishlist:
     get:
       tags:
         - "user"
       summary: "Get the list of books in the whishlist"
       operationId: "userWhishlistGET"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -645,17 +713,22 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
+      x-swagger-router-controller: "User"
     delete:
       tags:
         - "user"
       summary: "Removes one book from the whishlist"
       operationId: "userWhishlistDELETE"
       parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
         - name: "bookID"
           in: "query"
+          description: "The id of the book to be removed from the whishlist"
           required: true
           type: "integer"
-          description: "The id of the book to be removed from the whishlist"
       responses:
         200:
           description: "Status 200"
@@ -667,18 +740,18 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
-    parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "string"
+      x-swagger-router-controller: "User"
   /user/{id}/order:
     get:
       tags:
         - "user"
       summary: "Get the orders for a given user"
       operationId: "userOrderGET"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -688,18 +761,18 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
-    parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "string"
+      x-swagger-router-controller: "User"
   /user/{id}/chart:
     get:
       tags:
         - "user"
       summary: "Get the user's current chart"
       operationId: "userChartGET"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -711,6 +784,7 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
+      x-swagger-router-controller: "User"
     put:
       tags:
         - "user"
@@ -719,19 +793,15 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "body"
-          in: "body"
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
           required: true
           schema:
-            type: "object"
-            required:
-              - "bookID"
-              - "qty"
-            properties:
-              bookID:
-                type: "integer"
-              qty:
-                type: "integer"
+            $ref: "#/definitions/body_1"
       responses:
         200:
           description: "Status 200"
@@ -739,12 +809,17 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
+      x-swagger-router-controller: "User"
     delete:
       tags:
         - "user"
       summary: "Delete the current chart"
       operationId: "userChartDELETE"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -754,11 +829,7 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
-    parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "string"
+      x-swagger-router-controller: "User"
   /event:
     get:
       tags:
@@ -777,6 +848,7 @@ paths:
               $ref: "#/definitions/Event"
         404:
           description: "Status 404"
+      x-swagger-router-controller: "Event"
     post:
       tags:
         - "event"
@@ -785,8 +857,8 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "body"
-          in: "body"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/Event"
@@ -800,6 +872,7 @@ paths:
       security:
         - OAuth2:
             - "admin"
+      x-swagger-router-controller: "Event"
   /event/{id}:
     get:
       tags:
@@ -808,7 +881,11 @@ paths:
       operationId: "eventIdGET"
       produces:
         - "application/json"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -816,6 +893,7 @@ paths:
             $ref: "#/definitions/Event"
         404:
           description: "Status 404"
+      x-swagger-router-controller: "Event"
     put:
       tags:
         - "event"
@@ -824,8 +902,12 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "body"
-          in: "body"
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
           required: true
           schema:
             $ref: "#/definitions/Event"
@@ -839,12 +921,17 @@ paths:
       security:
         - OAuth2:
             - "admin"
+      x-swagger-router-controller: "Event"
     delete:
       tags:
         - "event"
       summary: "Delete an event"
       operationId: "eventIdDELETE"
-      parameters: []
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "string"
       responses:
         200:
           description: "Status 200"
@@ -853,11 +940,7 @@ paths:
       security:
         - OAuth2:
             - "admin"
-    parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "string"
+      x-swagger-router-controller: "Event"
   /event/search:
     get:
       tags:
@@ -869,24 +952,24 @@ paths:
       parameters:
         - name: "query_string"
           in: "query"
+          description: "The search query"
           required: false
           type: "string"
-          description: "The search query"
         - name: "name"
           in: "query"
+          description: "The name of the event"
           required: false
           type: "string"
-          description: "The name of the event"
         - name: "author_name"
           in: "query"
+          description: "The name of the author for the event"
           required: false
           type: "string"
-          description: "The name of the author for the event"
         - name: "author_id"
           in: "query"
+          description: "The id of the author for the event"
           required: false
           type: "integer"
-          description: "The id of the author for the event"
         - name: "book_name"
           in: "query"
           required: false
@@ -925,6 +1008,7 @@ paths:
           description: "At least one query parameter must exist"
         404:
           description: "Status 404"
+      x-swagger-router-controller: "Event"
 securityDefinitions:
   OAuth2:
     type: "oauth2"
@@ -1039,6 +1123,14 @@ definitions:
         type: "integer"
         description: "ID of the book (or author) to which this review refers."
     description: "This is a review object."
+    example:
+      author: 6
+      rating: 1.46581298050294517310021547018550336360931396484375
+      book_author: 5
+      id: 0
+      title: "title"
+      body: "body"
+      timestamp: "2000-01-23T04:56:07.000+00:00"
   Author:
     type: "object"
     required:
@@ -1052,6 +1144,11 @@ definitions:
         type: "string"
       description:
         type: "string"
+    example:
+      image_url: "image_url"
+      name: "name"
+      description: "description"
+      id: 0
   Address:
     type: "object"
     required:
@@ -1076,6 +1173,14 @@ definitions:
       country:
         type: "string"
     description: "An address -.-"
+    example:
+      country: "country"
+      cap: 6
+      city: "city"
+      name: "name"
+      address_line_1: "address_line_1"
+      id: 0
+      address_line_2: "address_line_2"
   Event:
     type: "object"
     required:
@@ -1105,6 +1210,24 @@ definitions:
       related_book:
         type: "integer"
     description: "An event, oc -.-"
+    example:
+      related_book: 1
+      related_author: 6
+      name: "name"
+      description: "description"
+      image_urls:
+        - "image_urls"
+        - "image_urls"
+      location:
+        country: "country"
+        cap: 6
+        city: "city"
+        name: "name"
+        address_line_1: "address_line_1"
+        id: 0
+        address_line_2: "address_line_2"
+      id: 0
+      timestamp: "2000-01-23T04:56:07.000+00:00"
   Order:
     type: "object"
     required:
@@ -1122,15 +1245,7 @@ definitions:
         type: "array"
         description: "The list of books ordered"
         items:
-          required:
-            - "book"
-            - "qty"
-          type: "object"
-          properties:
-            book:
-              $ref: "#/definitions/Book"
-            qty:
-              type: "integer"
+          $ref: "#/definitions/Order_Books"
       amount:
         type: "number"
         description: "Amount to pay for this order"
@@ -1159,15 +1274,7 @@ definitions:
         type: "array"
         description: "The list of books ordered"
         items:
-          required:
-            - "book"
-            - "qty"
-          type: "object"
-          properties:
-            book:
-              $ref: "#/definitions/Book"
-            qty:
-              type: "integer"
+          $ref: "#/definitions/Order_Books"
       total_amount:
         type: "number"
         description: "Amount to pay for this order"
@@ -1182,3 +1289,32 @@ definitions:
       eur\"\n  }\n\n},\n{\n  id: 1,\n  title: \"Il deserto dei tartari\",\n  author:\
       \ \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  }\n\
       }\n  ]\n}"
+  body:
+    type: "object"
+    required:
+      - "password"
+      - "username"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+  body_1:
+    type: "object"
+    required:
+      - "bookID"
+      - "qty"
+    properties:
+      bookID:
+        type: "integer"
+      qty:
+        type: "integer"
+  Order_Books:
+    required:
+      - "book"
+      - "qty"
+    properties:
+      book:
+        $ref: "#/definitions/Book"
+      qty:
+        type: "integer"

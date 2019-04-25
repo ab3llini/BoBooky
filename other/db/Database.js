@@ -1,4 +1,4 @@
-const { Client } = require('pg');
+const {Client} = require('pg');
 let query = require('./Query.js');
 
 const client = new Client({
@@ -7,17 +7,40 @@ const client = new Client({
     database: 'd3k4sooera9fsh',
     password: 'a46181c55c68f90d53b029a88daa5800f4b13f203287f0df528a993ef18e5b14',
     port: 5432,
-    ssl : true
+    ssl: true
 });
 
 client.connect();
 
-module.exports.bookGET = (offset, limit) => {
-    return new Promise((resolve, reject) => {
-
+let process_book = (book) => {
+    return new Promise(resolve => {
+        client.query(query.authorId(book.author))
+            .then(author => {
+                book.author = author.rows[0]
+                client.query(query.bookGenres(book.id))
+                    .then(genres => {
+                        book.genres = genres.rows.map( object => object.name );
+                        resolve(book)
+                    })
+            })
     })
 }
 
-client.query(query.bookGET(0, 10))
-    .then(res => console.log(res.rows))
-    .catch(e => console.error(e.stack));
+module.exports.bookGET = (offset, limit) => {
+    return new Promise((resolve, reject) => {
+        client.query(query.bookView(offset, limit))
+            .then(books => {
+                books.rows.forEach((book, i) => {
+                    process_book(book)
+                        .then(processed => {
+                            book = processed;
+                            if (i === books.rows.length - 1) {
+                                resolve(books.rows)
+                            }
+                        })
+                })
+            })
+    })
+};
+
+

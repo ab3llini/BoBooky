@@ -1,5 +1,6 @@
 'use strict';
 
+let db = require('../db/Database.js');
 
 /**
  * Books available in the inventory
@@ -9,15 +10,15 @@
  * limit Integer Maximum number of items per page. Default is 20 and cannot exceed 500. (optional)
  * returns List
  **/
-exports.bookGET = function(offset,limit) {
+exports.bookGET = function(offset = 0,limit = 20) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url: \"https://test.com\"\n}", "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url: \"https://test.com\"\n}" ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    db.bookGET(offset, limit)
+        .then(books => {
+          resolve(books)
+        })
+        .catch(error => {
+          resolve()
+        })
   });
 }
 
