@@ -21,16 +21,14 @@ module.exports.bookID = (id) => {
 
 module.exports.author = (offset, limit) => {
     return {
-        text: 'select a.id, name, i.href as image_url, description from author a join image i on a.image = i.id ' +
-            'limit $2 offset $1',
+        text: "select a.id, name, i.href as image_url, description from author a join image i on a.image = i.id limit $2 offset $1",
         values: [offset, limit]
     }
 };
 
 module.exports.authorId = (id) => {
     return {
-        text: 'select a.id, name, i.href as image_url, description from author a join image i on a.image = i.id ' +
-            'where a.id = $1',
+        text: 'select a.id, name, i.href as image_url, description from author a join image i on a.image = i.id where a.id = $1',
         values: [id]
     }
 };
@@ -38,9 +36,9 @@ module.exports.authorId = (id) => {
 
 module.exports.authorIdReview = (id) => {
     return {
-        text: 'select u.name, author, timestamp, title, content as body, rating, book_author as author_id ' +
-            'from author_review join "user" u on author_review.author = u.id ' +
-            'where book_author = $1',
+        text: `select u.name, author, timestamp, title, content as body, rating, book_author as author_id
+            from author_review join "user" u on author_review.author = u.id
+            where book_author = $1`,
         values: [id]
     }
 };
@@ -48,16 +46,16 @@ module.exports.authorIdReview = (id) => {
 
 module.exports.event = () => {
     return {
-        text: 'select e.id, name, description, location as address, timestamp ' +
-            'from event e join event_to_image eti on e.id = eti.event_id join image i on eti.image_id = i.id'
+        text: `select e.id, name, description, location as address, timestamp
+            from event e join event_to_image eti on e.id = eti.event_id join image i on eti.image_id = i.id`
     }
 };
 
 module.exports.eventAddress = (id) => {
     return {
-        text: 'select a.* ' +
-            'from address a join event e on a.id = e.location ' +
-            'where e.id = $1',
+        text: `select a.*
+            from address a join event e on a.id = e.location
+            where e.id = $1`,
         values: [id]
     }
 };
