@@ -12,7 +12,7 @@ exports.userAddressDELETE = function(id,addressID) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -47,7 +47,7 @@ exports.userAddressGET = function(id) {
       resolve();
     }
   });
-}
+};
 
 
 /**
@@ -61,7 +61,7 @@ exports.userAddressPOST = function(id,body) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -76,7 +76,7 @@ exports.userAddressPUT = function(id,addressID,body) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -89,7 +89,7 @@ exports.userChartDELETE = function(id) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -108,7 +108,7 @@ exports.userChartGET = function(id) {
       resolve();
     }
   });
-}
+};
 
 
 /**
@@ -122,7 +122,7 @@ exports.userChartPUT = function(id,body) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -136,7 +136,7 @@ exports.userLoginPOST = function(body) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -149,7 +149,7 @@ exports.userLogoutGET = function() {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -162,7 +162,7 @@ exports.userOrderGET = function(id) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -176,7 +176,7 @@ exports.userRegisterPOST = function(body) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -190,7 +190,7 @@ exports.userWhishlistDELETE = function(id,bookID) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -209,5 +209,5 @@ exports.userWhishlistGET = function(id) {
       resolve();
     }
   });
-}
+};
 

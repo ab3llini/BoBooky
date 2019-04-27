@@ -50,7 +50,7 @@ exports.eventGET = function() {
       resolve();
     }
   });
-}
+};
 
 
 /**
@@ -63,7 +63,7 @@ exports.eventIdDELETE = function(id) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -99,7 +99,7 @@ exports.eventIdGET = function(id) {
       resolve();
     }
   });
-}
+};
 
 
 /**
@@ -113,7 +113,7 @@ exports.eventIdPUT = function(id,body) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -126,7 +126,7 @@ exports.eventPOST = function(body) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -188,5 +188,5 @@ exports.eventSearchGET = function(query_string,name,author_name,author_id,book_n
       resolve();
     }
   });
-}
+};
 

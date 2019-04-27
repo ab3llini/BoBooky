@@ -1,6 +1,6 @@
 module.exports.bookView = (offset, limit) => {
     return {
-        text: 'SELECT * from book_view offset $1 limit $2',
+        text: 'SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img from book_view bw join author a on bw.author = a.id join image i on a.image = i.id offset $1 limit $2',
         values: [offset, limit]
     }
 };
@@ -14,8 +14,22 @@ module.exports.bookGenres = (book_id) => {
 
 module.exports.bookID = (id) => {
     return {
-        text: 'SELECT * from book_view where id = $1',
+        text: 'SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img from book_view bw join author a on bw.author = a.id join image i on a.image = i.id where bw.id = $1',
         values: [id]
+    }
+};
+
+module.exports.bookReviews = (bookID) => {
+    return {
+        text: 'select br.id, br.timestamp, br.title, br.content as body, br.rating, u.id author_id, u.name as author_name, u.surname as author_surname from book_review br join "user" u on br.author = u.id where br.book = $1',
+        values: [bookID]
+    }
+};
+
+module.exports.relatedBooks = (bookID, offset, limit) => {
+    return {
+        text: 'SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img from book_view bw join author a on bw.author = a.id join image i on a.image = i.id where a.id = (select author from book where id = $1) offset $2 limit $3',
+        values: [bookID, offset, limit]
     }
 };
 
@@ -34,12 +48,12 @@ module.exports.authorId = (id) => {
 };
 
 
-module.exports.authorIdReview = (id) => {
+module.exports.authorReviews = (authorID) => {
     return {
         text: `select u.name, author, timestamp, title, content as body, rating, book_author as author_id
             from author_review join "user" u on author_review.author = u.id
             where book_author = $1`,
-        values: [id]
+        values: [authorID]
     }
 };
 

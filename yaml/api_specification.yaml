@@ -1078,7 +1078,6 @@ definitions:
   User:
     type: "object"
     required:
-      - "email"
       - "name"
       - "surname"
     properties:
@@ -1100,7 +1099,6 @@ definitions:
     type: "object"
     required:
       - "author"
-      - "book_author"
       - "rating"
       - "timestamp"
       - "title"
@@ -1108,8 +1106,7 @@ definitions:
       id:
         type: "integer"
       author:
-        type: "integer"
-        description: "ID of the user to which this review refers"
+        $ref: "#/definitions/User"
       timestamp:
         type: "string"
         format: "date-time"
@@ -1119,14 +1116,11 @@ definitions:
         type: "string"
       rating:
         type: "number"
-      book_author:
-        type: "integer"
-        description: "ID of the book (or author) to which this review refers."
     description: "This is a review object."
     example:
-      author: 6
-      rating: 1.46581298050294517310021547018550336360931396484375
-      book_author: 5
+      author: "{\n  id: 1,\n  name: \"Alan\",\n  surname: \"Turing\",\n  email: \"\
+        alan.turing@example.com\"\n  birthdate: \"1989-01-01\"\n}"
+      rating: 6.02745618307040320615897144307382404804229736328125
       id: 0
       title: "title"
       body: "body"
@@ -1310,6 +1304,7 @@ definitions:
       qty:
         type: "integer"
   Order_Books:
+    type: "object"
     required:
       - "book"
       - "qty"
