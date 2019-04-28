@@ -26,14 +26,62 @@ module.exports.bookReviews = (bookID) => {
     }
 };
 
-module.exports.bookSearch = (query, isbn, genre, year, author, publisher) => {
-    let q = 'SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img from book_view bw join author a on bw.author = a.id join image i on a.image = i.id' + ' ';
+module.exports.bookSearch = (query, isbn, genre, year, author, publisher, offset = 0, limit = 20) => {
+    let q = `select distinct bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img
+             from book_view bw
+                      join author a on bw.author = a.id
+                      join image i on a.image = i.id
+                      join book_to_genre btg on bw.id = btg.book_id
+                      join genre g on btg.genre_id = g.id` + ' ';
+
+    let clause = 'where';
+    let placeholder = 1;
+    let values = [];
+
     if (query !== undefined) {
-        q += 'where bw.title like $1 or a.name like $1 or bw.publisher like $1 or bw.isbn like $1 or bw.isbn13 like $1';
-        return {
-            text: q,
-            values: ["'%" + query + "%'"]
-        }
+        q += clause + ' ((bw.title LIKE \'%\' || $'+placeholder+' || \'%\') ' +
+            'or (a.name LIKE \'%\' || $'+placeholder+' || \'%\') or (bw.publisher LIKE \'%\' || $'+placeholder+' || \'%\') ' +
+            'or (bw.isbn LIKE \'%\' || $'+placeholder+' || \'%\') or (bw.isbn13  LIKE \'%\' || $'+placeholder+' || \'%\') ' +
+            'or (g.name  LIKE \'%\' || $'+placeholder+' || \'%\'))' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(query)
+    }
+    if (isbn !== undefined) {
+        q += clause + ' (bw.isbn = $'+placeholder+' or bw.isbn13 = $'+placeholder+')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(isbn)
+    }
+    if (genre !== undefined) {
+        q += clause + ' (g.name = $'+placeholder+')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(genre)
+    }
+    if (year !== undefined) {
+        q += clause + ' (bw.publication_year = cast($'+placeholder+' as int))' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(year)
+    }
+    if (author !== undefined) {
+        q += clause + ' (a.name = $'+placeholder+')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(author)
+    }
+    if (publisher !== undefined) {
+        q += clause + ' (bw.publisher = $'+placeholder+')' + ' ';
+        placeholder += 1;
+        values.push(publisher)
+    }
+    q += 'offset $'+placeholder+' limit $'+(placeholder+1);
+    values.push(offset, limit);
+    console.log(q)
+    return {
+        text: q,
+        values: values
     }
 };
 

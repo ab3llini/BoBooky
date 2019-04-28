@@ -140,32 +140,30 @@ module.exports.bookRelatedGET = (bookID, offset = 0, limit = 20) => {
     })
 };
 
-module.exports.bookSearchGET = (query,isbn,genre,year,author,publisher) => {
+module.exports.bookSearchGET = (query, isbn, genre, year, author, publisher) => {
     return new Promise((resolve, reject) => {
-        let q = make.bookSearch(query,isbn,genre,year,author,publisher);
-        if (q === undefined)
-            reject();
-        else {
-            pipe.query(q)
-                .then(result => {
-                    result.rows.forEach((book, i) => {
-                        process_book(book)
-                            .then(processed => {
-                                book = processed;
-                                if (i === result.rows.length - 1) {
-                                    resolve(result.rows)
-                                }
-                            })
-                            .catch(error => {
-                                reject()
-                            })
-                    })
+
+        pipe.query(make.bookSearch(query, isbn, genre, year, author, publisher))
+            .then(result => {
+                result.rows.forEach((book, i) => {
+                    process_book(book)
+                        .then(processed => {
+                            book = processed;
+                            if (i === result.rows.length - 1) {
+                                resolve(result.rows)
+                            }
+                        })
+                        .catch(error => {
+                            reject()
+                        })
                 })
-                .catch(error => {
-                    reject()
-                })
-        }
+            })
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+
     })
-}
+};
 
 
