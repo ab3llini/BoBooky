@@ -14,12 +14,11 @@ pipe.connect();
 
 module.exports.execute = (func, args) => {
     return new Promise((resolve, reject) => {
-
         func.apply(null, args)
             .then(result => {
                 resolve(result)
             })
-            .catch(() => {
+            .catch((error) => {
                 reject()
             })
     });
@@ -140,5 +139,33 @@ module.exports.bookRelatedGET = (bookID, offset = 0, limit = 20) => {
             })
     })
 };
+
+module.exports.bookSearchGET = (query,isbn,genre,year,author,publisher) => {
+    return new Promise((resolve, reject) => {
+        let q = make.bookSearch(query,isbn,genre,year,author,publisher);
+        if (q === undefined)
+            reject();
+        else {
+            pipe.query(q)
+                .then(result => {
+                    result.rows.forEach((book, i) => {
+                        process_book(book)
+                            .then(processed => {
+                                book = processed;
+                                if (i === result.rows.length - 1) {
+                                    resolve(result.rows)
+                                }
+                            })
+                            .catch(error => {
+                                reject()
+                            })
+                    })
+                })
+                .catch(error => {
+                    reject()
+                })
+        }
+    })
+}
 
 

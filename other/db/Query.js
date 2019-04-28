@@ -26,6 +26,17 @@ module.exports.bookReviews = (bookID) => {
     }
 };
 
+module.exports.bookSearch = (query, isbn, genre, year, author, publisher) => {
+    let q = 'SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img from book_view bw join author a on bw.author = a.id join image i on a.image = i.id' + ' ';
+    if (query !== undefined) {
+        q += 'where bw.title like $1 or a.name like $1 or bw.publisher like $1 or bw.isbn like $1 or bw.isbn13 like $1';
+        return {
+            text: q,
+            values: ["'%" + query + "%'"]
+        }
+    }
+};
+
 module.exports.relatedBooks = (bookID, offset, limit) => {
     return {
         text: 'SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img from book_view bw join author a on bw.author = a.id join image i on a.image = i.id where a.id = (select author from book where id = $1) offset $2 limit $3',
@@ -51,8 +62,9 @@ module.exports.authorId = (id) => {
 module.exports.authorReviews = (authorID) => {
     return {
         text: `select u.name, author, timestamp, title, content as body, rating, book_author as author_id
-            from author_review join "user" u on author_review.author = u.id
-            where book_author = $1`,
+               from author_review
+                        join "user" u on author_review.author = u.id
+               where book_author = $1`,
         values: [authorID]
     }
 };
@@ -61,15 +73,18 @@ module.exports.authorReviews = (authorID) => {
 module.exports.event = () => {
     return {
         text: `select e.id, name, description, location as address, timestamp
-            from event e join event_to_image eti on e.id = eti.event_id join image i on eti.image_id = i.id`
+               from event e
+                        join event_to_image eti on e.id = eti.event_id
+                        join image i on eti.image_id = i.id`
     }
 };
 
 module.exports.eventAddress = (id) => {
     return {
         text: `select a.*
-            from address a join event e on a.id = e.location
-            where e.id = $1`,
+               from address a
+                        join event e on a.id = e.location
+               where e.id = $1`,
         values: [id]
     }
 };
