@@ -13,7 +13,7 @@ info:
 host: "localhost"
 basePath: "/api"
 schemes:
-- "http"
+- "https"
 consumes:
 - "application/json"
 produces:
@@ -747,14 +747,28 @@ paths:
       - "user"
       summary: "Get the orders for a given user"
       operationId: "userOrderGET"
+      produces:
+      - "application/json"
       parameters:
       - name: "id"
         in: "path"
         required: true
         type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        required: false
+        type: "integer"
       responses:
         200:
           description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Order"
         404:
           description: "Status 404"
       security:
@@ -1078,6 +1092,8 @@ definitions:
   User:
     type: "object"
     required:
+    - "birthdate"
+    - "email"
     - "name"
     - "surname"
     properties:
@@ -1092,6 +1108,8 @@ definitions:
       birthdate:
         type: "string"
         format: "date"
+      password:
+        type: "string"
     description: "A user"
     example: "{\n  id: 1,\n  name: \"Alan\",\n  surname: \"Turing\",\n  email: \"\
       alan.turing@example.com\"\n  birthdate: \"1989-01-01\"\n}"

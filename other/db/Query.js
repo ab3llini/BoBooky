@@ -1,3 +1,21 @@
+const sha256 = require('sha256');
+
+
+function getRandomString(length) {
+    let result = '';
+    const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+
+
+/***************************
+ ******** BOOKS ************
+ ***************************/
 module.exports.bookView = (offset, limit) => {
     return {
         text: 'SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img from book_view bw join author a on bw.author = a.id join image i on a.image = i.id offset $1 limit $2',
@@ -92,6 +110,10 @@ module.exports.relatedBooks = (bookID, offset, limit) => {
     }
 };
 
+/***************************
+ ******** AUTHORS **********
+ ***************************/
+
 module.exports.author = (offset, limit) => {
     return {
         text: "select a.id, name, i.href as image_url, description from author a join image i on a.image = i.id limit $2 offset $1",
@@ -117,6 +139,9 @@ module.exports.authorReviews = (authorID) => {
     }
 };
 
+/***************************
+ ******** EVENTS ***********
+ ***************************/
 
 module.exports.event = () => {
     return {
@@ -136,3 +161,53 @@ module.exports.eventAddress = (id) => {
         values: [id]
     }
 };
+
+
+/***************************
+ ********* USER ************
+ ***************************/
+
+module.exports.registerUser = (user) => {
+    const salt_ = getRandomString(4);
+    const sha256_ = sha256(user.password + salt_);
+    return {
+        text: `insert into "user"(name, surname, email, birthdate, sha256, salt16)
+            values ($1, $2, $3, $4, $5, $6)`,
+        values: [user.name, user.surname, user.email, user.birthtime.getDate(), sha256_, salt_]
+    }
+}
+
+module.exports.loginUser = (email, pswSHA256) => {
+    return {
+        text: `select * from "user" where email = $1 and sha256 = $2`,
+        values: [email, pswSHA256]
+    }
+}
+
+module.exports.getUserSalt = (email) => {
+    return {
+        text: `select salt16 from "user" where email = $1`,
+        values: [email]
+    }
+}
+
+module.exports.getUserOrder = (id, limit, offset) => {
+    return {
+        text: `select o.id as order_id, u.id as user_id, u.name, u.surname, u.email, u.birthdate, o.total_amount, o.timestamp
+            from "order" o join "user" u on o.user_id = u.id join order_to_book otb on o.id = otb.order_id
+            where u.id = $1
+            offset $2 limit $3`,
+        values: [id, limit, offset]
+    }
+}
+
+module.exports.getBooksForOrder = (id) => {
+    return {
+        text: `select b.id as book_id, b.title, a.name, b.description, b.publisher, b.price, b.isbn, b.isbn13, b.publication_year,
+                i.href as image_href
+            from "order" o join order_to_book otb on o.id = otb.order_id join book b on otb.book_id = b.id
+                join author a on b.author = a.id join image i on b.image_id = i.id
+            where o.id = $1`,
+        values: [id]
+    }
+}

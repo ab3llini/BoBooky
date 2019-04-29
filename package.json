@@ -15,7 +15,8 @@
   "dependencies": {
     "connect": "^3.2.0",
     "js-yaml": "^3.3.0",
-    "swagger-tools": "0.10.1",
-    "pg": "latest"
+    "pg": "^7.10.0",
+    "sha256": "^0.2.0",
+    "swagger-tools": "^0.10.4"
   }
 }

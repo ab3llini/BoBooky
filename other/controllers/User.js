@@ -108,13 +108,15 @@ module.exports.userLogoutGET = function userLogoutGET (req, res, next) {
 
 module.exports.userOrderGET = function userOrderGET (req, res, next) {
   var id = req.swagger.params['id'].value;
-  User.userOrderGET(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  var offset = req.swagger.params['offset'].value;
+  var limit = req.swagger.params['limit'].value;
+  User.userOrderGET(id,offset,limit)
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
