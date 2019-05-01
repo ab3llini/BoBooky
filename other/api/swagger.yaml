@@ -13,7 +13,7 @@ info:
 host: "localhost"
 basePath: "/api"
 schemes:
-- "https"
+- "http"
 consumes:
 - "application/json"
 produces:
