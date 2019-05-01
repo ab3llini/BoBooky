@@ -16,6 +16,7 @@ schemes:
 - "http"
 consumes:
 - "application/json"
+- "application/octet-stream"
 produces:
 - "application/json"
 paths:
@@ -713,6 +714,32 @@ paths:
       - OAuth2:
         - "admin"
         - "user"
+      x-swagger-router-controller: "User"
+    post:
+      tags:
+      - "user"
+      summary: "Add a book to the whish list"
+      operationId: "userWhishlistPOST"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "book_id"
+        in: "query"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "Book already present in the whish list"
+        404:
+          description: "Status 404"
+      security:
+      - OAuth2:
+        - "user"
+        - "admin"
       x-swagger-router-controller: "User"
     delete:
       tags:

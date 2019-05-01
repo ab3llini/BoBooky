@@ -143,10 +143,7 @@ exports.userRegisterPOST = function(body) {
  * no response value expected for this operation
  **/
 exports.userWhishlistDELETE = function(id,bookID) {
-    //TODO
-    return new Promise(function(resolve, reject) {
-        resolve();
-    });
+    return db.execute(db.userWhishlistDELETE, [id, bookID])
 };
 
 
@@ -157,15 +154,16 @@ exports.userWhishlistDELETE = function(id,bookID) {
  * returns List
  **/
 exports.userWhishlistGET = function(id) {
-    //TODO
-    return new Promise(function(resolve, reject) {
-        var examples = {};
-        examples['application/json'] = [ "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url: \"https://test.com\"\n}", "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url: \"https://test.com\"\n}" ];
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
+    return db.execute(db.userWhishlistGET, [id])
 };
 
+/**
+ * Add a book to the whish list
+ *
+ * id String
+ * book_id Integer
+ * no response value expected for this operation
+ **/
+exports.userWhishlistPOST = function(id,book_id) {
+    return db.execute(db.userWhishlistPOST, [id, book_id])
+};

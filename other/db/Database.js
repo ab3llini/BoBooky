@@ -20,7 +20,7 @@ module.exports.execute = (func, args) => {
                 resolve(result)
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     });
@@ -178,11 +178,9 @@ module.exports.bookSearchGET = (query, isbn, genre, year, author, publisher) => 
 module.exports.userRegisterPOST = (body) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.registerUser(body))
-            .then(() => {
-                resolve()
-            })
+            .then(resolve())
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     })
@@ -198,13 +196,13 @@ module.exports.userLoginPOST = (body) => {
                     pipe.query(make.loginUser(body.username, sha256(body.password + result.rows[0].salt)))
                         .then(res => resolve(res))
                         .catch(error => {
-                            console.error(error);
+                            console.log(error);
                             reject()
                         })
                 }
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     })
@@ -256,13 +254,13 @@ module.exports.userOrderGET = (id, offset, limit) => {
                                 })
                             })
                             .catch(error => {
-                                console.error(error);
+                                console.log(error);
                                 reject()
                             })
                     })
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     })
@@ -273,14 +271,14 @@ module.exports.userAddressPOST = (userID, address) => {
         pipe.query(make.addAddressForUser(address))
             .then((id) => {
                 pipe.query(make.bindUserAddress(userID, id.rows[0].id))
-                    .then(() => resolve())
+                    .then(resolve())
                     .catch(error => {
-                        console.error(error);
+                        console.log(error);
                         reject()
                     })
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     })
@@ -296,7 +294,7 @@ module.exports.userAddressDELETE = (userID, address) => {
                     reject()
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     })
@@ -309,7 +307,7 @@ module.exports.userAddressGET = (userID) => {
                 resolve(response.rows)
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     })
@@ -318,9 +316,9 @@ module.exports.userAddressGET = (userID) => {
 module.exports.userAddressPUT = (userID, address) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.updateAddressForUser(userID, address))
-            .then(() => resolve())
+            .then(resolve())
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     })
@@ -332,21 +330,21 @@ module.exports.userChartPUT = (userID, book_info) => {
             .then(books => {
                 if (books.rows.length === 0)
                    pipe.query(make.addBookToUserChart(userID, book_info))
-                       .then(() => resolve())
+                       .then(resolve())
                        .catch(error => {
-                           console.error(error);
+                           console.log(error);
                            reject()
                        });
                 else
                     pipe.query(make.updateUserChart(userID, book_info))
-                        .then(() => resolve())
+                        .then(resolve())
                         .catch(error => {
-                            console.error(error);
+                            console.log(error);
                             reject()
                         })
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     })
@@ -355,9 +353,9 @@ module.exports.userChartPUT = (userID, book_info) => {
 module.exports.userChartDELETE = (userID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.deleteChart(userID))
-            .then(() => resolve())
+            .then(resolve())
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     })
@@ -396,8 +394,41 @@ module.exports.userChartGET = (userID) => {
                 resolve(ans)
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
                 reject()
             })
     })
 };
+
+module.exports.userWhishlistPOST = (userID, bookID) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.addBookToUserWishList(userID, bookID))
+            .then(resolve())
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+}
+
+module.exports.userWhishlistGET = (userID) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.getWishList(userID))
+            .then(wl => resolve(wl.rows))
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+}
+
+module.exports.userWhishlistDELETE = (userID, bookID) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.deleteBookFromUserWishList(userID, bookID))
+            .then(resolve())
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+}

@@ -111,12 +111,12 @@ module.exports.userOrderGET = function userOrderGET (req, res, next) {
   var offset = req.swagger.params['offset'].value;
   var limit = req.swagger.params['limit'].value;
   User.userOrderGET(id,offset,limit)
-      .then(function (response) {
-        utils.writeJson(res, response);
-      })
-      .catch(function (response) {
-        utils.writeJson(res, response);
-      });
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
 };
 
 module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
@@ -145,6 +145,18 @@ module.exports.userWhishlistDELETE = function userWhishlistDELETE (req, res, nex
 module.exports.userWhishlistGET = function userWhishlistGET (req, res, next) {
   var id = req.swagger.params['id'].value;
   User.userWhishlistGET(id)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.userWhishlistPOST = function userWhishlistPOST (req, res, next) {
+  var id = req.swagger.params['id'].value;
+  var book_id = req.swagger.params['book_id'].value;
+  User.userWhishlistPOST(id,book_id)
     .then(function (response) {
       utils.writeJson(res, response);
     })

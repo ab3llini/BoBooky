@@ -325,3 +325,33 @@ module.exports.getChart = (userID) => {
         values: [userID]
     };
 };
+
+module.exports.addBookToUserWishList = (userID, bookID) => {
+    return {
+        text: `insert into user_to_book_wl(user_id, book_id)
+            values ($1, $2)`,
+            values: [userID, bookID]
+    }
+}
+
+module.exports.deleteBookFromUserWishList = (userID, bookID) => {
+    return {
+        text: `delete from user_to_book_wl
+            where book_id = $2 and user_id = $1`,
+        values: [userID, bookID]
+    }
+}
+
+module.exports.getWishList = (userID) => {
+    return {
+        text: `select b.id, b.title, a.name as author, b.description, p.name as publisher,
+                b.price, b.isbn, b.publication_year, i.href as image_href
+            from user_to_book_wl utbw
+                join book b on utbw.book_id = b.id
+                join author a on b.author = a.id
+                join publisher p on b.publisher = p.id
+                join image i on b.image_id = i.id
+            where user_id = $1`,
+        values: [userID]
+    };
+};
