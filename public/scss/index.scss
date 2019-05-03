@@ -2,20 +2,36 @@
 @import "../bootstrap/scss/variables";
 @import "../bootstrap/scss/mixins/_breakpoints";
 
+@function get-vw() {
+  @return 100vw;
+}
+
+@function get-vh() {
+  @return 100vh;
+}
+
+// $at between 0 and 1
+@function get-offset($at) {
+  $height: 0.6244791667 * get-vw();
+  $k: $at * get-vh();
+  @return calc(#{$k} - #{$height})
+}
+
 body {
 
   background-image: url('../assets/home_background.svg');
   background-repeat: no-repeat;
   background-position-x: center;
+
+  @include media-breakpoint-up(xs) {
+    background-size: auto 100vh;
+  }
+
   @include media-breakpoint-up(md) {
     background-size:     cover;
   }
-  @include media-breakpoint-up(xl) {
-    background-position-y:  20%;
-  }
-}
 
-.test {
-  background: grey;
-  height: 200px;
+  @include media-breakpoint-up(xl) {
+    background-position-y:get-offset(3/5);
+  }
 }
