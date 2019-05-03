@@ -13,5 +13,9 @@ body {
   @include media-breakpoint-up(xl) {
     background-position-y:  20%;
   }
+}
 
+.test {
+  background: grey;
+  height: 200px;
 }
