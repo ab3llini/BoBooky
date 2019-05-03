@@ -4,6 +4,8 @@ var fs = require('fs'),
     path = require('path'),
     http = require('http');
 
+var serveStatic = require('serve-static');
+
 var app = require('connect')();
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
@@ -34,6 +36,8 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
+
+  app.use(serveStatic('./public', null));
 
   // Start the server
   http.createServer(app).listen(serverPort, function () {

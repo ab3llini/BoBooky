@@ -17,6 +17,7 @@
     "js-yaml": "^3.3.0",
     "pg": "^7.10.0",
     "sha256": "^0.2.0",
-    "swagger-tools": "^0.10.4"
+    "swagger-tools": "^0.10.4",
+    "serve-static": "latest"
   }
 }
