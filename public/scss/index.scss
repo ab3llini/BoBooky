@@ -1,0 +1,17 @@
+@import "../bootstrap/scss/functions";
+@import "../bootstrap/scss/variables";
+@import "../bootstrap/scss/mixins/_breakpoints";
+
+body {
+
+  background-image: url('../assets/home_background.svg');
+  background-repeat: no-repeat;
+  background-position-x: center;
+  @include media-breakpoint-up(md) {
+    background-size:     cover;
+  }
+  @include media-breakpoint-up(xl) {
+    background-position-y:  20%;
+  }
+
+}
