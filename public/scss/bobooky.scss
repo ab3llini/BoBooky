@@ -1,0 +1,6 @@
+$theme-colors: (
+        "dark" : #21263F
+);
+$fa-font-path: "../assets/font-awesome/fonts";
+@import "../assets/font-awesome/scss/font-awesome.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap";

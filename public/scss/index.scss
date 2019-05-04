@@ -1,37 +1,89 @@
-@import "../bootstrap/scss/functions";
-@import "../bootstrap/scss/variables";
-@import "../bootstrap/scss/mixins/_breakpoints";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins/_breakpoints";
 
-@function get-vw() {
-  @return 100vw;
+
+@function prepend($list, $value) {
+  @return join($value, $list);
 }
 
-@function get-vh() {
-  @return 100vh;
+@function get-svg($count) {
+  $urls: ();
+  @for $i from 1 through $count {
+    @if $i > 1 {
+      $urls: prepend($urls, url('../assets/component/home_bg_' + $i + '.svg') + ',')
+    }
+    @else {
+      $urls: prepend($urls, url('../assets/component/home_bg_' + $i + '.svg'))
+    }
+  }
+  @return $urls;
 }
 
-// $at between 0 and 1
-@function get-offset($at) {
-  $height: 0.6244791667 * get-vw();
-  $k: $at * get-vh();
-  @return calc(#{$k} - #{$height})
-}
 
-body {
+.search-section {
 
-  background-image: url('../assets/home_background.svg');
+  background-image: get-svg(4);
   background-repeat: no-repeat;
-  background-position-x: center;
+
 
   @include media-breakpoint-up(xs) {
-    background-size: auto 100vh;
+    $ribbon-size: 0.8;
+    $ribbon-length: 0.8;
+    $ribbon-relative-offset: 0.2;
+    $left-breakpoint: -0.1;
+    $right-breakpoint: 1 - $left-breakpoint;
+    background-size: #{$ribbon-size * 100}vh;
+    background-position:
+            right calc(#{100 - ($right-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) bottom -#{(1 - $ribbon-length) * 100}vh,
+            left calc(#{($right-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) top -#{(1 - $ribbon-length) * 100}vh,
+            right calc(#{100 - ($left-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) bottom -#{(1 - $ribbon-length) * 100}vh,
+            left calc(#{($left-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) top -#{(1 - $ribbon-length) * 100}vh;
   }
 
-  @include media-breakpoint-up(md) {
-    background-size:     cover;
+  @include media-breakpoint-up(sm) {
+    $ribbon-size: 0.9;
+    $ribbon-length: 0.7;
+    $ribbon-relative-offset: 0.2;
+    $left-breakpoint: 0.1;
+    $right-breakpoint: 1 - $left-breakpoint;
+    background-size: #{$ribbon-size * 100}vh;
+    background-position:
+            right calc(#{100 - ($right-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) bottom -#{(1 - $ribbon-length) * 100}vh,
+            left calc(#{($right-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) top -#{(1 - $ribbon-length) * 100}vh,
+            right calc(#{100 - ($left-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) bottom -#{(1 - $ribbon-length) * 100}vh,
+            left calc(#{($left-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) top -#{(1 - $ribbon-length) * 100}vh;
   }
 
-  @include media-breakpoint-up(xl) {
-    background-position-y:get-offset(3/5);
+  @include media-breakpoint-up(lg) {
+    $ribbon-size: 1;
+    $ribbon-length: 0.6;
+    $ribbon-relative-offset: 0.2;
+    $left-breakpoint: 0.2;
+    $right-breakpoint: 1 - $left-breakpoint;
+    background-size: #{$ribbon-size * 100}vh;
+    background-position:
+            right calc(#{100 - ($right-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) bottom -#{(1 - $ribbon-length) * 100}vh,
+            left calc(#{($right-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) top -#{(1 - $ribbon-length) * 100}vh,
+            right calc(#{100 - ($left-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) bottom -#{(1 - $ribbon-length) * 100}vh,
+            left calc(#{($left-breakpoint * 100)}vw - #{$ribbon-relative-offset * 100}vh) top -#{(1 - $ribbon-length) * 100}vh;
   }
+
+
+
+
+}
+
+
+.search-bar .form-control, .search-bar .btn {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-bar .form-control {
+  border-right: hidden;
+
+}
+.search-bar .btn {
+  border: 1px solid $light;
+  border-left: hidden;
 }

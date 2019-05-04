@@ -1,0 +1,12 @@
+$logo-height: 25px;
+
+.navbar.scrolled {
+  transition: background-color 200ms linear;
+}
+.navbar.unscrolled {
+  transition: background-color 200ms linear;
+}
+
+.navbar-brand img {
+  height: $logo-height;
+}
