@@ -89,10 +89,7 @@ exports.bookRelatedGET = function(id) {
  * no response value expected for this operation
  **/
 exports.bookReviewDELETE = function(id,reviewID) {
-  //TODO:
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+  return db.execute(db.bookReviewDELETE(id, reviewID))
 };
 
 
@@ -116,10 +113,7 @@ exports.bookReviewGET = function(id) {
  * no response value expected for this operation
  **/
 exports.bookReviewPOST = function(id,userID,body) {
-  //TODO:
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+  return db.execute(db.bookReviewPOST, [id, userID, body])
 };
 
 

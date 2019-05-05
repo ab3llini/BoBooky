@@ -155,6 +155,22 @@ module.exports.genres = () => {
     }
 };
 
+module.exports.addBookReview = (userID, bookID, body) => {
+    return {
+        text: `insert into book_review(title, content, book, rating, author)
+            values ($1, $2, $3, $4, $5)`,
+        values: [body.title, body.content, bookID, body.rating, userID]
+    }
+}
+
+module.exports.deleteReview = (userID, reviewID) => {
+    return {
+        text: `delete from book_review
+            where author = $1 and id = $2`,
+        values: [userID, reviewID]
+    }
+}
+
 /***************************
  ******** AUTHORS **********
  ***************************/

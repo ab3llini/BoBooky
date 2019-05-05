@@ -206,6 +206,28 @@ module.exports.bookGenreGET = () => {
     })
 };
 
+module.exports.bookReviewPOST = (id,userID,body) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.addBookReview(userID, id, body))
+            .then(resolve())
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+};
+
+module.exports.bookReviewDELETE = (id,reviewID) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.deleteReview(id, reviewID))
+            .then(resolve())
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+};
+
 /***************************
  ******** AUTHORS **********
  ***************************/
