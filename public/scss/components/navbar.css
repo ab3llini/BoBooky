@@ -1,0 +1,13 @@
+.navbar.scrolled {
+  transition: background-color 200ms linear;
+}
+
+.navbar.unscrolled {
+  transition: background-color 200ms linear;
+}
+
+.navbar-brand img {
+  height: 25px;
+}
+
+/*# sourceMappingURL=navbar.css.map */
