@@ -1,9 +1,146 @@
-.carousel .card.book {
-  width: 18rem;
-  max-height: 50rem;
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+$component-name: ".multi-item-carousel";
+$ci: ".carousel-item";
+$items: 4;
+
+#{$component-name} .book {
+  height: 40rem;
 }
-.card-img-top {
+
+#{$component-name} .book .card-img-top {
   width: 100%;
-  height: 25rem;
+  @include media-breakpoint-up(md) {
+    height: 20rem;
+  }
+  height: 50rem;
   object-fit: cover;
+
+}
+
+@function gen-active() {
+  $active: "";
+  @for $i from 1 to $items {
+    @for $k from 0 to $i {
+      $active: $active + "+ #{$ci}";
+    }
+    @if $i != $items {
+      $active: $active + ","
+    }
+  }
+  @return $active
+}
+
+@function gen-not() {
+  $base: "&:not(#{$ci}-right):not(#{$ci}-left)";
+  $out: "";
+  @for $i from 0 to $items {
+    $out: $out + " " + $base;
+    @for $k from 0 to $i {
+      $out: $out + " + #{$ci}";
+    }
+    @if $i != $items {
+      $out: $out + ","
+    }
+  }
+  @return $out;
+}
+
+@function gen-comb($l, $r) {
+  $base: "#{$ci}-#{$l}#{$ci}-#{$r} + #{$ci}";
+  $out: "";
+  @for $i from 0 to $items {
+    $out: $out + " " + $base;
+    @for $k from 0 to $i {
+      $out: $out + " + #{$ci}";
+    }
+    @if $i != $items {
+      $out: $out + ","
+    }
+  }
+  @return $out;
+}
+
+@function gen-line() {
+  $out: "";
+  @for $i from 0 to $items {
+    $out: $out + "+ #{$ci} ";
+  }
+  @return $out;
+}
+
+@media (min-width: 768px) {
+
+  #{$component-name} {
+
+    .carousel-inner {
+      #{$ci} {
+        // NEW to v4.3.1: all margin-right properties come with -100% as default
+        // causing all hidden items to be out of the screen
+        margin-right: inherit;
+
+        &.active {
+          #{gen-active()} {
+            display: block; // three visible items
+          }
+
+          // prevents opposite direction "animation"
+          #{gen-not()} {
+            transition: none;
+          }
+
+          // allows new item to be visible in order to "slide in" into place
+          #{gen-line()} {
+            position: absolute;
+            top: 0;
+            right: -(percentage(1/$items));
+            z-index: -1;
+            display: block;
+            visibility: visible;
+          }
+        }
+
+        // .active
+        &-next,
+        &-prev {
+          position: relative;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      // .carousel-item
+
+      // farthest right hidden item must be also positioned for animations
+      #{$ci}-prev#{$ci}-right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+      }
+    }
+
+    // .carousel-inner
+
+    // left or forward direction
+    .active#{$ci}-left + #{$ci}-next#{$ci}-left,
+    #{gen-comb("next", "left")} {
+      position: relative;
+      transform: translate3d(-100%, 0, 0);
+      visibility: visible;
+    }
+
+    // right or previous direction
+    .active#{$ci}-right + #{$ci}-prev#{$ci}-right,
+    #{gen-comb("prev", "right")} {
+      position: relative;
+      transform: translate3d(100%, 0, 0);
+      display: block;
+      visibility: visible;
+    }
+  }
+  // multi-item-carousel
 }

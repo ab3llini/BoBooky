@@ -61,35 +61,30 @@
     </div>
 </div>
 <div class="section d-flex justify-content-center min-vh-100 flex-column">
-    <div class="container-fluid">
-        <div id="carouselExampleControls" class="carousel slide books" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-center">
-                        <div class="card book template m-2">
-                            <img class="card-img-top"
-                                 src="https://images.gr-assets.com/books/1356422925l/13450339.jpg"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text"></p>
-                            </div>
+    <div class="container">
+        <div class="carousel slide multi-item-carousel" id="books">
+            <div class="carousel-inner row mx-auto">
+                <div class="carousel-item template col-md-3">
+                    <div class="card book">
+                        <img class="card-img-top"
+                             src="https://images.gr-assets.com/books/1356422925l/13450339.jpg"
+                             alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
-
                 </div>
             </div>
-            <a class="carousel-control carousel-control-prev" href="#carouselExampleControls" role="button"
-               data-slide="prev">
-                <span class="fa fa-lg fa-chevron-left text-dark" aria-hidden="true"></span>
+            <a class="carousel-control-prev" href="#books" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="fa fa-lg fa-chevron-right text-dark" aria-hidden="true"></span>
+            <a class="carousel-control-next" href="#books" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
     </div>
 </div>
 <div class="container">
@@ -101,8 +96,10 @@
 </div>
 <script src="jquery/dist/jquery.js"></script>
 <script src="bootstrap/dist/js/bootstrap.js"></script>
-<script src="js/navbar/navbar.js"></script>
+<script src="js/components/navbar/navbar.js"></script>
 <script src="js/index/index.js" type="module"></script>
+<script src="js/components/carousel.js" type="module"></script>
+
 
 </body>
 </html>
