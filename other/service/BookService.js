@@ -89,6 +89,7 @@ exports.bookRelatedGET = function(id) {
  * no response value expected for this operation
  **/
 exports.bookReviewDELETE = function(id,reviewID) {
+  //TODO:
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -115,6 +116,7 @@ exports.bookReviewGET = function(id) {
  * no response value expected for this operation
  **/
 exports.bookReviewPOST = function(id,userID,body) {
+  //TODO:
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -130,10 +132,22 @@ exports.bookReviewPOST = function(id,userID,body) {
  * genre String  (optional)
  * year Integer  (optional)
  * author String  (optional)
+ * author_id Integer  (optional)
  * publisher String  (optional)
+ * publisher_id Integer  (optional)
+ * theme String  (optional)
  * returns List
  **/
-exports.bookSearchGET = function(query,isbn,genre,year,author,publisher) {
-  return db.execute(db.bookSearchGET, [query,isbn,genre,year,author,publisher])
+exports.bookSearchGET = function(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme) {
+  return db.execute(db.bookSearchGET, [query,isbn,genre,year,author,author_id,publisher,publisher_id,theme])
 };
 
+
+/**
+ * Gets all the genres
+ *
+ * returns List
+ **/
+exports.bookGenreGET = function() {
+  return db.execute(db.bookGenreGET, [])
+};

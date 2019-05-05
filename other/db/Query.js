@@ -18,85 +18,114 @@ function getRandomString(length) {
  ***************************/
 module.exports.bookView = (offset, limit) => {
     return {
-        text: 'SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img from book_view bw join author a on bw.author = a.id join image i on a.image = i.id offset $1 limit $2',
+        text: `SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img
+            from book_view bw join author a on bw.author = a.id join image i on a.image = i.id offset $1 limit $2`,
         values: [offset, limit]
     }
 };
 
 module.exports.bookGenres = (book_id) => {
     return {
-        text: 'select g.name from book join book_to_genre btg on book.id = btg.book_id join genre g on btg.genre_id = g.id where book.id = $1',
+        text: `select g.name
+            from book join book_to_genre btg on book.id = btg.book_id join genre g on btg.genre_id = g.id
+            where book.id = $1`,
         values: [book_id],
     }
 };
 
 module.exports.bookID = (id) => {
     return {
-        text: 'SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img from book_view bw join author a on bw.author = a.id join image i on a.image = i.id where bw.id = $1',
+        text: `SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img
+            from book_view bw join author a on bw.author = a.id join image i on a.image = i.id
+            where bw.id = $1`,
         values: [id]
     }
 };
 
 module.exports.bookReviews = (bookID) => {
     return {
-        text: 'select br.id, br.timestamp, br.title, br.content as body, br.rating, u.id author_id, u.name as author_name, u.surname as author_surname from book_review br join "user" u on br.author = u.id where br.book = $1',
+        text: `select br.id, br.timestamp, br.title, br.content as body, br.rating,
+                    u.id author_id, u.name as author_name, u.surname as author_surname
+                from book_review br join "user" u on br.author = u.id
+                where br.book = $1`,
         values: [bookID]
     }
 };
 
-module.exports.bookSearch = (query, isbn, genre, year, author, publisher, offset = 0, limit = 20) => {
-    let q = `select distinct bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img
-             from book_view bw
-                      join author a on bw.author = a.id
-                      join image i on a.image = i.id
-                      join book_to_genre btg on bw.id = btg.book_id
-                      join genre g on btg.genre_id = g.id` + ' ';
+module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publisher, publisher_id, theme,
+                             offset = 0, limit = 20) => {
+    //TODO: Fif error when searching by year
+    let q = `select distinct b.id, b.title, a.name as author, b.description, p.name as publisher, b.price, b.isbn,
+                b.isbn13, b.publication_year, b.publication_month, i.href as image_href,
+                i.href_small as image_href_small, b.theme
+             from book b
+                join author a on b.author = a.id
+                join publisher p on b.publisher = p.id
+                join image i on b.image_id = i.id
+                join book_to_genre btg on b.id = btg.book_id
+                join genre g on btg.genre_id = g.id` + ' ';
 
     let clause = 'where';
     let placeholder = 1;
     let values = [];
 
     if (query !== undefined) {
-        q += clause + ' ((bw.title LIKE \'%\' || $'+placeholder+' || \'%\') ' +
-            'or (a.name LIKE \'%\' || $'+placeholder+' || \'%\') or (bw.publisher LIKE \'%\' || $'+placeholder+' || \'%\') ' +
-            'or (bw.isbn LIKE \'%\' || $'+placeholder+' || \'%\') or (bw.isbn13  LIKE \'%\' || $'+placeholder+' || \'%\') ' +
-            'or (g.name  LIKE \'%\' || $'+placeholder+' || \'%\'))' + ' ';
+        q += clause + ' ((b.title LIKE \'%\' || $'+placeholder+' || \'%\') ' +
+            'or (a.name LIKE \'%\' || $'+placeholder+' || \'%\') or (p.name LIKE \'%\' || $'+placeholder+' || \'%\') ' +
+            'or (b.isbn LIKE \'%\' || $'+placeholder+' || \'%\') or (b.isbn13  LIKE \'%\' || $'+placeholder+' || \'%\') ' +
+            'or (g.name  LIKE \'%\' || $'+placeholder+' || \'%\') or (b.theme  LIKE \'%\' || $'+placeholder+' || \'%\'))' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(query)
     }
     if (isbn !== undefined) {
-        q += clause + ' (bw.isbn = $'+placeholder+' or bw.isbn13 = $'+placeholder+')' + ' ';
+        q += clause + ' (b.isbn = $'+placeholder+' or b.isbn13 = $'+placeholder+')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(isbn)
     }
     if (genre !== undefined) {
-        q += clause + ' (g.name = $'+placeholder+')' + ' ';
+        q += clause + ' (g.name  LIKE \'%\' || $'+placeholder+' || \'%\')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(genre)
     }
     if (year !== undefined) {
-        q += clause + ' (bw.publication_year = cast($'+placeholder+' as int))' + ' ';
+        q += clause + ' (b.publication_year  LIKE \'%\' || $'+placeholder+' || \'%\')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(year)
     }
     if (author !== undefined) {
-        q += clause + ' (a.name = $'+placeholder+')' + ' ';
+        q += clause + ' (a.name  LIKE \'%\' || $'+placeholder+' || \'%\')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(author)
     }
     if (publisher !== undefined) {
-        q += clause + ' (bw.publisher = $'+placeholder+')' + ' ';
+        q += clause + ' (p.name  LIKE \'%\' || $'+placeholder+' || \'%\')' + ' ';
         placeholder += 1;
         values.push(publisher)
     }
+    if (author_id !== undefined) {
+        q += clause + ' (a.id = \'%\' || $'+placeholder+' || \'%\')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(author_id)
+    }
+    if (publisher_id !== undefined) {
+        q += clause + ' (p.id = \'%\' || $'+placeholder+' || \'%\')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(publisher_id)
+    }
+    if (theme !== undefined) {
+        q += clause + ' (b.theme  LIKE \'%\' || $'+placeholder+' || \'%\')' + ' ';
+        placeholder += 1;
+        values.push(theme)
+    }
     q += 'offset $'+placeholder+' limit $'+(placeholder+1);
     values.push(offset, limit);
-    console.log(q);
     return {
         text: q,
         values: values
@@ -105,8 +134,24 @@ module.exports.bookSearch = (query, isbn, genre, year, author, publisher, offset
 
 module.exports.relatedBooks = (bookID, offset, limit) => {
     return {
-        text: 'SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img from book_view bw join author a on bw.author = a.id join image i on a.image = i.id where a.id = (select author from book where id = $1) offset $2 limit $3',
+        text: `select distinct b.id, b.title, a.name as author, b.description, p.name as publisher, b.price, b.isbn,
+                    b.isbn13, b.publication_year, b.publication_month, i.href as image_href,
+                    i.href_small as image_href_small, b.theme
+                from book b
+                    join author a on b.author = a.id
+                    join publisher p on b.publisher = p.id
+                    join image i on b.image_id = i.id
+                    where b.theme = (select theme from book where id = $1)
+                        and b.author != (select author from book where id = $1)
+                offset $2 limit $3`,
         values: [bookID, offset, limit]
+    }
+};
+
+module.exports.genres = () => {
+    return {
+        text: `select id, name as genre_name from genre`,
+        values: []
     }
 };
 
@@ -116,18 +161,20 @@ module.exports.relatedBooks = (bookID, offset, limit) => {
 
 module.exports.author = (offset, limit) => {
     return {
-        text: "select a.id, name, i.href as image_url, description from author a join image i on a.image = i.id limit $2 offset $1",
+        text: `select a.id, name, i.href as image_url, description 
+            from author a join image i on a.image = i.id limit $2 offset $1`,
         values: [offset, limit]
     }
 };
 
 module.exports.authorId = (id) => {
     return {
-        text: 'select a.id, name, i.href as image_url, description from author a join image i on a.image = i.id where a.id = $1',
+        text: `select a.id, name, i.href as image_url, description
+            from author a join image i on a.image = i.id
+            where a.id = $1`,
         values: [id]
     }
 };
-
 
 module.exports.authorReviews = (authorID) => {
     return {
@@ -145,23 +192,108 @@ module.exports.authorReviews = (authorID) => {
 
 module.exports.event = () => {
     return {
-        text: `select e.id, name, description, location as address, timestamp
-               from event e
-                        join event_to_image eti on e.id = eti.event_id
-                        join image i on eti.image_id = i.id`
+        text: `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
+                a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country
+            from event e
+                join event_to_image eti on e.id = eti.event_id
+                join image i on eti.image_id = i.id
+                join address a on e.location = a.id`
     }
 };
 
-module.exports.eventAddress = (id) => {
+module.exports.eventByID = (id) => {
     return {
-        text: `select a.*
-               from address a
-                        join event e on a.id = e.location
-               where e.id = $1`,
+        text: `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
+                a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country
+            from event e
+                join event_to_image eti on e.id = eti.event_id
+                join image i on eti.image_id = i.id
+                join address a on e.location = a.id
+            where e.id = $1`,
         values: [id]
     }
 };
 
+module.exports.eventSearch = (query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location) => {
+    let q = `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
+                    a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country
+             from event e
+                      join event_to_image eti on e.id = eti.event_id
+                      join image i on eti.image_id = i.id
+                      join address a on e.location = a.id
+                      join author a2 on e.related_author = a2.id
+                      join book b on e.related_book = b.id` + ' ';
+
+    let clause = 'where';
+    let placeholder = 1;
+    let values = [];
+
+    if (query_string !== undefined) {
+        q += clause + ' ((e.name LIKE \'%\' || $'+placeholder+' || \'%\') ' +
+            'or (a2.name LIKE \'%\' || $'+placeholder+' || \'%\') or (b.title LIKE \'%\' || $'+placeholder+' || \'%\')) ' +
+            ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(query_string)
+    }
+    if (name !== undefined) {
+        q += clause + ' (e.name = $'+placeholder+')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(name)
+    }
+    if (author_name !== undefined) {
+        q += clause + ' (a2.name LIKE \'%\' || $'+placeholder+' || \'%\') ' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(author_name)
+    }
+    if (author_id !== undefined) {
+        q += clause + ' (a2.id = $'+placeholder+')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(author_id)
+    }
+    if (book_name !== undefined) {
+        q += clause + ' (b.title LIKE \'%\' || $'+placeholder+' || \'%\') ' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(book_name)
+    }
+    if (book_id !== undefined) {
+        q += clause + ' (b.id = $'+placeholder+')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(book_id)
+    }
+    if (date !== undefined) {
+        q += clause + ' (CAST(e.timestamp AS DATE) = $'+placeholder+')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(date)
+    }
+    if (date_from !== undefined) {
+        q += clause + ' (e.timestamp >= $'+placeholder+')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(date_from)
+    }
+    if (date_to !== undefined) {
+        q += clause + ' (e.timestamp <= $'+placeholder+')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(date_to)
+    }
+    if (location !== undefined) {
+        q += clause + ' (a.city = $'+placeholder+')' + ' ';
+        values.push(location)
+    }
+
+    return {
+        text: q,
+        values: values
+    }
+};
 
 /***************************
  ********* USER ************
@@ -236,8 +368,6 @@ module.exports.updateAddressForUser = (userID, address) => {
             address.country, address.id, userID]
     }
 };
-
-
 
 module.exports.bindUserAddress = (userID, addressID) => {
     return {
@@ -332,7 +462,7 @@ module.exports.addBookToUserWishList = (userID, bookID) => {
             values ($1, $2)`,
             values: [userID, bookID]
     }
-}
+};
 
 module.exports.deleteBookFromUserWishList = (userID, bookID) => {
     return {
@@ -340,7 +470,7 @@ module.exports.deleteBookFromUserWishList = (userID, bookID) => {
             where book_id = $2 and user_id = $1`,
         values: [userID, bookID]
     }
-}
+};
 
 module.exports.getWishList = (userID) => {
     return {

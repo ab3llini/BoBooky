@@ -2,6 +2,27 @@ const {Client} = require('pg');
 let make = require('./Query.js');
 const sha256 = require('sha256');
 
+function mapEvent(e) {
+    return {
+        id: e.id,
+        name: e.name,
+        description: e.description,
+        timestamp: e.timestamp,
+        related_author: e.related_author,
+        relater_book: e.related_book,
+        image_urls: [e.href, e.href_small],
+        location: {
+            id: e.address_id,
+            name: e.address_name,
+            address_line_1: e.address_line_1,
+            address_line_2: e.address_line_2,
+            cap: e.cap,
+            city: e.city,
+            country: e.country
+        }
+    }
+}
+
 const pipe = new Client({
     user: 'kaxtczmqrauqfc',
     host: 'ec2-79-125-2-142.eu-west-1.compute.amazonaws.com',
@@ -62,7 +83,7 @@ module.exports.bookGET = (offset, limit) => {
                     process_book(book)
                         .then(processed => {
                             book = processed;
-                            if (i === books.rows.length - 1) {
+                            if (i === books.rowCount - 1) {
                                 resolve(books.rows)
                             }
                         })
@@ -81,7 +102,7 @@ module.exports.bookIdGET = (id) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.bookID(id))
             .then(book => {
-                if (book.rows.length === 0) {
+                if (book.rowCount === 0) {
                     reject();
                 } else {
                     process_book(book.rows[0])
@@ -103,7 +124,7 @@ module.exports.bookReviewGET = (id) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.bookReviews(id))
             .then(reviews => {
-                if (reviews.rows.length === 0) {
+                if (reviews.rowCount === 0) {
                     reject()
                 } else {
                     reviews.rows.forEach((review) => {
@@ -130,7 +151,7 @@ module.exports.bookRelatedGET = (bookID, offset = 0, limit = 20) => {
                     process_book(book)
                         .then(processed => {
                             book = processed;
-                            if (i === related.rows.length - 1) {
+                            if (i === related.rowCount - 1) {
                                 resolve(related.rows)
                             }
                         })
@@ -145,20 +166,21 @@ module.exports.bookRelatedGET = (bookID, offset = 0, limit = 20) => {
     })
 };
 
-module.exports.bookSearchGET = (query, isbn, genre, year, author, publisher) => {
+module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher,publisher_id,theme) => {
     return new Promise((resolve, reject) => {
-
-        pipe.query(make.bookSearch(query, isbn, genre, year, author, publisher))
+        pipe.query(make.bookSearch(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme))
             .then(result => {
+                let ans = [];
                 result.rows.forEach((book, i) => {
-                    process_book(book)
-                        .then(processed => {
-                            book = processed;
-                            if (i === result.rows.length - 1) {
-                                resolve(result.rows)
-                            }
+                    pipe.query(make.bookGenres(book.id))
+                        .then(genres => {
+                            book.genres = genres.rows;
+                            ans.push(book);
+                            if (i === result.rowCount - 1)
+                                resolve(ans)
                         })
                         .catch(error => {
+                            console.log(error);
                             reject()
                         })
                 })
@@ -168,6 +190,50 @@ module.exports.bookSearchGET = (query, isbn, genre, year, author, publisher) => 
                 reject()
             })
 
+    })
+};
+
+module.exports.bookGenreGET = () => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.genres())
+            .then(genres => {
+                resolve(genres.rows)
+            })
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+};
+
+/***************************
+ ******** AUTHORS **********
+ ***************************/
+
+module.exports.authorGET = (offset, limit) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.author(offset, limit))
+            .then(authors => resolve(authors.rows))
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+};
+
+module.exports.authorIdGET = (id) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.author(id))
+            .then(authors => {
+                if(authors.rowCount === 0)
+                    resolve(authors.rows[0]);
+                else
+                    reject()
+            })
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
     })
 };
 
@@ -190,7 +256,7 @@ module.exports.userLoginPOST = (body) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.getUserSalt(body.username))
             .then(result => {
-                if (result.rows.length === 0) {
+                if (result.rowCount === 0) {
                     reject()
                 } else {
                     pipe.query(make.loginUser(body.username, sha256(body.password + result.rows[0].salt)))
@@ -212,7 +278,7 @@ module.exports.userOrderGET = (id, offset, limit) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.getUserOrder(id, offset, limit))
             .then((results) => {
-                if (results.rows.length === 0)
+                if (results.rowCount === 0)
                     resolve([]);
                 else
                     results.rows.forEach((order, i) => {
@@ -248,8 +314,8 @@ module.exports.userOrderGET = (id, offset, limit) => {
                                             image_href: book.image_href
                                         }
                                     });
-                                    if (j === books.rows.length - 1)
-                                        if (i === results.rows.length - 1)
+                                    if (j === books.rowCount - 1)
+                                        if (i === results.rowCount - 1)
                                             resolve(results.rows)
                                 })
                             })
@@ -288,7 +354,7 @@ module.exports.userAddressDELETE = (userID, address) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.deleteAddress(userID, address))
             .then(deleted => {
-                if (deleted.rows.length !== 0)
+                if (deleted.rowCount !== 0)
                     resolve();
                 else
                     reject()
@@ -328,7 +394,7 @@ module.exports.userChartPUT = (userID, book_info) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.getBooksForUserChart(userID, book_info.bookID))
             .then(books => {
-                if (books.rows.length === 0)
+                if (books.rowCount === 0)
                    pipe.query(make.addBookToUserChart(userID, book_info))
                        .then(resolve())
                        .catch(error => {
@@ -409,7 +475,7 @@ module.exports.userWhishlistPOST = (userID, bookID) => {
                 reject()
             })
     })
-}
+};
 
 module.exports.userWhishlistGET = (userID) => {
     return new Promise((resolve, reject) => {
@@ -420,7 +486,7 @@ module.exports.userWhishlistGET = (userID) => {
                 reject()
             })
     })
-}
+};
 
 module.exports.userWhishlistDELETE = (userID, bookID) => {
     return new Promise((resolve, reject) => {
@@ -431,4 +497,64 @@ module.exports.userWhishlistDELETE = (userID, bookID) => {
                 reject()
             })
     })
-}
+};
+
+
+/***************************
+ ******** EVENTS ***********
+ ***************************/
+
+module.exports.eventGET = () => {
+    return new Promise((resolve, reject) => {
+        let ans = [];
+        pipe.query(make.event())
+            .then(events => {
+                events.rows.forEach((e, idx) => {
+                    ans.push(mapEvent(e));
+                    if(idx === events.rowCount - 1)
+                        resolve(ans);
+                })
+            })
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+};
+
+module.exports.eventIdGET = (id) => {
+    return new Promise((resolve, reject) =>  {
+        pipe.query(make.event())
+            .then(event => {
+                if(event.rowCount > 0)
+                    resolve(mapEvent(event.rows[0]));
+                else
+                    reject()
+            })
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+};
+
+module.exports.eventSearchGET = (query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location) => {
+    return new Promise((resolve, reject) =>  {
+        pipe.query(make.eventSearch(query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location))
+            .then(events => {
+                if(events.rowCount > 0) {
+                    let ans = [];
+                    events.rows.forEach((event, idx) => {
+                        ans.push(mapEvent(event));
+                        if(idx === events.rowCount - 1)
+                            resolve(ans)
+                    })
+                } else
+                    resolve()
+            })
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+};

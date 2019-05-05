@@ -13,11 +13,13 @@ info:
 host: "localhost"
 basePath: "/api"
 schemes:
-  - "https"
+  - "http"
 consumes:
   - "application/json"
+  - "application/octet-stream"
 produces:
   - "application/json"
+  - "application/octet-stream"
 paths:
   /author:
     get:
@@ -453,7 +455,19 @@ paths:
           in: "query"
           required: false
           type: "string"
+        - name: "author_id"
+          in: "query"
+          required: false
+          type: "integer"
         - name: "publisher"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "publisher_id"
+          in: "query"
+          required: false
+          type: "integer"
+        - name: "theme"
           in: "query"
           required: false
           type: "string"
@@ -468,6 +482,33 @@ paths:
           description: "At least one parameter must be specified"
         404:
           description: "Book not found"
+  /book/genre:
+    get:
+      tags:
+        - "book"
+      summary: "Gets all the genres"
+      operationId: "bookGenreGET"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              required:
+                - "genre_name"
+              type: "object"
+              properties:
+                id:
+                  type: "integer"
+                genre_name:
+                  type: "string"
+        400:
+          description: "Status 400"
+        404:
+          description: "Status 404"
   /user/register:
     post:
       tags:
@@ -642,6 +683,27 @@ paths:
         - OAuth2:
             - "admin"
             - "user"
+    post:
+      tags:
+        - "user"
+      summary: "Add a book to the whish list"
+      operationId: "userWhishlistPOST"
+      parameters:
+        - name: "book_id"
+          in: "query"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "Book already present in the whish list"
+        404:
+          description: "Status 404"
+      security:
+        - OAuth2:
+            - "user"
+            - "admin"
     delete:
       tags:
         - "user"
@@ -978,6 +1040,8 @@ definitions:
         type: "array"
         items:
           type: "string"
+      theme:
+        type: "string"
     description: "A book for sale in the store"
     example: "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino\
       \ Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url:\

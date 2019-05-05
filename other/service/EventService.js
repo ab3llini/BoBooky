@@ -1,65 +1,27 @@
 'use strict';
 
+let db = require('../db/Database');
+
+
 
 /**
  * Get the complete list of events
  *
- * returns List
+ * @returns List
  **/
 exports.eventGET = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "related_book" : 1,
-  "related_author" : 6,
-  "name" : "name",
-  "description" : "description",
-  "image_urls" : [ "image_urls", "image_urls" ],
-  "location" : {
-    "country" : "country",
-    "cap" : 6,
-    "city" : "city",
-    "name" : "name",
-    "address_line_1" : "address_line_1",
-    "id" : 0,
-    "address_line_2" : "address_line_2"
-  },
-  "id" : 0,
-  "timestamp" : "2000-01-23T04:56:07.000+00:00"
-}, {
-  "related_book" : 1,
-  "related_author" : 6,
-  "name" : "name",
-  "description" : "description",
-  "image_urls" : [ "image_urls", "image_urls" ],
-  "location" : {
-    "country" : "country",
-    "cap" : 6,
-    "city" : "city",
-    "name" : "name",
-    "address_line_1" : "address_line_1",
-    "id" : 0,
-    "address_line_2" : "address_line_2"
-  },
-  "id" : 0,
-  "timestamp" : "2000-01-23T04:56:07.000+00:00"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return db.execute(db.eventGET, [])
 };
 
 
 /**
  * Delete an event
  *
- * id String 
+ * @param id is the identifier of the event
  * no response value expected for this operation
  **/
 exports.eventIdDELETE = function(id) {
+  //TODO:
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -69,36 +31,11 @@ exports.eventIdDELETE = function(id) {
 /**
  * Get event for a given id
  *
- * id String 
- * returns Event
+ * @param id is the identifier of the event
+ * @returns Event
  **/
 exports.eventIdGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "related_book" : 1,
-  "related_author" : 6,
-  "name" : "name",
-  "description" : "description",
-  "image_urls" : [ "image_urls", "image_urls" ],
-  "location" : {
-    "country" : "country",
-    "cap" : 6,
-    "city" : "city",
-    "name" : "name",
-    "address_line_1" : "address_line_1",
-    "id" : 0,
-    "address_line_2" : "address_line_2"
-  },
-  "id" : 0,
-  "timestamp" : "2000-01-23T04:56:07.000+00:00"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return db.execute(db.eventIdGET, [id])
 };
 
 
@@ -110,6 +47,7 @@ exports.eventIdGET = function(id) {
  * no response value expected for this operation
  **/
 exports.eventIdPUT = function(id,body) {
+  //TODO:
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -123,6 +61,7 @@ exports.eventIdPUT = function(id,body) {
  * no response value expected for this operation
  **/
 exports.eventPOST = function(body) {
+  //TODO:
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -132,61 +71,20 @@ exports.eventPOST = function(body) {
 /**
  * Search for an event
  *
- * query_string String The search query (optional)
- * name String The name of the event (optional)
- * author_name String The name of the author for the event (optional)
- * author_id Integer The id of the author for the event (optional)
- * book_name String  (optional)
- * book_id Integer  (optional)
- * date date  (optional)
- * date_from date  (optional)
- * date_to date  (optional)
- * location String  (optional)
- * returns List
+ * @param query_string String The search query (optional)
+ * @param name String The name of the event (optional)
+ * @param author_name String The name of the author for the event (optional)
+ * @param author_id Integer The id of the author for the event (optional)
+ * @param book_name String  (optional)
+ * @param book_id Integer  (optional)
+ * @param date date  (optional)
+ * @param date_from date  (optional)
+ * @param date_to date  (optional)
+ * @param location String  (optional)
+ * @returns List
  **/
 exports.eventSearchGET = function(query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "related_book" : 1,
-  "related_author" : 6,
-  "name" : "name",
-  "description" : "description",
-  "image_urls" : [ "image_urls", "image_urls" ],
-  "location" : {
-    "country" : "country",
-    "cap" : 6,
-    "city" : "city",
-    "name" : "name",
-    "address_line_1" : "address_line_1",
-    "id" : 0,
-    "address_line_2" : "address_line_2"
-  },
-  "id" : 0,
-  "timestamp" : "2000-01-23T04:56:07.000+00:00"
-}, {
-  "related_book" : 1,
-  "related_author" : 6,
-  "name" : "name",
-  "description" : "description",
-  "image_urls" : [ "image_urls", "image_urls" ],
-  "location" : {
-    "country" : "country",
-    "cap" : 6,
-    "city" : "city",
-    "name" : "name",
-    "address_line_1" : "address_line_1",
-    "id" : 0,
-    "address_line_2" : "address_line_2"
-  },
-  "id" : 0,
-  "timestamp" : "2000-01-23T04:56:07.000+00:00"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return db.execute(db.eventSearchGET,
+      [query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location])
 };
 

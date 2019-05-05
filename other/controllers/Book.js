@@ -15,6 +15,16 @@ module.exports.bookGET = function bookGET (req, res, next) {
     });
 };
 
+module.exports.bookGenreGET = function bookGenreGET (req, res, next) {
+  Book.bookGenreGET()
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.bookIdDELETE = function bookIdDELETE (req, res, next) {
   var id = req.swagger.params['id'].value;
   Book.bookIdDELETE(id)
@@ -113,8 +123,11 @@ module.exports.bookSearchGET = function bookSearchGET (req, res, next) {
   var genre = req.swagger.params['genre'].value;
   var year = req.swagger.params['year'].value;
   var author = req.swagger.params['author'].value;
+  var author_id = req.swagger.params['author_id'].value;
   var publisher = req.swagger.params['publisher'].value;
-  Book.bookSearchGET(query,isbn,genre,year,author,publisher)
+  var publisher_id = req.swagger.params['publisher_id'].value;
+  var theme = req.swagger.params['theme'].value;
+  Book.bookSearchGET(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme)
     .then(function (response) {
       utils.writeJson(res, response);
     })

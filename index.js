@@ -37,8 +37,8 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
 
-  app.use(serveStatic(path.join(__dirname, 'node_modules')))
-  app.use(serveStatic(path.join(__dirname, 'public')))
+  app.use(serveStatic(path.join(__dirname, 'node_modules')));
+  app.use(serveStatic(path.join(__dirname, 'public')));
 
 
   // Start the server

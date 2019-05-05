@@ -26,7 +26,6 @@ $(function () {
       .on('hidden.bs.modal', function (e) {
         $('#fa5-iframe').remove();
       });
-    ;
   }
 
   if (storageAvailable('localStorage')) {
