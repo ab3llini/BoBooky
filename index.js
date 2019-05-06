@@ -10,12 +10,6 @@ var app = require('express')();
 var passport = require('passport');
 var strategy = require('passport-local').Strategy;
 
-passport.use(new strategy(
-    function(username, password, done) {
-        return done(null, {'name':'dioporco'});
-    }
-));
-
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = 80;
@@ -28,15 +22,14 @@ passport.use(new strategy (
             password: password
         })
             .then((result) => {
-                console.log(result)
+                console.log('logged-in')
                 done(null, {username: username})
             })
             .catch(e => {
-                console.log(e)
+                console.log('not-logged-in')
+
                 done(null, false)
-
             })
-
     }
 ));
 
@@ -68,6 +61,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
     app.get('/login', function(req, res, next) {
         passport.authenticate('local', function(err, user, info) {
             console.log(user)
+            next()
         })(req, res, next);
     });
 
