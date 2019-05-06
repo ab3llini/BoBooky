@@ -11,14 +11,14 @@ var app = express();
 var session = require("express-session"),
     bodyParser = require("body-parser");
 var passport = require('passport');
-var strategy = require('passport-local').Strategy;
+var Strategy = require('passport-local').Strategy;
 
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = 80;
 var db = require('./other/db/Database.js');
 
-passport.use(new strategy (
+passport.use(new Strategy (
     function(username, password, done) {
         db.userLoginPOST({
             username: username,
@@ -26,7 +26,7 @@ passport.use(new strategy (
         })
             .then((result) => {
                 console.log('logged-in')
-                done(null, {username: username})
+                done(null, {username: username, id: result.id})
             })
             .catch(e => {
                 console.log('not-logged-in')
@@ -59,12 +59,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/login',
+app.get('/login',
     passport.authenticate('local', { successRedirect: '/',
         failureRedirect: '/login' }));
 
 app.get('/checkauth', (req,res,next) => {
-    if(req.user)
+    if(req.user.id === req.id)
         return next();
     else
         return res.status(401).json({
@@ -72,7 +72,6 @@ app.get('/checkauth', (req,res,next) => {
         })
 
 }, function(req, res){
-
     res.status(200).json({
         status: 'Login successful!'
     });
@@ -89,9 +88,17 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
     app.use(middleware.swaggerSecurity({
         OAuth2: function (req, authOrSecDef, scopesOrApiKey, callback) {
+            let requestedID = parseInt(req.swagger.params.id.value, 10);
+            if(!req.user)
+                callback(new Error('You must login'));
+            else if(req.user.id === requestedID) {
+                console.log(requestedID);
 
-        }}))
-
+                callback()
+            } else
+                callback(new Error('This is not your business man!'))
+        }
+    }));
 
     // Route validated requests to appropriate controller
     app.use(middleware.swaggerRouter(options));

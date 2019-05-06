@@ -281,8 +281,8 @@ module.exports.userLoginPOST = (body) => {
                 if (result.rowCount === 0) {
                     reject()
                 } else {
-                    pipe.query(make.loginUser(body.username, sha256(body.password + result.rows[0].salt)))
-                        .then(res => res.rowCount > 0 ? resolve(res.rows) : reject('Wrong password'))
+                    pipe.query(make.loginUser(body.username, sha256(body.password + result.rows[0].salt16)))
+                        .then(res => res.rowCount > 0 ? resolve(res.rows[0]) : reject('Wrong password'))
                         .catch(error => {
                             console.log(error);
                             reject()
