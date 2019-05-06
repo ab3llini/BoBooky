@@ -6,7 +6,10 @@ var fs = require('fs'),
 
 var serveStatic = require('serve-static');
 
-var app = require('express')();
+var express = require('express');
+var app = express();
+var session = require("express-session"),
+    bodyParser = require("body-parser");
 var passport = require('passport');
 var strategy = require('passport-local').Strategy;
 
@@ -27,7 +30,6 @@ passport.use(new strategy (
             })
             .catch(e => {
                 console.log('not-logged-in')
-
                 done(null, false)
             })
     }
@@ -44,6 +46,38 @@ var options = {
 var spec = fs.readFileSync(path.join(__dirname,'other/api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
 
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
+app.use(session({ secret: "user" }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.post('/login',
+    passport.authenticate('local', { successRedirect: '/',
+        failureRedirect: '/login' }));
+
+app.get('/checkauth', (req,res,next) => {
+    if(req.user)
+        return next();
+    else
+        return res.status(401).json({
+            error: 'User not authenticated'
+        })
+
+}, function(req, res){
+
+    res.status(200).json({
+        status: 'Login successful!'
+    });
+});
+
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
@@ -58,12 +92,6 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
         }}))
 
-    app.get('/login', function(req, res, next) {
-        passport.authenticate('local', function(err, user, info) {
-            console.log(user)
-            next()
-        })(req, res, next);
-    });
 
     // Route validated requests to appropriate controller
     app.use(middleware.swaggerRouter(options));
