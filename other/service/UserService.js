@@ -95,6 +95,7 @@ exports.userChartPUT = function(id,body) {
 exports.userLoginPOST = function(body) {
     //TODO: Manage event for login successful / rejected
     db.execute(db.userLoginPOST, [body])
+
 };
 
 
