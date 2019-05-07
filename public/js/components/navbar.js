@@ -1,4 +1,9 @@
 $(function () {
+
+    // Inject navbar
+    $(".nav-placeholder").load("/components/navbar.html");
+
+    // Toggle bg color
     $(document).scroll(function () {
         let $nav = $(".navbar");
         let didScroll = $(this).scrollTop() > $nav.height();
