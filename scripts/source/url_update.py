@@ -49,10 +49,17 @@ def update_urls(connection):
     connection.commit()
 
 
+def set_themes_to_books(connection):
+    update_query = 'update book set theme = (select a.theme from author a where a.id = book.id)'
+    cursor = connection.cursor()
+    cursor.execute(update_query)
+    connection.commit()
+
+
 if __name__ == '__main__':
     conn = psycopg2.connect(host="ec2-79-125-2-142.eu-west-1.compute.amazonaws.com",
                             database="d3k4sooera9fsh",
                             user="kaxtczmqrauqfc",
                             password="a46181c55c68f90d53b029a88daa5800f4b13f203287f0df528a993ef18e5b14")
-    check_unavailable(conn)
+    set_themes_to_books(conn)
     conn.close()

@@ -25,43 +25,9 @@ module.exports.bookGenreGET = function bookGenreGET (req, res, next) {
     });
 };
 
-module.exports.bookIdDELETE = function bookIdDELETE (req, res, next) {
-  var id = req.swagger.params['id'].value;
-  Book.bookIdDELETE(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
 module.exports.bookIdGET = function bookIdGET (req, res, next) {
   var id = req.swagger.params['id'].value;
   Book.bookIdGET(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.bookIdPUT = function bookIdPUT (req, res, next) {
-  var id = req.swagger.params['id'].value;
-  var body = req.swagger.params['body'].value;
-  Book.bookIdPUT(id,body)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.bookPOST = function bookPOST (req, res, next) {
-  var body = req.swagger.params['body'].value;
-  Book.bookPOST(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -84,7 +50,7 @@ module.exports.bookRelatedGET = function bookRelatedGET (req, res, next) {
 module.exports.bookReviewDELETE = function bookReviewDELETE (req, res, next) {
   var id = req.swagger.params['id'].value;
   var reviewID = req.swagger.params['reviewID'].value;
-  var userID = req.swagger.params['userID'].value;
+  var userID = req.user.id;
   Book.bookReviewDELETE(id,reviewID,userID)
     .then(function (response) {
       utils.writeJson(res, response);
@@ -107,7 +73,7 @@ module.exports.bookReviewGET = function bookReviewGET (req, res, next) {
 
 module.exports.bookReviewPOST = function bookReviewPOST (req, res, next) {
   var id = req.swagger.params['id'].value;
-  var userID = req.swagger.params['userID'].value;
+  var userID = req.user.id;
   var body = req.swagger.params['body'].value;
   Book.bookReviewPOST(id,userID,body)
     .then(function (response) {

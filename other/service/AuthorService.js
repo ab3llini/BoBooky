@@ -15,20 +15,6 @@ exports.authorGET = function(offset,limit) {
 
 
 /**
- * Delete an existing author
- * Deletes the author specified in the id
- *
- * @param id String
- * no response value expected for this operation
- **/
-exports.authorIdDELETE = function(id) {
-    return new Promise(function(resolve, reject) {
-        resolve();
-    });
-};
-
-
-/**
  * Fetch a specific author
  *
  * @param id String
@@ -36,35 +22,6 @@ exports.authorIdDELETE = function(id) {
  **/
 exports.authorIdGET = function(id) {
     return db.execute(db.authorIdGET, [id])
-};
-
-
-/**
- * Update an existing author
- * Updates an existing author with the informations provided
- *
- * id String
- * body Author
- * no response value expected for this operation
- **/
-exports.authorIdPUT = function(id,body) {
-    return new Promise(function(resolve, reject) {
-        resolve();
-    });
-};
-
-
-/**
- * Add new author
- * Add a new book to the library
- *
- * body Author
- * no response value expected for this operation
- **/
-exports.authorPOST = function(body) {
-    return new Promise(function(resolve, reject) {
-        resolve();
-    });
 };
 
 

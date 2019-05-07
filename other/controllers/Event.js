@@ -13,43 +13,9 @@ module.exports.eventGET = function eventGET (req, res, next) {
     });
 };
 
-module.exports.eventIdDELETE = function eventIdDELETE (req, res, next) {
-  var id = req.swagger.params['id'].value;
-  Event.eventIdDELETE(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
 module.exports.eventIdGET = function eventIdGET (req, res, next) {
   var id = req.swagger.params['id'].value;
   Event.eventIdGET(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.eventIdPUT = function eventIdPUT (req, res, next) {
-  var id = req.swagger.params['id'].value;
-  var body = req.swagger.params['body'].value;
-  Event.eventIdPUT(id,body)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.eventPOST = function eventPOST (req, res, next) {
-  var body = req.swagger.params['body'].value;
-  Event.eventPOST(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

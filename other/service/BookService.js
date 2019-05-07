@@ -16,20 +16,6 @@ exports.bookGET = function(offset=0,limit=20) {
 
 
 /**
- * Delete an existing book
- * Deletes the book specified in the id
- *
- * id Long ID of book to return
- * no response value expected for this operation
- **/
-exports.bookIdDELETE = function(id) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-};
-
-
-/**
  * Find book by ID
  * Returns a book
  *
@@ -38,35 +24,6 @@ exports.bookIdDELETE = function(id) {
  **/
 exports.bookIdGET = function(id) {
     return db.execute(db.bookIdGET, [id])
-};
-
-
-/**
- * Update an existing book
- * Updates an existing book with the informations provided
- *
- * id Long ID of book to return
- * body Book 
- * no response value expected for this operation
- **/
-exports.bookIdPUT = function(id,body) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-};
-
-
-/**
- * Add new book
- * Add a new book to the library
- *
- * body Book 
- * no response value expected for this operation
- **/
-exports.bookPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
 };
 
 
@@ -90,6 +47,7 @@ exports.bookRelatedGET = function(id) {
  * no response value expected for this operation
  **/
 exports.bookReviewDELETE = function(id,reviewID,userID) {
+  //TODO:
   return new Promise(function(resolve, reject) {
     resolve();
   });

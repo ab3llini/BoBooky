@@ -49,28 +49,6 @@ paths:
           description: "Unable to fetch all authors"
         404:
           description: "Unable to find the specified resource"
-    post:
-      tags:
-        - "author"
-      summary: "Add new author"
-      description: "Add a new book to the library"
-      operationId: "authorPOST"
-      consumes:
-        - "application/json"
-      parameters:
-        - name: "body"
-          in: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/Author"
-      responses:
-        200:
-          description: "The author has been added to the database"
-        400:
-          description: "Error adding the object to the db"
-      security:
-        - OAuth2:
-            - "admin"
   /author/{id}:
     get:
       tags:
@@ -87,47 +65,6 @@ paths:
           description: "Unable to fetch this author."
         404:
           description: "Unable to find this author."
-    put:
-      tags:
-        - "author"
-      summary: "Update an existing author"
-      description: "Updates an existing author with the informations provided"
-      operationId: "authorIdPUT"
-      consumes:
-        - "application/json"
-      parameters:
-        - name: "body"
-          in: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/Author"
-      responses:
-        200:
-          description: "The author has been updated"
-        400:
-          description: "Invalid author ID provided"
-        404:
-          description: "Author ID not found"
-      security:
-        - OAuth2:
-            - "admin"
-    delete:
-      tags:
-        - "author"
-      summary: "Delete an existing author"
-      description: "Deletes the author specified in the id"
-      operationId: "authorIdDELETE"
-      parameters: []
-      responses:
-        200:
-          description: "The author has been successfully deleted"
-        400:
-          description: "The author id provided is invalid"
-        404:
-          description: "Author id not found"
-      security:
-        - OAuth2:
-            - "admin"
     parameters:
       - name: "id"
         in: "path"
@@ -244,28 +181,6 @@ paths:
               $ref: "#/definitions/Book"
         404:
           description: "Book not found"
-    post:
-      tags:
-        - "book"
-      summary: "Add new book"
-      description: "Add a new book to the library"
-      operationId: "bookPOST"
-      consumes:
-        - "application/json"
-      parameters:
-        - name: "body"
-          in: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/Book"
-      responses:
-        200:
-          description: "The book has been added to the database"
-        400:
-          description: "Error adding the object to the db"
-      security:
-        - OAuth2:
-            - "admin"
   /book/{id}:
     get:
       tags:
@@ -285,47 +200,6 @@ paths:
           description: "Invalid ID supplied"
         404:
           description: "Book not found"
-    put:
-      tags:
-        - "book"
-      summary: "Update an existing book"
-      description: "Updates an existing book with the informations provided"
-      operationId: "bookIdPUT"
-      consumes:
-        - "application/json"
-      parameters:
-        - name: "body"
-          in: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/Book"
-      responses:
-        200:
-          description: "The book has been updated"
-        400:
-          description: "Invalid book ID provided"
-        404:
-          description: "Book ID not found"
-      security:
-        - OAuth2:
-            - "admin"
-    delete:
-      tags:
-        - "book"
-      summary: "Delete an existing book"
-      description: "Deletes the book specified in the id"
-      operationId: "bookIdDELETE"
-      parameters: []
-      responses:
-        200:
-          description: "The book has been successfully deleted"
-        400:
-          description: "The book id provided is invalid"
-        404:
-          description: "Book id not found"
-      security:
-        - OAuth2:
-            - "admin"
     parameters:
       - name: "id"
         in: "path"
@@ -850,29 +724,6 @@ paths:
               $ref: "#/definitions/Event"
         404:
           description: "Status 404"
-    post:
-      tags:
-        - "event"
-      summary: "Add new event"
-      operationId: "eventPOST"
-      consumes:
-        - "application/json"
-      parameters:
-        - name: "body"
-          in: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/Event"
-      responses:
-        200:
-          description: "Status 200"
-        400:
-          description: "invalid event object"
-        404:
-          description: "Status 404"
-      security:
-        - OAuth2:
-            - "admin"
   /event/{id}:
     get:
       tags:
@@ -889,43 +740,6 @@ paths:
             $ref: "#/definitions/Event"
         404:
           description: "Status 404"
-    put:
-      tags:
-        - "event"
-      summary: "Update an event"
-      operationId: "eventIdPUT"
-      consumes:
-        - "application/json"
-      parameters:
-        - name: "body"
-          in: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/Event"
-      responses:
-        200:
-          description: "Status 200"
-        400:
-          description: "Status 400"
-        404:
-          description: "Status 404"
-      security:
-        - OAuth2:
-            - "admin"
-    delete:
-      tags:
-        - "event"
-      summary: "Delete an event"
-      operationId: "eventIdDELETE"
-      parameters: []
-      responses:
-        200:
-          description: "Status 200"
-        404:
-          description: "Status 404"
-      security:
-        - OAuth2:
-            - "admin"
     parameters:
       - name: "id"
         in: "path"
@@ -1309,6 +1123,15 @@ definitions:
       qty:
         type: "integer"
   inline_response_200:
+    type: "object"
+    required:
+      - "genre_name"
+    properties:
+      id:
+        type: "integer"
+      genre_name:
+        type: "string"
+  inline_response_200_1:
     type: "object"
     required:
       - "genre_name"
