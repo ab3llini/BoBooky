@@ -21,7 +21,6 @@ exports.eventGET = function() {
  * no response value expected for this operation
  **/
 exports.eventIdDELETE = function(id) {
-  //TODO:
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -47,7 +46,6 @@ exports.eventIdGET = function(id) {
  * no response value expected for this operation
  **/
 exports.eventIdPUT = function(id,body) {
-  //TODO:
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -61,7 +59,6 @@ exports.eventIdPUT = function(id,body) {
  * no response value expected for this operation
  **/
 exports.eventPOST = function(body) {
-  //TODO:
   return new Promise(function(resolve, reject) {
     resolve();
   });

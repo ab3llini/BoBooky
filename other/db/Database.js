@@ -259,6 +259,52 @@ module.exports.authorIdGET = (id) => {
     })
 };
 
+module.exports.authorIdReviewGET = (id) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.authorReviews(id))
+            .then(results => {
+                let ans = []
+                results.rows.forEach((res, idx) => {
+                    let review = {
+                        id: res.id,
+                        timestamp: res.timestamp,
+                        title: res.title,
+                        body: res.body,
+                        rating: res.rating
+                    };
+                    review.Author = {
+                        name: res.name,
+                        surname: res.surname,
+                        email: res.email,
+                        birthdate: res.birthdate
+                    }
+                    ans.push(res)
+                    if (idx === results.rowCount - 1)
+                        resolve(ans)
+                })
+            })
+            .catch(error => {
+                console.log(error)
+                reject(error)
+            })
+    })
+}
+
+module.exports.authorIdReviewPOST = (id,userID,body) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.addAuthorReview(id, userID, body))
+            .then(resolve())
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+}
+
+module.exports.authorIdReviewDELETE = () => {
+    //TODO:
+}
+
 /***************************
  ********* USER ************
  ***************************/

@@ -93,7 +93,6 @@ exports.userChartPUT = function(id,body) {
  * no response value expected for this operation
  **/
 exports.userLoginPOST = function(body) {
-    //TODO: Manage event for login successful / rejected
     db.execute(db.userLoginPOST, [body])
 
 };

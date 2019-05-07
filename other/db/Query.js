@@ -194,11 +194,20 @@ module.exports.authorId = (id) => {
 
 module.exports.authorReviews = (authorID) => {
     return {
-        text: `select u.name, author, timestamp, title, content as body, rating, book_author as author_id
+        text: `select u.name, u.surname, u.email, u.birthdate, timestamp, title, content as body,
+                    rating, book_author as author_id
                from author_review
                         join "user" u on author_review.author = u.id
                where book_author = $1`,
         values: [authorID]
+    }
+};
+
+module.exports.addAuthorReview = (id,userID,body) => {
+    return {
+        text: `insert into author_review(title, content, book_author, author, rating) 
+            values($1, $2, $3, $4, $5)`,
+        values: [body.title, body.content, id, userID, body.rating]
     }
 };
 
