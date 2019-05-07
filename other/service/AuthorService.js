@@ -73,14 +73,12 @@ exports.authorPOST = function(body) {
  *
  * id String
  * reviewID Integer The id of the review to be removed
+ * userID Integer
  * no response value expected for this operation
  **/
-exports.authorReviewDELETE = function(id,reviewID) {
-    //TODO: Get also the userID
-    return new Promise(function(resolve, reject) {
-        resolve();
-    });
-};
+exports.authorReviewDELETE = function(id,reviewID,userID) {
+    return db.execute(db.authorIdReviewDELETE(id,reviewID,userID))
+}
 
 
 /**

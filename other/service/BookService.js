@@ -84,13 +84,16 @@ exports.bookRelatedGET = function(id) {
 /**
  * Delete a review from a given user
  *
- * id String 
+ * id String
  * reviewID Integer The id of the review to be removed
+ * userID Integer
  * no response value expected for this operation
  **/
-exports.bookReviewDELETE = function(id,reviewID) {
-  return db.execute(db.bookReviewDELETE(id, reviewID))
-};
+exports.bookReviewDELETE = function(id,reviewID,userID) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
 
 
 /**

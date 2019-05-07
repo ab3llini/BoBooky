@@ -217,9 +217,10 @@ module.exports.bookReviewPOST = (id,userID,body) => {
     })
 };
 
-module.exports.bookReviewDELETE = (id,reviewID) => {
+module.exports.bookReviewDELETE = (id,reviewID,userID) => {
+    //TODO: need also the user
     return new Promise((resolve, reject) => {
-        pipe.query(make.deleteReview(id, reviewID))
+        pipe.query(make.deleteReview(id,reviewID,userID))
             .then(resolve())
             .catch(error => {
                 console.log(error);
@@ -301,8 +302,15 @@ module.exports.authorIdReviewPOST = (id,userID,body) => {
     })
 }
 
-module.exports.authorIdReviewDELETE = () => {
-    //TODO:
+module.exports.authorIdReviewDELETE = (id,reviewID,userID) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.deleteAuthorReview(id,reviewID,userID))
+            .then(resolve())
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
 }
 
 /***************************

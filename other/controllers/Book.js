@@ -84,7 +84,8 @@ module.exports.bookRelatedGET = function bookRelatedGET (req, res, next) {
 module.exports.bookReviewDELETE = function bookReviewDELETE (req, res, next) {
   var id = req.swagger.params['id'].value;
   var reviewID = req.swagger.params['reviewID'].value;
-  Book.bookReviewDELETE(id,reviewID)
+  var userID = req.swagger.params['userID'].value;
+  Book.bookReviewDELETE(id,reviewID,userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })

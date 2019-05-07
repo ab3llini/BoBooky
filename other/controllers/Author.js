@@ -63,7 +63,8 @@ module.exports.authorPOST = function authorPOST (req, res, next) {
 module.exports.authorReviewDELETE = function authorReviewDELETE (req, res, next) {
   var id = req.swagger.params['id'].value;
   var reviewID = req.swagger.params['reviewID'].value;
-  Author.authorReviewDELETE(id,reviewID)
+  var userID = req.swagger.params['userID'].value;
+  Author.authorReviewDELETE(id,reviewID,userID)
     .then(function (response) {
       utils.writeJson(res, response);
     })

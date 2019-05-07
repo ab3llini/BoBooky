@@ -189,6 +189,10 @@ paths:
           required: true
           type: "integer"
           description: "The id of the review to be removed"
+        - name: "userID"
+          in: "query"
+          required: true
+          type: "integer"
       responses:
         200:
           description: "Status 200"
@@ -408,6 +412,10 @@ paths:
           required: true
           type: "integer"
           description: "The id of the review to be removed"
+        - name: "userID"
+          in: "query"
+          required: true
+          type: "integer"
       responses:
         200:
           description: "Status 200"
@@ -993,7 +1001,7 @@ paths:
 securityDefinitions:
   OAuth2:
     type: "oauth2"
-    tokenUrl: "https://localhost/api/auth"
+    tokenUrl: "http://localhost/login"
     flow: "password"
     scopes:
       admin: "Website administrator"
@@ -1300,3 +1308,12 @@ definitions:
         $ref: "#/definitions/Book"
       qty:
         type: "integer"
+  inline_response_200:
+    type: "object"
+    required:
+      - "genre_name"
+    properties:
+      id:
+        type: "integer"
+      genre_name:
+        type: "string"

@@ -163,11 +163,11 @@ module.exports.addBookReview = (userID, bookID, body) => {
     }
 }
 
-module.exports.deleteReview = (userID, reviewID) => {
+module.exports.deleteReview = (id, reviewID, userID) => {
     return {
         text: `delete from book_review
-            where author = $1 and id = $2`,
-        values: [userID, reviewID]
+            where author = $1 and id = $2 and book = $3`,
+        values: [userID, reviewID, id]
     }
 }
 
@@ -210,6 +210,14 @@ module.exports.addAuthorReview = (id,userID,body) => {
         values: [body.title, body.content, id, userID, body.rating]
     }
 };
+
+module.exports.deleteAuthorReview = (id,reviewID,userID) => {
+    return {
+        text: `delete from author_review 
+            where book_author = $1 and author = $2 and id = $3`,
+        values: [id, userID, reviewID]
+    }
+}
 
 /***************************
  ******** EVENTS ***********

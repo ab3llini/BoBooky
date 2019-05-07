@@ -89,6 +89,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
     app.use(middleware.swaggerSecurity({
         OAuth2: function (req, authOrSecDef, scopesOrApiKey, callback) {
             let requestedID = parseInt(req.swagger.params.id.value, 10);
+            console.log(req.url.split('/'))
             if(!req.user)
                 callback(new Error('You must login'));
             else if(req.user.id === requestedID) {
