@@ -11,8 +11,7 @@ $(() => {
         carousel.initialize('books', books, (dom, item) => {
             dom.find('img').attr('src', item.image_href);
             dom.find('.card-title').html(item.title);
-            dom.find('.card-text').html(item.author.name);
+            dom.find('.card-text').html(item.description);
         })
     })
-
 });
