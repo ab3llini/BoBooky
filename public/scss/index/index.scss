@@ -67,7 +67,7 @@
 }
 
 .search-bar .form-control, .search-bar .btn {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 15, 55, 0.64);
 }
 
 .search-bar .form-control {
@@ -88,6 +88,6 @@
   margin-right: 0;
 }
 
-.search-bar input::placeholder {
+.search-bar .form-control::placeholder {
   color: #d6d6d6;
 }
