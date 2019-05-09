@@ -35,7 +35,7 @@ exports.authorIdGET = function(id) {
  **/
 exports.authorReviewDELETE = function(id,reviewID,userID) {
     return db.execute(db.authorIdReviewDELETE(id,reviewID,userID))
-}
+};
 
 
 /**

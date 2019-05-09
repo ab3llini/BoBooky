@@ -25,11 +25,11 @@ passport.use(new Strategy (
             password: password
         })
             .then((result) => {
-                console.log('logged-in')
+                console.log('logged-in');
                 done(null, {username: username, id: result.id})
             })
             .catch(e => {
-                console.log('not-logged-in')
+                console.log('not-logged-in');
                 done(null, false)
             })
     }
@@ -59,6 +59,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Routes
 app.get('/login',
     passport.authenticate('local', { successRedirect: '/',
         failureRedirect: '/login' }));

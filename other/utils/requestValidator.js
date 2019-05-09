@@ -37,7 +37,7 @@ module.exports.validateRequest = (req) => {
 
         callback()
     } else
-        callback(new Error('This is not your business man!'))
+        callback(new Error('This is not your business man!'));
 
 
 
@@ -45,4 +45,4 @@ module.exports.validateRequest = (req) => {
 
 
     return false
-}
+};

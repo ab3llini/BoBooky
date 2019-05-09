@@ -51,7 +51,7 @@ exports.bookReviewDELETE = function(id,reviewID,userID) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**

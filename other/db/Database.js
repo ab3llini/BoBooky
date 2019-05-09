@@ -264,7 +264,7 @@ module.exports.authorIdReviewGET = (id) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.authorReviews(id))
             .then(results => {
-                let ans = []
+                let ans = [];
                 results.rows.forEach((res, idx) => {
                     let review = {
                         id: res.id,
@@ -278,18 +278,18 @@ module.exports.authorIdReviewGET = (id) => {
                         surname: res.surname,
                         email: res.email,
                         birthdate: res.birthdate
-                    }
-                    ans.push(res)
+                    };
+                    ans.push(res);
                     if (idx === results.rowCount - 1)
                         resolve(ans)
                 })
             })
             .catch(error => {
-                console.log(error)
+                console.log(error);
                 reject(error)
             })
     })
-}
+};
 
 module.exports.authorIdReviewPOST = (id,userID,body) => {
     return new Promise((resolve, reject) => {
@@ -300,7 +300,7 @@ module.exports.authorIdReviewPOST = (id,userID,body) => {
                 reject()
             })
     })
-}
+};
 
 module.exports.authorIdReviewDELETE = (id,reviewID,userID) => {
     return new Promise((resolve, reject) => {
@@ -311,7 +311,7 @@ module.exports.authorIdReviewDELETE = (id,reviewID,userID) => {
                 reject()
             })
     })
-}
+};
 
 /***************************
  ********* USER ************

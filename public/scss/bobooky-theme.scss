@@ -1,0 +1,10 @@
+@import "booboky-colors";
+
+$theme-colors: (
+        "dark" : $bobooky-dark,
+        "primary" : $bobooky-primary,
+        "secondary" : $bobooky-secondary
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+

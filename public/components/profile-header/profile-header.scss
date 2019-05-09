@@ -1,0 +1,20 @@
+@import '../../../node_modules/bootstrap/scss/functions';
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+@import '../../scss/booboky-colors';
+
+$header-section-height: 10rem;
+
+.container-fluid.header {
+
+  @include media-breakpoint-up(lg) {
+    height: 10rem;
+  }
+
+  margin-top: 60px;
+  background: $bobooky-primary; /* Old browsers */
+  background: -moz-linear-gradient(left, $bobooky-primary 0%, $bobooky-secondary 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, $bobooky-primary 0%,$bobooky-secondary 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, $bobooky-primary 0%, $bobooky-secondary 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}

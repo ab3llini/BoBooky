@@ -7,60 +7,98 @@
     <title>Starter Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="/scss/bootstrap/bobooky.css">
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/scss/bobooky-theme.css">
     <link rel="stylesheet" href="/scss/components/navbar.css">
     <link rel="stylesheet" href="scss/index.css">
+    <link rel="stylesheet" href="/components/profile-header/profile-header.css">
 
 </head>
 
 <body class="bg-dark">
 
 <div class="nav-placeholder"></div>
-
-<div class="section">
-    <div class="container-fluid header">
-        <div class="container h-100 px-n">
-            <div class="container h-100 p-0 ">
-                <div class="row h-100 py-3">
-                    <div class="col-12 col-lg-4 d-flex flex-column justify-content-center">
-                        <div class="container p-0 ">
-                            <h3 class="text-white">
-                                Hi Luna Alessia!
-                            </h3>
-                            <button type="button" class="btn btn-dark rounded-pill">
-                                   Logout
-                                </button>
-                            <hr class="style1 border-white d-lg-none d-block">
-                        </div>
+<div class="profile-header-placeholder"></div>
+<div class="section container main text-white">
+    <div class="row">
+        <div class="col-12 col-lg mt-5">
+            <h1 class="font-weight-bold text-secondary">About you</h1>
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-1 text-center">
+                        <i class="fa fa-user mr-1"></i>
                     </div>
-                    <div class="col-12 col-lg-8 d-flex flex-column justify-content-center justify-content-lg-end">
-                        <div class="container p-0 text-lg-center">
-                            <div class="row">
-                                <div class="col-12 col-lg py-1 py-lg-0">
-                                    <a href="#" class="text-white">My Account</a>
+                    <div class="col d-flex justify-content-center flex-column">
+                        <span id="name-placeholder">Name Surname</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1 text-center ">
+                        <i class="fa fa-at mr-1"></i>
+                    </div>
+                    <div class="col d-flex justify-content-center flex-column">
+                        <span id="email-placeholder">email</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1"><i class="fa fa-birthday-cake mr-1"></i>
+                    </div>
+                    <div class="col d-flex justify-content-center flex-column">
+                        <span id="birthday-placeholder">Birth date</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg mt-5">
+            <h1 class="font-weight-bold text-secondary">Your addresses</h1>
+            <div class="address container">
+                <div class="row">
+                    <div class="col">
+                        <div class="address template">
+                            <div class="default">
+                                <div class="card address template bg-transparent border-secondary my-4 w-100">
+                                    <div class="card-header bg-secondary">
+                                        Address title
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item bg-transparent">Cras justo odio</li>
+                                        <li class="list-group-item bg-transparent">Dapibus ac facilisis in</li>
+                                        <li class="list-group-item bg-transparent"ì>Vestibulum at eros</li>
+                                    </ul>
+                                    <div class="card-footer text-muted p-1 bg-secondary">
+                                        <div class="actions text-right">
+                                            <button type="button" class="btn btn-secondary">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-lg py-1 py-lg-0">
-                                    <a href="#" class="text-white">Orders</a>
-                                </div>
-                                <div class="col-12 col-lg py-1 py-lg-0">
-                                    <a href="#" class="text-white">Wishlist</a>
-                                </div>
-                                <div class="col-12 col-lg py-1 py-lg-0">
-                                    <a href="#" class="text-white">My reviews</a>
-                                </div>
-                                <div class="col-12 col-lg py-1 py-lg-0 d-block d-lg-none">
-                                    <a href="#" class="text-white">
-                                        <span class="badge badge-pill badge-dark py-2 px-3 float-right">Logout</span>
-                                    </a>
+                            </div>
+                            <div class="actions d-none">
+                                <div class="card address template bg-secondary my-4 w-100">
+                                    <div class="card-header">
+                                        Actions
+                                    </div>
+                                    <div class="card-body">
+                                        <div>
+                                            <button type="button" class="btn btn-danger rounded-pill">Delete</button>
+                                        </div>
+                                        <div>
+                                            <button type="button" class="btn btn-danger rounded-pill">Edit</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
+
+
             </div>
         </div>
     </div>
+
+
 </div>
 
 <script src="/jquery/dist/jquery.js"></script>
@@ -68,6 +106,17 @@
 <script src="/js/components/navbar.js"></script>
 <script src="/js/index/index.js" type="module"></script>
 <script src="/js/components/carousel.js" type="module"></script>
+<script src="/components/profile-header/profile-header.js"></script>
+
+<script>
+    $(() => {
+
+        let toggle = (o) => {
+            $(o).find('.default').toggleClass('d-none')
+            $(o).find('.actions').toggleClass('d-none')
+        }
+    })
+</script>
 
 
 </body>
