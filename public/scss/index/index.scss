@@ -10,6 +10,7 @@
 
 @function get-svg($count) {
   $urls: ();
+
   @for $i from 1 through $count {
     @if $i > 1 {
       $urls: prepend($urls, url('../../assets/component/home_bg_' + $i + '.svg') + ',')
