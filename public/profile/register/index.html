@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/scss/bobooky-theme.css">
+    <link rel="stylesheet" href="/scss/components/navbar.css">
+    <link rel="stylesheet" href="scss/index.css">
+    <link rel="stylesheet" href="/components/profile-header/profile-header.css">
+
+</head>
+
+<body class="bg-dark">
+
+<div class="nav-placeholder"></div>
+<div class="section container main text-white">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <h1 class="font-weight-bold text-secondary">Register</h1>
+            <div class="container mt-4 border border-secondary rounded" style="border-width: 2px !important;">
+                <form class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="form-group col-12 col-sm-6">
+                            <label class="col-form-label-lg" for="inputName">Name</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="Name" required>
+                            <div class="invalid-feedback">
+                                Please insert a valid name.
+                            </div>
+                        </div>
+                        <div class="form-group col-12 col-sm-6">
+                            <label class="col-form-label-lg" for="inputSurname">Surname</label>
+                            <input type="text" class="form-control" id="inputSurname" placeholder="Surname" required>
+                            <div class="invalid-feedback">
+                                Please insert a valid surname.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12 col-sm-6">
+                            <label class="col-form-label-lg" for="inputEmail">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+                            <div class="invalid-feedback">
+                                Please insert a valid email.
+                            </div>
+                        </div>
+                        <div class="form-group col-12 col-sm-6">
+                            <label class="col-form-label-lg" for="inputBirthDate">Birth date</label>
+                            <input type="date" class="form-control" id="inputBirthDate" placeholder="Birth date" required>
+                            <div class="invalid-feedback">
+                                Please choose a valid date.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12 col-sm-6">
+                            <label class="col-form-label-lg" for="inputPassword">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
+                            <small id="passwordHelpBlock" class="form-text text-muted">
+                                Your password must be 8-20 characters long
+                            </small>
+                            <div class="invalid-feedback">
+                                Please insert a password.
+                            </div>
+                        </div>
+                        <div class="form-group col-12 col-sm-6">
+                            <label class="col-form-label-lg" for="inputPasswordRepeated">Repeat Password</label>
+                            <input type="password" class="form-control" id="inputPasswordRepeated" placeholder="Password" required>
+                            <div class="invalid-feedback">
+                                Please repeat the password.
+                            </div>
+                        </div>
+
+                        <div class="container mb-3">
+                            <button type="submit" class="btn btn-primary float-right">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="/jquery/dist/jquery.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/js/components/navbar.js"></script>
+<script src="/js/index/index.js" type="module"></script>
+<script src="/js/components/carousel.js" type="module"></script>
+<script src="/components/profile-header/profile-header.js"></script>
+
+<script>
+    'use strict';
+    $(() => {
+        let forms = $('.needs-validation');
+        forms.each((idx, form) => {
+            form.addEventListener('submit', (event) => {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated')
+            }, false)
+        });
+    })
+</script>
+
+
+</body>
+</html>
