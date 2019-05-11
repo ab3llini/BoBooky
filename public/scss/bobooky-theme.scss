@@ -3,8 +3,22 @@
 $theme-colors: (
         "dark" : $bobooky-dark,
         "primary" : $bobooky-primary,
-        "secondary" : $bobooky-secondary
+        "secondary" : $bobooky-secondary,
+        "warning" : $bobooky-warning
 );
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+.bobooky.form-control{
+  background: none;
+  border: none;
+  outline: none !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid;
+  border-radius: 0;
+  padding: 0;
+}
+
+.bobooky.form-control:focus {
+  border-color: white; //#F7BC5D
+}
