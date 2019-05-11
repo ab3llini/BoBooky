@@ -4,7 +4,8 @@ $theme-colors: (
         "dark" : $bobooky-dark,
         "primary" : $bobooky-primary,
         "secondary" : $bobooky-secondary,
-        "warning" : $bobooky-warning
+        "warning" : $bobooky-warning,
+        "bobooky" : red
 );
 
 @import "../../node_modules/bootstrap/scss/bootstrap";

@@ -1,5 +1,5 @@
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top unscrolled">
+<nav class="navbar navbar-expand-lg navbar-dark unscrolled">
     <div class="container">
         <a class="navbar-brand" href="/">
             <img src="/assets/logo_white.png"/>
@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile/account">
+                    <a class="nav-link" href="/profile/account" data-toggle="collapse" data-target="#profile-header" aria-controls="profile-heade" aria-expanded="false">
                         <span class="fa font-weight-bold text-white fa-user"></span>
                     </a>
                 </li>
@@ -45,4 +45,49 @@
         </div>
     </div>
 </nav>
+
+<div class="container-fluid header collapse" id="profile-header">
+    <div class="container h-100 px-n">
+        <div class="container h-100 p-0 ">
+            <div class="row h-100 py-3">
+                <div class="col-12 col-lg-4 d-flex flex-column justify-content-center">
+                    <div class="container p-0 ">
+                        <h3 class="text-white">
+                            Hi Luna Alessia!
+                        </h3>
+                        <button type="button" class="btn btn-dark rounded-pill">
+                            Logout
+                        </button>
+                        <hr class="style1 border-white d-lg-none d-block">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8 d-flex flex-column justify-content-center justify-content-lg-end">
+                    <div class="container p-0 text-lg-center">
+                        <div class="row">
+                            <div class="col-12 col-lg py-1 py-lg-0">
+                                <a href="#" class="text-white">My Account</a>
+                            </div>
+                            <div class="col-12 col-lg py-1 py-lg-0">
+                                <a href="#" class="text-white">Orders</a>
+                            </div>
+                            <div class="col-12 col-lg py-1 py-lg-0">
+                                <a href="#" class="text-white">Wishlist</a>
+                            </div>
+                            <div class="col-12 col-lg py-1 py-lg-0">
+                                <a href="#" class="text-white">My reviews</a>
+                            </div>
+                            <div class="col-12 col-lg py-1 py-lg-0 d-block d-lg-none">
+                                <a href="#" class="text-white">
+                                    <span class="badge badge-pill badge-dark py-2 px-3 float-right">Logout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- END NAVBAR -->
