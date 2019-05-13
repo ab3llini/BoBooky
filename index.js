@@ -18,8 +18,8 @@ var jsyaml = require('js-yaml');
 var serverPort = 80;
 var db = require('./other/db/Database.js');
 
-passport.use(new Strategy (
-    function(username, password, done) {
+passport.use(new Strategy(
+    function (username, password, done) {
         db.userLoginPOST({
             username: username,
             password: password
@@ -43,36 +43,40 @@ var options = {
 };
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
-var spec = fs.readFileSync(path.join(__dirname,'other/api/swagger.yaml'), 'utf8');
+var spec = fs.readFileSync(path.join(__dirname, 'other/api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
 
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function (user, done) {
     done(null, user);
 });
-app.use(session({ secret: "user" }));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({secret: "user"}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Routes
-app.get('/login',
-    passport.authenticate('local', { successRedirect: '/',
-        failureRedirect: '/login' }));
+app.post('/login',
+    passport.authenticate('local'),
+    function (req, res) {
+        // If this function gets called, authentication was successful.
+        // `req.user` contains the authenticated user.
+        //res.redirect('/users/' + req.user.username);
+        console.log('Authenticated!!')
+    });
 
-app.get('/checkauth', (req,res,next) => {
-    if(req.user.id === req.id)
+app.get('/checkauth', (req, res, next) => {
+    if (req.user !== undefined && req.user.id === req.id)
         return next();
-    else
-        return res.status(401).json({
-            error: 'User not authenticated'
-        })
 
-}, function(req, res){
+    return res.status(401).json({
+        error: 'User not authenticated'
+    })
+
+}, function (req, res) {
     res.status(200).json({
         status: 'Login successful!'
     });
@@ -89,8 +93,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
     app.use(middleware.swaggerSecurity({
         OAuth2: function (req, authOrSecDef, scopesOrApiKey, callback) {
-            let requestedID = parseInt(req.swagger.params.id.value, 10);
-            if(!req.user)
+            if (!req.user)
                 callback(new Error('You must login'));
             else
                 callback()
@@ -99,7 +102,6 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
     // Route validated requests to appropriate controller
     app.use(middleware.swaggerRouter(options));
-
 
 
     // Serve the Swagger documents and Swagger UI
