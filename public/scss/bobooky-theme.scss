@@ -3,8 +3,54 @@
 $theme-colors: (
         "dark" : $bobooky-dark,
         "primary" : $bobooky-primary,
-        "secondary" : $bobooky-secondary
+        "secondary" : $bobooky-secondary,
+        "warning" : $bobooky-warning,
+        "yellow" : $bobooky-warning,
+        "white" : white
 );
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+.bobooky.form-control:focus {
+    border-color: white; //#F7BC5D
+}
+
+/*
+    Extensions
+ */
+
+@each $key, $color in $theme-colors {
+    /*
+        Themed forms
+     */
+
+    .form-#{$key} .form-control{
+        background: none;
+        border: none;
+        outline: none !important;
+        box-shadow: none !important;
+        border-bottom: 1px solid;
+        border-radius: 0;
+        padding: 0;
+        color: $color
+    }
+
+    .form-placeholder-#{$key} .form-control::placeholder {
+        color: $color
+    }
+
+    /*
+        Themed placeholders
+     */
+    input.placeholder-#{$key}::placeholder {
+        color: $color;
+    }
+}
+
+
+.linear-gradient {
+    background: $bobooky-primary; /* Old browsers */
+    background: -moz-linear-gradient(left, $bobooky-primary 0%, $bobooky-secondary 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, $bobooky-primary 0%,$bobooky-secondary 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, $bobooky-primary 0%, $bobooky-secondary 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}

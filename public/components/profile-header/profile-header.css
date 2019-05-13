@@ -8,10 +8,5 @@
   background: linear-gradient(to right, #0D71B9 0%, #05AB9E 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
-@media (min-width: 992px) {
-  .container-fluid.header {
-    height: 10rem;
-  }
-}
 
 /*# sourceMappingURL=profile-header.css.map */

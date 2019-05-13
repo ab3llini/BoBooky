@@ -50,7 +50,7 @@ def update_urls(connection):
 
 
 def set_themes_to_books(connection):
-    update_query = 'update book set theme = (select a.theme from author a where a.id = book.id)'
+    update_query = 'update book set theme = (select theme from author a where book.author = a.id)'
     cursor = connection.cursor()
     cursor.execute(update_query)
     connection.commit()

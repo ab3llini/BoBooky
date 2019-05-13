@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="/scss/bobooky-theme.css">
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="/scss/components/navbar.css">
+    <link rel="stylesheet" href="/components/navbar/navbar.css">
     <link rel="stylesheet" href="/scss/index/index.css">
     <link rel="stylesheet" href="/scss/components/carousel.css">
 </head>
@@ -23,7 +23,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10 text-white">
                 <h3>What are you looking for?</h3>
-                <div class="form-group mt-3 search-bar">
+                <div class="form-group border-white mt-3 search-bar">
                     <div class="input-group input-group-lg">
                         <input type="text" class="form-control text-white" placeholder="Search more than 700 books">
                         <div class="input-group-append">
@@ -38,8 +38,12 @@
         </div>
     </div>
 </div>
-<div class="section d-flex justify-content-center min-vh-100 flex-column">
-    <div class="container">
+
+<div class="container col-lg-8 col-md-10 text-dark pb-4 pt-5 mt-5 bg-info">
+    <h3>What's new</h3>
+</div>
+<div class="section d-flex  flex-column bg-danger">
+    <div class="container min-vh-25 bg-success">
         <div class="carousel slide multi-item-carousel" id="books">
             <div class="carousel-inner row mx-auto">
                 <div class="carousel-item template col-md-3">
@@ -49,7 +53,7 @@
                              alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title"></h5>
-                            <p class="card-text"></p>
+                            <p class="card-author"></p>
                         </div>
                     </div>
                 </div>
@@ -74,7 +78,7 @@
 </div>
 <script src="/jquery/dist/jquery.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.js"></script>
-<script src="/js/components/navbar.js"></script>
+<script src="/components/navbar/navbar.js"></script>
 <script src="/js/index/index.js" type="module"></script>
 <script src="/js/components/carousel.js" type="module"></script>
 

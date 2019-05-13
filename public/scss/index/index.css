@@ -23,11 +23,20 @@
 
 .search-bar .form-control {
   border-right: hidden;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .search-bar .btn {
   border: 1px solid #f8f9fa;
   border-left: hidden;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.form-control:focus {
+  box-shadow: white;
+  border-color: white;
 }
 
 .carousel-control.left {

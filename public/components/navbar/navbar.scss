@@ -1,0 +1,18 @@
+@import '../../scss/booboky-colors';
+@import '../../../node_modules/bootstrap/scss/functions';
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+$logo-height: 25px;
+
+.navbar.scrolled {
+  transition: background-color 200ms linear;
+}
+.navbar.unscrolled {
+  transition: background-color 200ms linear;
+}
+
+
+.navbar-brand img {
+  height: $logo-height;
+}
+
