@@ -16,7 +16,7 @@
       $urls: prepend($urls, url('../../assets/component/home_bg_' + $i + '.svg') + ',')
     }
     @else {
-      $urls: prepend($urls, url('../../assets/component/home_bg_' + $i + '.svg'))
+      $urls: prepend($urls, url('/assets/component/home_bg_' + $i + '.svg'))
     }
   }
   @return $urls;

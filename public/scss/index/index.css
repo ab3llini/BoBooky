@@ -1,5 +1,5 @@
 .search-section {
-  background-image: url("../../assets/component/home_bg_4.svg"), url("../../assets/component/home_bg_3.svg"), url("../../assets/component/home_bg_2.svg"), url("../../assets/component/home_bg_1.svg");
+  background-image: url("../../assets/component/home_bg_4.svg"), url("../../assets/component/home_bg_3.svg"), url("../../assets/component/home_bg_2.svg"), url("/assets/component/home_bg_1.svg");
   background-repeat: no-repeat;
   background-size: 80vh;
   background-position: right calc(-10vw - 18vh) bottom -20vh, left calc(110vw - 18vh) top -20vh, right calc(110vw - 18vh) bottom -20vh, left calc(-10vw - 18vh) top -20vh;
