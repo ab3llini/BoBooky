@@ -20,16 +20,17 @@ var db = require('./other/db/Database.js');
 
 passport.use(new Strategy(
     function (username, password, done) {
+
         db.userLoginPOST({
             username: username,
             password: password
         })
             .then((result) => {
-                console.log('logged-in');
+                console.log('New login: ' + username);
                 done(null, {username: username, id: result.id})
             })
             .catch(e => {
-                console.log('not-logged-in');
+                console.log('Login failed: ' + username);
                 done(null, false)
             })
     }
@@ -55,18 +56,11 @@ passport.deserializeUser(function (user, done) {
     done(null, user);
 });
 app.use(session({secret: "user"}));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/login',
-    passport.authenticate('local'),
-    function (req, res) {
-        // If this function gets called, authentication was successful.
-        // `req.user` contains the authenticated user.
-        //res.redirect('/users/' + req.user.username);
-        console.log('Authenticated!!')
-    });
+app.post('/login', passport.authenticate('local'));
 
 app.get('/checkauth', (req, res, next) => {
     if (req.user !== undefined && req.user.id === req.id)
