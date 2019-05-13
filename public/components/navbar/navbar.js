@@ -25,25 +25,35 @@ $(function () {
             profile_button.attr('aria-controls', 'register-login-ribbon')
         }
 
+        // Replace salute user
+        if (session.isLoggedIn()) {
+            $('#profile-ribbon #username').html(session.get().user.username)
+
+        }
+
         // Bind login functionality
         $("#register-login-form").submit(function(evt){
-            evt.preventDefault()
+            evt.preventDefault();
             // Fields
             let inputs = $(this).find('input');
             let form = {};
             inputs.each(function () {
                 form[this.name] = this.value;
             });
-
-            // Perform login
-            api.post.login(form.username, form.password)
+            session.login(form.username, form.password)
                 .then(result => {
-                    console.log(result)
+                    // Refresh page
+                    location.reload();
                 })
                 .catch(e => {
-                    console.log(e)
+                    alert('Wrong username or password')
                 })
         });
+
+        $('.logout').click(() => {
+            session.logout();
+            $(location).attr('href', '/logout');
+        })
 
     });
 });

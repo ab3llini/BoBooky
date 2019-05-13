@@ -18,6 +18,8 @@ var jsyaml = require('js-yaml');
 var serverPort = 80;
 var db = require('./other/db/Database.js');
 
+var writer = require('./other/utils/writer');
+
 passport.use(new Strategy(
     function (username, password, done) {
 
@@ -60,7 +62,14 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/login', passport.authenticate('local'));
+app.post('/login', passport.authenticate('local'), (req, res) => {
+    writer.writeJson(res, {user : req.user})
+});
+
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
 
 app.get('/checkauth', (req, res, next) => {
     if (req.user !== undefined && req.user.id === req.id)
