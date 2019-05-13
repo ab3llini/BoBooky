@@ -1,4 +1,9 @@
 export let get = {
+    session : () => {
+        return {
+            name : 'Alberto'
+        }
+    },
     books : (offset, limit) => {
         return new Promise((resolve, reject) => {
             $.ajax({
