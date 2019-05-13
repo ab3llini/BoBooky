@@ -38,8 +38,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile/account" data-toggle="collapse" data-target="#profile-ribbon"
-                           aria-controls="profile-ribbon" aria-expanded="false">
+                        <a class="nav-link" id="profile-button" data-toggle="collapse" data-target="" aria-controls=""
+                           aria-expanded="false">
                             <span class="fa font-weight-bold text-white fa-user"></span>
                         </a>
                     </li>
@@ -72,17 +72,15 @@
                             <h2 class="text-white">
                                 <span class="font-weight-bold">login</span>
                             </h2>
-                            <form class="form-white form-placeholder-white">
+                            <form class="form-white form-placeholder-white" id="register-login-form">
                                 <div class="form-row">
                                     <div class="col-12 col-md">
-                                        <input type="text" class="form-control" id="username"
-                                               placeholder="username"
-                                               required>
+                                        <input type="text" class="form-control" name="username"
+                                               placeholder="username">
                                     </div>
                                     <div class="col-12 col-md">
-                                        <input type="password" class="form-control" id="password"
-                                               placeholder="password"
-                                               required>
+                                        <input type="password" class="form-control" name="password"
+                                               placeholder="password">
                                     </div>
                                     <div class="col-12 col-md-auto mt-4 mt-md-0">
                                         <button type="submit"
@@ -144,4 +142,4 @@
         </div>
     </div>
 </div>
-    <!-- END NAVBAR -->
+<!-- END NAVBAR -->

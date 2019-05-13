@@ -23,3 +23,23 @@ export let get = {
         })
     }
 };
+export let post = {
+    login : (username, password) => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/login',
+                type: 'POST',
+                body: {
+                    username: username,
+                    password: password
+                },
+                success: (data) => {
+                    resolve(data)
+                },
+                error: (error) => {
+                    reject(error)
+                }
+            });
+        })
+    }
+}
