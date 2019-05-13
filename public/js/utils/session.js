@@ -5,17 +5,32 @@ export let isLoggedIn = () => {
     return $.cookie('session') !== undefined
 }
 
-export let logIn = (username) => {
+export let login = (username, password) => {
 
-    let val = {
-        username : username
-    };
-    $.cookie('session', JSON.stringify(val));
+    return new Promise((resolve, reject) => {
+        api.post.login(username, password)
+            .then(result => {
+                $.cookie('session', JSON.stringify(result));
+                console.log('Authorized' + JSON.stringify(result))
+                resolve(result)
+            })
+            .catch(e => {
+                console.log('Unauthorized');
+                reject(e)
+            })
+    })
+
 };
 
-export let getSession = () => {
+export let logout = () => {
     if (isLoggedIn()) {
-        return JSON.parse($.cookie('session'));
+        $.removeCookie('session');
+    }
+};
+
+export let get = () => {
+    if (isLoggedIn()) {
+        return JSON.parse($.cookie('session'))
     }
     else {
         return null

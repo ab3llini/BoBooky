@@ -26,13 +26,26 @@ export let get = {
 export let post = {
     login : (username, password) => {
         return new Promise((resolve, reject) => {
+
+            if (username === undefined || username === '') {
+                reject();
+                return;
+            }
+
+            if (password === undefined || password === '') {
+                reject();
+                return;
+            }
+
             $.ajax({
                 url: '/login',
                 type: 'POST',
-                body: {
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({
                     username: username,
                     password: password
-                },
+                }),
                 success: (data) => {
                     resolve(data)
                 },
