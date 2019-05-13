@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>My account</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
@@ -20,14 +20,14 @@
 <div class="section container main text-white">
     <div class="row">
         <div class="col-12 col-lg mt-5">
-            <h1 class="font-weight-bold">About you</h1>
-            <div class="container mt-4">
+            <h2 class="font-weight-bold text-secondary my-5">About you</h2>
+            <div class="container mt-4" style="font-size: 16px;">
                 <div class="row">
                     <div class="col-1 text-center">
                         <i class="fa fa-user mr-1"></i>
                     </div>
                     <div class="col d-flex justify-content-center flex-column">
-                        <span id="name-placeholder">Name Surname</span>
+                        <label id="name-placeholder">Name Surname</label>
                     </div>
                 </div>
                 <div class="row">
@@ -35,26 +35,33 @@
                         <i class="fa fa-at mr-1"></i>
                     </div>
                     <div class="col d-flex justify-content-center flex-column">
-                        <span id="email-placeholder">email</span>
+                        <label id="email-placeholder">Email</label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-1"><i class="fa fa-birthday-cake mr-1"></i>
+                    <div class="col-1 text-center"><i class="fa fa-birthday-cake mr-1"></i>
                     </div>
                     <div class="col d-flex justify-content-center flex-column">
-                        <span id="birthday-placeholder">Birth date</span>
+                        <label id="birthday-placeholder">Birth date</label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-12 col-lg mt-5">
-            <h1 class="font-weight-bold">Your addresses</h1>
+            <h2 class="font-weight-bold text-secondary my-5">Your addresses</h2>
             <div class="container">
-                <div class="card bg-light mb-3 text-dark" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
+                <div class="card bg-dark mb-3 border border-secondary rounded text-white" style="font-size: 16px; max-width: 18rem; border-width: 2px !important;">
+                    <div class="card-header">Name Surname</div>
                     <div class="card-body">
+                        <label class="col-form-label-md" id="addressLine1">Address line 1</label>
+                        <label class="col-form-label-md" id="addressLine2">Address line 2</label>
+                        <label class="col-form-label-md" id="inputPostalCode">Postal Code</label>
+                        <label class="col-form-label-md" id="inputCity">City</label>
+                        <label class="col-form-label-md" id="inputCountry">Country</label>
+                       <!--
                         <p class="card-text" style="font-size: 16px;">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
+                            -->
                     </div>
                 </div>
             </div>

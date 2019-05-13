@@ -16,7 +16,7 @@
       $urls: prepend($urls, url('../../assets/component/home_bg_' + $i + '.svg') + ',')
     }
     @else {
-      $urls: prepend($urls, url('../../assets/component/home_bg_' + $i + '.svg'))
+      $urls: prepend($urls, url('/assets/component/home_bg_' + $i + '.svg'))
     }
   }
   @return $urls;
@@ -71,6 +71,7 @@
   background-color: rgba(0, 15, 55, 0.64);
 }
 
+
 .search-bar .form-control {
   border-right: hidden;
   outline: none !important;
@@ -84,10 +85,12 @@
   box-shadow: none !important;
 }
 
-.form-control:focus {
+.search-bar.form-control:focus {
   box-shadow: white;
   border-color: white;
 }
+
+
 
 .carousel-control.left {
   left: 0;
@@ -97,6 +100,15 @@
   right: 0;
   margin-right: 0;
 }
+
+.carousel-control-prev {
+  margin-left: -10%;
+}
+
+.carousel-control-next {
+  margin-right: -10%;
+}
+
 
 .search-bar .form-control::placeholder {
   color: #d6d6d6;
