@@ -54,5 +54,21 @@ export let post = {
                 }
             });
         })
+    },
+    logout : () => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/logout',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: (data) => {
+                    resolve(data)
+                },
+                error: (error) => {
+                    reject(error)
+                }
+            });
+        })
     }
 }

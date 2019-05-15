@@ -66,13 +66,14 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
     writer.writeJson(res, {user : req.user})
 });
 
-app.get('/logout', function(req, res){
+app.post('/logout', function(req, res, next){
     req.logout();
-    res.redirect('/');
+    console.log('Logging out');
+    writer.writeJson(res, {massage : 'Logout successful'})
 });
 
 app.get('/checkauth', (req, res, next) => {
-    if (req.user !== undefined && req.user.id === req.id)
+    if (req.user !== undefined)
         return next();
 
     return res.status(401).json({

@@ -28,7 +28,6 @@ $(function () {
         // Replace salute user
         if (session.isLoggedIn()) {
             $('#profile-ribbon #username').html(session.get().user.username)
-
         }
 
         // Bind login functionality
@@ -51,8 +50,14 @@ $(function () {
         });
 
         $('.logout').click(() => {
-            session.logout();
-            $(location).attr('href', '/logout');
+            session.logout()
+                .then(result => {
+                    console.log('Logged out')
+                    location.reload()
+                })
+                .catch(e => {
+                    console.log("Unable to logout, reason: " + JSON.stringify(e))
+                })
         })
 
     });
