@@ -1,10 +1,30 @@
-export let get = {
-    session : () => {
-        return {
-            name : 'Alberto'
+let debug = true
+
+let make = {
+    post: (url, data = undefined) => {
+        if (debug) {
+            console.info('New POST request to ' + url + ' with data = ' + JSON.stringify(data))
         }
-    },
-    books : (offset, limit) => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                success: (data) => {
+                    resolve(data)
+                },
+                error: (error) => {
+                    reject(error)
+                }
+            });
+        })
+    }
+};
+
+export let get = {
+    books: (offset, limit) => {
         return new Promise((resolve, reject) => {
             $.ajax({
                 url: '/api/book',
@@ -24,51 +44,17 @@ export let get = {
     }
 };
 export let post = {
-    login : (username, password) => {
-        return new Promise((resolve, reject) => {
-
-            if (username === undefined || username === '') {
-                reject();
-                return;
-            }
-
-            if (password === undefined || password === '') {
-                reject();
-                return;
-            }
-
-            $.ajax({
-                url: '/login',
-                type: 'POST',
-                contentType: 'application/json',
-                dataType: 'json',
-                data: JSON.stringify({
-                    username: username,
-                    password: password
-                }),
-                success: (data) => {
-                    resolve(data)
-                },
-                error: (error) => {
-                    reject(error)
-                }
-            });
+    login: (username, password) => {
+        return make.post('/login', {
+            username: username,
+            password: password
         })
     },
-    logout : () => {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: '/logout',
-                type: 'POST',
-                contentType: 'application/json',
-                dataType: 'json',
-                success: (data) => {
-                    resolve(data)
-                },
-                error: (error) => {
-                    reject(error)
-                }
-            });
-        })
+    logout: () => {
+        return make.post('/logout');
+    },
+    register: (body) => {
+        return make.post('/api/user/register', body)
     }
+
 }

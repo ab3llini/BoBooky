@@ -93,7 +93,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
     app.use(middleware.swaggerMetadata());
 
     // Validate Swagger requests
-    app.use(middleware.swaggerValidator());
+    app.use(middleware.swaggerValidator())
 
     app.use((req, res, next) => {
         middleware.swaggerSecurity({
