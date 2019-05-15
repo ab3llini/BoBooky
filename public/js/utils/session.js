@@ -23,9 +23,17 @@ export let login = (username, password) => {
 };
 
 export let logout = () => {
-    if (isLoggedIn()) {
+    return new Promise((resolve, reject) => {
         $.removeCookie('session');
-    }
+        api.post.logout()
+            .then(result => {
+                resolve(result)
+            })
+            .catch(e => {
+                reject(e)
+            })
+    })
+
 };
 
 export let get = () => {
