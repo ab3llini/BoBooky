@@ -1,5 +1,4 @@
 import * as session from '/js/utils/session.js'
-import * as api from '/js/utils/api.js';
 
 $(function () {
 
