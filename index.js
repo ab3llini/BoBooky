@@ -63,13 +63,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.post('/login', passport.authenticate('local'), (req, res) => {
-    writer.writeJson(res, {user : req.user})
+    writer.writeJson(res, {user: req.user})
 });
 
-app.post('/logout', function(req, res, next){
+app.post('/logout', function (req, res, next) {
     req.logout();
     console.log('Logging out');
-    writer.writeJson(res, {massage : 'Logout successful'})
+    writer.writeJson(res, {massage: 'Logout successful'})
 });
 
 app.get('/checkauth', (req, res, next) => {
@@ -93,20 +93,21 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
     app.use(middleware.swaggerMetadata());
 
     // Validate Swagger requests
-    app.use(middleware.swaggerValidator());
+    app.use(middleware.swaggerValidator())
 
-    app.use(middleware.swaggerSecurity({
-        OAuth2: function (req, authOrSecDef, scopesOrApiKey, callback) {
-            if (!req.user)
-                callback(new Error('You must login'));
-            else
-                callback()
-        }
-    }));
+    app.use((req, res, next) => {
+        middleware.swaggerSecurity({
+            OAuth2: function (req, authOrSecDef, scopesOrApiKey, callback) {
+                if (!req.user) {
+                    writer.writeJson(res, writer.respondWithCode(401, 'Not authorized'))
+                } else
+                    callback()
+            }
+        })(req, res, next)
+    });
 
     // Route validated requests to appropriate controller
     app.use(middleware.swaggerRouter(options));
-
 
     // Serve the Swagger documents and Swagger UI
     app.use(middleware.swaggerUi());

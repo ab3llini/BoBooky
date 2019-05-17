@@ -9,9 +9,8 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/scss/bobooky-theme.css">
-    <link rel="stylesheet" href="/scss/components/navbar.css">
-    <link rel="stylesheet" href="scss/calendar.css">
-
+    <link rel="stylesheet" href="/components/navbar/navbar.css">
+    <link rel="stylesheet" href="/profile/register/scss/calendar.css">
 
 </head>
 
@@ -21,59 +20,62 @@
 <div class="section container main text-white">
     <div class="row" id="registration-form">
         <div class="col-12 mt-5">
-            <h2 class="font-weight-bold text-warning mt-5">Welcome!</h2>
-            <!--border border-warning rounded-->
-            <div class="container mt-4" style="border-width: 2px !important;">
-                <form class="needs-validation" novalidate>
+            <h2 class="font-weight-bold text-warning ml-3 mt-5 mb-4">Welcome!</h2>
+            <div class="container" style="border-width: 2px !important;">
+                <form class="needs-validation form-yellow" id="register-form" novalidate>
                     <div class="form-row">
                         <div class="form-group col-12 col-md-5 mr-4">
                             <label class="col-form-label-md" for="inputName">Name</label>
-                            <input type="text" class="form-control bobooky text-warning" id="inputName" placeholder=" " required>
+                            <input type="text" class="form-control bobooky text-warning" name="name" id="inputName" placeholder=" "
+                                   required>
                             <div class="invalid-feedback">
                                 Please insert a valid name.
                             </div>
                         </div>
+
                             <div class="form-group col-12 col-md-5">
-                                <label class="col-form-label-md" for="inputSurname">Surname</label>
-                                <input type="text" class="form-control bobooky text-warning" id="inputSurname" placeholder=" " required>
-                                <div class="invalid-feedback">
-                                    Please insert a valid surname.
-                                </div>
-                            </div>
-
-                            <!-- old calendar
-                            <div class="form-group col-12 col-sm-6">
-                                <label class="col-form-label-md" for="inputBirthDate">Birth date</label>
-                                <input type="date" class="col-6 form-control bobooky text-warning" id="inputBirthDate" placeholder="Birth date" required>
-                            -->
-
-                            <div class="dates form-group col-12 col-md-5">
-                                <label class="col-form-label-md" for="usr1">Birth date</label>
-                                <input type="text" class="form-control bobooky text-warning" id="usr1" name="event_date" placeholder="yyyy-mm-dd" autocomplete="off" required >
-                            </div>
+                            <label class="col-form-label-md" for="inputSurname">Surname</label>
+                            <input type="text" class="form-control bobooky text-warning" name="surname" id="inputSurname"
+                                   placeholder=" " required>
                             <div class="invalid-feedback">
-                                Please choose a valid date.
+                                Please insert a valid surname.
                             </div>
                         </div>
-                </form>
-                </div>
-            <h2 class="font-weight-bold mt-5 mb-4 text-warning">Which is your...</h2>
-            <div class="container mt-4" style="border-width: 2px !important;">
-                <form class="needs-validation" novalidate>
+
+                        <!-- old calendar
+                        <div class="form-group col-12 col-sm-6">
+                            <label class="col-form-label-md" for="inputBirthDate">Birth date</label>
+                            <input type="date" class="col-6 form-control bobooky text-warning" id="inputBirthDate" placeholder="Birth date" required>
+                        -->
+
+                        <div class="dates form-group col-12 col-md-5 mt-md-3">
+                            <label class="col-form-label-md" for="usr1">Birth date</label>
+                            <input type="text" class="form-control bobooky text-warning" name="birthdate" id="usr1" name="event_date"
+                                   placeholder="dd-mm-yyyy" autocomplete="off" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a valid date.
+                        </div>
+                    </div>
+
+                    <h2 class="font-weight-bold mt-5 mb-4 text-warning">Which is your...</h2>
                     <div class="form-row">
                         <div class="form-group col-12 col-md-5">
                             <label class="col-form-label-md" for="inputEmail">Email</label>
-                            <input type="email" class="form-control bobooky text-warning" id="inputEmail" placeholder=" " required>
+                            <input type="email" class="form-control bobooky text-warning" name="email" id="inputEmail"
+                                   placeholder=" "
+                                   required>
                             <div class="invalid-feedback">
                                 Please insert a valid email.
                             </div>
                         </div>
 
                     </div>
-                    <div class="form-row">
+                    <div class="form-row mt-md-3">
                         <div class="form-group col-12 col-md-5 mr-4">
                             <label class="col-form-label-md" for="inputPassword">Password</label>
-                            <input type="password" class="form-control bobooky text-warning" id="inputPassword" placeholder="********" required>
+                            <input type="password" class="form-control bobooky text-warning" name="password" id="inputPassword"
+                                   placeholder="********" required>
                             <small id="passwordHelpBlock" class="form-text text-muted">
                                 Your password must be 8-20 characters long
                             </small>
@@ -82,36 +84,39 @@
                             </div>
                         </div>
                         <div class="form-group col-12 col-md-5">
-                            <label class="col-form-label-md" for="inputPasswordRepeated">Can you repeat it, please?</label>
-                            <input type="password" class="form-control bobooky text-warning" id="inputPasswordRepeated" placeholder="********" required>
+                            <label class="col-form-label-md" for="inputPasswordRepeated">Can you repeat it,
+                                please?</label>
+                            <input type="password" class="form-control bobooky text-warning" id="inputPasswordRepeated"
+                                   placeholder="********" required>
                             <div class="invalid-feedback">
                                 Please repeat the password.
                             </div>
 
-                            <div class="container mb-3">
-                                <button type="submit" class="btn btn-warning font-weight-bold rounded-pill my-5 float-right">Submit</button>
+                            <div class="container pr-0 my-3">
+                                <button type="submit"
+                                        class="btn btn-warning font-weight-bold rounded-pill my-5 float-right">Submit
+                                </button>
                             </div>
                         </div>
 
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
-
 
 </div>
 
 <script src="/jquery/dist/jquery.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.js"></script>
-<script src="/js/components/navbar.js"></script>
+<script src="/components/navbar/navbar.js" type="module"></script>
 <script src="/js/index/index.js" type="module"></script>
 <script src="/js/components/carousel.js" type="module"></script>
+<script src="register.js" type="module"></script>
+<script src="calendar.js" type="module"></script>
 
-<!-- calendar -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="/js/register/register.js"></script>
-
+<!--
 <script>
     'use strict';
     $(() => {
@@ -128,15 +133,16 @@
     })
 </script>
 
-<!-- calendar -->
+
 <script>
-    $(function() {
+    $(function () {
         $('.dates #usr1').datepicker({
-            'format': 'yyyy-mm-dd',
+            'format': 'dd-mm-yyyy',
             'autoclose': true
         });
     });
 </script>
+-->
 
 </body>
 </html>
