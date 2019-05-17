@@ -17,25 +17,34 @@
   }
 }
 
-.search-bar .form-control, .search-bar .btn {
-  background-color: rgba(0, 15, 55, 0.64);
+.search-bar .form-control, .search-bar .btn.round {
+  background-color: rgba(0, 15, 55, 0.4);
 }
 
 .search-bar .form-control {
-  border-right: hidden;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.search-bar .btn {
   border: 1px solid #f8f9fa;
-  border-left: hidden;
+  outline: none !important;
+  box-shadow: none !important;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+
+.search-bar .btn.round {
+  border: 1px solid #f8f9fa;
+  outline: none !important;
+  box-shadow: none !important;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.search-bar .btn.round:active {
+  background: rgba(142, 142, 142, 0.5);
+  border: 1px solid #f8f9fa;
   outline: none !important;
   box-shadow: none !important;
 }
 
-.search-bar.form-control:focus {
-  box-shadow: white;
+.search-bar .form-control:focus-within {
   border-color: white;
 }
 
@@ -50,10 +59,12 @@
 }
 
 .carousel-control-prev {
+  filter: invert(100%);
   margin-left: -10%;
 }
 
 .carousel-control-next {
+  filter: invert(100%);
   margin-right: -10%;
 }
 
