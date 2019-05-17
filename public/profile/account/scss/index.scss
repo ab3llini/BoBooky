@@ -1,5 +1,14 @@
 @import "../../../scss/booboky-colors.scss";
 
+/*
+//background trial
+.mailbox {
+  //background-image: url("/assets/images/account_mailbox.svg");
+  background-position: bottom left;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 30vw;
+} */
 
 .main {
   font-size: 18pt;
@@ -7,6 +16,14 @@
 
 .navbar {
   background: $bobooky-dark;
+}
+
+.address-card {
+  border-radius: 24px;
+}
+
+.address-card:hover {
+  border-color: white;
 }
 
 .profile-header-placeholder {
