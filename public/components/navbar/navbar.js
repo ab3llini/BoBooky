@@ -2,6 +2,7 @@ import * as session from '/js/utils/session.js'
 
 $(function () {
 
+
     // Inject navbar
     $(".nav-placeholder").load("/components/navbar/navbar.html", function() {
         // Toggle bg color on scroll

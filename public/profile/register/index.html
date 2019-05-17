@@ -51,7 +51,7 @@
                         <div class="dates form-group col-12 col-md-5 mt-md-3">
                             <label class="col-form-label-md" for="usr1">Birth date</label>
                             <input type="text" class="form-control bobooky text-warning" name="birthdate" id="usr1" name="event_date"
-                                   placeholder="dd-mm-yyyy" autocomplete="off" required>
+                                   placeholder="yyyy-mm-dd" autocomplete="off" required>
                         </div>
                         <div class="invalid-feedback">
                             Please choose a valid date.
@@ -107,6 +107,44 @@
     </div>
 
 </div>
+<!-- Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Oops..</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Something went wrong!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Welcome!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                You have successfully registered!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="/jquery/dist/jquery.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.js"></script>
@@ -116,9 +154,10 @@
 <script src="register.js" type="module"></script>
 <script src="calendar.js" type="module"></script>
 
-<!--
+
 <script>
     'use strict';
+    /*
     $(() => {
         let forms = $('.needs-validation');
         forms.each((idx, form) => {
@@ -131,18 +170,17 @@
             }, false)
         });
     })
-</script>
 
-
-<script>
     $(function () {
         $('.dates #usr1').datepicker({
-            'format': 'dd-mm-yyyy',
+            'format': 'yyyy-mm-dd',
             'autoclose': true
         });
     });
+
+     */
 </script>
--->
+
 
 </body>
 </html>

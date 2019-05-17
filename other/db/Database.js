@@ -209,7 +209,7 @@ module.exports.bookGenreGET = () => {
 module.exports.bookReviewPOST = (id,userID,body) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.addBookReview(userID, id, body))
-            .then(resolve())
+            .then(() => resolve())
             .catch(error => {
                 console.log(error);
                 reject()
@@ -221,7 +221,7 @@ module.exports.bookReviewDELETE = (id,reviewID,userID) => {
     //TODO: need also the user
     return new Promise((resolve, reject) => {
         pipe.query(make.deleteReview(id,reviewID,userID))
-            .then(resolve())
+            .then(() => resolve())
             .catch(error => {
                 console.log(error);
                 reject()
@@ -294,7 +294,7 @@ module.exports.authorIdReviewGET = (id) => {
 module.exports.authorIdReviewPOST = (id,userID,body) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.addAuthorReview(id, userID, body))
-            .then(resolve())
+            .then(() => resolve())
             .catch(error => {
                 console.log(error);
                 reject()
@@ -305,7 +305,7 @@ module.exports.authorIdReviewPOST = (id,userID,body) => {
 module.exports.authorIdReviewDELETE = (id,reviewID,userID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.deleteAuthorReview(id,reviewID,userID))
-            .then(resolve())
+            .then(() => resolve())
             .catch(error => {
                 console.log(error);
                 reject()
@@ -320,7 +320,7 @@ module.exports.authorIdReviewDELETE = (id,reviewID,userID) => {
 module.exports.userRegisterPOST = (body) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.registerUser(body))
-            .then(resolve())
+            .then(() => resolve())
             .catch(error => {
                 console.log(error);
                 reject()
@@ -413,7 +413,7 @@ module.exports.userAddressPOST = (userID, address) => {
         pipe.query(make.addAddressForUser(address))
             .then((id) => {
                 pipe.query(make.bindUserAddress(userID, id.rows[0].id))
-                    .then(resolve())
+                    .then(() => resolve())
                     .catch(error => {
                         console.log(error);
                         reject()
@@ -458,7 +458,7 @@ module.exports.userAddressGET = (userID) => {
 module.exports.userAddressPUT = (userID, address) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.updateAddressForUser(userID, address))
-            .then(resolve())
+            .then(() => resolve())
             .catch(error => {
                 console.log(error);
                 reject()
@@ -472,14 +472,14 @@ module.exports.userChartPUT = (userID, book_info) => {
             .then(books => {
                 if (books.rowCount === 0)
                    pipe.query(make.addBookToUserChart(userID, book_info))
-                       .then(resolve())
+                       .then(() => resolve())
                        .catch(error => {
                            console.log(error);
                            reject()
                        });
                 else
                     pipe.query(make.updateUserChart(userID, book_info))
-                        .then(resolve())
+                        .then(() => resolve())
                         .catch(error => {
                             console.log(error);
                             reject()
@@ -495,7 +495,7 @@ module.exports.userChartPUT = (userID, book_info) => {
 module.exports.userChartDELETE = (userID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.deleteChart(userID))
-            .then(resolve())
+            .then(() => resolve())
             .catch(error => {
                 console.log(error);
                 reject()
@@ -545,7 +545,7 @@ module.exports.userChartGET = (userID) => {
 module.exports.userWhishlistPOST = (userID, bookID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.addBookToUserWishList(userID, bookID))
-            .then(resolve())
+            .then(() => resolve())
             .catch(error => {
                 console.log(error);
                 reject()
@@ -567,7 +567,7 @@ module.exports.userWhishlistGET = (userID) => {
 module.exports.userWhishlistDELETE = (userID, bookID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.deleteBookFromUserWishList(userID, bookID))
-            .then(resolve())
+            .then(() => resolve())
             .catch(error => {
                 console.log(error);
                 reject()

@@ -123,10 +123,10 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
   var body = req.swagger.params['body'].value;
   User.userRegisterPOST(body)
     .then(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, utils.respondWithCode(200, 'registration successful'));
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, utils.respondWithCode(401, 'unable to register user'));
     });
 };
 
