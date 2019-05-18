@@ -3,6 +3,22 @@ import * as session from '/js/utils/session.js';
 
 $(() => {
 
+    let forms = $('.needs-validation');
+    forms.each((idx, form) => {
+        form.addEventListener('submit', (event) => {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated')
+        }, false)
+    });
+
+    $('.dates #usr1').datepicker({
+        'format': 'yyyy-mm-dd',
+        'autoclose': true
+    });
+
     $("#register-form").submit(function(evt) {
         evt.preventDefault();
         // Fields

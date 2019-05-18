@@ -9,9 +9,29 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/scss/bobooky-theme.css">
-    <link rel="stylesheet" href="/scss/components/navbar.css">
-    <link rel="stylesheet" href="/scss/index.css">
-    <link rel="stylesheet" href="/components/profile-header/profile-header.css">
+    <link rel="stylesheet" href="/components/navbar/navbar.css">
+
+    <style>
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control-placeholder {
+            position: absolute;
+            top: 0;
+            transition: all 200ms;
+            opacity: 0.5;
+        }
+
+        .form-control:focus + .form-control-placeholder,
+        .form-control:valid + .form-control-placeholder {
+            font-size: 75%;
+            transform: translate3d(0, -100%, 0);
+            opacity: 1;
+        }
+
+    </style>
 
 </head>
 
@@ -23,62 +43,71 @@
         <div class="col-12 mt-5">
             <h2 class="font-weight-bold text-secondary">New Address</h2>
             <div class="container mt-4 border border-secondary rounded" style="border-width: 2px !important;">
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation form-secondary" novalidate>
                     <div class="container p-3">
                         <div class="form-row justify-content-end">
-                        <img class="py-4" src="../../assets/icon/stamp.svg" alt="stamp">
+                            <img class="py-4" src="/assets/icon/stamp.svg" alt="stamp">
                         </div>
-                    <div class="form-row">
-                        <div class="form-group col-12 col-md-5 mr-auto">
-                            <label class="col-form-label-md" for="inputName">Name</label>
-                            <input type="text" class="form-control bobooky text-secondary" id="inputName" placeholder=" " required>
-                            <div class="invalid-feedback">
-                                Name cannot be empty.
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-5 mr-auto">
+                                <input type="text" class="form-control bobooky text-secondary" id="inputName" required>
+                                <label class="col-form-label-md form-control-placeholder" for="inputName">Name</label>
+                                <div class="invalid-feedback">
+                                    Name cannot be empty.
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-md-5">
+                                <label class="col-form-label-md" for="inputSurname">Surname</label>
+                                <input type="text" class="bobooky form-control text-secondary" id="inputSurname"
+                                       placeholder=" " required>
+                                <div class="invalid-feedback">
+                                    Surname cannot be empty.
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group col-12 col-md-5">
-                            <label class="col-form-label-md" for="inputSurname">Surname</label>
-                            <input type="text" class="bobooky form-control text-secondary" id="inputSurname" placeholder=" " required>
-                            <div class="invalid-feedback">
-                                Surname cannot be empty.
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <label class="col-form-label-md" for="addressLine1">Address</label>
+                                <input type="text" class="bobooky form-control text-secondary" id="addressLine1"
+                                       placeholder="Street and number" required>
+                                <div class="invalid-feedback">
+                                    Address cannot be empty
+                                </div>
+                                <input type="text" class="bobooky form-control text-secondary mt-2" id="addressLine2"
+                                       placeholder="More details (optional)">
                             </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-12">
-                            <label class="col-form-label-md" for="addressLine1">Address</label>
-                            <input type="text" class="bobooky form-control text-secondary" id="addressLine1" placeholder="Street and number" required>
-                            <div class="invalid-feedback">
-                                Address cannot be empty
+                        <div class="form-row">
+                            <div class="form-group col-12 col-sm-4">
+                                <label class="col-form-label-md" for="inputPostalCode">Postal Code</label>
+                                <input type="number" class="bobooky form-control text-secondary" id="inputPostalCode"
+                                       placeholder="20121" required>
+                                <div class="invalid-feedback">
+                                    Please insert a valid postal code.
+                                </div>
                             </div>
-                            <input type="text" class="bobooky form-control text-secondary mt-2" id="addressLine2" placeholder="More details (optional)">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-12 col-sm-4">
-                            <label class="col-form-label-md" for="inputPostalCode">Postal Code</label>
-                            <input type="number" class="bobooky form-control text-secondary" id="inputPostalCode" placeholder="20121" required>
-                            <div class="invalid-feedback">
-                                Please insert a valid postal code.
+                            <div class="form-group col-12 col-sm-4">
+                                <label class="col-form-label-md" for="inputCity">City</label>
+                                <input type="text" class="bobooky form-control text-secondary" id="inputCity"
+                                       placeholder="Milan" required>
+                                <div class="invalid-feedback">
+                                    City cannot be empty.
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-12 col-sm-4">
-                            <label class="col-form-label-md" for="inputCity">City</label>
-                            <input type="text" class="bobooky form-control text-secondary" id="inputCity" placeholder="Milan" required>
-                            <div class="invalid-feedback">
-                                City cannot be empty.
+                            <div class="form-group col-12 col-sm-4">
+                                <label class="col-form-label-md" for="inputCountry">Country</label>
+                                <input type="text" class="bobooky form-control text-secondary" id="inputCountry"
+                                       placeholder="Italy" required>
+                                <div class="invalid-feedback">
+                                    Country cannot be empty.
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-12 col-sm-4">
-                            <label class="col-form-label-md" for="inputCountry">Country</label>
-                            <input type="text" class="bobooky form-control text-secondary" id="inputCountry" placeholder="Italy" required>
-                            <div class="invalid-feedback">
-                                Country cannot be empty.
+                            <div class="container mb-3">
+                                <button type="submit"
+                                        class="btn btn-secondary text-dark font-weight-bold rounded-pill mt-5 float-right">
+                                    Save
+                                </button>
                             </div>
-                        </div>
-                        <div class="container mb-3">
-                            <button type="submit" class="btn btn-secondary text-dark font-weight-bold rounded-pill mt-5 float-right">Save</button>
-                        </div>
 
                         </div>
                     </div>
@@ -88,14 +117,11 @@
     </div>
 
 
-
 </div>
 
 <script src="/jquery/dist/jquery.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.js"></script>
-<script src="/js/components/navbar.js"></script>
-<script src="/js/index/index.js" type="module"></script>
-<script src="/js/components/carousel.js" type="module"></script>
+<script src="/components/navbar/navbar.js" type="module"></script>
 
 <script>
     'use strict';
