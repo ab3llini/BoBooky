@@ -1,12 +1,16 @@
-/*
-//background trial
 .mailbox {
-  //background-image: url("/assets/images/account_mailbox.svg");
-  background-position: bottom left;
+  background-image: url("/assets/images/account_mailbox.svg");
+  background-position: 10% bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  height: 30vw;
-} */
+  background-size: 40vh;
+}
+
+@media (max-width: 576px) {
+  .mailbox {
+    background-image: none;
+  }
+}
 .main {
   font-size: 18pt;
 }
