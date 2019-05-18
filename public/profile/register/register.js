@@ -2,18 +2,6 @@ import * as api from '/js/utils/api.js';
 import * as session from '/js/utils/session.js';
 
 $(() => {
-
-    let forms = $('.needs-validation');
-    forms.each((idx, form) => {
-        form.addEventListener('submit', (event) => {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated')
-        }, false)
-    });
-
     $('.dates #usr1').datepicker({
         'format': 'yyyy-mm-dd',
         'autoclose': true
@@ -21,7 +9,26 @@ $(() => {
 
     $("#register-form").submit(function(evt) {
         evt.preventDefault();
-        // Fields
+
+        let form = $('.needs-validation')[0];
+        if (form.checkValidity() === false) {
+            evt.preventDefault();
+            evt.stopPropagation();
+            form.classList.add('was-validated');
+            return
+        }
+        let pwd = $(this).find('#inputPassword').val();
+        let pwd_2 = $(this).find('#inputPasswordRepeated').val();
+        form.classList.add('was-validated');
+        if (pwd.length < 8) {
+            alert('Password mus be at least 8 character long')
+            return
+        }
+        if (pwd !== pwd_2) {
+            alert('Password are not the same');
+            return;
+        }
+
         let inputs = $(this).find('input');
         let body = {};
         inputs.each(function () {
