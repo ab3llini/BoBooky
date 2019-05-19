@@ -24,7 +24,10 @@ export let login = (username, password) => {
 
 export let logout = () => {
     return new Promise((resolve, reject) => {
-        $.removeCookie('session');
+
+
+        console.log($.removeCookie('session',{ path: '/' }))
+
         api.post.logout()
             .then(result => {
                 resolve(result)

@@ -12,8 +12,8 @@ let make = {
                 contentType: 'application/json',
                 dataType: 'json',
                 data: JSON.stringify(data),
-                success: (data) => {
-                    resolve(data)
+                success: (result) => {
+                    resolve(result)
                 },
                 error: (error) => {
                     reject(error)
@@ -55,6 +55,10 @@ export let post = {
     },
     register: (body) => {
         return make.post('/api/user/register', body)
+    },
+    user : {
+        address : (body) => {
+            return make.post('/api/user/0/address', body)
+        }
     }
-
 }

@@ -31,10 +31,10 @@ module.exports.userAddressPOST = function userAddressPOST (req, res, next) {
   var body = req.swagger.params['body'].value;
   User.userAddressPOST(id,body)
     .then(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, utils.respondWithCode(200, {massage: 'Address successfully added.'}));
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, utils.respondWithCode(500, {massage: 'Something went wrong.'}));
     });
 };
 
@@ -123,10 +123,10 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
   var body = req.swagger.params['body'].value;
   User.userRegisterPOST(body)
     .then(function (response) {
-      utils.writeJson(res, utils.respondWithCode(200, 'registration successful'));
+      utils.writeJson(res, utils.respondWithCode(200, {massage: 'Registration successful'}));
     })
     .catch(function (response) {
-      utils.writeJson(res, utils.respondWithCode(401, 'unable to register user'));
+      utils.writeJson(res, utils.respondWithCode(401, {massage: 'Unable to register user'}));
     });
 };
 

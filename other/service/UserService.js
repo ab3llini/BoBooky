@@ -34,7 +34,7 @@ exports.userAddressGET = function(id) {
  * no response value expected for this operation
  **/
 exports.userAddressPOST = function(id, body) {
-    return db.execute(db.userAddressPOST(id, body))
+    return db.execute(db.userAddressPOST, [id, body])
 };
 
 

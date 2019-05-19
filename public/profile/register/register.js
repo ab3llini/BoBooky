@@ -1,5 +1,8 @@
+import * as modal from '/components/modal/modal.js'
 import * as api from '/js/utils/api.js';
 import * as session from '/js/utils/session.js';
+import * as sanitizer from '/js/utils/sanitizer.js';
+
 
 $(() => {
     $('.dates #usr1').datepicker({
@@ -7,52 +10,45 @@ $(() => {
         'autoclose': true
     });
 
-    $("#register-form").submit(function(evt) {
+    modal.inject(modal.type.alert, 'ui');
+
+
+    $("#register-form").submit(function (evt) {
         evt.preventDefault();
 
-        let form = $('.needs-validation')[0];
-        if (form.checkValidity() === false) {
-            evt.preventDefault();
-            evt.stopPropagation();
-            form.classList.add('was-validated');
-            return
-        }
+        sanitizer.locate(this);
+
         let pwd = $(this).find('#inputPassword').val();
         let pwd_2 = $(this).find('#inputPasswordRepeated').val();
-        form.classList.add('was-validated');
+        $(this)[0].classList.add('was-validated');
         if (pwd.length < 8) {
-            alert('Password mus be at least 8 character long')
+            modal.show('Warning', 'Password must be at least 8 character long')
             return
         }
         if (pwd !== pwd_2) {
-            alert('Password are not the same');
+            modal.show('Warning', 'Password are not the same');
             return;
         }
 
-        let inputs = $(this).find('input');
-        let body = {};
-        inputs.each(function () {
-            if($(this).attr('name'))
-                body[this.name] = this.value;
-        });
-
-        // API Call
-        api.post.register(body)
-            .then(result => {
-                let m = $('#successModal');
-                m.modal();
-                m.on('hidden.bs.modal', function (e) {
-                    session.login(body['email'], body['password'])
-                        .then(result => {
-                            $(window.location).attr('href', '/');
-                        })
-                        .catch(e => {
-                            $('#errorModal').modal();
+        if (sanitizer.validate()) {
+            sanitizer.sanitize();
+            let ctx = sanitizer.getContext();
+            api.post.register(ctx)
+                .then(result => {
+                    modal.show('Welcome!', 'You have successfully registered')
+                        .on('hidden.bs.modal', function (e) {
+                            session.login(ctx['email'], ctx['password'])
+                                .then(result => {
+                                    $(window.location).attr('href', '/');
+                                })
+                                .catch(e => {
+                                    modal.error(e)
+                                })
                         })
                 })
-            })
-            .catch(e => {
-                $('#errorModal').modal();
-            })
+                .catch(e => {
+                    modal.error(e)
+                })
+        }
     })
 })

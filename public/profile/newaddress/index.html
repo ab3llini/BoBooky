@@ -14,7 +14,7 @@
     <style>
         .form-group {
             position: relative;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .form-control-placeholder {
@@ -43,23 +43,28 @@
         <div class="col-12 mt-5">
             <h2 class="font-weight-bold text-secondary">New Address</h2>
             <div class="container mt-4 border border-secondary rounded" style="border-width: 2px !important;">
-                <form class="needs-validation form-secondary" novalidate>
+                <form class="needs-validation form-secondary" id="new-address" novalidate>
                     <div class="container p-3">
                         <div class="form-row justify-content-end">
-                        <img class="py-4" src="/assets/images/stamp.svg" alt="stamp">
+                            <img class="py-4" src="/assets/images/stamp.svg" alt="stamp">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 col-md-5 mr-auto">
-                                <input type="text" class="form-control bobooky text-secondary" id="inputName" required>
-                                <label class="col-form-label-md form-control-placeholder" for="inputName">Name</label>
+                                <input type="text" name="name" class="form-control bobooky text-secondary"
+                                       id="inputName" required>
+                                <label class="col-form-label-md form-control-placeholder form-control-placeholder"
+                                       for="inputName">Name</label>
                                 <div class="invalid-feedback">
                                     Name cannot be empty.
                                 </div>
                             </div>
                             <div class="form-group col-12 col-md-5">
-                                <label class="col-form-label-md" for="inputSurname">Surname</label>
-                                <input type="text" class="bobooky form-control text-secondary" id="inputSurname"
+                                <input type="text" name="surname" class="bobooky form-control text-secondary"
+                                       id="inputSurname"
                                        placeholder=" " required>
+                                <label class="col-form-label-md form-control-placeholder"
+                                       for="inputSurname">Surname</label>
+
                                 <div class="invalid-feedback">
                                     Surname cannot be empty.
                                 </div>
@@ -67,37 +72,51 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12">
-                                <label class="col-form-label-md" for="addressLine1">Address</label>
-                                <input type="text" class="bobooky form-control text-secondary" id="addressLine1"
-                                       placeholder="Street and number" required>
-                                <div class="invalid-feedback">
-                                    Address cannot be empty
-                                </div>
-                                <input type="text" class="bobooky form-control text-secondary mt-2" id="addressLine2"
-                                       placeholder="More details (optional)">
+                                <input type="text" name="address_line_1" class="bobooky form-control text-secondary"
+                                       id="addressLine1"
+                                       required>
+                                <label class="col-form-label-md form-control-placeholder"
+                                       for="addressLine1">Address</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <input type="text" name="address_line_2" class="bobooky form-control text-secondary"
+                                       id="addressLine2"
+                                       required>
+                                <label class="col-form-label-md form-control-placeholder"
+                                       for="addressLine2">Additional details</label>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 col-sm-4">
-                                <label class="col-form-label-md" for="inputPostalCode">Postal Code</label>
-                                <input type="number" class="bobooky form-control text-secondary" id="inputPostalCode"
-                                       placeholder="20121" required>
+                                <input type="number" name="cap" class="bobooky form-control text-secondary"
+                                       id="inputPostalCode"
+                                       required>
+                                <label class="col-form-label-md form-control-placeholder" for="inputPostalCode">Postal
+                                    Code</label>
+
                                 <div class="invalid-feedback">
                                     Please insert a valid postal code.
                                 </div>
                             </div>
                             <div class="form-group col-12 col-sm-4">
-                                <label class="col-form-label-md" for="inputCity">City</label>
-                                <input type="text" class="bobooky form-control text-secondary" id="inputCity"
-                                       placeholder="Milan" required>
+                                <input type="text" name="city" class="bobooky form-control text-secondary"
+                                       id="inputCity"
+                                       required>
+                                <label class="col-form-label-md form-control-placeholder" for="inputCity">City</label>
+
                                 <div class="invalid-feedback">
                                     City cannot be empty.
                                 </div>
                             </div>
                             <div class="form-group col-12 col-sm-4">
-                                <label class="col-form-label-md" for="inputCountry">Country</label>
-                                <input type="text" class="bobooky form-control text-secondary" id="inputCountry"
-                                       placeholder="Italy" required>
+                                <input type="text" name="country" class="bobooky form-control text-secondary"
+                                       id="inputCountry"
+                                       required>
+                                <label class="col-form-label-md form-control-placeholder"
+                                       for="inputCountry">Country</label>
+
                                 <div class="invalid-feedback">
                                     Country cannot be empty.
                                 </div>
@@ -122,23 +141,7 @@
 <script src="/jquery/dist/jquery.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>
-
-<script>
-    'use strict';
-    $(() => {
-        let forms = $('.needs-validation');
-        forms.each((idx, form) => {
-            form.addEventListener('submit', (event) => {
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated')
-            }, false)
-        });
-    })
-</script>
-
+<script src="newaddress.js" type="module"></script>
 
 </body>
 </html>
