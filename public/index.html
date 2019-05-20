@@ -6,8 +6,12 @@
 
     <title>Starter Template for Bootstrap</title>
 
+    <!--Font temporary experiments -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Paytone+One|Catamaran|Merriweather+Sans:300,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli|Nunito:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Roboto|Open+Sans:400,700,800&display=swap" rel="stylesheet">
     <!-- Bootstrap core CSS -->
-
     <link rel="stylesheet" href="/scss/bobooky-theme.css">
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/components/navbar/navbar.css">
@@ -34,26 +38,28 @@
                     </div>
                 </div>
             </div>
-
         </div>
+    </div>
+    <div class="row align-self-center">
+    <a href="#latest" class="fa fa-chevron-down text-white text-decoration-none"></a>
     </div>
 </div>
 
 <div class="container col-lg-8 col-md-10 text-dark pb-4 pt-5 mt-5">
-    <h3>What's new</h3>
+    <h3 id="latest" class="text-gradient">What's new</h3>
 </div>
 <div class="section d-flex flex-column">
     <div class="container min-vh-25">
         <div class="carousel slide multi-item-carousel mx-3" id="books">
             <div class="carousel-inner row mx-auto">
                 <div class="carousel-item template col-md-3">
-                    <div class="card book bg-info">
-                         <img class="card-img-top"
+                    <div class="card border-0">
+                         <img class="card-img-top pt-0"
                              src="https://images.gr-assets.com/books/1356422925l/13450339.jpg"
                              alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title"></h5>
-                            <p class="card-author"></p>
+                            <h6 class="text-dark card-title"></h6>
+                            <p class="text-dark card-author"></p>
                         </div>
                     </div>
                 </div>
@@ -69,13 +75,12 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row header">
-        <div class="col">
 
-        </div>
-    </div>
+<div class="container col-lg-8 col-md-10 text-dark pb-4 pt-5 mt-5">
+    <h3 class="text-gradient float-right">Some of our favourite books</h3>
 </div>
+
+
 <script src="/jquery/dist/jquery.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>

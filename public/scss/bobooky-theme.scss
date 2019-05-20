@@ -8,12 +8,14 @@ $theme-colors: (
         "orange" : $bobooky-orange,
         "danger" : $bobooky-danger,
         "pink" : $bobooky-pink,
-        "purple" : $bobooky-purple
+        "purple" : $bobooky-purple,
         "yellow" : $bobooky-warning,
         "white" : white
 );
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
+
+::selection { background-color: $yellow; }
 
 .bobooky.form-control:focus {
    border-color: white;
@@ -50,6 +52,27 @@ $theme-colors: (
         color: $color;
     }
 }
+
+//Font temporary experiments
+body {
+    //font-family: 'Muli', sans-serif;
+    //font-family: 'Catamaran', sans-serif;
+    //font-family: 'Lato', sans-serif;
+    //font-family: 'Raleway', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+    h1, h2, h3, h4, h5, h6, .title {
+        font-family: 'Nunito', sans-serif;
+        //font-family: 'Montserrat', sans-serif;
+        //font-family: 'Roboto', sans-serif;
+        //font-family: 'Raleway', sans-serif;
+        //font-family: 'Paytone One', sans-serif;
+        font-weight: bold;
+    }
+}
+
+
+
 
 
 .linear-gradient {

@@ -6,18 +6,28 @@ $component-name: ".multi-item-carousel";
 $ci: ".carousel-item";
 $items: 4;
 
-#{$component-name} .book {
-//height: 50vh;
-//object-position: top;
+#{$component-name} .card-img-top {
+  //width: 100%;
+  @include media-breakpoint-up(md) {
+    height: 18vw;
+  }
+  height: 90vw;
+  object-fit: contain;
+  object-position: 50% 0;
 }
 
-#{$component-name} .book .card-img-top {
-  width: 100%;
-  @include media-breakpoint-up(md) {
-    height: 20rem;
+@media (min-width: 1500px){
+  #{$component-name} .card-img-top {
+   object-fit: cover;
   }
-  height: 50rem;
-  object-fit: contain;
+}
+
+.text-gradient {
+  //text-transform: uppercase;
+  background: linear-gradient(to right, $pink 20%, $red 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
 }
 
 @function gen-active() {
