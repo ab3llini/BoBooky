@@ -1,5 +1,7 @@
 @import "../../../scss/booboky-colors.scss";
-
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins/breakpoints";
 
 //background trial
 .mailbox {
@@ -8,9 +10,8 @@
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 40vh;
-}
-@media (max-width: 576px){
-  .mailbox {
+
+  @include media-breakpoint-down(xs) {
     background-image: none;
   }
 }
@@ -32,5 +33,5 @@
 }
 
 .profile-header-placeholder {
-    margin-top: 55px;
+  margin-top: 55px;
 }

@@ -18,8 +18,10 @@ function getRandomString(length) {
  ***************************/
 module.exports.bookView = (offset, limit) => {
     return {
-        text: `SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img
-            from book_view bw join author a on bw.author = a.id join image i on a.image = i.id offset $1 limit $2`,
+        text: `SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img, b.avg_rating
+            from book_view bw join author a on bw.author = a.id join image i on a.image = i.id
+            join book b on b.id = bw.id
+            offset $1 limit $2`,
         values: [offset, limit]
     }
 };
@@ -35,8 +37,8 @@ module.exports.bookGenres = (book_id) => {
 
 module.exports.bookID = (id) => {
     return {
-        text: `SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img
-            from book_view bw join author a on bw.author = a.id join image i on a.image = i.id
+        text: `SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img, b.avg_rating
+            from book_view bw join author a on bw.author = a.id join image i on a.image = i.id join book b on b.id = bw.id
             where bw.id = $1`,
         values: [id]
     }
@@ -56,7 +58,7 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
                              offset = 0, limit = 20) => {
     //TODO: Fif error when searching by year
     let q = `select distinct b.id, b.title, a.name as author, b.description, p.name as publisher, b.price, b.isbn,
-                b.isbn13, b.publication_year, b.publication_month, i.href as image_href,
+                b.isbn13, b.publication_year, b.publication_month, b.avg_rating, i.href as image_href,
                 i.href_small as image_href_small, b.theme
              from book b
                 join author a on b.author = a.id
@@ -135,7 +137,7 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
 module.exports.relatedBooks = (bookID, offset, limit) => {
     return {
         text: `select distinct b.id, b.title, a.name as author, b.description, p.name as publisher, b.price, b.isbn,
-                    b.isbn13, b.publication_year, b.publication_month, i.href as image_href,
+                    b.isbn13, b.publication_year, b.publication_month, b.avg_rating, i.href as image_href,
                     i.href_small as image_href_small, b.theme
                 from book b
                     join author a on b.author = a.id
@@ -369,7 +371,7 @@ module.exports.getUserOrder = (id, offset, limit) => {
 module.exports.getBooksForOrder = (id) => {
     return {
         text: `select b.id as book_id, b.title, a.name, b.description, p.name as publisher, b.price, b.isbn, b.isbn13, b.publication_year,
-                i.href as image_href, otb.qty
+                b.avg_rating, i.href as image_href, otb.qty
             from "order" o join order_to_book otb on o.id = otb.order_id join book b on otb.book_id = b.id
                 join author a on b.author = a.id join image i on b.image_id = i.id join publisher p on b.publisher = p.id
             where o.id = $1`,
@@ -476,7 +478,7 @@ module.exports.deleteChart = (userID) => {
 module.exports.getChart = (userID) => {
     return {
         text: `select b.id, b.title, a.name as author, b.description, p.name as publisher,
-                b.price, b.isbn, b.publication_year, i.href as image_href, ctb.qty,
+                b.price, b.isbn, b.publication_year, b.avg_rating, i.href as image_href, ctb.qty,
                 u.id as user_id, u.name as user_name, u.surname, u.email, u.birthdate
             from chart_to_book ctb
                 join book b on ctb.book_id = b.id
@@ -508,7 +510,7 @@ module.exports.deleteBookFromUserWishList = (userID, bookID) => {
 module.exports.getWishList = (userID) => {
     return {
         text: `select b.id, b.title, a.name as author, b.description, p.name as publisher,
-                b.price, b.isbn, b.publication_year, i.href as image_href
+                b.price, b.isbn, b.publication_year, b.avg_rating, i.href as image_href
             from user_to_book_wl utbw
                 join book b on utbw.book_id = b.id
                 join author a on b.author = a.id

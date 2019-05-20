@@ -5,12 +5,12 @@
   background-repeat: no-repeat;
   background-size: 40vh;
 }
-
-@media (max-width: 576px) {
+@media (max-width: 575.98px) {
   .mailbox {
     background-image: none;
   }
 }
+
 .main {
   font-size: 18pt;
 }

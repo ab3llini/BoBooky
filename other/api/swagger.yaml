@@ -928,6 +928,8 @@ definitions:
           type: "string"
       theme:
         type: "string"
+      avg_rating:
+        type: "number"
     description: "A book for sale in the store"
     example: "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino\
       \ Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url:\

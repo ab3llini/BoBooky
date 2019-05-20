@@ -387,7 +387,8 @@ module.exports.userOrderGET = (id, offset, limit) => {
                                             isbn: book.isbn,
                                             isbn13: book.isbn13,
                                             publication_year: book.publication_year,
-                                            image_href: book.image_href
+                                            image_href: book.image_href,
+                                            avg_rating: book.avg_rating
                                         }
                                     });
                                     if (j === books.rowCount - 1)
@@ -520,7 +521,8 @@ module.exports.userChartGET = (userID) => {
                             price: ch.price,
                             isbn: ch.isbn,
                             publication_year: ch.publication_year,
-                            image_href: ch.image_href
+                            image_href: ch.image_href,
+                            avg_rating: ch.avg_rating
                         }
                     })
                 });
