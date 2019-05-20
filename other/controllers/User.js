@@ -34,7 +34,7 @@ module.exports.userAddressPOST = function userAddressPOST (req, res, next) {
       utils.writeJson(res, utils.respondWithCode(200, {massage: 'Address successfully added.'}));
     })
     .catch(function (response) {
-      utils.writeJson(res, utils.respondWithCode(500, {massage: 'Something went wrong.'}));
+      utils.writeJson(res, response);
     });
 };
 
