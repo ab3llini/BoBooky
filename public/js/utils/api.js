@@ -1,4 +1,4 @@
-let debug = true
+let debug = true;
 
 let make = {
     post: (url, data = undefined) => {
@@ -12,6 +12,25 @@ let make = {
                 contentType: 'application/json',
                 dataType: 'json',
                 data: JSON.stringify(data),
+                success: (result) => {
+                    resolve(result)
+                },
+                error: (error) => {
+                    reject(error)
+                }
+            });
+        })
+    },
+
+    get: (url, data = undefined) => {
+        if (debug) {
+            console.info('New POST request to ' + url + ' with data = ' + JSON.stringify(data))
+        }
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: data,
                 success: (result) => {
                     resolve(result)
                 },
@@ -41,7 +60,9 @@ export let get = {
                 }
             });
         })
-    }
+    },
+
+    address: () => make.get('/api/user/0/address')
 };
 export let post = {
     login: (username, password) => {
