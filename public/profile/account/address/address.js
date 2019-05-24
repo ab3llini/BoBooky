@@ -1,12 +1,12 @@
-import * as api from '/js/utils/api.js';
+import * as api from '/lib/js/utils/api.js';
 import * as modals from '/components/modal/modal.js'
-import * as loader from '/js/utils/template_loader.js'
+import * as loader from '/lib/js/utils/template_loader.js'
 
 $(() => {
     api.get.address()
         .then(addresses => {
             addresses.forEach(function (address) {
-                loader.append(
+                loader.append_selectors(
                     '#address-container',
                     '/components/address/address.html',
                     address.id,

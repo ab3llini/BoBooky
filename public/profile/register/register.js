@@ -1,7 +1,7 @@
 import * as modal from '/components/modal/modal.js'
-import * as api from '/js/utils/api.js';
-import * as session from '/js/utils/session.js';
-import * as sanitizer from '/js/utils/sanitizer.js';
+import * as api from '/lib/js/utils/api.js';
+import * as session from '/lib/js/utils/session.js';
+import * as sanitizer from '/lib/js/utils/sanitizer.js';
 
 
 $(() => {

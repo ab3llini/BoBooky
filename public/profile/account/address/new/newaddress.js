@@ -1,6 +1,6 @@
 import * as modal from '/components/modal/modal.js'
-import * as api from '/js/utils/api.js';
-import * as sanitizer from '/js/utils/sanitizer.js';
+import * as api from '/lib/js/utils/api.js';
+import * as sanitizer from '/lib/js/utils/sanitizer.js';
 
 //Inject modal container
 modal.inject(modal.type.alert, 'ui');

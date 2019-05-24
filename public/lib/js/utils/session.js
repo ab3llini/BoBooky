@@ -1,5 +1,5 @@
-import * as api from '/js/utils/api.js';
-import '/js/utils/jquery.cookie.js';
+import * as api from '/lib/js/utils/api.js';
+import '/lib/js/utils/jquery.cookie.js';
 
 export let isLoggedIn = () => {
     return $.cookie('session') !== undefined

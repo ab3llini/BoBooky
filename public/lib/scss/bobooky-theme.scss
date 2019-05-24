@@ -1,4 +1,4 @@
-@import "booboky-colors";
+@import "booboky-colors.scss";
 
 $theme-colors: (
         "dark" : $bobooky-dark,
@@ -9,11 +9,11 @@ $theme-colors: (
         "danger" : $bobooky-danger,
         "pink" : $bobooky-pink,
         "purple" : $bobooky-purple,
-        "yellow" : $bobooky-warning,
-        "white" : white
+        "white" : white,
+        "gray" : #737373
 );
 
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
 
 ::selection { background-color: $yellow; }
 
@@ -71,13 +71,13 @@ body {
     }
 }
 
-
-
-
-
 .linear-gradient {
     background: $bobooky-primary; /* Old browsers */
     background: -moz-linear-gradient(left, $bobooky-primary 0%, $bobooky-secondary 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(left, $bobooky-primary 0%,$bobooky-secondary 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to right, $bobooky-primary 0%, $bobooky-secondary 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.rounded-bobooky {
+    border-radius: 2.5rem;
 }

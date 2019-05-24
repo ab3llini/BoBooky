@@ -1,4 +1,4 @@
-import * as session from '/js/utils/session.js'
+import * as session from '/lib/js/utils/session.js'
 
 $(function () {
 

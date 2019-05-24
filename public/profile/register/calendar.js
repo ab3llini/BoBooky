@@ -675,7 +675,7 @@
                 html += '<th class="dow">'+dates[this.o.language].daysMin[(dowCnt++)%7]+'</th>';
             }
             html += '</tr>';
-            this.picker.find('.datepicker-days thead').append(html);
+            this.picker.find('.datepicker-days thead').append_selectors(html);
         },
 
         fillMonths: function(){
@@ -809,7 +809,7 @@
                 }
                 prevMonth.setUTCDate(prevMonth.getUTCDate()+1);
             }
-            this.picker.find('.datepicker-days tbody').empty().append(html.join(''));
+            this.picker.find('.datepicker-days tbody').empty().append_selectors(html.join(''));
 
             var months = this.picker.find('.datepicker-months')
                 .find('th:eq(1)')

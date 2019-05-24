@@ -1,0 +1,36 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+[aria-expanded="false"] > .expanded,
+[aria-expanded="true"] > .collapsed {
+    display: none;
+}
+
+$related-book-section-height: 15rem;
+
+.book-image img {
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+    }
+}
+
+.related-books {
+    height: $related-book-section-height;
+    position: relative;
+}
+
+.related-books > svg {
+    height: 100%;
+    width: calc(100vw - 15rem);
+    position: absolute;
+    margin-left: 15rem;
+}
+
+.book-reviews {
+    margin-top: - $related-book-section-height / 2;
+}
+
+.book-reviews > .container {
+    margin-top: $related-book-section-height / 2 + 5rem;
+}

@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["index.scss","../../../../../scss/booboky-colors.scss"],"names":[],"mappings":"AAGA;EACE;;;AAGF;EACE,YCRc;;;ADWhB;EACI","file":"index.css"}
+{"version":3,"sourceRoot":"","sources":["index.scss","../../../../../lib/scss/booboky-colors.scss"],"names":[],"mappings":"AAGA;EACE;;;AAGF;EACE,YCRc;;;ADWhB;EACI","file":"index.css"}
