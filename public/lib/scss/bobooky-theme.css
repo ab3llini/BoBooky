@@ -10661,13 +10661,24 @@ input.placeholder-gray::placeholder {
   color: #737373;
 }
 
+@font-face {
+  font-family: "Open Sans";
+  src: url(https://fonts.googleapis.com/css?family=Open+Sans&display=swap);
+}
+@font-face {
+  font-family: "Muli";
+  src: url(https://fonts.googleapis.com/css?family=Muli&display=swap);
+}
+@font-face {
+  font-family: "Nunito";
+  src: url(https://fonts.googleapis.com/css?family=Nunito&display=swap);
+}
 body {
   font-family: "Open Sans", sans-serif;
   font-weight: lighter;
 }
 body h1, body h2, body h3, body h4, body h5, body h6, body .title {
   font-family: "Nunito", sans-serif;
-  font-weight: bold;
 }
 
 .linear-gradient {
