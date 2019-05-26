@@ -1,10 +1,6 @@
 import * as api from '/lib/js/utils/api.js';
 import * as loader from '/lib/js/utils/template_loader.js'
 
-let config = {
-    slide_n_books: 4
-};
-
 $(() => {
 
     // Inject
