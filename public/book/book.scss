@@ -7,7 +7,8 @@
     display: none;
 }
 
-$related-book-section-height: 15rem;
+$related-book-section-height: 18rem;
+$related-book-section-margin: 15rem;
 
 .book-image img {
     @include media-breakpoint-down(sm) {
@@ -20,11 +21,16 @@ $related-book-section-height: 15rem;
     position: relative;
 }
 
-.related-books > svg {
+.related-books > svg.head {
     height: 100%;
-    width: calc(100vw - 15rem);
     position: absolute;
-    margin-left: 15rem;
+    margin-left: $related-book-section-margin;
+}
+.related-books > svg.tail {
+    height: 100%;
+    width: calc(100% - #{$related-book-section-margin + $related-book-section-height / 2 - 0.1rem});
+    position: absolute;
+    margin-left: $related-book-section-margin + $related-book-section-height / 2 - 0.1rem;
 }
 
 .book-reviews {
