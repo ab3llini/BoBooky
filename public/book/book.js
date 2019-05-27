@@ -11,7 +11,7 @@ $(() => {
             api.get.books(0, 20).then(books => {
                 books.forEach(book => {
                     loader.append_map('#related-carousel .MS-content', '/components/carousel/items/book.html', book.id, (o) => {
-                        //o.find('.image').css("background-image", "url(" + book.image_href + ")");
+                        o.find('.image').css("background-image", "url(" + book.image_href + ")");
                         o.find('.title').html(book.title)
                     })
                         .then(() => {

@@ -1,6 +1,8 @@
 
 $debug : false;
 
+$carousel-margin: 2rem;
+
 .carousel {
     position: relative;
 }
@@ -9,7 +11,7 @@ $debug : false;
     height: 100%;
     overflow: hidden;
     white-space: nowrap;
-    margin: 0 2rem 0 2rem;
+    margin: 0 $carousel-margin 0 $carousel-margin;
 }
 
 .carousel .MS-content .item {

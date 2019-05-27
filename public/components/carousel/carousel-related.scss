@@ -20,14 +20,5 @@ TO CHANGE STYLES OF ITEM, SEE RELATIVE CSS!
 THIS IS NOT THE PLACE TO CHANGE ITEM STYLES
  */
 
-.carousel .MS-content .item {
 
-    width: 33.3333%;
 
-    @include media-breakpoint-down(sm) {
-        width: 50%;
-    }
-    @include media-breakpoint-down(xs) {
-        width: 100%;
-    }
-}
