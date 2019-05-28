@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/components/navbar/navbar.css">
     <link rel="stylesheet" href="book.css">
-    <link rel="stylesheet" href="/components/carousel/common.css">
+    <link rel="stylesheet" href="/components/animated-heart/animated-heart.css">
+
 
 </head>
 
@@ -28,7 +29,7 @@
 <div class="section mt-5">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-6 d-block d-md-none">
+            <div class="col-12 d-block d-md-none">
                 <div class="book-title">
                     <h1 class="text-dark">Book title</h1>
                 </div>
@@ -52,50 +53,73 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-3">
                 <div class="container mt-4 mt-md-0">
-                    <div class="row">
-                        <div class="col-6 col-md-12 d-flex justify-content-center p-0">
+                    <div class="row px-0">
+                        <div class="col-6 col-md-12 px-0">
                             <div>
-                                <div class="book-image">
+                                <div class="book-image bg-dark w-100">
                                     <img class="rounded" src="https://images.gr-assets.com/books/1459127484l/16793.jpg">
                                 </div>
                                 <div class="container p-0 d-none d-md-block mt-4 text-gray">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <span class="book-publisher">Publisher</span>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="float-right">
+                                    <div class="row mt-2 mt-lg-1">
+                                        <div class="col">
+                                            <div class="font-weight-bold">Publisher</div>
 
-                                                <span class="book-isbn">0451155750</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="float-right">
+                                                <span class="book-publisher">Some Publisher</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            on sale from <span class="book-date">08/1980</span>
-
+                                    <div class="row mt-2 mt-lg-1">
+                                        <div class="col">
+                                            <div class="font-weight-bold">Publication date</div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="float-right"><span class="book-isbn-13">2153463135</span></div>
+                                        <div class="col-auto">
+                                            <div class="float-right">
+                                                <span class="book-date">08/1980</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 mt-lg-1">
+                                        <div class="col">
+                                            <div class="font-weight-bold">ISBN</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="float-right">
+                                                <span class="book-isbn">2153463135</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 mt-lg-1">
+                                        <div class="col">
+                                            <div class="font-weight-bold">ISBN 13</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="float-right">
+                                                <span class="book-isbn-13">2153463135</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-md-12">
-                            <div class="d-block d-md-none text-gray d-flex flex-column justify-content-start">
-                                <span class="book-isbn">ISBN 2153463135</span>
-                                <span class="book-isbn-13">ISBN13 2153463135</span>
-                                <span class="book-publisher">Publisher</span>
+                        <div class="col-6 col-md-12 d-block d-md-none ">
+                            <div class="text-gray">
+                                <div class="font-weight-bold">ISBN</div>
+                                <span class="book-isbn">2153463135</span>
+                                <div class="font-weight-bold mt-3">ISBN 13</div>
+                                <span class="book-isbn-13">2153463135</span>
+                                <div class="font-weight-bold mt-3">Publisher</div>
+                                <span class="book-publisher">Some publisher</span>
+                                <div class="font-weight-bold mt-3">Publication date</div>
                                 <span class="book-date">08/1980</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 d-block d-md-none">
+            <div class="col-12 d-block d-md-none">
                 <div class="book-description mt-4">
                     <p class="visible">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit non
@@ -125,7 +149,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-12 col-md-6 d-none d-md-block">
+            <div class="col-12 col-md-9 d-none d-md-block px-5">
                 <div class="book-title">
                     <h1 class="text-dark">Book title</h1>
                 </div>
@@ -213,6 +237,7 @@
     </div>
 </div>
 <div class="section related-books mt-5">
+
     <svg class="head" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 184.73 368.45">
         <defs>
             <style>.cls-1 {
@@ -250,14 +275,22 @@
         </g>
     </svg>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-lg-3 d-flex flex-column justify-content-center">
-                <h3 class="text-white">
+        <div class="row m-0 p-0">
+            <div class="col-12 m-0 p-0 col-lg-3 d-flex flex-column justify-content-center">
+                <h2 class="text-white d-none d-lg-block">
                     We think you will also love this
-                </h3>
+                </h2>
+                <div class="container d-block d-lg-none mt-4">
+                    <h4 class="text-white">
+                        We think you will also love this
+                    </h4>
+                </div>
             </div>
-            <div class="col-12 col-lg-9">
-                <div class="related-container mt-4 mt-lg-0"></div>
+            <div class="col-12 m-0 p-0 col-lg-9">
+                <div class="related-container my-4 my-lg-0"></div>
+            </div>
+            <div class="col-12 m-0 p-0 d-block d-md-none text-center">
+                <h6 class="text-white mb-4">Book title</h6>
             </div>
         </div>
 
