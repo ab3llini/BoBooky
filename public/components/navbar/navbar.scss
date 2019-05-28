@@ -11,6 +11,25 @@ $logo-height: 25px;
   transition: background-color 200ms linear;
 }
 
+#shopping-cart-ribbon {
+  width: 576px;
+  right: 8%;
+  position: absolute;
+  z-index: 100;
+  @include media-breakpoint-down(xs) {
+    width: 100%;
+    right: 0;
+  }
+}
+
+//TODO: fix this shit
+.container {
+  -ms-overflow-style: none;  // IE 10+
+  scrollbar-width: none;  // Firefox
+}
+.container::-webkit-scrollbar {
+  display: none;  // Safari and Chrome
+}
 
 .navbar-brand img {
   height: $logo-height;

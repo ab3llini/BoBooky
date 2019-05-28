@@ -6,6 +6,28 @@
   transition: background-color 200ms linear;
 }
 
+#shopping-cart-ribbon {
+  width: 576px;
+  right: 8%;
+  position: absolute;
+  z-index: 100;
+}
+@media (max-width: 575.98px) {
+  #shopping-cart-ribbon {
+    width: 100%;
+    right: 0;
+  }
+}
+
+.container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
 .navbar-brand img {
   height: 25px;
 }

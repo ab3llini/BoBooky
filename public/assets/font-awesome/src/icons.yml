@@ -1327,11 +1327,11 @@ icons:
 
 
   - name:       Bar Chart
-    id:         bar-chart
+    id:         bar-cart
     unicode:    f080
     created:    1.0
     aliases:
-      - bar-chart-o
+      - bar-cart-o
     filter:
       - graph
       - analytics
@@ -4819,7 +4819,7 @@ icons:
       - Web Application Icons
 
   - name:       Area Chart
-    id:         area-chart
+    id:         area-cart
     unicode:    f1fe
     created:    4.2
     filter:
@@ -4831,7 +4831,7 @@ icons:
       - Chart Icons
 
   - name:       Pie Chart
-    id:         pie-chart
+    id:         pie-cart
     unicode:    f200
     created:    4.2
     filter:
@@ -4843,7 +4843,7 @@ icons:
       - Chart Icons
 
   - name:       Line Chart
-    id:         line-chart
+    id:         line-cart
     unicode:    f201
     created:    4.2
     filter:

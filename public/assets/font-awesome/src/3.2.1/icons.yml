@@ -855,8 +855,8 @@ icons:
       - Web Application Icons
 
 
-  - name:       bar-chart
-    id:         bar-chart
+  - name:       bar-cart
+    id:         bar-cart
     unicode:    f080
     created:    1.0
     categories:

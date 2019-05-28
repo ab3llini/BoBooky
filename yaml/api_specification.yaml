@@ -652,7 +652,7 @@ paths:
     get:
       tags:
         - "user"
-      summary: "Get the user's current chart"
+      summary: "Get the user's current cart"
       operationId: "userChartGET"
       parameters: []
       responses:
@@ -669,7 +669,7 @@ paths:
     put:
       tags:
         - "user"
-      summary: "Updates the current chart"
+      summary: "Updates the current cart"
       operationId: "userChartPUT"
       consumes:
         - "application/json"
@@ -689,7 +689,7 @@ paths:
     delete:
       tags:
         - "user"
-      summary: "Delete the current chart"
+      summary: "Delete the current cart"
       operationId: "userChartDELETE"
       parameters: []
       responses:

@@ -52,7 +52,7 @@ exports.userAddressPUT = function(id,addressID,body) {
 
 
 /**
- * Delete the current chart
+ * Delete the current cart
  *
  * @param id the if of the user
  * no response value expected for this operation
@@ -63,7 +63,7 @@ exports.userChartDELETE = function(id) {
 
 
 /**
- * Get the user's current chart
+ * Get the user's current cart
  *
  * @param id id of the user
  * @returns Chart
@@ -74,7 +74,7 @@ exports.userChartGET = function(id) {
 
 
 /**
- * Updates the current chart
+ * Updates the current cart
  *
  * @param id is the id of the user
  * @param body is an object with bookID and qty
