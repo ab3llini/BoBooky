@@ -1,0 +1,82 @@
+.carousel {
+  position: relative;
+}
+
+.carousel .MS-content {
+  height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 2rem 0 2rem;
+}
+
+.carousel .MS-content .item {
+  display: inline-block;
+  height: 100%;
+  overflow: hidden;
+  white-space: normal;
+  position: relative;
+  vertical-align: top;
+}
+
+.carousel .MS-controls button {
+  position: absolute;
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  outline: 0;
+  top: calc(50% - 15px);
+}
+
+.carousel .MS-controls .MS-left {
+  left: -10px;
+}
+
+.carousel .MS-controls .MS-right {
+  right: -10px;
+}
+
+/*
+*********** IMPORTANT! ***************
+DO NOT TOUCH STUFF UNLESS YOU KNOW WHY
+YOU SHOULD DO IT
+
+FOR INSTANCE: DO NOT CHANGE ANY MARGIN ! :)
+
+Thanks <3
+Alberto
+**************************************
+ */
+/*********** IMPORTANT! ***************
+
+TO CHANGE STYLES OF ITEM, SEE RELATIVE CSS!
+THIS IS NOT THE PLACE TO CHANGE ITEM STYLES
+ */
+.carousel .MS-content .item {
+  width: 20%;
+}
+@media (max-width: 1199.98px) {
+  .carousel .MS-content .item {
+    width: 25%;
+  }
+}
+@media (max-width: 991.98px) {
+  .carousel .MS-content .item {
+    width: 33.3333%;
+  }
+}
+@media (max-width: 767.98px) {
+  .carousel .MS-content .item {
+    width: 50%;
+  }
+}
+@media (max-width: 575.98px) {
+  .carousel .MS-content .item {
+    width: 100%;
+  }
+}
+
+.carousel .MS-content .item .container {
+  padding: 0 0.3rem 0 0.3rem;
+}
+
+/*# sourceMappingURL=carousel-five.css.map */
