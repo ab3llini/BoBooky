@@ -1,25 +1,52 @@
 .navbar.scrolled {
-  transition: background-color 200ms linear; }
+  transition: background-color 200ms linear;
+}
 
 .navbar.unscrolled {
-  transition: background-color 200ms linear; }
+  transition: background-color 200ms linear;
+}
 
 #shopping-cart-ribbon {
   width: 576px;
+  height: calc(100vh - 56px);
   right: 8%;
   position: absolute;
-  z-index: 100; }
-  @media (max-width: 575.98px) {
-    #shopping-cart-ribbon {
-      width: 100%;
-      right: 0; } }
+  z-index: 1000;
+}
+@media (max-width: 575.98px) {
+  #shopping-cart-ribbon {
+    width: 100%;
+    right: 0;
+  }
+}
+
+.blurred-bg {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.objects {
+  max-height: calc(100vh - 156px);
+}
+
+#cart-title {
+  height: 50px;
+}
+
+#cart-bottom {
+  height: 50px;
+}
 
 .container {
   -ms-overflow-style: none;
-  scrollbar-width: none; }
+  scrollbar-width: none;
+}
 
 .container::-webkit-scrollbar {
-  display: none; }
+  display: none;
+}
 
 .navbar-brand img {
-  height: 25px; }
+  height: 25px;
+}
+
+/*# sourceMappingURL=navbar.css.map */

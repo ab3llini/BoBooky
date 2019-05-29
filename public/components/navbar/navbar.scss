@@ -13,13 +13,30 @@ $logo-height: 25px;
 
 #shopping-cart-ribbon {
   width: 576px;
+  height: calc(100vh - 56px);
   right: 8%;
   position: absolute;
-  z-index: 100;
+  z-index: 1000;
   @include media-breakpoint-down(xs) {
     width: 100%;
     right: 0;
   }
+}
+
+.blurred-bg {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.objects {
+  max-height: calc(100vh - 156px);
+}
+
+#cart-title{
+  height: 50px;
+}
+
+#cart-bottom{
+  height: 50px;
 }
 
 //TODO: fix this shit
