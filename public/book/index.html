@@ -26,17 +26,17 @@
         </ol>
     </div>
 </nav>
-<div class="section mt-5">
+<div class="section top mt-5" style="display: none">
     <div class="container">
         <div class="row">
             <div class="col-12 d-block d-md-none">
-                <div class="book-title">
-                    <h1 class="text-dark">Book title</h1>
+                <div>
+                    <h1 class="text-dark book-title">Book title</h1>
                 </div>
-                <div class="book-author">
-                    <h3 class="text-pink">Author name</h3>
+                <div>
+                    <h3 class="text-pink book-author text-capitalize">Author name</h3>
                 </div>
-                <div class="text-gray book-genres mt-4">
+                <div class="text-gray book-genres text-capitalize mt-4">
                     Horror / Fantasy
                 </div>
                 <div class="text-light book-rating mt-1">
@@ -48,8 +48,8 @@
                         <i class="fa fa-bookmark-o text-pink"></i>
                     </div>
                     <div class="ml-2 text-gray d-inline">
-                        <span class="book-rating-qty">25</span>
-                        <span class="book-rating-qty"> reviews</span>
+                        <span class="book-rating-val">0</span>/5,
+                        <span class="book-rating-qty"> 0</span> reviews
                     </div>
                 </div>
             </div>
@@ -58,8 +58,8 @@
                     <div class="row px-0">
                         <div class="col-6 col-md-12 px-0">
                             <div>
-                                <div class="book-image bg-dark w-100">
-                                    <img class="rounded" src="https://images.gr-assets.com/books/1459127484l/16793.jpg">
+                                <div class="book-image w-100">
+                                    <img class="rounded">
                                 </div>
                                 <div class="container p-0 d-none d-md-block mt-4 text-gray">
                                     <div class="row mt-2 mt-lg-1">
@@ -69,7 +69,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <div class="float-right">
-                                                <span class="book-publisher">Some Publisher</span>
+                                                <span class="book-publisher">-------</span>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <div class="float-right">
-                                                <span class="book-date">08/1980</span></div>
+                                                <span class="book-date">-------</span></div>
                                         </div>
                                     </div>
                                     <div class="row mt-2 mt-lg-1">
@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <div class="float-right">
-                                                <span class="book-isbn">2153463135</span></div>
+                                                <span class="book-isbn">-------</span></div>
                                         </div>
                                     </div>
                                     <div class="row mt-2 mt-lg-1">
@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <div class="float-right">
-                                                <span class="book-isbn-13">2153463135</span>
+                                                <span class="book-isbn-13">-------</span>
                                             </div>
                                         </div>
                                     </div>
@@ -120,13 +120,13 @@
                 </div>
             </div>
             <div class="col-12 d-block d-md-none">
-                <div class="book-description mt-4">
-                    <p class="visible">
+                <div class="mt-4">
+                    <p class="book-description">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit non
                         deleniti reiciendis expedita, velit excepturi doloremque numquam. Blanditiis,
                         accusantium, at.
                     </p>
-                    <p class="collapse full-description">
+                    <p class="collapse book-full-description">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tempore asperiores et
                         vel perferendis ea quisquam eos incidunt veritatis, hic porro voluptates temporibus
                         laborum! Saepe natus vitae eum ex nam, laborum optio vel magni hic. Minima pariatur
@@ -138,7 +138,7 @@
                         deserunt, ipsa sequi exercitationem assumenda dignissimos praesentium voluptatibus
                         incidunt!
                     </p>
-                    <a data-toggle="collapse" aria-expanded="false" href=".full-description"
+                    <a data-toggle="collapse" aria-expanded="false" href=".book-full-description"
                        class="text-dark text-decoration-none font-weight-bold">
                         <span class="collapsed">
                             continue
@@ -150,13 +150,13 @@
                 </div>
             </div>
             <div class="col-12 col-md-9 d-none d-md-block px-5">
-                <div class="book-title">
-                    <h1 class="text-dark">Book title</h1>
+                <div>
+                    <h1 class="text-dark book-title text-capitalize">Book title</h1>
                 </div>
-                <div class="book-author">
-                    <h3 class="text-pink">Author name</h3>
+                <div>
+                    <h3 class="text-pink book-author text-capitalize">Author name</h3>
                 </div>
-                <div class="text-gray book-genres mt-4">
+                <div class="text-gray book-genres mt-4 text-capitalize">
                     Horror / Fantasy
                 </div>
                 <div class="text-light book-rating mt-1">
@@ -168,13 +168,13 @@
                         <i class="fa fa-bookmark-o text-pink"></i>
                     </div>
                     <div class="ml-2 text-gray d-inline">
-                        <span class="book-rating-qty">25</span>
-                        <span class="book-rating-qty"> reviews</span>
+                        <span class="book-rating-val">0</span>/5,
+                        <span class="book-rating-qty"> 0</span> reviews
                     </div>
                 </div>
                 <div class="mt-4 d-flex justify-content-start" style="height: 3rem">
                     <div class="text-dark font-weight-bold d-flex flex-column justify-content-center h-100">
-                        <h3 class="mt-2">25,00 €</h3>
+                        <h3 class="mt-2"><span class="book-price">00,00</span> €</h3>
                     </div>
                     <div class="text-dark font-weight-bold d-flex flex-column justify-content-center ml-5 h-100">
                         <div class="input-group input-group-sm">
@@ -204,13 +204,13 @@
                                 class="fa fa-heart text-pink"></i></label>
                     </div>
                 </div>
-                <div class="book-description mt-4">
-                    <p class="visible">
+                <div class="mt-4">
+                    <p class="book-description">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit non
                         deleniti reiciendis expedita, velit excepturi doloremque numquam. Blanditiis,
                         accusantium, at.
                     </p>
-                    <p class="collapse full-description">
+                    <p class="collapse book-full-description">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tempore asperiores et
                         vel perferendis ea quisquam eos incidunt veritatis, hic porro voluptates temporibus
                         laborum! Saepe natus vitae eum ex nam, laborum optio vel magni hic. Minima pariatur
@@ -222,7 +222,7 @@
                         deserunt, ipsa sequi exercitationem assumenda dignissimos praesentium voluptatibus
                         incidunt!
                     </p>
-                    <a data-toggle="collapse" aria-expanded="false" href=".full-description"
+                    <a data-toggle="collapse" aria-expanded="false" href=".book-full-description"
                        class="text-dark text-decoration-none font-weight-bold">
                         <span class="collapsed">
                             continue
@@ -236,7 +236,7 @@
         </div>
     </div>
 </div>
-<div class="section related-books mt-5">
+<div class="section related-books mt-5 ">
 
     <svg class="head" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 184.73 368.45">
         <defs>
@@ -296,9 +296,9 @@
 
     </div>
 </div>
-<div class="section book-reviews d-flex bg-dark vh-100">
+<div class="section book-reviews bg-dark vh-100">
     <div class="container text-white">
-        <h3>Reviews (<span class="book-rating-qty">25</span>)</h3>
+        <h3>Reviews (<span class="book-rating-qty">0</span>)</h3>
         <div class="d-flex flex-column justify-content-start mt-5">
             <div class="review border border-pink rounded-bobooky p-4">
                 <div class="container">

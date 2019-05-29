@@ -190,14 +190,18 @@ $related-align: $related-book-section-margin + ($carousel-height + 2 * $padding)
     }
 }
 
-
 .book-reviews {
+    position: relative;
+    bottom: 0;
     margin-top: - ($carousel-height + 2 * $carousel-margin) / 2;
 }
 
+
 .book-reviews > .container {
-    margin-top: ($carousel-height + 2 * $carousel-margin) / 2 + 5rem;
+    height: 100%;
+    padding-top: ($carousel-height + 2 * $carousel-margin) / 2 + 5rem;
 }
+
 
 .book-image img {
     width: 100%;

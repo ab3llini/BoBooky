@@ -24,7 +24,7 @@ let make = {
 
     get: (url, data = undefined) => {
         if (debug) {
-            console.info('New POST request to ' + url + ' with data = ' + JSON.stringify(data))
+            console.info('New GET request to ' + url + ' with data = ' + JSON.stringify(data))
         }
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -61,7 +61,9 @@ export let get = {
             });
         })
     },
-
+    book : {
+        get : (id) => make.get('/api/book/' + id)
+    },
     address: () => make.get('/api/user/0/address')
 };
 export let post = {
@@ -80,6 +82,14 @@ export let post = {
     user : {
         address : (body) => {
             return make.post('/api/user/0/address', body)
+        }
+    }
+}
+
+export let map = (map) => {
+    for (let sel in map) {
+        if (map.hasOwnProperty(sel)) {
+            $(sel).html(map[sel])
         }
     }
 }
