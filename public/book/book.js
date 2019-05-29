@@ -77,7 +77,7 @@ $(() => {
         // Download reviews
         api.get.book.reviews(id).then(reviews => {
             for (let review in reviews) {
-
+                loader.append_map('.book-reviews-container', '/components')
             }
         })
     }
