@@ -137,6 +137,7 @@ $related-align: $related-book-section-margin + ($carousel-height + 2 * $padding)
     transform: translateY(-50%);
     padding: 0.8rem;
     font-size: 14px;
+    color: $white;
 }
 
 .carousel .MS-content .item .container > .description {
@@ -165,6 +166,10 @@ $related-align: $related-book-section-margin + ($carousel-height + 2 * $padding)
 
 .related-books {
     position: relative;
+}
+
+.section {
+    display: none;
 }
 
 .related-books > svg.head {

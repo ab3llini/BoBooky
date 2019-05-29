@@ -10,6 +10,7 @@ $(() => {
             api.get.books(0, 20).then(books => {
                 books.forEach(book => {
                     loader.append_map('#whatsnew-carousel .MS-content', '/components/carousel/items/book.html', book.id, (o) => {
+                        o.find('.book-href').attr('href', '/book/?id=' + book.id);
                         o.find('.image').css("background-image", "url(" + book.image_href + ")");
                         o.find('.title').html(book.title)
                     })

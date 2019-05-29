@@ -62,7 +62,9 @@ export let get = {
         })
     },
     book : {
-        get : (id) => make.get('/api/book/' + id)
+        get : (id) => make.get('/api/book/' + id),
+        related : (id) => make.get('/api/book/' + id + '/related'),
+        reviews : (id) => make.get('/api/book/' + id + '/reviews')
     },
     address: () => make.get('/api/user/0/address')
 };

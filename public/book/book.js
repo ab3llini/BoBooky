@@ -16,8 +16,10 @@ $(() => {
     //If id exists
     if (args.has('id')) {
 
+        let id = parseInt(args.get('id'))
+
         // Retrieve and map book
-        api.get.book.get(parseInt(args.get('id')))
+        api.get.book.get(id)
             .then(book => {
                 // Load JSON
                 api.map({
@@ -46,9 +48,10 @@ $(() => {
         loader.append('.related-container', '/components/carousel/container.html', 'related-carousel')
             .then(() => {
 
-                api.get.books(0, 20).then(books => {
+                api.get.book.related(id).then(books => {
                     books.forEach(book => {
                         loader.append_map('#related-carousel .MS-content', '/components/carousel/items/book.html', book.id, (o) => {
+                            o.find('.book-href').attr('href', '/book/?id=' + book.id);
                             o.find('.image').css("background-image", "url(" + book.image_href + ")");
                             o.find('.title').html(book.title)
                         })
@@ -58,6 +61,7 @@ $(() => {
                                         interval: 3000,
                                         hoverPause: true
                                     });
+                                    $('.section.bottom').fadeIn()
                                 }
                             })
                             .catch(e => {
@@ -69,6 +73,13 @@ $(() => {
             .catch(e => {
                 modal.error(e)
             });
+
+        // Download reviews
+        api.get.book.reviews(id).then(reviews => {
+            for (let review in reviews) {
+
+            }
+        })
     }
     else {
         modal.show('Warning', 'Unknown book id')
