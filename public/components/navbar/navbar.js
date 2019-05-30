@@ -1,5 +1,4 @@
 import * as session from '/lib/js/utils/session.js'
-import * as cart from '/components/cart/cart.js'
 
 $(function () {
 
@@ -60,13 +59,6 @@ $(function () {
                     console.log("Unable to logout, reason: " + JSON.stringify(e))
                 })
         });
-
-
-
-        let cart_button = $('#shopping-cart');
-        cart_button.attr('data-target', '#shopping-cart-ribbon');
-        cart_button.attr('aria-controls', 'shopping-cart-ribbon');
-        cart.load_cart()
 
 
 

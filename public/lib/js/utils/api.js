@@ -66,7 +66,8 @@ export let get = {
         related : (id) => make.get('/api/book/' + id + '/related'),
         reviews : (id) => make.get('/api/book/' + id + '/reviews')
     },
-    address: () => make.get('/api/user/0/address')
+    address: () => make.get('/api/user/0/address'),
+    chart: () => make.get('/api/user/0/chart')
 };
 export let post = {
     login: (username, password) => {
