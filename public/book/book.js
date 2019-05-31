@@ -55,7 +55,7 @@ $(() => {
 
                         api.get.book.related(id).then(books => {
                             books.forEach(book => {
-                                loader.append_map('#related-carousel .MS-content', '/components/carousel/items/book.html', book.id, function(book_obj) {
+                                loader.append_map('#related-carousel .MS-content', '/components/carousel/items/book.html', book.id, function (book_obj) {
                                     book_obj.find('.book-href').attr('href', '/book/?id=' + book.id);
                                     book_obj.find('.image').css("background-image", "url(" + book.image_href + ")");
                                     book_obj.find('.title').html(book.title)
@@ -81,9 +81,15 @@ $(() => {
 
                 // Download reviews
                 api.get.book.reviews(id).then(reviews => {
-                    for (let review in reviews) {
-                        loader.append_map('.book-reviews-container', '/components/review/review.html', review.id, (o) => {})
-                    }
+                    reviews.forEach(function (review) {
+                        loader.append_map('.book-reviews-container', '/components/review/review.html', review.id, (o) => {
+                            o.find('.author').html(review.author)
+                            o.find('.content').html(review.body)
+                            o.find('.title').html(review.title)
+                        })
+                    })
+                }).catch(e => {
+                    modal.error(e)
                 })
             } else {
                 modal.show('Warning', 'Unknown book id')
