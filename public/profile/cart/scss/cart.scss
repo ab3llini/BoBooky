@@ -1,0 +1,8 @@
+@import "../../../lib/scss/booboky-colors";
+
+.summary-container {
+  height: 70vh;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 100px;
+}
