@@ -20,18 +20,27 @@ export let append_selectors = (container, template, id=undefined, selectors) => 
     })
 };
 
-export let append_map = (container, template, id, map_fn) => {
+export let append_map = (container, template, id, map_fn, prepend = false) => {
     return new Promise(resolve => {
 
         let $ctx = $('<div>');
         $ctx.load(template, () => {
             let $ans = $ctx.children().first();
-            $ans.attr('id', id);
+            if (id !== undefined)
+                $ans.attr('id', id);
             map_fn($ans);
-            $(container).append($ans
-                .hide()
-                .fadeIn(500)
-            );
+            if (prepend) {
+                $(container).prepend($ans
+                    .hide()
+                    .fadeIn(500)
+                );
+            }
+            else {
+                $(container).append($ans
+                    .hide()
+                    .fadeIn(500)
+                );
+            }
             resolve($ans);
         });
     })

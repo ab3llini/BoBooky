@@ -15,8 +15,11 @@ let make = {
                 success: (result) => {
                     resolve(result)
                 },
-                error: (error) => {
-                    reject(error)
+                complete: (xhr, textStatus) => {
+                    if (xhr.status !== 200)
+                        reject(textStatus)
+                    else
+                        resolve()
                 }
             });
         })
@@ -34,8 +37,11 @@ let make = {
                 success: (result) => {
                     resolve(result)
                 },
-                error: (error) => {
-                    reject(error)
+                complete: (xhr, textStatus) => {
+                    if (xhr.status !== 200)
+                        reject(textStatus)
+                    else
+                        resolve()
                 }
             });
         })
