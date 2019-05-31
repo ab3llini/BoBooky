@@ -3,22 +3,32 @@
   background-position: 10% bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size: 40vh; }
-  @media (max-width: 575.98px) {
-    .mailbox {
-      background-image: none; } }
+  background-size: 40vh;
+}
+@media (max-width: 575.98px) {
+  .mailbox {
+    background-image: none;
+  }
+}
 
 .main {
-  font-size: 18pt; }
+  font-size: 18pt;
+}
 
 .navbar {
-  background: #21263F; }
+  background: #21263F;
+}
 
 .address-card {
-  border-radius: 24px; }
+  border-radius: 24px;
+}
 
 .address-card:hover {
-  border-color: white; }
+  border-color: white;
+}
 
 .profile-header-placeholder {
-  margin-top: 55px; }
+  margin-top: 55px;
+}
+
+/*# sourceMappingURL=index.css.map */
