@@ -168,9 +168,6 @@ $related-align: $related-book-section-margin + ($carousel-height + 2 * $padding)
     position: relative;
 }
 
-.section {
-    display: none;
-}
 
 .related-books > svg.head {
     z-index: 100;
