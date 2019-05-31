@@ -11,29 +11,28 @@ export let append_selectors = (container, template, id=undefined, selectors) => 
                     $o.html(selectors[selector])
                 }
             }
-            $ans;
             $(container).append($ans
                 .hide()
                 .fadeIn(500)
         );
-            resolve();
+            resolve($ans);
         });
     })
 };
 
-export let append_map = (container, template, id, map) => {
+export let append_map = (container, template, id, map_fn) => {
     return new Promise(resolve => {
 
         let $ctx = $('<div>');
         $ctx.load(template, () => {
             let $ans = $ctx.children().first();
             $ans.attr('id', id);
-            map($ans);
+            map_fn($ans);
             $(container).append($ans
                 .hide()
                 .fadeIn(500)
             );
-            resolve();
+            resolve($ans);
         });
     })
 };
@@ -51,7 +50,7 @@ export let append = (container, template, id, processing = undefined) => {
                 .hide()
                 .fadeIn(500)
             );
-            resolve();
+            resolve($ans);
         });
     })
 }

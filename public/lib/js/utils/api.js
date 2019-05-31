@@ -64,7 +64,7 @@ export let get = {
     book : {
         get : (id) => make.get('/api/book/' + id),
         related : (id) => make.get('/api/book/' + id + '/related'),
-        reviews : (id) => make.get('/api/book/' + id + '/reviews')
+        reviews : (id) => make.get('/api/book/' + id + '/review')
     },
     address: () => make.get('/api/user/0/address')
 };
@@ -88,10 +88,10 @@ export let post = {
     }
 }
 
-export let map = (map) => {
-    for (let sel in map) {
-        if (map.hasOwnProperty(sel)) {
-            $(sel).html(map[sel])
+export let map = (map_fn) => {
+    for (let sel in map_fn) {
+        if (map_fn.hasOwnProperty(sel)) {
+            $(sel).html(map_fn[sel])
         }
     }
 }
