@@ -1,4 +1,4 @@
-PATH := ../node_modules/.bin:$(PATH)
+PATH := lib/bootstrap.bin:$(PATH)
 
 FA_ROOT_DIRECTORY = assets/font-awesome
 FA_LESS_DIRECTORY = assets/font-awesome/less
