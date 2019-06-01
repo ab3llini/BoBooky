@@ -177,10 +177,6 @@
   position: relative;
 }
 
-.section {
-  display: none;
-}
-
 .related-books > svg.head {
   z-index: 100;
   height: 100%;
