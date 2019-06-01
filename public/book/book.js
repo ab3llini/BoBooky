@@ -26,6 +26,43 @@ $(() => {
 
             let id = parseInt(args.get('id'))
 
+            let inWishlist = false;
+
+            // Init wishlist
+            api.get.user.wishlist().then(wishlist => {
+                wishlist.forEach(function (book) {
+                    if (book.id === id) {
+                        inWishlist = true;
+                        let $btn = $('.wishlist');
+                        let $heart = $btn.find('.fa');
+                            $heart.removeClass('fa-heart-o');
+                            $heart.addClass('fa-heart')
+                    }
+                })
+            });
+
+            // Bind wishlist add/remove
+            $('.wishlist').unbind().click(function () {
+                if (inWishlist) {
+                    api.post.user.wishlist.delete(id).then(()=> {
+                        console.log('Removed')
+                        let $heart = $(this).find('.fa');
+                        $heart.removeClass('fa-heart');
+                        $heart.addClass('fa-heart-o')
+                        inWishlist = false;
+                    }).catch(e => modal.error(e))
+                }
+                else {
+                    api.post.user.wishlist.add(id).then(()=> {
+                        console.log('Added')
+                        let $heart = $(this).find('.fa');
+                        $heart.removeClass('fa-heart-o');
+                        $heart.addClass('fa-heart')
+                        inWishlist = true;
+                    }).catch(e => modal.error(e))
+                }
+            })
+
             // Retrieve and map book
             api.get.book.get(id)
                 .then(book => {
@@ -120,4 +157,6 @@ $(() => {
             modal.show('Warning', 'Unknown book id')
         }
     })
+
+
 });

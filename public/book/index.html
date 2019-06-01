@@ -26,6 +26,43 @@ Loading template
     </div>
 </div>
 
+<div class="fixed-bottom vw-100 shadow d-block d-md-none">
+    <div class="container">
+        <div class="row bg-white">
+            <div class="col">
+                <div class="row py-3">
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3 class="m-0 p-0"><span class="book-price font-weight-bold">00,00</span> €</h3>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group input-group">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-pink dropdown-toggle" type="button"
+                                        data-toggle="dropdown">1
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">2</a>
+                                    <a class="dropdown-item" href="#">3</a>
+                                    <a class="dropdown-item" href="#">4</a>
+                                    <a class="dropdown-item" href="#">5</a>
+                                </div>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-pink" type="button">Add</button>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-pink text-white wishlist" type="button">
+                                    <i class="fa fa-heart-o"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="nav-placeholder"></div>
 <nav aria-label="breadcrumb" class="bg-pink text-white">
     <div class="container">
@@ -178,11 +215,10 @@ Loading template
                                         data-toggle="dropdown">1
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
+                                    <a class="dropdown-item" href="#">2</a>
+                                    <a class="dropdown-item" href="#">3</a>
+                                    <a class="dropdown-item" href="#">4</a>
+                                    <a class="dropdown-item" href="#">5</a>
                                 </div>
                             </div>
                             <div class="input-group-append">
@@ -194,9 +230,9 @@ Loading template
                         or
                     </div>
                     <div class="text-gray d-flex flex-column justify-content-center h-100" style="width: 2rem">
-                        <input id="toggle-heart" type="checkbox"/>
-                        <label for="toggle-heart" aria-label="like" style="font-size: 1.5rem" class="mt-2"> <i
-                                class="fa fa-heart text-pink"></i></label>
+                        <button class="btn btn-pink btn-sm text-white wishlist" type="button">
+                            <i class="fa fa-heart-o"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="mt-4">
@@ -303,14 +339,12 @@ Loading template
     </div>
 </div>
 </div>
-<script src="/lib/js/popper/popper.js" type="module"></script>
 
-<script src="/jquery/dist/jquery.js"></script>
-<script src="/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>
 <script src="/lib/multislider/multislider.js"></script>
 <script src="book.js" type="module"></script>
-
 
 </body>
 </html>
