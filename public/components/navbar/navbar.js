@@ -23,6 +23,9 @@ $(function () {
         else {
             profile_button.attr('data-target', '#register-login-ribbon');
             profile_button.attr('aria-controls', 'register-login-ribbon')
+            profile_button.click(function () {
+                alert()
+            })
         }
 
         // Replace salute user

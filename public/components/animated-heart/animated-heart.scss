@@ -108,7 +108,7 @@ $_precision: 10;
     border-width: $ext;
 }
 
-[id='toggle-heart'] {
+.toggle-heart {
     position: absolute;
     left: -100vw;
 
@@ -141,12 +141,10 @@ $_precision: 10;
     }
 }
 
-[for='toggle-heart'] {
+.toggle-heart {
     align-self: center;
     position: relative;
-    color: #888;
     font-size: $size;
-    filter: grayscale(1);
     user-select: none;
     cursor: pointer;
 
@@ -161,7 +159,6 @@ $_precision: 10;
     &:before {
         box-sizing: border-box;
         margin: -$bubble-r;
-        border: solid $bubble-r #e2264d;
         width: $bubble-d; height: $bubble-d;
         transform: scale(0);
     }

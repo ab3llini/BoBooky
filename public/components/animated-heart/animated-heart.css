@@ -1,39 +1,37 @@
-[id=toggle-heart] {
+.toggle-heart {
   position: absolute;
   left: -100vw;
 }
-[id=toggle-heart]:checked + label {
+.toggle-heart:checked + label {
   color: #e2264d;
   filter: none;
   will-change: font-size;
   animation: heart 1s cubic-bezier(0.17, 0.89, 0.32, 1.49);
 }
-[id=toggle-heart]:checked + label:before, [id=toggle-heart]:checked + label:after {
+.toggle-heart:checked + label:before, .toggle-heart:checked + label:after {
   animation: inherit;
   animation-timing-function: ease-out;
 }
-[id=toggle-heart]:checked + label:before {
+.toggle-heart:checked + label:before {
   will-change: transform, border-width, border-color;
   animation-name: bubble;
 }
-[id=toggle-heart]:checked + label:after {
+.toggle-heart:checked + label:after {
   will-change: opacity, box-shadow;
   animation-name: sparkles;
 }
-[id=toggle-heart]:focus + label {
+.toggle-heart:focus + label {
   text-shadow: 0 0 3px white, 0 1px 1px white, 0 -1px 1px white, 1px 0 1px white, -1px 0 1px white;
 }
 
-[for=toggle-heart] {
+.toggle-heart {
   align-self: center;
   position: relative;
-  color: #888;
   font-size: 1rem;
-  filter: grayscale(1);
   user-select: none;
   cursor: pointer;
 }
-[for=toggle-heart]:before, [for=toggle-heart]:after {
+.toggle-heart:before, .toggle-heart:after {
   position: absolute;
   z-index: -1;
   top: 50%;
@@ -41,15 +39,14 @@
   border-radius: 50%;
   content: "";
 }
-[for=toggle-heart]:before {
+.toggle-heart:before {
   box-sizing: border-box;
   margin: -2.25rem;
-  border: solid 2.25rem #e2264d;
   width: 4.5rem;
   height: 4.5rem;
   transform: scale(0);
 }
-[for=toggle-heart]:after {
+.toggle-heart:after {
   margin: -0.1875rem;
   width: 0.375rem;
   height: 0.375rem;
