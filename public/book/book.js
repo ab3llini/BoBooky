@@ -61,6 +61,15 @@ $(() => {
                         inWishlist = true;
                     }).catch(e => modal.error(e))
                 }
+            });
+
+
+            // Bind add/remove to cart
+            $('.cart-add').click(function() {
+                let qty = $(this).parents('.input-group').first().find('.cart-qty').first().val();
+                api.put.user.cart(id, qty).then(() => {
+                    modal.show('Added')
+                }).catch( e => modal.error(e) )
             })
 
             // Retrieve and map book

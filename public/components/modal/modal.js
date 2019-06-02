@@ -1,7 +1,8 @@
 let object = undefined;
 
 export let type = {
-    alert: 'alert'
+    alert: 'alert',
+    checkout : 'checkout'
 };
 
 export let inject = (type, id) => {
@@ -23,7 +24,13 @@ export let show = (title, content) => {
     return object
 };
 
+
 export let error = (error) => {
-    show(error.statusText + ' (' + error.status + ')', 'Something went wrong.')
+    if (error.status === 401) {
+        show('Login or Register', 'Please login or register first!')
+    }
+    else {
+        show(error.statusText + ' (' + error.status + ')', 'Something went wrong.')
+    }
 }
 

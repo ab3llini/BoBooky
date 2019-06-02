@@ -211,18 +211,16 @@ Loading template
                     <div class="text-dark font-weight-bold d-flex flex-column justify-content-center ml-5 h-100">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
-                                <button class="btn btn-outline-pink dropdown-toggle" type="button"
-                                        data-toggle="dropdown">1
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">2</a>
-                                    <a class="dropdown-item" href="#">3</a>
-                                    <a class="dropdown-item" href="#">4</a>
-                                    <a class="dropdown-item" href="#">5</a>
-                                </div>
+                                <select class="custom-select-sm cart-qty">
+                                    <option selected value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn btn-pink" type="button">Add to cart</button>
+                                <button class="btn btn-pink cart-add" type="button">Add to cart</button>
                             </div>
                         </div>
                     </div>

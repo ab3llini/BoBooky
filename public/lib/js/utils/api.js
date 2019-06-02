@@ -45,7 +45,7 @@ let make = {
                 complete: (xhr, textStatus) => {
                     if (xhr.status !== 200) {
                         var e = new Error(xhr.statusText);
-                        e.statusText = xhr.statusText
+                        e.statusText = xhr.statusText;
                         e.status = xhr.status;
                         reject(e)
                     }
@@ -159,6 +159,13 @@ export let post = {
             delete : (id) => {
                 return make.delete('/api/user/0/whishlist/?bookID=' + id, undefined, data => {return data})
             }
+        }
+    }
+}
+export let put = {
+    user : {
+        cart : (id, qty) => {
+            return make.put('/api/user/0/chart', {bookID : parseInt(id), qty: parseInt(qty)})
         }
     }
 }
