@@ -15,6 +15,17 @@ $(()=> {
                     o.find('.book-qty').html(qty);
                     o.find('.book-price').html('€ ' + (qty * book.price));
                     o.find('.book-image').attr('src', book.image_href);
+                    o.find('.plus-button').click(() => {
+                        api.put.user.cart(book.id, qty + 1).then(() => location.reload())
+                    });
+                    o.find('.minus-button').click(() => {
+                        if(qty > 1) {
+                            api.put.user.cart(book.id, qty - 1).then(() => location.reload())
+                        }
+                    });
+                    o.find('.trash-button').click(() => {
+                        api.put.user.cart(book.id, 0).then(() => location.reload())
+                    });
                     total_amount += qty * book.price;
 
                     if (idx === books.length - 1) {
