@@ -72,18 +72,15 @@ app.post('/logout', function (req, res, next) {
     writer.writeJson(res, {massage: 'Logout successful'})
 });
 
-app.get('/checkauth', (req, res, next) => {
+app.get('/profile/*', (req, res, next) => {
     if (req.user !== undefined)
         return next();
-
     return res.status(401).json({
         error: 'User not authenticated'
     })
 
-}, function (req, res) {
-    res.status(200).json({
-        status: 'Login successful!'
-    });
+}, function (req, res, next) {
+    return next()
 });
 
 // Initialize the Swagger middleware

@@ -15,16 +15,30 @@ $(()=> {
                     o.find('.book-qty').html(qty);
                     o.find('.book-price').html('€ ' + (qty * book.price));
                     o.find('.book-image').attr('src', book.image_href);
-                    o.find('.plus-button').click(() => {
-                        api.put.user.cart(book.id, qty + 1).then(() => location.reload())
+                    o.find('.plus-button').click(function(){
+                        let $item = $(this).parents('.shopping-item').first();
+                        qty += 1;
+                        api.put.user.cart(book.id, qty).then(function () {
+                            $item.find('.book-qty').html(qty)
+                        })
                     });
-                    o.find('.minus-button').click(() => {
+                    o.find('.minus-button').click(function(){
+                        let $item = $(this).parents('.shopping-item').first();
+
                         if(qty > 1) {
-                            api.put.user.cart(book.id, qty - 1).then(() => location.reload())
+                            qty -= 1;
+                            api.put.user.cart(book.id, qty).then(function () {
+                                $item.find('.book-qty').html(qty)
+                            }).catch(e )
                         }
                     });
-                    o.find('.trash-button').click(() => {
-                        api.put.user.cart(book.id, 0).then(() => location.reload())
+                    o.find('.trash-button').click(function() {
+                        let $item = $(this).parents('.shopping-item').first();
+                        api.put.user.cart(book.id, 0).then(() => {
+                            $item.slideUp(() => {
+                                $item.remove()
+                            })
+                        })
                     });
                     total_amount += qty * book.price;
 
