@@ -68,7 +68,7 @@ $(() => {
             $('.cart-add').click(function() {
                 let qty = $(this).parents('.input-group').first().find('.cart-qty').first().val();
                 api.put.user.cart(id, qty).then(() => {
-                    modal.show('Added')
+                    modal.show('Thanks!', 'The book was added to your cart!')
                 }).catch( e => modal.error(e) )
             })
 
