@@ -29,7 +29,7 @@ $(()=> {
                             qty -= 1;
                             api.put.user.cart(book.id, qty).then(function () {
                                 $item.find('.book-qty').html(qty)
-                            }).catch(e )
+                            })
                         }
                     });
                     o.find('.trash-button').click(function() {
