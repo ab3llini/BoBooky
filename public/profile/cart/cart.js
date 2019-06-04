@@ -2,10 +2,10 @@ import * as loader from '/lib/js/utils/template_loader.js'
 import * as api from '/lib/js/utils/api.js';
 
 $(()=> {
+    let total_amount = 0.0;
     api.get.chart()
         .then(chart => {
             let books = chart.Books;
-            let total_amount = 0.0;
             books.forEach((b, idx) => {
                 loader.append_map('.shopping-cart-container', '/components/cart/cart-element.html', b.book.id, (o) => {
                     let book = b.book;
