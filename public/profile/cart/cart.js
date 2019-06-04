@@ -17,18 +17,24 @@ $(()=> {
                     o.find('.book-image').attr('src', book.image_href);
                     o.find('.plus-button').click(function(){
                         let $item = $(this).parents('.shopping-item').first();
-                        qty += 1;
                         api.put.user.cart(book.id, qty).then(function () {
-                            $item.find('.book-qty').html(qty)
+                            qty += 1;
+                            $item.find('.book-qty').html(qty);
+                            total_amount += book.price;
+                            $('.summary-subtotal').html('€ ' + total_amount.toFixed(2));
+                            $('.summary-total').html('€ ' + total_amount.toFixed(2));
                         })
                     });
                     o.find('.minus-button').click(function(){
                         let $item = $(this).parents('.shopping-item').first();
 
                         if(qty > 1) {
-                            qty -= 1;
                             api.put.user.cart(book.id, qty).then(function () {
-                                $item.find('.book-qty').html(qty)
+                                qty -= 1;
+                                $item.find('.book-qty').html(qty);
+                                total_amount -= book.price;
+                                $('.summary-subtotal').html('€ ' + total_amount.toFixed(2));
+                                $('.summary-total').html('€ ' + total_amount.toFixed(2));
                             })
                         }
                     });
@@ -36,6 +42,9 @@ $(()=> {
                         let $item = $(this).parents('.shopping-item').first();
                         api.put.user.cart(book.id, 0).then(() => {
                             $item.slideUp(() => {
+                                total_amount -= qty*book.price;
+                                $('.summary-subtotal').html('€ ' + total_amount.toFixed(2));
+                                $('.summary-total').html('€ ' + total_amount.toFixed(2));
                                 $item.remove()
                             })
                         })
@@ -43,8 +52,8 @@ $(()=> {
                     total_amount += qty * book.price;
 
                     if (idx === books.length - 1) {
-                        $('.summary-subtotal').html('€ ' + total_amount);
-                        $('.summary-total').html('€ ' + total_amount);
+                        $('.summary-subtotal').html('€ ' + total_amount.toFixed(2));
+                        $('.summary-total').html('€ ' + total_amount.toFixed(2));
                         $('.summary-delivery').html('free')
                     }
                 })
