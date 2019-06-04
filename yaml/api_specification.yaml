@@ -838,7 +838,7 @@ definitions:
       title:
         type: "string"
       author:
-        type: "string"
+        $ref: "#/definitions/Author"
       description:
         type: "string"
       publisher:
