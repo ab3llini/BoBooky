@@ -287,13 +287,13 @@ module.exports.authorIdReviewGET = (id) => {
                         body: res.body,
                         rating: res.rating
                     };
-                    review.Author = {
+                    review.author = {
                         name: res.name,
                         surname: res.surname,
                         email: res.email,
                         birthdate: res.birthdate
                     };
-                    ans.push(res);
+                    ans.push(review);
                     if (idx === results.rowCount - 1)
                         resolve(ans)
                 })
