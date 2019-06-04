@@ -27,7 +27,7 @@ Loading template
 </div>
 
 <div class="fixed-bottom vw-100 shadow d-block d-md-none">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row bg-white">
             <div class="col">
                 <div class="row py-3">
@@ -37,18 +37,16 @@ Loading template
                     <div class="col-auto">
                         <div class="input-group input-group">
                             <div class="input-group-prepend">
-                                <button class="btn btn-outline-pink dropdown-toggle" type="button"
-                                        data-toggle="dropdown">1
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">2</a>
-                                    <a class="dropdown-item" href="#">3</a>
-                                    <a class="dropdown-item" href="#">4</a>
-                                    <a class="dropdown-item" href="#">5</a>
-                                </div>
+                                <select class="custom-select cart-qty">
+                                    <option selected value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn btn-pink" type="button">Add</button>
+                                <button class="btn btn-pink cart-add" type="button">Add</button>
                             </div>
                             <div class="input-group-append">
                                 <button class="btn btn-pink text-white wishlist" type="button">
@@ -81,12 +79,16 @@ Loading template
                     <h1 class="text-dark book-title">Book title</h1>
                 </div>
                 <div>
-                    <h3 class="text-pink book-author text-capitalize">Author name</h3>
+                    <a href="#" class="book-author-href text-decoration-none">
+                        <h3 class="text-pink book-author text-capitalize">
+                            Author name
+                        </h3>
+                    </a>
                 </div>
                 <div class="text-gray book-genres text-capitalize mt-4">
                     Horror / Fantasy
                 </div>
-                <div class="text-light book-rating mt-1">
+                <div class="text-light text-pink book-rating mt-1">
                     <div class="ml-2 text-gray d-inline">
                         <span class="book-rating-val">0</span>/5, <span class="book-rating-qty">0</span> reviews
                     </div>
@@ -193,12 +195,15 @@ Loading template
                     <h1 class="text-dark book-title text-capitalize">Book title</h1>
                 </div>
                 <div>
-                    <h3 class="text-pink book-author text-capitalize">Author name</h3>
-                </div>
+                    <a href="#" class="book-author-href text-decoration-none">
+                        <h3 class="text-pink book-author text-capitalize">
+                            Author name
+                        </h3>
+                    </a>                </div>
                 <div class="text-gray book-genres mt-4 text-capitalize">
                     Horror / Fantasy
                 </div>
-                <div class="text-light book-rating mt-1">
+                <div class="text-light text-pink book-rating mt-1">
                     <div class="ml-2 text-gray d-inline">
                         <span class="book-rating-val">0</span>/5,
                         <span class="book-rating-qty"> 0</span> reviews
@@ -211,18 +216,16 @@ Loading template
                     <div class="text-dark font-weight-bold d-flex flex-column justify-content-center ml-5 h-100">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
-                                <button class="btn btn-outline-pink dropdown-toggle" type="button"
-                                        data-toggle="dropdown">1
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">2</a>
-                                    <a class="dropdown-item" href="#">3</a>
-                                    <a class="dropdown-item" href="#">4</a>
-                                    <a class="dropdown-item" href="#">5</a>
-                                </div>
+                                <select class="custom-select-sm cart-qty">
+                                    <option selected value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn btn-pink" type="button">Add to cart</button>
+                                <button class="btn btn-pink cart-add" type="button">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -331,13 +334,13 @@ Loading template
     <div class="book-reviews bg-dark vh-100">
         <div class="container text-white">
 
-                <h3 class="d-inline">Reviews (<span class="book-rating-qty">0</span>)</h3>
-                <div class=" ml-4 book-rating d-inline"></div>
+            <h3 class="d-inline">Reviews (<span class="book-rating-qty">0</span>)</h3>
+            <div class="text-pink ml-4 book-rating d-inline"></div>
 
-        <div class="book-reviews-container d-flex flex-column justify-content-start mt-5">
+            <div class="book-reviews-container d-flex flex-column justify-content-start mt-5">
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <script src="/lib/jquery/dist/jquery.js"></script>

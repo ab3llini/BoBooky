@@ -45,7 +45,7 @@ let make = {
                 complete: (xhr, textStatus) => {
                     if (xhr.status !== 200) {
                         var e = new Error(xhr.statusText);
-                        e.statusText = xhr.statusText
+                        e.statusText = xhr.statusText;
                         e.status = xhr.status;
                         reject(e)
                     }
@@ -127,12 +127,28 @@ export let get = {
     book : {
         get : (id) => { return make.get('/api/book/' + id) },
         related : (id) => { return make.get('/api/book/' + id + '/related')},
-        reviews : (id) => { return make.get('/api/book/' + id + '/review') }
+        reviews : (id) => { return make.get('/api/book/' + id + '/review') },
+        search : {
+            query: (query) => { return make.get('/api/book/search?query=' + query)},
+            isbn : (isbn) => { return make.get('/api/book/search?isbn=' + isbn)},
+            genre : (genre) => { return make.get('/api/book/search?genre=' + genre)},
+            year : (year) => { return make.get('/api/book/search?year=' + year)},
+            author : (author) => { return make.get('/api/book/search?author=' + author)},
+            author_id : (author_id) => { return make.get('/api/book/search?author_id=' + author_id)},
+            publisher : (publisher) => { return make.get('/api/book/search?publisher=' + publisher)},
+            publisher_id : (publisher_id) => { return make.get('/api/book/search?publisher_id=' + publisher_id)},
+            theme : (theme) => { return make.get('/api/book/search?theme=' + theme)}
+        }
     },
     address: () => { return make.get('/api/user/0/address')}, //FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
     chart: () => { return make.get('/api/user/0/chart')},
     user : {
         wishlist: () => { return make.get('/api/user/0/whishlist') }
+    },
+    author: {
+        get : (id) => { return make.get('/api/author/' + id) },
+        books : (id) => { return get.book.search.author_id(id)},
+        reviews : (id) => { return make.get('/api/author/' + id + '/review') }
     }
 };
 export let post = {
@@ -159,6 +175,13 @@ export let post = {
             delete : (id) => {
                 return make.delete('/api/user/0/whishlist/?bookID=' + id, undefined, data => {return data})
             }
+        }
+    }
+}
+export let put = {
+    user : {
+        cart : (id, qty) => {
+            return make.put('/api/user/0/chart', {bookID : parseInt(id), qty: parseInt(qty)})
         }
     }
 }
