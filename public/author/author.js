@@ -13,7 +13,7 @@ $(() => {
     loading.set('body > .loading');
 
     // Create new job to load all elements first
-    let loadingJob = worker.newJob(4, loading.hide);
+    let loadingJob = worker.newJob(2, loading.hide);
 
     // Then Inject modal to handle messages, then perform all the rest..
     modal.inject(modal.type.alert, 'author').then(modal_obj => {
@@ -67,10 +67,8 @@ $(() => {
                         '.author-description': author.description.slice(0, 500),
                         '.author-full-description': author.description.slice(500, author.description.length),
                     });
-                    // Load author image
-                    image.load('.author-image > img', author.image_url).then(() => {
-                        loadingJob.completeTask()
-                    });
+
+                    $('.author-image > .img').css("background-image", "url(" + author.image_url + ")");
 
                     //Inject rating
                     rating.append_rating('.author-rating', avg_rating).then(o => { loadingJob.completeTask() })
@@ -84,12 +82,13 @@ $(() => {
             loader.append('.related-container', '/components/carousel/container.html', 'related-carousel')
                 .then(() => {
 
-                    if (books === undefined) {
-                        loadingJob.completeTask()
-                        return;
-                    }
 
                     api.get.book.search.author_id(id).then(books => {
+
+                        if (books === undefined) {
+                            loadingJob.completeTask()
+                            return;
+                        }
                         $('.book-data').html(books[0].title);
 
                         books.forEach(book => {

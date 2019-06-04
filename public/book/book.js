@@ -93,6 +93,9 @@ $(() => {
                         '.book-description': book.description.slice(0, 500),
                         '.book-full-description': book.description.slice(500, book.description.length),
                     });
+
+                    $('.book-author-href').attr('href', '/author/?id='+book.author.id);
+
                     // Load book image
                     image.load('.book-image > img', book.image_href).then(() => {
                         loadingJob.completeTask()
