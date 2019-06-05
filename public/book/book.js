@@ -39,7 +39,7 @@ $(() => {
                             $heart.addClass('fa-heart')
                     }
                 })
-            });
+            }).catch(e => {});
 
             // Bind wishlist add/remove
             $('.wishlist').unbind().click(function () {
@@ -70,11 +70,15 @@ $(() => {
                 api.put.user.cart(id, qty).then(() => {
                     modal.show('Thanks!', 'The book was added to your cart!')
                 }).catch( e => modal.error(e) )
-            })
+            });
 
             // Retrieve and map book
             api.get.book.get(id)
                 .then(book => {
+
+                    // Set page title
+                    document.title = book.title;
+
                     // Load JSON
                     api.map({
                         '.book-title': book.title,
@@ -89,6 +93,9 @@ $(() => {
                         '.book-description': book.description.slice(0, 500),
                         '.book-full-description': book.description.slice(500, book.description.length),
                     });
+
+                    $('.book-author-href').attr('href', '/author/?id='+book.author.id);
+
                     // Load book image
                     image.load('.book-image > img', book.image_href).then(() => {
                         loadingJob.completeTask()
