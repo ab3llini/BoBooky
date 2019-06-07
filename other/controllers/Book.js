@@ -7,82 +7,92 @@ module.exports.bookGET = function bookGET (req, res, next) {
   var offset = req.swagger.params['offset'].value;
   var limit = req.swagger.params['limit'].value;
   Book.bookGET(offset,limit)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.bookGenreGET = function bookGenreGET (req, res, next) {
   Book.bookGenreGET()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.bookIdGET = function bookIdGET (req, res, next) {
   var id = req.swagger.params['id'].value;
   Book.bookIdGET(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.bookRelatedGET = function bookRelatedGET (req, res, next) {
   var id = req.swagger.params['id'].value;
   Book.bookRelatedGET(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
+};
+
+module.exports.bookRelatedGET = function bookRelatedGET (req, res, next) {
+  var id = req.swagger.params['id'].value;
+  Book.bookRelatedGET(id)
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.bookReviewDELETE = function bookReviewDELETE (req, res, next) {
   var id = req.swagger.params['id'].value;
   var reviewID = req.swagger.params['reviewID'].value;
-  var userID = req.user.id;
-  Book.bookReviewDELETE(id,reviewID,userID)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  Book.bookReviewDELETE(id,reviewID)
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.bookReviewGET = function bookReviewGET (req, res, next) {
   var id = req.swagger.params['id'].value;
   Book.bookReviewGET(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.bookReviewPOST = function bookReviewPOST (req, res, next) {
   var id = req.swagger.params['id'].value;
-  var userID = req.user.id;
   var body = req.swagger.params['body'].value;
-  Book.bookReviewPOST(id,userID,body)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  Book.bookReviewPOST(id,body)
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
+
 
 module.exports.bookSearchGET = function bookSearchGET (req, res, next) {
   var query = req.swagger.params['query'].value;
@@ -94,11 +104,13 @@ module.exports.bookSearchGET = function bookSearchGET (req, res, next) {
   var publisher = req.swagger.params['publisher'].value;
   var publisher_id = req.swagger.params['publisher_id'].value;
   var theme = req.swagger.params['theme'].value;
-  Book.bookSearchGET(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  var offset = req.swagger.params['offset'].value;
+  var limit = req.swagger.params['limit'].value;
+  Book.bookSearchGET(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme,offset,limit)
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };

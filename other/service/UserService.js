@@ -84,6 +84,23 @@ exports.userChartPUT = function(id,body) {
     return db.execute(db.userChartPUT, [id, body])
 };
 
+/**
+ * Returns all the registered users. Admins only.
+ *
+ * returns List
+ **/
+exports.userGET = function() {
+    return new Promise(function(resolve, reject) {
+        var examples = {};
+        examples['application/json'] = [ "{\n  id: 1,\n  name: \"Alan\",\n  surname: \"Turing\",\n  email: \"alan.turing@example.com\"\n  birthdate: \"1989-01-01\"\n}", "{\n  id: 1,\n  name: \"Alan\",\n  surname: \"Turing\",\n  email: \"alan.turing@example.com\"\n  birthdate: \"1989-01-01\"\n}" ];
+        if (Object.keys(examples).length > 0) {
+            resolve(examples[Object.keys(examples)[0]]);
+        } else {
+            resolve();
+        }
+    });
+}
+
 
 /**
  * Login
@@ -136,25 +153,25 @@ exports.userRegisterPOST = function(body) {
 
 
 /**
- * Removes one book from the whishlist
+ * Removes one book from the Wishlist
  *
  * id String
- * bookID Integer The id of the book to be removed from the whishlist
+ * bookID Integer The id of the book to be removed from the Wishlist
  * no response value expected for this operation
  **/
-exports.userWhishlistDELETE = function(id,bookID) {
-    return db.execute(db.userWhishlistDELETE, [id, bookID])
+exports.userWishlistDELETE = function(id,bookID) {
+    return db.execute(db.userWishlistDELETE, [id, bookID])
 };
 
 
 /**
- * Get the list of books in the whishlist
+ * Get the list of books in the Wishlist
  *
  * id String
  * returns List
  **/
-exports.userWhishlistGET = function(id) {
-    return db.execute(db.userWhishlistGET, [id])
+exports.userWishlistGET = function(id) {
+    return db.execute(db.userWishlistGET, [id])
 };
 
 /**
@@ -164,6 +181,6 @@ exports.userWhishlistGET = function(id) {
  * book_id Integer
  * no response value expected for this operation
  **/
-exports.userWhishlistPOST = function(id,book_id) {
-    return db.execute(db.userWhishlistPOST, [id, book_id])
+exports.userWishlistPOST = function(id,book_id) {
+    return db.execute(db.userWishlistPOST, [id, book_id])
 };

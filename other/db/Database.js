@@ -294,9 +294,8 @@ module.exports.authorIdReviewGET = (id) => {
                         birthdate: res.birthdate
                     };
                     ans.push(review);
-                    if (idx === results.rowCount - 1)
-                        resolve(ans)
                 })
+                resolve(ans)
             })
             .catch(error => {
                 console.log(error);
@@ -558,7 +557,7 @@ module.exports.userChartGET = (userID) => {
     })
 };
 
-module.exports.userWhishlistPOST = (userID, bookID) => {
+module.exports.userWishlistPOST = (userID, bookID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.addBookToUserWishList(userID, bookID))
             .then(() => resolve())
@@ -569,7 +568,7 @@ module.exports.userWhishlistPOST = (userID, bookID) => {
     })
 };
 
-module.exports.userWhishlistGET = (userID) => {
+module.exports.userWishlistGET = (userID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.getWishList(userID))
             .then(wl => resolve(wl.rows))
@@ -580,7 +579,7 @@ module.exports.userWhishlistGET = (userID) => {
     })
 };
 
-module.exports.userWhishlistDELETE = (userID, bookID) => {
+module.exports.userWishlistDELETE = (userID, bookID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.deleteBookFromUserWishList(userID, bookID))
             .then(() => resolve())

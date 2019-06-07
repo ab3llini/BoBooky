@@ -21,7 +21,7 @@ produces:
   - "application/json"
   - "application/octet-stream"
 paths:
-  /author:
+  /authors:
     get:
       tags:
         - "author"
@@ -70,7 +70,7 @@ paths:
         in: "path"
         required: true
         type: "string"
-  /author/{id}/review:
+  /author/{id}/reviews:
     get:
       tags:
         - "author"
@@ -98,11 +98,6 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "userID"
-          in: "query"
-          required: true
-          type: "integer"
-          description: "The user that wrote the review"
         - name: "body"
           in: "body"
           required: true
@@ -112,7 +107,7 @@ paths:
         200:
           description: "Status 200"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "user"
             - "admin"
     delete:
@@ -126,10 +121,6 @@ paths:
           required: true
           type: "integer"
           description: "The id of the review to be removed"
-        - name: "userID"
-          in: "query"
-          required: true
-          type: "integer"
       responses:
         200:
           description: "Status 200"
@@ -138,7 +129,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     parameters:
@@ -146,7 +137,7 @@ paths:
         in: "path"
         required: true
         type: "string"
-  /book:
+  /books:
     get:
       tags:
         - "book"
@@ -230,7 +221,7 @@ paths:
         in: "path"
         required: true
         type: "string"
-  /book/{id}/review:
+  /book/{id}/reviews:
     get:
       tags:
         - "book"
@@ -258,11 +249,6 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "userID"
-          in: "query"
-          required: true
-          type: "integer"
-          description: "The user that wrote the review"
         - name: "body"
           in: "body"
           required: true
@@ -272,7 +258,7 @@ paths:
         200:
           description: "Status 200"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     delete:
@@ -283,13 +269,9 @@ paths:
       parameters:
         - name: "reviewID"
           in: "query"
-          required: true
+          required: false
           type: "integer"
           description: "The id of the review to be removed"
-        - name: "userID"
-          in: "query"
-          required: true
-          type: "integer"
       responses:
         200:
           description: "Status 200"
@@ -298,7 +280,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     parameters:
@@ -306,6 +288,33 @@ paths:
         in: "path"
         required: true
         type: "string"
+  /book/genres:
+    get:
+      tags:
+        - "book"
+      summary: "Gets all the genres"
+      operationId: "bookGenreGET"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              required:
+                - "genre_name"
+              type: "object"
+              properties:
+                id:
+                  type: "integer"
+                genre_name:
+                  type: "string"
+        400:
+          description: "Status 400"
+        404:
+          description: "Status 404"
   /book/search:
     get:
       tags:
@@ -353,6 +362,18 @@ paths:
           in: "query"
           required: false
           type: "string"
+        - name: "offset"
+          in: "query"
+          required: false
+          type: "integer"
+          description: "Defaults to 0"
+          x-example: 10
+        - name: "limit"
+          in: "query"
+          required: false
+          type: "integer"
+          description: "Defaults to 20"
+          x-example: 50
       responses:
         200:
           description: "successful operation"
@@ -364,33 +385,6 @@ paths:
           description: "At least one parameter must be specified"
         404:
           description: "Book not found"
-  /book/genre:
-    get:
-      tags:
-        - "book"
-      summary: "Gets all the genres"
-      operationId: "bookGenreGET"
-      produces:
-        - "application/json"
-      parameters: []
-      responses:
-        200:
-          description: "Status 200"
-          schema:
-            type: "array"
-            items:
-              required:
-                - "genre_name"
-              type: "object"
-              properties:
-                id:
-                  type: "integer"
-                genre_name:
-                  type: "string"
-        400:
-          description: "Status 400"
-        404:
-          description: "Status 404"
   /user/register:
     post:
       tags:
@@ -427,7 +421,7 @@ paths:
           in: "body"
           required: true
           schema:
-            $ref: "#/definitions/body"
+            $ref: "#/definitions/login_request"
       responses:
         200:
           description: "succesfull login"
@@ -445,10 +439,10 @@ paths:
         200:
           description: "Status 200"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
-  /user/{id}/address:
+  /user/{id}/addresses:
     get:
       tags:
         - "user"
@@ -465,7 +459,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     post:
@@ -486,7 +480,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     put:
@@ -515,7 +509,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     delete:
@@ -537,7 +531,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     parameters:
@@ -545,7 +539,9 @@ paths:
         in: "path"
         required: true
         type: "string"
-  /user/{id}/whishlist:
+        description: "The ID of the user. Automatically replaced if not logged-in with\
+        \ admin privileges."
+  /user/{id}/wishlist:
     get:
       tags:
         - "user"
@@ -562,7 +558,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     post:
@@ -583,7 +579,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "user"
             - "admin"
     delete:
@@ -605,7 +601,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     parameters:
@@ -613,7 +609,9 @@ paths:
         in: "path"
         required: true
         type: "string"
-  /user/{id}/order:
+        description: "The ID of the user. Automatically replaced if not logged-in with\
+        \ admin privileges."
+  /user/{id}/orders:
     get:
       tags:
         - "user"
@@ -640,7 +638,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     parameters:
@@ -648,7 +646,9 @@ paths:
         in: "path"
         required: true
         type: "string"
-  /user/{id}/chart:
+        description: "The ID of the user. Automatically replaced if not logged-in with\
+        \ admin privileges."
+  /user/{id}/cart:
     get:
       tags:
         - "user"
@@ -659,11 +659,11 @@ paths:
         200:
           description: "Status 200"
           schema:
-            $ref: "#/definitions/Chart"
+            $ref: "#/definitions/Cart"
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     put:
@@ -678,12 +678,12 @@ paths:
           in: "body"
           required: true
           schema:
-            $ref: "#/definitions/body_1"
+            $ref: "#/definitions/update_cart_request"
       responses:
         200:
           description: "Status 200"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     delete:
@@ -698,7 +698,7 @@ paths:
         404:
           description: "Status 404"
       security:
-        - OAuth2:
+        - BoBookySecurity:
             - "admin"
             - "user"
     parameters:
@@ -706,7 +706,9 @@ paths:
         in: "path"
         required: true
         type: "string"
-  /event:
+        description: "The ID of the user. Automatically replaced if not logged-in with\
+        \ admin privileges."
+  /events:
     get:
       tags:
         - "event"
@@ -745,7 +747,7 @@ paths:
         in: "path"
         required: true
         type: "string"
-  /event/search:
+  /events/search:
     get:
       tags:
         - "event"
@@ -812,10 +814,31 @@ paths:
           description: "At least one query parameter must exist"
         404:
           description: "Status 404"
+  /users:
+    get:
+      tags:
+        - "user"
+      summary: "Returns all the registered users. Admins only."
+      operationId: "userGET"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        401:
+          description: "Status 401"
+      security:
+        - BoBookySecurity:
+            - "admin"
 securityDefinitions:
-  OAuth2:
+  BoBookySecurity:
     type: "oauth2"
-    tokenUrl: "http://localhost/login"
+    tokenUrl: "http://localhost/api/user/login"
     flow: "password"
     scopes:
       admin: "Website administrator"
@@ -870,18 +893,6 @@ definitions:
     example: "{\n  id: 0,\n  title: \"Il deserto dei tartari\",\n  author: \"Dino\
       \ Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  },\n  image_url:\
       \ \"https://test.com\"\n}"
-  Amount:
-    type: "object"
-    required:
-      - "value"
-    properties:
-      value:
-        type: "number"
-        format: "double"
-        minimum: 0.01
-        maximum: 1000
-    description: "Price\n"
-    example: "{\n  currency: \"eur\",\n  value: 11\n}"
   User:
     type: "object"
     required:
@@ -928,14 +939,11 @@ definitions:
       rating:
         type: "number"
     description: "This is a review object."
-    example:
-      author: "{\n  id: 1,\n  name: \"Alan\",\n  surname: \"Turing\",\n  email: \"\
-        alan.turing@example.com\"\n  birthdate: \"1989-01-01\"\n}"
-      rating: 6.027456183070403
-      id: 0
-      title: "title"
-      body: "body"
-      timestamp: "2000-01-23T04:56:07.000+00:00"
+    example: "{\n  \"author\":{  \"id\": 1,  \"name\": \"Alan\",  \"surname\": \"\
+      Turing\",  \"email\": \"alan.turing@example.com\",  \"birthdate\": \"1989-01-01\"\
+      },\n  \"rating\": 6.027456183070403,\n  \"id\": 0,\n  \"title\": \"title\",\n\
+      \  \"body\": \"body\",\n  \"timestamp\": \"2000-01-23T04:56:07.000+00:00\"\n\
+      }"
   Author:
     type: "object"
     required:
@@ -1050,7 +1058,7 @@ definitions:
         type: "array"
         description: "The list of books ordered"
         items:
-          $ref: "#/definitions/Order_Books"
+          $ref: "#/definitions/books_in_cart"
       amount:
         type: "number"
         description: "Amount to pay for this order"
@@ -1065,7 +1073,7 @@ definitions:
       eur\"\n  }\n\n},\n{\n  id: 1,\n  title: \"Il deserto dei tartari\",\n  author:\
       \ \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  }\n\
       }\n  ]\n}"
-  Chart:
+  Cart:
     type: "object"
     required:
       - "Books"
@@ -1079,7 +1087,7 @@ definitions:
         type: "array"
         description: "The list of books ordered"
         items:
-          $ref: "#/definitions/Order_Books"
+          $ref: "#/definitions/books_in_cart"
       total_amount:
         type: "number"
         description: "Amount to pay for this order"
@@ -1094,7 +1102,7 @@ definitions:
       eur\"\n  }\n\n},\n{\n  id: 1,\n  title: \"Il deserto dei tartari\",\n  author:\
       \ \"Dino Buzzati\",\n  price: {\n    value: 10,\n    currency: \"eur\"\n  }\n\
       }\n  ]\n}"
-  body:
+  login_request:
     type: "object"
     required:
       - "password"
@@ -1104,7 +1112,7 @@ definitions:
         type: "string"
       password:
         type: "string"
-  body_1:
+  update_cart_request:
     type: "object"
     required:
       - "bookID"
@@ -1114,7 +1122,7 @@ definitions:
         type: "integer"
       qty:
         type: "integer"
-  Order_Books:
+  books_in_cart:
     type: "object"
     required:
       - "book"
@@ -1124,21 +1132,4 @@ definitions:
         $ref: "#/definitions/Book"
       qty:
         type: "integer"
-  inline_response_200:
-    type: "object"
-    required:
-      - "genre_name"
-    properties:
-      id:
-        type: "integer"
-      genre_name:
-        type: "string"
-  inline_response_200_1:
-    type: "object"
-    required:
-      - "genre_name"
-    properties:
-      id:
-        type: "integer"
-      genre_name:
-        type: "string"
+

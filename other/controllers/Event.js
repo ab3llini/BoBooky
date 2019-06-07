@@ -5,23 +5,23 @@ var Event = require('../service/EventService');
 
 module.exports.eventGET = function eventGET (req, res, next) {
   Event.eventGET()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.eventIdGET = function eventIdGET (req, res, next) {
   var id = req.swagger.params['id'].value;
   Event.eventIdGET(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.eventSearchGET = function eventSearchGET (req, res, next) {
@@ -36,10 +36,10 @@ module.exports.eventSearchGET = function eventSearchGET (req, res, next) {
   var date_to = req.swagger.params['date_to'].value;
   var location = req.swagger.params['Location'].value;
   Event.eventSearchGET(query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };

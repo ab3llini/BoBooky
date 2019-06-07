@@ -85,6 +85,16 @@ module.exports.userChartPUT = function userChartPUT (req, res, next) {
     });
 };
 
+module.exports.userGET = function userGET (req, res, next) {
+  User.userGET()
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
+};
+
 module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
   var body = req.swagger.params['body'].value;
   User.userLoginPOST(body)
@@ -130,10 +140,10 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
     });
 };
 
-module.exports.userWhishlistDELETE = function userWhishlistDELETE (req, res, next) {
+module.exports.userWishlistDELETE = function userWishlistDELETE (req, res, next) {
   var id = req.user.id;
   var bookID = req.swagger.params['bookID'].value;
-  User.userWhishlistDELETE(id,bookID)
+  User.userWishlistDELETE(id,bookID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -142,9 +152,9 @@ module.exports.userWhishlistDELETE = function userWhishlistDELETE (req, res, nex
     });
 };
 
-module.exports.userWhishlistGET = function userWhishlistGET (req, res, next) {
+module.exports.userWishlistGET = function userWishlistGET (req, res, next) {
   var id = req.user.id;
-  User.userWhishlistGET(id)
+  User.userWishlistGET(id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -153,10 +163,10 @@ module.exports.userWhishlistGET = function userWhishlistGET (req, res, next) {
     });
 };
 
-module.exports.userWhishlistPOST = function userWhishlistPOST (req, res, next) {
+module.exports.userWishlistPOST = function userWishlistPOST (req, res, next) {
   var id = req.user.id;
   var book_id = req.swagger.params['book_id'].value;
-  User.userWhishlistPOST(id,book_id)
+  User.userWishlistPOST(id,book_id)
     .then(function (response) {
       utils.writeJson(res, response);
     })

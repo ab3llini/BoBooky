@@ -91,10 +91,12 @@ exports.bookReviewPOST = function(id,userID,body) {
  * publisher String  (optional)
  * publisher_id Integer  (optional)
  * theme String  (optional)
+ * offset Integer Defaults to 0 (optional)
+ * limit Integer Defaults to 20 (optional)
  * returns List
  **/
-exports.bookSearchGET = function(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme) {
-  return db.execute(db.bookSearchGET, [query,isbn,genre,year,author,author_id,publisher,publisher_id,theme])
+exports.bookSearchGET = function(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme,offset,limit) {
+  return db.execute(db.bookSearchGET, [query,isbn,genre,year,author,author_id,publisher,publisher_id,theme, offset, limit])
 };
 
 

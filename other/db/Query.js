@@ -129,7 +129,6 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
     }
     q += 'offset $'+placeholder+' limit $'+(placeholder+1);
     values.push(offset, limit);
-    console.log(q);
     return {
         text: q,
         values: values
