@@ -28,46 +28,98 @@ $(() => {
 
             let authors = {};
 
+            // Wishlist
+            let wishlist = [];
+            let inWishlist = []
+
+
             // Fetch all results
             api.get.book.search.query(query).then(books => {
                 if (books !== undefined && books.length > 0) {
-                    books.forEach(book => {
-                        // Check-Add author
-                        if (!(book.author.id in authors)) {
-                            authors[book.author.id] = book.author
-                        }
 
-                        // Add book to results
-                        loader.append_map('.books-container', '/components/search/book.html', book.id, function (book_obj) {
-                            book_obj.find('.book-href').attr('href', '/book/?id=' + book.id);
-                            book_obj.find('.author-href').attr('href', '/author/?id=' + book.author.id);
-                            book_obj.find('.image').css("background-image", "url(" + book.image_href + ")");
+                    // Init wishlist
+                    api.get.user.wishlist().then(_wishlist => {
+                        wishlist = _wishlist;
+                        _wishlist.forEach(book => {
+                            inWishlist.push(book.id);
+                        })
 
-                            book_obj.find('.title').html(book.title);
-                            book_obj.find('.author').html(book.author.name);
-                            book_obj.find('.date').html([book.publication_month, book.publication_year].join('/'));
-                            book_obj.find('.genres').html(book.genres.map(genre => genre.name).join(' / '));
-                            book_obj.find('.theme').html(book.theme);
-                            book_obj.find('.price').html(book.price);
-                            book_obj.find('.book-rating-val').html(book.avg_rating);
+                        // append books
+                        books.forEach(book => {
+                            // Check-Add author
+                            if (!(book.author.id in authors)) {
+                                authors[book.author.id] = book.author
+                            }
 
-                            rating.append_rating(book_obj.find('.rating'), book.avg_rating).then(o => { /*loadingJob.completeTask() */})
+                            // Add book to results
+                            loader.append_map('.books-container', '/components/search/book.html', book.id, function (book_obj) {
+                                book_obj.find('.book-href').attr('href', '/book/?id=' + book.id);
+                                book_obj.find('.author-href').attr('href', '/author/?id=' + book.author.id);
+                                book_obj.find('.image').css("background-image", "url(" + book.image_href + ")");
 
-                            api.get.book.reviews(book.id).then(reviews => {
-                                if (reviews === undefined) {
-                                    return
+                                book_obj.find('.title').html(book.title);
+                                book_obj.find('.author').html(book.author.name);
+                                book_obj.find('.date').html([book.publication_month, book.publication_year].join('/'));
+                                book_obj.find('.genres').html(book.genres.map(genre => genre.name).join(' / '));
+                                book_obj.find('.theme').html(book.theme);
+                                book_obj.find('.price').html(book.price);
+                                book_obj.find('.book-rating-val').html(book.avg_rating);
+
+                                // Setup in wishlist
+                                if (inWishlist.indexOf(book.id) > 0) {
+                                    let $btn = book_obj.find('.wishlist');
+                                    let $heart = $btn.find('.fa');
+                                    $heart.removeClass('fa-heart-o');
+                                    $heart.addClass('fa-heart')
                                 }
-                                book_obj.find('.book-rating-qty').html(reviews.length)
+
+                                // Bind handlers for wishlist
+                                book_obj.find('.wishlist').unbind().click(function () {
+
+                                    let id = $(this).parents('.book').attr('id');
+                                    let idx = inWishlist.indexOf(id)
+                                    if (idx > 0) {
+                                        api.post.user.wishlist.delete(id).then(() => {
+                                            console.log('Removed')
+                                            let $heart = $(this).find('.fa');
+                                            $heart.removeClass('fa-heart');
+                                            $heart.addClass('fa-heart-o')
+                                            inWishlist.splice(idx, 1)
+                                        }).catch(e => modal.error(e))
+                                    } else {
+                                        api.post.user.wishlist.add(id).then(() => {
+                                            console.log('Added')
+                                            let $heart = $(this).find('.fa');
+                                            $heart.removeClass('fa-heart-o');
+                                            $heart.addClass('fa-heart')
+                                            inWishlist.push(idx)
+                                        }).catch(e => modal.error(e))
+                                    }
+                                });
+
+                                rating.append_rating(book_obj.find('.rating'), book.avg_rating).then(o => { /*loadingJob.completeTask() */
+                                })
+
+                                api.get.book.reviews(book.id).then(reviews => {
+                                    if (reviews === undefined) {
+                                        return
+                                    }
+                                    book_obj.find('.book-rating-qty').html(reviews.length)
                                 })
                             }).then(() => {
                                 if (book === $(books).get(-1)) {
                                     //loadingJob.completeTask()
                                 }
                             })
-                            .catch(e => {
-                                modal.error(e)
-                            });
-                    })
+                                .catch(e => {
+                                    modal.error(e)
+                                });
+
+
+                        })
+
+                    }).catch(e => {
+                    });
                 }
 
                 // Inject authors carousel
