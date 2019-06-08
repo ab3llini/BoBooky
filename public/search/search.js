@@ -26,14 +26,60 @@ $(() => {
 
             let query = args.get('q')
 
+            // Fetch all authors that match the query
             let authors = {};
+
+            // Inject authors carousel
+            api.get.book.search.author(query).then(books => {
+                console.log(books)
+                books.forEach(book => {
+                    // Check-Add author
+                    if (!(book.author.id in authors)) {
+                        authors[book.author.id] = book.author
+                    }
+                })
+                if (Object.values(authors).length > 0) {
+                    loader.append('.author-container', '/components/carousel/container.html', 'author-carousel')
+                        .then(() => {
+                            Object.values(authors).forEach(author => {
+                                loader.append_map('#author-carousel .MS-content', '/components/carousel/items/author.html', author.id, function (book_obj) {
+                                    book_obj.find('.author-href').attr('href', '/author/?id=' + author.id);
+                                    book_obj.find('.image').css("background-image", "url(" + author.image_url + ")");
+                                    book_obj.find('.title').html(author.name);
+                                })
+                                    .then(() => {
+                                        if (author === $(Object.values(authors)).get(-1)) {
+                                            let ms = $('#author-carousel');
+                                            console.log('END')
+                                            ms.multislider({
+                                                interval: 3000,
+                                                hoverPause: true
+                                            }).multislider('pause');
+
+                                            //loadingJob.completeTask()
+                                        }
+                                    })
+                                    .catch(e => {
+                                        modal.error(e)
+                                    });
+                            })
+
+                        })
+                        .catch(e => {
+                            modal.error(e)
+                        });
+
+                } else {
+                    $('.author-container').html("No authors found..")
+                }
+            }).catch(e => modal.error(e))
 
             // Wishlist
             let wishlist = [];
             let inWishlist = []
 
 
-            // Fetch all results
+            // Fetch all books that match the query
             api.get.book.search.query(query).then(books => {
                 if (books !== undefined && books.length > 0) {
 
@@ -46,10 +92,6 @@ $(() => {
 
                         // append books
                         books.forEach(book => {
-                            // Check-Add author
-                            if (!(book.author.id in authors)) {
-                                authors[book.author.id] = book.author
-                            }
 
                             // Add book to results
                             loader.append_map('.books-container', '/components/search/book.html', book.id, function (book_obj) {
@@ -120,42 +162,6 @@ $(() => {
 
                     }).catch(e => {
                     });
-                }
-
-                // Inject authors carousel
-                if (Object.values(authors).length > 0) {
-                    loader.append('.author-container', '/components/carousel/container.html', 'author-carousel')
-                        .then(() => {
-                            Object.values(authors).forEach(author => {
-                                loader.append_map('#author-carousel .MS-content', '/components/carousel/items/author.html', author.id, function (book_obj) {
-                                    book_obj.find('.author-href').attr('href', '/author/?id=' + author.id);
-                                    book_obj.find('.image').css("background-image", "url(" + author.image_url + ")");
-                                    book_obj.find('.title').html(author.name);
-                                })
-                                    .then(() => {
-                                        if (author === $(Object.values(authors)).get(-1)) {
-                                            let ms = $('#author-carousel');
-                                            console.log('END')
-                                            ms.multislider({
-                                                interval: 3000,
-                                                hoverPause: true
-                                            }).multislider('pause');
-
-                                            //loadingJob.completeTask()
-                                        }
-                                    })
-                                    .catch(e => {
-                                        modal.error(e)
-                                    });
-                            })
-
-                        })
-                        .catch(e => {
-                            modal.error(e)
-                        });
-
-                } else {
-                    $('.author-container').html("No authors found..")
                 }
             }).catch(e => modal.error(e));
 
