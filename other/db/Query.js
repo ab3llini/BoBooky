@@ -129,7 +129,6 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
     }
     q += 'offset $'+placeholder+' limit $'+(placeholder+1);
     values.push(offset, limit);
-    console.log(q);
     return {
         text: q,
         values: values
@@ -348,7 +347,7 @@ module.exports.registerUser = (user) => {
 
 module.exports.loginUser = (email, pswSHA256) => {
     return {
-        text: `select id, email from "user" where email = $1 and sha256 = $2`,
+        text: `select id, name, surname, email from "user" where email = $1 and sha256 = $2`,
         values: [email, pswSHA256]
     }
 };

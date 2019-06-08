@@ -23,15 +23,25 @@ var writer = require('./other/utils/writer');
 passport.use(new Strategy(
     function (username, password, done) {
 
+
         db.userLoginPOST({
             username: username,
             password: password
         })
             .then((result) => {
+                console.warn('1 username = ' + username + ' pass=' + password)
+
                 console.log('New login: ' + username);
-                done(null, {username: username, id: result.id})
+                done(null, {
+                    name: result.name,
+                    surname: result.surname,
+                    email: result.email,
+                    id: result.id
+                })
             })
             .catch(e => {
+                console.warn(e)
+
                 console.log('Login failed: ' + username);
                 done(null, false)
             })
@@ -62,11 +72,15 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/login', passport.authenticate('local'), (req, res) => {
+app.use('/api/user/login', function (req, res, next) {
+    if (req.user)
+        req.logout();
+    passport.authenticate('local')(req, res, next)
+}, (req, res, next) => {
     writer.writeJson(res, {user: req.user})
 });
 
-app.post('/logout', function (req, res, next) {
+app.use('/api/user/logout', function (req, res, next) {
     req.logout();
     console.log('Logging out');
     writer.writeJson(res, {massage: 'Logout successful'})
@@ -94,7 +108,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
     app.use((req, res, next) => {
         middleware.swaggerSecurity({
-            OAuth2: function (req, authOrSecDef, scopesOrApiKey, callback) {
+            BoBookyAuth: function (req, authOrSecDef, scopesOrApiKey, callback) {
                 if (!req.user) {
                     writer.writeJson(res, writer.respondWithCode(401, 'Not authorized'))
                 } else

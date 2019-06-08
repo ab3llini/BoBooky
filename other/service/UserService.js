@@ -1,101 +1,99 @@
 'use strict';
-
 let db = require('../db/Database');
 
 
 /**
  * Delete an existing address for the user
  *
- * @param id The id of the user
- * @param addressID Integer The id of the address to be removed
+ * addressID Integer The id of the address to be removed
  * no response value expected for this operation
  **/
-exports.userAddressDELETE = function(id,addressID) {
-    return db.execute(db.userAddressDELETE, [id, addressID])
-};
+exports.userAddressDELETE = function(id, addressID) {
+  return db.execute(db.userAddressDELETE, [id, addressID])
+
+}
 
 
 /**
  * Get the list of addresses for the user
  *
- * @param id is the id of the user
- * @returns List of addresses
+ * returns List
  **/
 exports.userAddressGET = function(id) {
-    return db.execute(db.userAddressGET, [id])
-};
+  return db.execute(db.userAddressGET, [id])
+
+}
 
 
 /**
  * Add new address for the user
  *
- * @param id Is the id of the user
- * @param body object that contains all the information about the Address
+ * body Address 
  * no response value expected for this operation
  **/
 exports.userAddressPOST = function(id, body) {
-    return db.execute(db.userAddressPOST, [id, body])
-};
+  return db.execute(db.userAddressPOST, [id, body])
+
+}
 
 
 /**
- * Update an existing address
+ * Update an exsisting address
  *
- * @param id is the id of the user
- * @param addressID Integer The identifier for the address to update
- * @param body contains all the information about the Address updated
+ * addressID Integer The identifier for the address to update
+ * body Address 
  * no response value expected for this operation
  **/
-exports.userAddressPUT = function(id,addressID,body) {
-    return db.execute(db.userAddressPUT, [id, body])
-};
+exports.userAddressPUT = function(id, addressID, body) {
+  return db.execute(db.userAddressPUT, [id, body])
+
+}
 
 
 /**
  * Delete the current cart
  *
- * @param id the if of the user
  * no response value expected for this operation
  **/
 exports.userChartDELETE = function(id) {
-    return db.execute(db.userChartDELETE, [id])
-};
+  return db.execute(db.userChartDELETE, [id])
+
+}
 
 
 /**
  * Get the user's current cart
  *
- * @param id id of the user
- * @returns Chart
+ * returns Cart
  **/
 exports.userChartGET = function(id) {
-    return db.execute(db.userChartGET, [id])
-};
+  return db.execute(db.userChartGET, [id])
+}
 
 
 /**
  * Updates the current cart
  *
- * @param id is the id of the user
- * @param body is an object with bookID and qty
+ * body Update_cart_request 
  * no response value expected for this operation
  **/
-exports.userChartPUT = function(id,body) {
-    return db.execute(db.userChartPUT, [id, body])
-};
+exports.userChartPUT = function(id, body) {
+  return db.execute(db.userChartPUT, [id, body])
+
+}
 
 
 /**
  * Login
  * Login with a form
  *
- * body Body
+ * body Login_request 
  * no response value expected for this operation
  **/
 exports.userLoginPOST = function(body) {
-    db.execute(db.userLoginPOST, [body])
+  db.execute(db.userLoginPOST, [body])
 
-};
+}
 
 
 /**
@@ -105,65 +103,67 @@ exports.userLoginPOST = function(body) {
  * no response value expected for this operation
  **/
 exports.userLogoutGET = function() {
-    //TODO
-    return new Promise(function(resolve, reject) {
-        resolve();
-    });
-};
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
 
 
 /**
  * Get the orders for a given user
  *
- * id String
- * no response value expected for this operation
+ * offset Integer  (optional)
+ * limit Integer  (optional)
+ * returns List
  **/
-exports.userOrderGET = function(id, offset=0, limit=10) {
-    return db.execute(db.userOrderGET, [id, offset, limit])
-};
+exports.userOrderGET = function(offset,limit) {
+  return db.execute(db.userOrderGET, [id, offset, limit])
+}
 
 
 /**
  * Registration
  * Register into the bookstore
  *
- * body User
+ * body User 
  * no response value expected for this operation
  **/
 exports.userRegisterPOST = function(body) {
-    return db.execute(db.userRegisterPOST, [body])
-};
+  return db.execute(db.userRegisterPOST, [body])
+
+}
 
 
 /**
  * Removes one book from the whishlist
  *
- * id String
  * bookID Integer The id of the book to be removed from the whishlist
  * no response value expected for this operation
  **/
-exports.userWhishlistDELETE = function(id,bookID) {
-    return db.execute(db.userWhishlistDELETE, [id, bookID])
-};
+exports.userWhishlistDELETE = function(id, bookID) {
+  return db.execute(db.userWishlistDELETE, [id, bookID])
+
+}
 
 
 /**
  * Get the list of books in the whishlist
  *
- * id String
  * returns List
  **/
 exports.userWhishlistGET = function(id) {
-    return db.execute(db.userWhishlistGET, [id])
-};
+  return db.execute(db.userWishlistGET, [id])
+
+}
+
 
 /**
  * Add a book to the whish list
  *
- * id String
- * book_id Integer
+ * bookID Integer 
  * no response value expected for this operation
  **/
-exports.userWhishlistPOST = function(id,book_id) {
-    return db.execute(db.userWhishlistPOST, [id, book_id])
-};
+exports.userWhishlistPOST = function(id, bookID) {
+  return db.execute(db.userWishlistPOST, [id, book_id])
+}
+

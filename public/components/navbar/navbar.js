@@ -20,7 +20,7 @@ $(function () {
 
         // Replace salute user
         if (session.isLoggedIn()) {
-            $('#profile-ribbon #username').html(session.get().user.username)
+            $('#profile-ribbon #username').html(session.get().user.name)
         }
 
         // Bind login functionality
