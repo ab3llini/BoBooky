@@ -92,7 +92,7 @@ module.exports.userChartPUT = function userChartPUT(req, res, next) {
         });
 };
 
-module.exports.userLoginPOST = function userLoginPOST(req, res, next) { next() };
+module.exports.userLoginPOST = function userLoginPOST(req, res, next) {  };
 
 module.exports.userLogoutGET = function userLogoutGET(req, res, next) {
     User.userLogoutGET()

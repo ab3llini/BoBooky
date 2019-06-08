@@ -109,7 +109,7 @@ export let get = {
     books: (offset, limit) => {
         return new Promise((resolve, reject) => {
             $.ajax({
-                url: '/api/book',
+                url: '/api/books',
                 type: 'GET',
                 data: {
                     offset: offset,
@@ -153,13 +153,13 @@ export let get = {
 };
 export let post = {
     login: (username, password) => {
-        return make.post('/login', {
+        return make.post('/api/user/login', {
             username: username,
             password: password
         })
     },
     logout: () => {
-        return make.post('/logout');
+        return make.post('/api/user/logout');
     },
     register: (body) => {
         return make.post('/api/user/register', body)
