@@ -13,7 +13,6 @@
 
         // ==== CACHE DOM ====
         var $multislider = $(this);
-        console.log($multislider.find('.MS-content').children().length)
         var $msContent = $multislider.find('.MS-content');
         var $msRight = $multislider.find('button.MS-right');
         var $msLeft = $multislider.find('button.MS-left');

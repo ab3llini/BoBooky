@@ -10693,11 +10693,13 @@ input.placeholder-gray::placeholder {
   src: url(https://fonts.googleapis.com/css?family=Nunito&display=swap);
 }
 body {
-  font-family: "Open Sans", sans-serif;
+  /*
+  font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
-}
-body h1, body h2, body h3, body h4, body h5, body h6, body .title {
-  font-family: "Nunito", sans-serif;
+  h1, h2, h3, h4, h5, h6, .title {
+      font-family: 'Nunito', sans-serif;
+  }
+  */
 }
 
 .linear-gradient {

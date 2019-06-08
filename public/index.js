@@ -3,6 +3,10 @@ import * as loader from '/lib/js/utils/template_loader.js'
 
 $(() => {
 
+    $('.search-button').click(function () {
+        window.location.href = '/search/?q=' + $('.search-query').val()
+    });
+
     // Inject
     loader.append('.whatsnew', '/components/carousel/container.html', 'whatsnew-carousel')
         .then(() => {
@@ -17,8 +21,8 @@ $(() => {
                         .then(() => {
                             if (book === $(books).get(-1)) {
                                 $('#whatsnew-carousel').multislider({
-                                    interval : 3000,
-                                    hoverPause : true
+                                    interval: 3000,
+                                    hoverPause: true
                                 });
                             }
                         })
@@ -39,8 +43,8 @@ $(() => {
                         .then(() => {
                             if (book === $(books).get(-1)) {
                                 $('#favourites-carousel').multislider({
-                                    interval : 3000,
-                                    hoverPause : true
+                                    interval: 3000,
+                                    hoverPause: true
                                 });
                             }
                         })
