@@ -29,8 +29,7 @@ module.exports.authorIdGET = function authorIdGET (req, res, next) {
 module.exports.authorReviewDELETE = function authorReviewDELETE (req, res, next) {
   var id = req.swagger.params['id'].value;
   var reviewID = req.swagger.params['reviewID'].value;
-  var userID = req.user.id;
-  Author.authorReviewDELETE(id,reviewID,userID)
+  Author.authorReviewDELETE(id,reviewID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -52,9 +51,8 @@ module.exports.authorReviewGET = function authorReviewGET (req, res, next) {
 
 module.exports.authorReviewPOST = function authorReviewPOST (req, res, next) {
   var id = req.swagger.params['id'].value;
-  var userID = req.user.id;
   var body = req.swagger.params['body'].value;
-  Author.authorReviewPOST(id,userID,body)
+  Author.authorReviewPOST(id,body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

@@ -50,8 +50,7 @@ module.exports.bookRelatedGET = function bookRelatedGET (req, res, next) {
 module.exports.bookReviewDELETE = function bookReviewDELETE (req, res, next) {
   var id = req.swagger.params['id'].value;
   var reviewID = req.swagger.params['reviewID'].value;
-  var userID = req.user.id;
-  Book.bookReviewDELETE(id,reviewID,userID)
+  Book.bookReviewDELETE(id,reviewID)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -73,9 +72,9 @@ module.exports.bookReviewGET = function bookReviewGET (req, res, next) {
 
 module.exports.bookReviewPOST = function bookReviewPOST (req, res, next) {
   var id = req.swagger.params['id'].value;
-  var userID = req.user.id;
   var body = req.swagger.params['body'].value;
-  Book.bookReviewPOST(id,userID,body)
+  var userID = req.user.id;
+  Book.bookReviewPOST(id, userID, body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -90,11 +89,23 @@ module.exports.bookSearchGET = function bookSearchGET (req, res, next) {
   var genre = req.swagger.params['genre'].value;
   var year = req.swagger.params['year'].value;
   var author = req.swagger.params['author'].value;
-  var author_id = req.swagger.params['author_id'].value;
+  var authorID = req.swagger.params['authorID'].value;
   var publisher = req.swagger.params['publisher'].value;
-  var publisher_id = req.swagger.params['publisher_id'].value;
+  var publisherID = req.swagger.params['publisherID'].value;
   var theme = req.swagger.params['theme'].value;
-  Book.bookSearchGET(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme)
+  var offset = req.swagger.params['offset'].value;
+  var limit = req.swagger.params['limit'].value;
+  Book.bookSearchGET(query,isbn,genre,year,author,authorID,publisher,publisherID,theme,offset,limit)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.bookThemeGET = function bookThemeGET (req, res, next) {
+  Book.bookThemeGET()
     .then(function (response) {
       utils.writeJson(res, response);
     })

@@ -57,7 +57,7 @@ module.exports.bookReviews = (bookID) => {
 module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publisher, publisher_id, theme,
                              offset = 0, limit = 20) => {
     //TODO: Fif error when searching by year
-    let q = `select distinct b.id, b.title, a.name as author, b.description, p.name as publisher, b.price, b.isbn,
+    let q = `select distinct b.id, b.title, a.id as author, b.description, p.name as publisher, b.price, b.isbn,
                 b.isbn13, b.publication_year, b.publication_month, b.avg_rating, i.href as image_href,
                 i.href_small as image_href_small, b.theme
              from book b
@@ -110,10 +110,11 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
         values.push(publisher)
     }
     if (author_id !== undefined) {
-        q += clause + ' (a.id = \'%\' || $'+placeholder+' || \'%\')' + ' ';
+        // If matching exact values (i.e. IDs) there is no point in using LIKE% syntax
+        q += clause + ' (a.id = $'+placeholder+')' + ' ';
         clause = 'and';
         placeholder += 1;
-        values.push(author_id)
+        values.push(parseInt(author_id))
     }
     if (publisher_id !== undefined) {
         q += clause + ' (p.id = \'%\' || $'+placeholder+' || \'%\')' + ' ';
@@ -346,7 +347,7 @@ module.exports.registerUser = (user) => {
 
 module.exports.loginUser = (email, pswSHA256) => {
     return {
-        text: `select id, email from "user" where email = $1 and sha256 = $2`,
+        text: `select id, name, surname, email from "user" where email = $1 and sha256 = $2`,
         values: [email, pswSHA256]
     }
 };

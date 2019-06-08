@@ -175,9 +175,22 @@ module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher
                     pipe.query(make.bookGenres(book.id))
                         .then(genres => {
                             book.genres = genres.rows;
-                            ans.push(book);
-                            if (i === result.rowCount - 1)
-                                resolve(ans)
+                            pipe.query(make.authorId(book.author))
+                                .then(authors => {
+                                    if(authors.rowCount !== 0) {
+                                        delete book.author;
+                                        book.author = authors.rows[0];
+                                        ans.push(book);
+                                        if (i === result.rowCount - 1)
+                                            resolve(ans)
+                                    }
+                                    else
+                                        reject()
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                    reject()
+                                })
                         })
                         .catch(error => {
                             console.log(error);
@@ -186,7 +199,8 @@ module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher
                 })
             })
             .catch(error => {
-                console.log(error);
+                console.log('ERROR IN SEARCH QUERY:')
+                console.error(error);
                 reject()
             })
 
@@ -246,9 +260,9 @@ module.exports.authorGET = (offset, limit) => {
 
 module.exports.authorIdGET = (id) => {
     return new Promise((resolve, reject) => {
-        pipe.query(make.author(id))
+        pipe.query(make.authorId(id))
             .then(authors => {
-                if(authors.rowCount === 0)
+                if(authors.rowCount !== 0)
                     resolve(authors.rows[0]);
                 else
                     reject()
@@ -273,16 +287,15 @@ module.exports.authorIdReviewGET = (id) => {
                         body: res.body,
                         rating: res.rating
                     };
-                    review.Author = {
+                    review.author = {
                         name: res.name,
                         surname: res.surname,
                         email: res.email,
                         birthdate: res.birthdate
                     };
-                    ans.push(res);
-                    if (idx === results.rowCount - 1)
-                        resolve(ans)
+                    ans.push(review);
                 })
+                resolve(ans)
             })
             .catch(error => {
                 console.log(error);
@@ -544,7 +557,7 @@ module.exports.userChartGET = (userID) => {
     })
 };
 
-module.exports.userWhishlistPOST = (userID, bookID) => {
+module.exports.userWishlistPOST = (userID, bookID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.addBookToUserWishList(userID, bookID))
             .then(() => resolve())
@@ -555,7 +568,7 @@ module.exports.userWhishlistPOST = (userID, bookID) => {
     })
 };
 
-module.exports.userWhishlistGET = (userID) => {
+module.exports.userWishlistGET = (userID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.getWishList(userID))
             .then(wl => resolve(wl.rows))
@@ -566,7 +579,7 @@ module.exports.userWhishlistGET = (userID) => {
     })
 };
 
-module.exports.userWhishlistDELETE = (userID, bookID) => {
+module.exports.userWishlistDELETE = (userID, bookID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.deleteBookFromUserWishList(userID, bookID))
             .then(() => resolve())
