@@ -1,0 +1,1481 @@
+openapi: 3.0.1
+info:
+  title: BoBooky
+  description: Welcome to the OpenAPI specification of Booboky!
+  termsOfService: ""
+  contact:
+    name: Alberto Mario Bellini / Gianpaolo Di Pietro
+    url: https://bobooky.herokuapp.com/
+    email: bobooky@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost/api
+paths:
+  /authors:
+    get:
+      tags:
+        - author
+      summary: List all the authors in the database
+      operationId: authorGET
+      parameters:
+        - name: offset
+          in: query
+          description: Page offset. Defaults to 0
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Result limit. Defaults to 20, max 500.
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Returns the list of authors in the specified range.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+              example: |-
+                [
+                {
+                    "image_url": "image_url",
+                    "name": "name",
+                    "description": "description",
+                    "id": 0
+                  }
+                ]
+            application/octet-stream:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+        400:
+          description: Unable to fetch all authors
+          content: {}
+        404:
+          description: Unable to find the specified resource
+          content: {}
+  /author/{id}:
+    get:
+      tags:
+        - author
+      summary: Fetch a specific author
+      operationId: authorIdGET
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Author'
+        400:
+          description: Unable to fetch this author.
+          content: {}
+        404:
+          description: Unable to find this author.
+          content: {}
+  /author/{id}/reviews:
+    get:
+      tags:
+        - author
+      summary: Get reviews for a given author
+      operationId: authorReviewGET
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+              example: |-
+                [
+                  {
+                   "author":{
+                      "id":1,
+                      "name":"Alan",
+                      "surname":"Turing",
+                      "email":"alan.turing@example.com",
+                      "birthdate":"1989-01-01"
+                   },
+                   "rating":6.027456183070403,
+                   "id":0,
+                   "title":"title",
+                   "body":"body",
+                   "timestamp":"2000-01-23T04:56:07.000+00:00"
+                }
+                ]
+        400:
+          description: Bad author id
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+    post:
+      tags:
+        - author
+      summary: Adds a review to the specified author
+      operationId: authorReviewPOST
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+        required: true
+      responses:
+        200:
+          description: Status 200
+          content: {}
+      security:
+        - BoBookyAuth: []
+    delete:
+      tags:
+        - author
+      summary: Deletes a review written by the authenticated user.
+      operationId: authorReviewDELETE
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: reviewID
+          in: query
+          description: The id of the review to be removed
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Status 200
+          content: {}
+        400:
+          description: invalid review id
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+  /books:
+    get:
+      tags:
+        - book
+      summary: Books available in the inventory
+      description: List of books available in the inventory
+      operationId: bookGET
+      parameters:
+        - name: offset
+          in: query
+          description: Pagination offset. Default is 0.
+          schema:
+            minimum: 0
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          description: Maximum number of items per page. Default is 20 and cannot exceed
+            500.
+          schema:
+            maximum: 500
+            minimum: 1
+            type: integer
+            default: 20
+      responses:
+        200:
+          description: A collection of Books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              example: |-
+                [
+                  {
+                  "id": 10,
+                  "title": "The Traitor (Divergent, #0.4)",
+                  "author": {
+                    "id": 10,
+                    "name": "Veronica Roth",
+                    "description": "Veronica Roth, born in 1988, is a renowned novelist and short story writer of American origin.",
+                    "image_url": "https://images.gr-assets.com/authors/1544540525p8/4039811.jpg"
+                  },
+                  "description": "The Traitor takes place two years after \"The Son\" and runs parallel with the early events in Divergent.",
+                  "publisher": "Katherine Tegen Books",
+                  "price": 20.25,
+                  "isbn": "006228567X",
+                  "isbn13": "9780062285676",
+                  "publication_year": 2014,
+                  "publication_month": 7,
+                  "image_href": "https://images.gr-assets.com/books/1393687607l/18080923.jpg",
+                  "image_href_small": "https://images.gr-assets.com/books/1393687607m/18080923.jpg",
+                  "avg_rating": 5,
+                  "genres": [
+                    "to-read",
+                    "young-adult",
+                    "dystopian",
+                    "dystopia"
+                  ]
+                }
+                ]
+        404:
+          description: Book not found
+          content: {}
+  /book/{id}:
+    get:
+      tags:
+        - book
+      summary: Find book by ID
+      description: Returns a book
+      operationId: bookIdGET
+      parameters:
+        - name: id
+          in: path
+          description: ID of book to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        400:
+          description: Invalid ID supplied
+          content: {}
+        404:
+          description: Book not found
+          content: {}
+  /book/{id}/related:
+    get:
+      tags:
+        - book
+      summary: Get the related books for the given book id
+      operationId: bookRelatedGET
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              example: |-
+                [
+                  {
+                  "id": 10,
+                  "title": "The Traitor (Divergent, #0.4)",
+                  "author": {
+                    "id": 10,
+                    "name": "Veronica Roth",
+                    "description": "Veronica Roth, born in 1988, is a renowned novelist and short story writer of American origin.",
+                    "image_url": "https://images.gr-assets.com/authors/1544540525p8/4039811.jpg"
+                  },
+                  "description": "The Traitor takes place two years after \"The Son\" and runs parallel with the early events in Divergent.",
+                  "publisher": "Katherine Tegen Books",
+                  "price": 20.25,
+                  "isbn": "006228567X",
+                  "isbn13": "9780062285676",
+                  "publication_year": 2014,
+                  "publication_month": 7,
+                  "image_href": "https://images.gr-assets.com/books/1393687607l/18080923.jpg",
+                  "image_href_small": "https://images.gr-assets.com/books/1393687607m/18080923.jpg",
+                  "avg_rating": 5,
+                  "genres": [
+                    "to-read",
+                    "young-adult",
+                    "dystopian",
+                    "dystopia"
+                  ]
+                }
+                ]
+        404:
+          description: Status 404
+          content: {}
+  /book/{id}/reviews:
+    get:
+      tags:
+        - book
+      summary: Get reviews for a given book
+      operationId: bookReviewGET
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+              example: |-
+                [
+                  {
+                   "author":{
+                      "id":1,
+                      "name":"Alan",
+                      "surname":"Turing",
+                      "email":"alan.turing@example.com",
+                      "birthdate":"1989-01-01"
+                   },
+                   "rating":6.027456183070403,
+                   "id":0,
+                   "title":"title",
+                   "body":"body",
+                   "timestamp":"2000-01-23T04:56:07.000+00:00"
+                }
+                ]
+        400:
+          description: Bad author id
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+    post:
+      tags:
+        - book
+      summary: Adds a review to the specified book
+      operationId: bookReviewPOST
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+        required: true
+      responses:
+        200:
+          description: Status 200
+          content: {}
+      security:
+        - BoBookyAuth: []
+    delete:
+      tags:
+        - book
+      summary: Deletes a review written by the authenticated user.
+      operationId: bookReviewDELETE
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: reviewID
+          in: query
+          description: The id of the review to be removed
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Status 200
+          content: {}
+        400:
+          description: invalid review id
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+  /book/themes:
+    get:
+      tags:
+        - book
+      summary: Returns all the themes in the db.
+      operationId: bookThemeGET
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+            application/octet-stream:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+        400:
+          description: Status 400
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+  /book/genres:
+    get:
+      tags:
+        - book
+      summary: Gets all the genres
+      operationId: bookGenreGET
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Genre'
+              example: |-
+                [
+                  {
+                  "id" : 53,
+                  "name" : "Drama"
+                }
+                ]
+        400:
+          description: Status 400
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+  /book/search:
+    get:
+      tags:
+        - book
+      summary: Find books by name
+      description: Return a list of books
+      operationId: bookSearchGET
+      parameters:
+        - name: query
+          in: query
+          description: generic search query for the book
+          schema:
+            type: string
+        - name: isbn
+          in: query
+          schema:
+            type: string
+        - name: genre
+          in: query
+          schema:
+            type: string
+        - name: year
+          in: query
+          schema:
+            type: integer
+        - name: author
+          in: query
+          schema:
+            type: string
+        - name: authorID
+          in: query
+          schema:
+            type: integer
+        - name: publisher
+          in: query
+          schema:
+            type: string
+        - name: publisherID
+          in: query
+          schema:
+            type: integer
+        - name: theme
+          in: query
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: Defaults to 0
+          schema:
+            type: integer
+          example: 10
+        - name: limit
+          in: query
+          description: Defaults to 20
+          schema:
+            type: integer
+          example: 50
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              example: |-
+                [
+                  {
+                  "id": 10,
+                  "title": "The Traitor (Divergent, #0.4)",
+                  "author": {
+                    "id": 10,
+                    "name": "Veronica Roth",
+                    "description": "Veronica Roth, born in 1988, is a renowned novelist and short story writer of American origin.",
+                    "image_url": "https://images.gr-assets.com/authors/1544540525p8/4039811.jpg"
+                  },
+                  "description": "The Traitor takes place two years after \"The Son\" and runs parallel with the early events in Divergent.",
+                  "publisher": "Katherine Tegen Books",
+                  "price": 20.25,
+                  "isbn": "006228567X",
+                  "isbn13": "9780062285676",
+                  "publication_year": 2014,
+                  "publication_month": 7,
+                  "image_href": "https://images.gr-assets.com/books/1393687607l/18080923.jpg",
+                  "image_href_small": "https://images.gr-assets.com/books/1393687607m/18080923.jpg",
+                  "avg_rating": 5,
+                  "genres": [
+                    "to-read",
+                    "young-adult",
+                    "dystopian",
+                    "dystopia"
+                  ]
+                }
+                ]
+        400:
+          description: At least one parameter must be specified
+          content: {}
+        404:
+          description: Book not found
+          content: {}
+  /user/register:
+    post:
+      tags:
+        - user
+      summary: Registration
+      description: Register into the bookstore
+      operationId: userRegisterPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        200:
+          description: succesfull registration
+          content: {}
+        400:
+          description: User already present
+          content: {}
+        404:
+          description: unauthorized
+          content: {}
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: Login
+      description: Login with a form
+      operationId: userLoginPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/login_request'
+        required: true
+      responses:
+        200:
+          description: succesfull login
+          content: {}
+        404:
+          description: unauthorized
+          content: {}
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: Logs out the current user session
+      description: Logout
+      operationId: userLogoutGET
+      responses:
+        200:
+          description: Status 200
+          content: {}
+      security:
+        - BoBookyAuth: []
+  /user/addresses:
+    get:
+      tags:
+        - user
+      summary: Get the list of addresses for the user
+      operationId: userAddressGET
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+              example: |-
+                [
+                {
+                    "id": 14,
+                    "name": "aaaa bbb",
+                    "address_line_1": "afadf",
+                    "address_line_2": "asDASda",
+                    "cap": 3423,
+                    "city": "DADSAD",
+                    "country": "ASAGGAS"
+                  }
+                ]
+            application/octet-stream:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+    put:
+      tags:
+        - user
+      summary: Update an exsisting address
+      operationId: userAddressPUT
+      parameters:
+        - name: addressID
+          in: query
+          description: The identifier for the address to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      responses:
+        200:
+          description: Status 200
+          content: {}
+        400:
+          description: Invalid address ID - the address to update does not exists
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+    post:
+      tags:
+        - user
+      summary: Add new address for the user
+      operationId: userAddressPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      responses:
+        200:
+          description: Status 200
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+    delete:
+      tags:
+        - user
+      summary: Delete an existing address for the user
+      operationId: userAddressDELETE
+      parameters:
+        - name: addressID
+          in: query
+          description: The id of the address to be removed
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: The address has been removed
+          content: {}
+        400:
+          description: The address id is invalid
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+  /user/wishlist:
+    get:
+      tags:
+        - user
+      summary: Get the list of books in the whishlist
+      operationId: userWhishlistGET
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              example: |-
+                [
+                  {
+                  "id": 10,
+                  "title": "The Traitor (Divergent, #0.4)",
+                  "author": {
+                    "id": 10,
+                    "name": "Veronica Roth",
+                    "description": "Veronica Roth, born in 1988, is a renowned novelist and short story writer of American origin.",
+                    "image_url": "https://images.gr-assets.com/authors/1544540525p8/4039811.jpg"
+                  },
+                  "description": "The Traitor takes place two years after \"The Son\" and runs parallel with the early events in Divergent.",
+                  "publisher": "Katherine Tegen Books",
+                  "price": 20.25,
+                  "isbn": "006228567X",
+                  "isbn13": "9780062285676",
+                  "publication_year": 2014,
+                  "publication_month": 7,
+                  "image_href": "https://images.gr-assets.com/books/1393687607l/18080923.jpg",
+                  "image_href_small": "https://images.gr-assets.com/books/1393687607m/18080923.jpg",
+                  "avg_rating": 5,
+                  "genres": [
+                    "to-read",
+                    "young-adult",
+                    "dystopian",
+                    "dystopia"
+                  ]
+                }
+                ]
+            application/octet-stream:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+    post:
+      tags:
+        - user
+      summary: Add a book to the whish list
+      operationId: userWhishlistPOST
+      parameters:
+        - name: bookID
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Status 200
+          content: {}
+        400:
+          description: Book already present in the whish list
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+    delete:
+      tags:
+        - user
+      summary: Removes one book from the whishlist
+      operationId: userWhishlistDELETE
+      parameters:
+        - name: bookID
+          in: query
+          description: The id of the book to be removed from the whishlist
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Status 200
+          content: {}
+        400:
+          description: Invalid book id - the book is not presenti on the whishlist
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+  /user/orders:
+    get:
+      tags:
+        - user
+      summary: Get the orders for a given user
+      operationId: userOrderGET
+      parameters:
+        - name: offset
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+              example: |-
+                [
+                  {
+                   "OrderID":123456789,
+                   "user":{
+                      "id":1,
+                      "name":"Alan",
+                      "surname":"Turing",
+                      "email":"alan.turing@example.com",
+                      "birthdate":"1989-01-01"
+                   },
+                   "books":[
+                      {
+                         "id":0,
+                         "title":"Il deserto dei tartari",
+                         "author":"Dino Buzzati",
+                         "price":{
+                            "value":10,
+                            "currency":"eur"
+                         }
+                      },
+                      {
+                         "id":1,
+                         "title":"Il deserto dei tartari",
+                         "author":"Dino Buzzati",
+                         "price":{
+                            "value":10,
+                            "currency":"eur"
+                         }
+                      }
+                   ],
+                  "amount" : 450,
+                  "timestamp": "1989-01-01"
+                }
+                ]
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+  /user/cart:
+    get:
+      tags:
+        - user
+      summary: Get the user's current cart
+      operationId: userChartGET
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+    put:
+      tags:
+        - user
+      summary: Updates the current cart
+      operationId: userChartPUT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_cart_request'
+        required: true
+      responses:
+        200:
+          description: Status 200
+          content: {}
+      security:
+        - BoBookyAuth: []
+    delete:
+      tags:
+        - user
+      summary: Delete the current cart
+      operationId: userChartDELETE
+      responses:
+        200:
+          description: Status 200
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+      security:
+        - BoBookyAuth: []
+  /events:
+    get:
+      tags:
+        - event
+      summary: Get the complete list of events
+      operationId: eventGET
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+              example: |-
+                [
+                  {
+                    "related_book": 1,
+                    "related_author": 6,
+                    "name": "name",
+                    "description": "description",
+                    "image_urls": [
+                      "image_urls",
+                      "image_urls"
+                    ],
+                    "location": {
+                      "country": "country",
+                      "cap": 6,
+                      "city": "city",
+                      "name": "name",
+                      "address_line_1": "address_line_1",
+                      "id": 0,
+                      "address_line_2": "address_line_2"
+                    },
+                    "id": 0,
+                    "timestamp": "2000-01-23T04:56:07.000+00:00"
+                  }
+                ]
+        404:
+          description: Status 404
+          content: {}
+  /event/{id}:
+    get:
+      tags:
+        - event
+      summary: Get event for a given id
+      operationId: eventIdGET
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        404:
+          description: Status 404
+          content: {}
+  /events/search:
+    get:
+      tags:
+        - event
+      summary: Search for an event
+      operationId: eventSearchGET
+      parameters:
+        - name: query_string
+          in: query
+          description: The search query
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: The name of the event
+          schema:
+            type: string
+        - name: author_name
+          in: query
+          description: The name of the author for the event
+          schema:
+            type: string
+        - name: authorID
+          in: query
+          description: The id of the author for the event
+          schema:
+            type: integer
+        - name: book_name
+          in: query
+          schema:
+            type: string
+        - name: bookID
+          in: query
+          schema:
+            type: integer
+        - name: date
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: date_from
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: date_to
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: Location
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: Status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        400:
+          description: At least one query parameter must exist
+          content: {}
+        404:
+          description: Status 404
+          content: {}
+components:
+  schemas:
+    Order:
+      required:
+        - amount
+        - books
+        - timestamp
+        - user
+      type: object
+      properties:
+        OrderID:
+          type: integer
+          description: The identifier of the order
+        user:
+          $ref: '#/components/schemas/User'
+        books:
+          type: array
+          description: The list of books ordered
+          items:
+            $ref: '#/components/schemas/CartBook'
+        amount:
+          type: number
+          description: Amount to pay for this order
+        timestamp:
+          type: string
+          format: date-time
+      description: An order for some books
+      example: |-
+        {
+           "OrderID":123456789,
+           "user":{
+              "id":1,
+              "name":"Alan",
+              "surname":"Turing",
+              "email":"alan.turing@example.com",
+              "birthdate":"1989-01-01"
+           },
+           "books":[
+              {
+                 "id":0,
+                 "title":"Il deserto dei tartari",
+                 "author":"Dino Buzzati",
+                 "price":{
+                    "value":10,
+                    "currency":"eur"
+                 }
+              },
+              {
+                 "id":1,
+                 "title":"Il deserto dei tartari",
+                 "author":"Dino Buzzati",
+                 "price":{
+                    "value":10,
+                    "currency":"eur"
+                 }
+              }
+           ],
+          "amount" : 450,
+          "timestamp": "1989-01-01"
+        }
+    User:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        birthdate:
+          type: string
+        password:
+          type: string
+      description: A user
+      example: "{\r\n   \"id\":45,\r\n   \"name\":\"Alberto\",\r\n   \"surname\":\"\
+        Rossi\",\r\n   \"email\":\"alberto.rossi@gmail.com\",\r\n   \"birthdate\"\
+        :\"1989-01-01\",\r\n   \"password\":\"abcde1234\"\r\n}"
+    Address:
+      required:
+        - address_line_1
+        - cap
+        - city
+        - country
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address_line_1:
+          type: string
+        address_line_2:
+          type: string
+        cap:
+          type: integer
+        city:
+          type: string
+        country:
+          type: string
+      description: An address
+      example: |-
+        {
+            "id": 14,
+            "name": "aaaa bbb",
+            "address_line_1": "afadf",
+            "address_line_2": "asDASda",
+            "cap": 3423,
+            "city": "DADSAD",
+            "country": "ASAGGAS"
+          }
+    Review:
+      type: object
+      properties:
+        author:
+          type: object
+          properties:
+            birthdate:
+              type: string
+            surname:
+              type: string
+            name:
+              type: string
+            id:
+              type: number
+            email:
+              type: string
+        rating:
+          type: number
+        id:
+          type: number
+        title:
+          type: string
+        body:
+          type: string
+        timestamp:
+          type: string
+      description: This is a review object.
+      example: "{\r\n   \"author\":{\r\n      \"id\":1,\r\n      \"name\":\"Alan\"\
+        ,\r\n      \"surname\":\"Turing\",\r\n      \"email\":\"alan.turing@example.com\"\
+        ,\r\n      \"birthdate\":\"1989-01-01\"\r\n   },\r\n   \"rating\":6.027456183070403,\r\
+        \n   \"id\":0,\r\n   \"title\":\"title\",\r\n   \"body\":\"body\",\r\n   \"\
+        timestamp\":\"2000-01-23T04:56:07.000+00:00\"\r\n}"
+    update_cart_request:
+      required:
+        - bookID
+        - qty
+      type: object
+      properties:
+        bookID:
+          type: integer
+        qty:
+          type: integer
+    login_request:
+      required:
+        - password
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    Book:
+      type: object
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+        author:
+          type: object
+          properties:
+            image_url:
+              type: string
+            name:
+              type: string
+            description:
+              type: string
+            id:
+              type: number
+        description:
+          type: string
+        publisher:
+          type: string
+        price:
+          type: number
+        isbn:
+          type: string
+        isbn13:
+          type: string
+        publication_year:
+          type: number
+        publication_month:
+          type: number
+        image_href:
+          type: string
+        image_href_small:
+          type: string
+        avg_rating:
+          type: number
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+        theme:
+          $ref: '#/components/schemas/Theme'
+      description: A book for sale in the store
+      example: |-
+        {
+          "id": 10,
+          "title": "The Traitor (Divergent, #0.4)",
+          "author": {
+            "id": 10,
+            "name": "Veronica Roth",
+            "description": "Veronica Roth, born in 1988, is a renowned novelist and short story writer of American origin.",
+            "image_url": "https://images.gr-assets.com/authors/1544540525p8/4039811.jpg"
+          },
+          "description": "The Traitor takes place two years after \"The Son\" and runs parallel with the early events in Divergent.",
+          "publisher": "Katherine Tegen Books",
+          "price": 20.25,
+          "isbn": "006228567X",
+          "isbn13": "9780062285676",
+          "publication_year": 2014,
+          "publication_month": 7,
+          "image_href": "https://images.gr-assets.com/books/1393687607l/18080923.jpg",
+          "image_href_small": "https://images.gr-assets.com/books/1393687607m/18080923.jpg",
+          "avg_rating": 5,
+          "genres": [
+            "to-read",
+            "young-adult",
+            "dystopian",
+            "dystopia"
+          ]
+        }
+    Theme:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      description: A theme
+    Author:
+      type: object
+      properties:
+        image_url:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        id:
+          type: number
+      description: An author
+      example: "{\r\n    \"image_url\": \"image_url\",\r\n    \"name\": \"name\",\r\
+        \n    \"description\": \"description\",\r\n    \"id\": 0\r\n  }"
+    Event:
+      type: object
+      properties:
+        related_book:
+          type: number
+        related_author:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+        image_urls:
+          type: array
+          items:
+            type: string
+        location:
+          type: object
+          properties:
+            country:
+              type: string
+            cap:
+              type: number
+            city:
+              type: string
+            name:
+              type: string
+            address_line_1:
+              type: string
+            id:
+              type: number
+            address_line_2:
+              type: string
+        id:
+          type: number
+        timestamp:
+          type: string
+      description: An event
+      example: "{\r\n    \"related_book\": 1,\r\n    \"related_author\": 6,\r\n  \
+        \  \"name\": \"name\",\r\n    \"description\": \"description\",\r\n    \"\
+        image_urls\": [\r\n      \"image_urls\",\r\n      \"image_urls\"\r\n    ],\r\
+        \n    \"location\": {\r\n      \"country\": \"country\",\r\n      \"cap\"\
+        : 6,\r\n      \"city\": \"city\",\r\n      \"name\": \"name\",\r\n      \"\
+        address_line_1\": \"address_line_1\",\r\n      \"id\": 0,\r\n      \"address_line_2\"\
+        : \"address_line_2\"\r\n    },\r\n    \"id\": 0,\r\n    \"timestamp\": \"\
+        2000-01-23T04:56:07.000+00:00\"\r\n  }"
+    Genre:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      example: "{\r\n  \"id\" : 53,\r\n  \"name\" : \"Drama\"\r\n}"
+    CartBook:
+      required:
+        - book
+        - qty
+      type: object
+      properties:
+        book:
+          $ref: '#/components/schemas/Book'
+        qty:
+          type: integer
+    Cart:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            birthdate:
+              type: string
+            surname:
+              type: string
+            name:
+              type: string
+            id:
+              type: number
+            email:
+              type: string
+        books:
+          type: array
+          items:
+            type: object
+            properties:
+              author:
+                type: string
+              price:
+                type: object
+                properties:
+                  currency:
+                    type: string
+                  value:
+                    type: number
+              id:
+                type: number
+              title:
+                type: string
+        amount:
+          type: number
+        timestamp:
+          type: string
+      description: An order for some books
+      example: "{\r\n   \"user\":{\r\n      \"id\":1,\r\n      \"name\":\"Alan\",\r\
+        \n      \"surname\":\"Turing\",\r\n      \"email\":\"alan.turing@example.com\"\
+        ,\r\n      \"birthdate\":\"1989-01-01\"\r\n   },\r\n   \"books\":[\r\n   \
+        \   {\r\n         \"id\":0,\r\n         \"title\":\"Il deserto dei tartari\"\
+        ,\r\n         \"author\":\"Dino Buzzati\",\r\n         \"price\":{\r\n   \
+        \         \"value\":10,\r\n            \"currency\":\"eur\"\r\n         }\r\
+        \n      },\r\n      {\r\n         \"id\":1,\r\n         \"title\":\"Il deserto\
+        \ dei tartari\",\r\n         \"author\":\"Dino Buzzati\",\r\n         \"price\"\
+        :{\r\n            \"value\":10,\r\n            \"currency\":\"eur\"\r\n  \
+        \       }\r\n      }\r\n   ],\r\n  \"amount\" : 450,\r\n  \"timestamp\": \"\
+        1989-01-01\"\r\n}"
+  securitySchemes:
+    BoBookyAuth:
+      type: http
+      scheme: basic

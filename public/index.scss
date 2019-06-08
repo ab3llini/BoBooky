@@ -1,0 +1,129 @@
+@import "lib/bootstrap/scss/functions";
+@import "lib/bootstrap/scss/variables";
+@import "lib/bootstrap/scss/mixins/breakpoints";
+
+
+@function prepend($list, $value) {
+  @return join($value, $list);
+}
+
+
+@function get-svg($count) {
+  $urls: ();
+
+  @for $i from 1 through $count {
+    @if $i > 1 {
+      $urls: prepend($urls, url('../../assets/component/home_bg_' + $i + '.svg') + ',')
+    }
+    @else {
+      $urls: prepend($urls, url('/assets/component/home_bg_' + $i + '.svg'))
+    }
+  }
+  @return $urls;
+}
+
+@function get-pos($rro, $rl,  $lbp, $rbp) {
+  @return right calc(#{100 - ($rbp * 100)}vw - #{$rro * 100}vh) bottom -#{(1 - $rl) * 100}vh,
+  left calc(#{($rbp * 100)}vw - #{$rro * 100}vh) top -#{(1 - $rl) * 100}vh,
+  right calc(#{100 - ($lbp * 100)}vw - #{$rro * 100}vh) bottom -#{(1 - $rl) * 100}vh,
+  left calc(#{($lbp * 100)}vw - #{$rro * 100}vh) top -#{(1 - $rl) * 100}vh;
+}
+
+.search-section {
+
+  background-image: get-svg(4);
+  background-repeat: no-repeat;
+
+  @include media-breakpoint-up(xs) {
+    $ribbon-size: 0.8;
+    $ribbon-length: 0.8;
+    $ribbon-relative-offset: 0.18;
+    $left-breakpoint: -0.1;
+    $right-breakpoint: 1 - $left-breakpoint;
+    background-size: #{$ribbon-size * 100}vh;
+    background-position: get-pos($ribbon-relative-offset, $ribbon-length, $left-breakpoint, $right-breakpoint)
+  }
+
+  @include media-breakpoint-up(sm) {
+    $ribbon-size: 0.9;
+    $ribbon-length: 0.7;
+    $ribbon-relative-offset: 0.2;
+    $left-breakpoint: 0.1;
+    $right-breakpoint: 1 - $left-breakpoint;
+    background-size: #{$ribbon-size * 100}vh;
+    background-position: get-pos($ribbon-relative-offset, $ribbon-length, $left-breakpoint, $right-breakpoint)
+
+  }
+
+  @include media-breakpoint-up(lg) {
+    $ribbon-size: 1;
+    $ribbon-length: 0.6;
+    $ribbon-relative-offset: 0.2;
+    $left-breakpoint: 0.2;
+    $right-breakpoint: 1 - $left-breakpoint;
+    background-size: #{$ribbon-size * 100}vh;
+    background-position: get-pos($ribbon-relative-offset, $ribbon-length, $left-breakpoint, $right-breakpoint)
+  }
+
+}
+
+.search-bar .form-control, .search-bar .btn.round {
+  background-color: rgba(0, 15, 55, 0.4);
+}
+
+
+.search-bar .form-control {
+  border: 1px solid $light;
+ // border-right: hidden;
+  outline: none !important;
+  box-shadow: none !important;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+
+.search-bar .btn.round {
+  border: 1px solid $light;
+  //border-left: hidden;
+  //margin-left: 1px; //risolve il bordino blu tra label e button ma non è responsive :(
+  outline: none !important;
+  box-shadow: none !important;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.search-bar .btn.round:active {
+  background: rgba(142, 142, 142, 0.5);
+  border: 1px solid $light;
+  //border-left: hidden;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.search-bar .form-control:focus-within {
+  //box-shadow: white;
+  border-color: white;
+}
+
+.carousel-control.left {
+  left: 0;
+  margin-left: 0;
+}
+.carousel-control.right {
+  right: 0;
+  margin-right: 0;
+}
+
+.carousel-control-prev {
+  //background-image: url(../images/previous-32.png);
+  filter: invert(100%);
+  margin-left: -10%;
+}
+
+.carousel-control-next {
+  filter: invert(100%);
+  margin-right: -10%;
+}
+
+.search-bar .form-control::placeholder {
+  color: #d6d6d6;
+}

@@ -1,0 +1,109 @@
+@import "booboky-colors.scss";
+
+$theme-colors: (
+        "dark" : $bobooky-dark,
+        "primary" : $bobooky-primary,
+        "secondary" : $bobooky-secondary,
+        "warning" : $bobooky-warning,
+        "orange" : $bobooky-orange,
+        "danger" : $bobooky-danger,
+        "pink" : $bobooky-pink,
+        "purple" : $bobooky-purple,
+        "white" : white,
+        "gray" : #737373
+);
+
+@import "../../lib/bootstrap/scss/bootstrap";
+
+
+::selection { background-color: $yellow; }
+
+.bobooky.form-control:focus {
+   border-color: white;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.form-control-placeholder {
+    position: absolute;
+    top: 0;
+    transition: all 200ms;
+    opacity: 0.5;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+    font-size: 75%;
+    transform: translate3d(0, -100%, 0);
+    opacity: 1;
+}
+
+/*
+    Extensions
+ */
+
+@each $key, $color in $theme-colors {
+    /*
+        Themed forms
+     */
+
+    .form-#{$key} .form-control{
+        background: none;
+        border: none;
+        outline: none !important;
+        box-shadow: none !important;
+        border-bottom: 1px solid;
+        border-radius: 0;
+        padding: 0;
+        color: $color
+    }
+
+    .form-placeholder-#{$key} .form-control::placeholder {
+        color: $color
+    }
+
+    /*
+        Themed placeholders
+     */
+    input.placeholder-#{$key}::placeholder {
+        color: $color;
+    }
+}
+
+//Font temporary experiments
+@font-face {
+    font-family: 'Open Sans';
+    src: url(https://fonts.googleapis.com/css?family=Open+Sans&display=swap);
+}
+
+@font-face {
+    font-family: 'Muli';
+    src: url(https://fonts.googleapis.com/css?family=Muli&display=swap);
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url(https://fonts.googleapis.com/css?family=Nunito&display=swap);
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+    h1, h2, h3, h4, h5, h6, .title {
+        font-family: 'Nunito', sans-serif;
+    }
+}
+
+.linear-gradient {
+    background: $bobooky-primary; /* Old browsers */
+    background: -moz-linear-gradient(left, $bobooky-primary 0%, $bobooky-secondary 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, $bobooky-primary 0%,$bobooky-secondary 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, $bobooky-primary 0%, $bobooky-secondary 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.rounded-bobooky {
+    border-radius: 2.5rem;
+}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>My account</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/lib/scss/bobooky-theme.css">
+    <link rel="stylesheet" href="/components/navbar/navbar.css">
+    <link rel="stylesheet" href="scss/index.css">
+
+</head>
+
+<body class="bg-dark mailbox">
+
+<div class="nav-placeholder"></div>
+<div class="mailbox"></div>
+<div class="section container main text-white">
+    <div class="row">
+        <div class="col-12 col-sm-6 mt-5">
+            <h2 class="font-weight-bold text-secondary my-5">About you</h2>
+            <div class="container mt-4" style="font-size: 16px;">
+                <div class="row">
+                    <div class="col-1 text-center">
+                        <i class="fa fa-user mr-1"></i>
+                    </div>
+                    <div class="col d-flex justify-content-center flex-column">
+                        <label id="name-placeholder">Name Surname</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1 text-center">
+                        <i class="fa fa-at mr-1"></i>
+                    </div>
+                    <div class="col d-flex justify-content-center flex-column">
+                        <label id="email-placeholder">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1 text-center"><i class="fa fa-birthday-cake mr-1"></i>
+                    </div>
+                    <div class="col d-flex justify-content-center flex-column">
+                        <label id="birthday-placeholder">Birth date</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 mt-5 float-right ">
+            <h2 class="font-weight-bold text-secondary my-5">Your addresses</h2>
+                <div class="container">
+                     <div id="address-container"></div>
+                    <a href="address/new/" class="btn float-right text-secondary p-0"><i class="fa fa-plus-circle fa-3x"></i></a>
+                </div>
+            </div>
+    </div>
+
+</div>
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="/components/navbar/navbar.js" type="module"></script>
+<script src="/index.js" type="module"></script>
+<script src="/profile/account/address/address.js" type="module"></script>
+
+
+</body>
+</html>

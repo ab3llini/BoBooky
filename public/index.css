@@ -1,0 +1,75 @@
+.search-section {
+  background-image: url("../../assets/component/home_bg_4.svg"), url("../../assets/component/home_bg_3.svg"), url("../../assets/component/home_bg_2.svg"), url("/assets/component/home_bg_1.svg");
+  background-repeat: no-repeat;
+  background-size: 80vh;
+  background-position: right calc(-10vw - 18vh) bottom -20vh, left calc(110vw - 18vh) top -20vh, right calc(110vw - 18vh) bottom -20vh, left calc(-10vw - 18vh) top -20vh;
+}
+@media (min-width: 576px) {
+  .search-section {
+    background-size: 90vh;
+    background-position: right calc(10vw - 20vh) bottom -30vh, left calc(90vw - 20vh) top -30vh, right calc(90vw - 20vh) bottom -30vh, left calc(10vw - 20vh) top -30vh;
+  }
+}
+@media (min-width: 992px) {
+  .search-section {
+    background-size: 100vh;
+    background-position: right calc(20vw - 20vh) bottom -40vh, left calc(80vw - 20vh) top -40vh, right calc(80vw - 20vh) bottom -40vh, left calc(20vw - 20vh) top -40vh;
+  }
+}
+
+.search-bar .form-control, .search-bar .btn.round {
+  background-color: rgba(0, 15, 55, 0.4);
+}
+
+.search-bar .form-control {
+  border: 1px solid #f8f9fa;
+  outline: none !important;
+  box-shadow: none !important;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+
+.search-bar .btn.round {
+  border: 1px solid #f8f9fa;
+  outline: none !important;
+  box-shadow: none !important;
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.search-bar .btn.round:active {
+  background: rgba(142, 142, 142, 0.5);
+  border: 1px solid #f8f9fa;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.search-bar .form-control:focus-within {
+  border-color: white;
+}
+
+.carousel-control.left {
+  left: 0;
+  margin-left: 0;
+}
+
+.carousel-control.right {
+  right: 0;
+  margin-right: 0;
+}
+
+.carousel-control-prev {
+  filter: invert(100%);
+  margin-left: -10%;
+}
+
+.carousel-control-next {
+  filter: invert(100%);
+  margin-right: -10%;
+}
+
+.search-bar .form-control::placeholder {
+  color: #d6d6d6;
+}
+
+/*# sourceMappingURL=index.css.map */

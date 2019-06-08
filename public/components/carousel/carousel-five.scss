@@ -1,0 +1,43 @@
+@import "../../lib/bootstrap/scss/functions";
+@import "../../lib/bootstrap/scss/variables";
+@import "../../lib/bootstrap/scss/mixins/breakpoints";
+@import "common.scss";
+/*
+*********** IMPORTANT! ***************
+DO NOT TOUCH STUFF UNLESS YOU KNOW WHY
+YOU SHOULD DO IT
+
+FOR INSTANCE: DO NOT CHANGE ANY MARGIN ! :)
+
+Thanks <3
+Alberto
+**************************************
+ */
+
+/*********** IMPORTANT! ***************
+
+TO CHANGE STYLES OF ITEM, SEE RELATIVE CSS!
+THIS IS NOT THE PLACE TO CHANGE ITEM STYLES
+ */
+
+.carousel .MS-content .item {
+
+    width: 20%;
+
+    @include media-breakpoint-down(lg) {
+        width: 25%;
+    }
+    @include media-breakpoint-down(md) {
+        width: 33.3333%;
+    }
+    @include media-breakpoint-down(sm) {
+        width: 50%;
+    }
+    @include media-breakpoint-down(xs) {
+        width: 100%;
+    }
+}
+
+.carousel .MS-content .item .container {
+    padding: 0 0.3rem 0 0.3rem;
+}

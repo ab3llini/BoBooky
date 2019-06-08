@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Book</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/lib/scss/bobooky-theme.css">
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/components/loading/loading.css">
+    <link rel="stylesheet" href="/components/navbar/navbar.css">
+    <link rel="stylesheet" href="book.css">
+    <link rel="stylesheet" href="/components/animated-heart/animated-heart.css">
+
+
+</head>
+
+<body>
+<!--
+Loading template
+-->
+<div class="loading d-flex flex-column justify-content-center text-dark">
+    <div class="text-center">
+        <h1 class="display-1">Loading..</h1>
+    </div>
+</div>
+
+<div class="fixed-bottom vw-100 shadow d-block d-md-none">
+    <div class="container-fluid">
+        <div class="row bg-white">
+            <div class="col">
+                <div class="row py-3">
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3 class="m-0 p-0"><span class="book-price font-weight-bold">00,00</span> €</h3>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group input-group">
+                            <div class="input-group-prepend">
+                                <select class="custom-select cart-qty">
+                                    <option selected value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-pink cart-add" type="button">Add</button>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-pink text-white wishlist" type="button">
+                                    <i class="fa fa-heart-o"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="nav-placeholder"></div>
+<nav aria-label="breadcrumb" class="bg-pink text-white">
+    <div class="container">
+        <ol class="breadcrumb bg-transparent px-0 m-0">
+            <li class="breadcrumb-item"><a href="#" class="text-white">Home</a></li>
+            <li class="breadcrumb-item"><a href="#" class="text-white">Library</a></li>
+            <li class="breadcrumb-item" class="text-white">Data</li>
+        </ol>
+    </div>
+</nav>
+<div class="section top mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-block d-md-none">
+                <div>
+                    <h1 class="text-dark book-title">Book title</h1>
+                </div>
+                <div>
+                    <a href="#" class="book-author-href text-decoration-none">
+                        <h3 class="text-pink book-author text-capitalize">
+                            Author name
+                        </h3>
+                    </a>
+                </div>
+                <div class="text-gray book-genres text-capitalize mt-4">
+                    Horror / Fantasy
+                </div>
+                <div class="text-light text-pink book-rating mt-1">
+                    <div class="ml-2 text-gray d-inline">
+                        <span class="book-rating-val">0</span>/5, <span class="book-rating-qty">0</span> reviews
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="container mt-4 mt-md-0">
+                    <div class="row px-0">
+                        <div class="col-6 col-md-12 px-0">
+                            <div>
+                                <div class="book-image w-100">
+                                    <img class="rounded">
+                                </div>
+                                <div class="container p-0 d-none d-md-block mt-4 text-gray">
+                                    <div class="row mt-2 mt-lg-1">
+                                        <div class="col">
+                                            <div class="font-weight-bold">Publisher</div>
+
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="float-right">
+                                                <span class="book-publisher">-------</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 mt-lg-1">
+                                        <div class="col">
+                                            <div class="font-weight-bold">Publication date</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="float-right">
+                                                <span class="book-date">-------</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 mt-lg-1">
+                                        <div class="col">
+                                            <div class="font-weight-bold">ISBN</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="float-right">
+                                                <span class="book-isbn">-------</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2 mt-lg-1">
+                                        <div class="col">
+                                            <div class="font-weight-bold">ISBN 13</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="float-right">
+                                                <span class="book-isbn-13">-------</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-12 d-block d-md-none ">
+                            <div class="text-gray">
+                                <div class="font-weight-bold">ISBN</div>
+                                <span class="book-isbn">2153463135</span>
+                                <div class="font-weight-bold mt-3">ISBN 13</div>
+                                <span class="book-isbn-13">2153463135</span>
+                                <div class="font-weight-bold mt-3">Publisher</div>
+                                <span class="book-publisher">Some publisher</span>
+                                <div class="font-weight-bold mt-3">Publication date</div>
+                                <span class="book-date">08/1980</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-block d-md-none">
+                <div class="mt-4">
+                    <p class="book-description">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit non
+                        deleniti reiciendis expedita, velit excepturi doloremque numquam. Blanditiis,
+                        accusantium, at.
+                    </p>
+                    <p class="collapse book-full-description">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tempore asperiores et
+                        vel perferendis ea quisquam eos incidunt veritatis, hic porro voluptates temporibus
+                        laborum! Saepe natus vitae eum ex nam, laborum optio vel magni hic. Minima pariatur
+                        molestiae error a quae sed accusantium voluptas, dolore, mollitia accusamus laborum!
+                        Quam dolorem rerum quibusdam numquam nostrum molestias natus cum quasi provident.
+                        Dignissimos, dolores voluptas. Nemo ducimus ad facilis voluptatem minus possimus hic
+                        aut, praesentium quia molestiae amet aliquam quibusdam, a laboriosam nesciunt culpa,
+                        animi aliquid sit doloremque provident libero! Voluptas illo, laborum consequuntur
+                        deserunt, ipsa sequi exercitationem assumenda dignissimos praesentium voluptatibus
+                        incidunt!
+                    </p>
+                    <a data-toggle="collapse" aria-expanded="false" href=".book-full-description"
+                       class="text-dark text-decoration-none font-weight-bold">
+                        <span class="collapsed">
+                            continue
+                        </span>
+                        <span class="expanded">
+                            show less
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-9 d-none d-md-block px-5">
+                <div>
+                    <h1 class="text-dark book-title text-capitalize">Book title</h1>
+                </div>
+                <div>
+                    <a href="#" class="book-author-href text-decoration-none">
+                        <h3 class="text-pink book-author text-capitalize">
+                            Author name
+                        </h3>
+                    </a>                </div>
+                <div class="text-gray book-genres mt-4 text-capitalize">
+                    Horror / Fantasy
+                </div>
+                <div class="text-light text-pink book-rating mt-1">
+                    <div class="ml-2 text-gray d-inline">
+                        <span class="book-rating-val">0</span>/5,
+                        <span class="book-rating-qty"> 0</span> reviews
+                    </div>
+                </div>
+                <div class="mt-4 d-flex justify-content-start" style="height: 3rem">
+                    <div class="text-dark font-weight-bold d-flex flex-column justify-content-center h-100">
+                        <h3 class="mt-2"><span class="book-price">00,00</span> €</h3>
+                    </div>
+                    <div class="text-dark font-weight-bold d-flex flex-column justify-content-center ml-5 h-100">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <select class="custom-select-sm cart-qty">
+                                    <option selected value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-pink cart-add" type="button">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-gray d-flex flex-column justify-content-center h-100 mx-2">
+                        or
+                    </div>
+                    <div class="text-gray d-flex flex-column justify-content-center h-100" style="width: 2rem">
+                        <button class="btn btn-pink btn-sm text-white wishlist" type="button">
+                            <i class="fa fa-heart-o"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <p class="book-description">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit non
+                        deleniti reiciendis expedita, velit excepturi doloremque numquam. Blanditiis,
+                        accusantium, at.
+                    </p>
+                    <p class="collapse book-full-description">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tempore asperiores et
+                        vel perferendis ea quisquam eos incidunt veritatis, hic porro voluptates temporibus
+                        laborum! Saepe natus vitae eum ex nam, laborum optio vel magni hic. Minima pariatur
+                        molestiae error a quae sed accusantium voluptas, dolore, mollitia accusamus laborum!
+                        Quam dolorem rerum quibusdam numquam nostrum molestias natus cum quasi provident.
+                        Dignissimos, dolores voluptas. Nemo ducimus ad facilis voluptatem minus possimus hic
+                        aut, praesentium quia molestiae amet aliquam quibusdam, a laboriosam nesciunt culpa,
+                        animi aliquid sit doloremque provident libero! Voluptas illo, laborum consequuntur
+                        deserunt, ipsa sequi exercitationem assumenda dignissimos praesentium voluptatibus
+                        incidunt!
+                    </p>
+                    <a data-toggle="collapse" aria-expanded="false" href=".book-full-description"
+                       class="text-dark text-decoration-none font-weight-bold">
+                        <span class="collapsed">
+                            continue
+                        </span>
+                        <span class="expanded">
+                            show less
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section bottom">
+    <div class="related-books mt-5 ">
+
+        <svg class="head" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 184.73 368.45">
+            <defs>
+                <style>.cls-1 {
+                    fill: #d4145a;
+                    stroke: #d4145a;
+                    stroke-miterlimit: 10;
+                }</style>
+            </defs>
+            <title>testa_suggestion_bg</title>
+            <g id="Livello_2" data-name="Livello 2">
+                <g id="back">
+                    <path class="cls-1" d="M184.23,368C82.76,368,.5,285.69.5,184.23h0A183.73,183.73,0,0,1,184.23.5Z"/>
+                </g>
+            </g>
+        </svg>
+        <svg preserveAspectRatio="none" class="tail" xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1609.94 367.45">
+            <defs>
+                <style>.cls-1 {
+                    fill: url(#Sfumatura_senza_nome_5);
+                }</style>
+                <linearGradient id="Sfumatura_senza_nome_5" x1="311.59" y1="10913.69" x2="1825.43" y2="10913.69"
+                                gradientTransform="matrix(0.64, 0.71, -0.64, 0.71, 7124.72, -8288.96)"
+                                gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#d5085a"/>
+                    <stop offset="0.18" stop-color="#d6075c"/>
+                    <stop offset="1" stop-color="#ac2428"/>
+                </linearGradient>
+            </defs>
+            <title>corpo_suggestion_bg</title>
+            <g id="Livello_2" data-name="Livello 2">
+                <g id="back">
+                    <rect class="cls-1" width="1609.94" height="367.45"/>
+                </g>
+            </g>
+        </svg>
+        <div class="container-fluid">
+            <div class="row m-0 p-0">
+                <div class="col-12 m-0 p-0 col-lg-3 d-flex flex-column justify-content-center">
+                    <h2 class="text-white d-none d-lg-block">
+                        We think you will also love this
+                    </h2>
+                    <div class="container d-block d-lg-none mt-4">
+                        <h4 class="text-white">
+                            We think you will also love this
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-12 m-0 p-0 col-lg-9">
+                    <div class="related-container my-4 my-lg-0"></div>
+                </div>
+                <div class="col-12 m-0 p-0 d-block d-md-none text-center">
+                    <h6 class="text-white mb-4 book-data"></h6>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="book-reviews bg-dark vh-100">
+        <div class="container text-white">
+
+            <h3 class="d-inline">Reviews (<span class="book-rating-qty">0</span>)</h3>
+            <div class="text-pink ml-4 book-rating d-inline"></div>
+
+            <div class="book-reviews-container d-flex flex-column justify-content-start mt-5">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="/components/navbar/navbar.js" type="module"></script>
+<script src="/lib/multislider/multislider.js"></script>
+<script src="book.js" type="module"></script>
+
+</body>
+</html>
