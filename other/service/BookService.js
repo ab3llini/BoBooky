@@ -1,6 +1,6 @@
 'use strict';
-
 let db = require('../db/Database');
+
 
 /**
  * Books available in the inventory
@@ -10,9 +10,20 @@ let db = require('../db/Database');
  * limit Integer Maximum number of items per page. Default is 20 and cannot exceed 500. (optional)
  * returns List
  **/
-exports.bookGET = function(offset=0,limit=20) {
+exports.bookGET = function(offset,limit) {
   return db.execute(db.bookGET, [offset, limit])
-};
+
+}
+
+
+/**
+ * Gets all the genres
+ *
+ * returns List
+ **/
+exports.bookGenreGET = function() {
+  return db.execute(db.bookGenreGET, [])
+}
 
 
 /**
@@ -23,8 +34,8 @@ exports.bookGET = function(offset=0,limit=20) {
  * returns Book
  **/
 exports.bookIdGET = function(id) {
-    return db.execute(db.bookIdGET, [id])
-};
+  return db.execute(db.bookIdGET, [id])
+}
 
 
 /**
@@ -35,23 +46,21 @@ exports.bookIdGET = function(id) {
  **/
 exports.bookRelatedGET = function(id) {
   return db.execute(db.bookRelatedGET, [id])
-};
+}
 
 
 /**
- * Delete a review from a given user
+ * Deletes a review written by the authenticated user.
  *
- * id String
- * reviewID Integer The id of the review to be removed
- * userID Integer
+ * id String 
+ * reviewID Integer The id of the review to be removed (optional)
  * no response value expected for this operation
  **/
-exports.bookReviewDELETE = function(id,reviewID,userID) {
-  //TODO:
+exports.bookReviewDELETE = function(id,reviewID) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-};
+}
 
 
 /**
@@ -61,21 +70,20 @@ exports.bookReviewDELETE = function(id,reviewID,userID) {
  * returns List
  **/
 exports.bookReviewGET = function(id) {
-    return db.execute(db.bookReviewGET, [id])
-};
+  return db.execute(db.bookReviewGET, [id])
+}
 
 
 /**
- * Add new review for the given book
+ * Adds a review to the specified book
  *
  * id String 
- * userID Integer The user that wrote the review
  * body Review 
  * no response value expected for this operation
  **/
-exports.bookReviewPOST = function(id,userID,body) {
+exports.bookReviewPOST = function(id, userID, body) {
   return db.execute(db.bookReviewPOST, [id, userID, body])
-};
+}
 
 
 /**
@@ -87,24 +95,40 @@ exports.bookReviewPOST = function(id,userID,body) {
  * genre String  (optional)
  * year Integer  (optional)
  * author String  (optional)
- * author_id Integer  (optional)
+ * authorID Integer  (optional)
  * publisher String  (optional)
- * publisher_id Integer  (optional)
+ * publisherID Integer  (optional)
  * theme String  (optional)
  * offset Integer Defaults to 0 (optional)
  * limit Integer Defaults to 20 (optional)
  * returns List
  **/
-exports.bookSearchGET = function(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme,offset,limit) {
-  return db.execute(db.bookSearchGET, [query,isbn,genre,year,author,author_id,publisher,publisher_id,theme, offset, limit])
-};
+exports.bookSearchGET = function(query,isbn,genre,year,author,authorID,publisher,publisherID,theme,offset,limit) {
+  return db.execute(db.bookSearchGET, [query,isbn,genre,year,author,authorID,publisher,publisherID,theme, offset, limit])
+
+}
 
 
 /**
- * Gets all the genres
+ * Returns all the themes in the db.
  *
  * returns List
  **/
-exports.bookGenreGET = function() {
-  return db.execute(db.bookGenreGET, [])
-};
+exports.bookThemeGET = function() {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = [ {
+  "name" : "name",
+  "id" : 0
+}, {
+  "name" : "name",
+  "id" : 0
+} ];
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}
+

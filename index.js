@@ -94,7 +94,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
     app.use((req, res, next) => {
         middleware.swaggerSecurity({
-            BoBookySecurity: function (req, authOrSecDef, scopesOrApiKey, callback) {
+            BoBookyAuth: function (req, authOrSecDef, scopesOrApiKey, callback) {
                 if (!req.user) {
                     writer.writeJson(res, writer.respondWithCode(401, 'Not authorized'))
                 } else

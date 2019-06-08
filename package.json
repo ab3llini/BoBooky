@@ -1,7 +1,7 @@
 {
-  "name": "booboky",
+  "name": "bobooky",
   "version": "1.0.0",
-  "description": "Welcome to the nodejs backend of Booboky!",
+  "description": "Welcome to the OpenAPI specification of Booboky!",
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
@@ -26,6 +26,7 @@
     "pg": "^7.11.0",
     "serve-static": "latest",
     "sha256": "^0.2.0",
-    "swagger-tools": "^0.10.4"
+    "swagger-tools": "^0.10.4",
+    "oas3-tools": "^1.0.1"
   }
 }
