@@ -137,13 +137,15 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
 
 module.exports.relatedBooks = (bookID, offset, limit) => {
     return {
-        text: `select distinct b.id, b.title, a.name as author, b.description, p.name as publisher, b.price, b.isbn,
+        text: `select distinct b.id, b.title, b.description, p.name as publisher, b.price, b.isbn,
                     b.isbn13, b.publication_year, b.publication_month, b.avg_rating, i.href as image_href,
-                    i.href_small as image_href_small, b.theme
+                    i.href_small as image_href_small, b.theme, a.id as a_id, a.name as a_name, a.description as a_desc,
+                    im.href as a_img
                 from book b
                     join author a on b.author = a.id
                     join publisher p on b.publisher = p.id
                     join image i on b.image_id = i.id
+                    join image im on a.image = im.id
                     where b.theme = (select theme from book where id = $1)
                         and b.author != (select author from book where id = $1)
                 offset $2 limit $3`,
