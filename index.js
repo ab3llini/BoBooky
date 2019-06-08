@@ -1,17 +1,22 @@
 'use strict';
 
+'use strict';
+
+var passport = require('passport');
+var localStrategy = require('passport-local').Strategy;
+var express = require('express');
+var app = express();
+
+
 var fs = require('fs'),
     path = require('path'),
     http = require('http');
 
 var serveStatic = require('serve-static');
 
-var express = require('express');
-var app = express();
 var session = require("express-session"),
     bodyParser = require("body-parser");
-var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
+
 
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
@@ -20,7 +25,7 @@ var db = require('./other/db/Database.js');
 
 var writer = require('./other/utils/writer');
 
-passport.use(new Strategy(
+passport.use(new localStrategy(
     function (username, password, done) {
 
         db.userLoginPOST({
@@ -62,15 +67,6 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/login', passport.authenticate('local'), (req, res) => {
-    writer.writeJson(res, {user: req.user})
-});
-
-app.post('/logout', function (req, res, next) {
-    req.logout();
-    console.log('Logging out');
-    writer.writeJson(res, {massage: 'Logout successful'})
-});
 
 app.get('/profile/*', (req, res, next) => {
     if (req.user !== undefined)
@@ -82,6 +78,30 @@ app.get('/profile/*', (req, res, next) => {
 }, function (req, res, next) {
     return next()
 });
+
+
+app.use(function (req, res, next) {
+    if(req.originalUrl === '/api/user/login') {
+        // Handle login
+        passport.authenticate('local', undefined, function (err, user) {
+            if (user) {
+                writer.writeJson(res, {message : "Welcome!", user : user})
+            }
+            else {
+                writer.writeJson(res, {message: "Wrong username or password"})
+            }
+        })(req, res, next)
+    }
+    else next();
+});
+
+
+app.post('/api/logout', function (req, res, next) {
+    req.logout();
+    console.log('Logging out');
+    writer.writeJson(res, {massage: 'Logout successful'})
+});
+
 
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
@@ -120,3 +140,4 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
     });
 
 });
+
