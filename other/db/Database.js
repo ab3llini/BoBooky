@@ -171,32 +171,35 @@ module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher
         pipe.query(make.bookSearch(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme))
             .then(result => {
                 let ans = [];
-                result.rows.forEach((book, i) => {
-                    pipe.query(make.bookGenres(book.id))
-                        .then(genres => {
-                            book.genres = genres.rows;
-                            pipe.query(make.authorId(book.author))
-                                .then(authors => {
-                                    if(authors.rowCount !== 0) {
-                                        delete book.author;
-                                        book.author = authors.rows[0];
-                                        ans.push(book);
-                                        if (i === result.rowCount - 1)
-                                            resolve(ans)
-                                    }
-                                    else
+                if(result.rowCount === 0)
+                    reject();
+                else {
+                    result.rows.forEach((book, i) => {
+                        pipe.query(make.bookGenres(book.id))
+                            .then(genres => {
+                                book.genres = genres.rows;
+                                pipe.query(make.authorId(book.author))
+                                    .then(authors => {
+                                        if (authors.rowCount !== 0) {
+                                            delete book.author;
+                                            book.author = authors.rows[0];
+                                            ans.push(book);
+                                            if (i === result.rowCount - 1)
+                                                resolve(ans)
+                                        } else
+                                            reject()
+                                    })
+                                    .catch(error => {
+                                        console.log(error);
                                         reject()
-                                })
-                                .catch(error => {
-                                    console.log(error);
-                                    reject()
-                                })
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            reject()
-                        })
-                })
+                                    })
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                reject()
+                            })
+                    })
+                }
             })
             .catch(error => {
                 console.log('ERROR IN SEARCH QUERY:')
