@@ -72,10 +72,10 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
     let values = [];
 
     if (query !== undefined) {
-        q += clause + ' ((b.title LIKE \'%\' || $'+placeholder+' || \'%\') ' +
-            'or (a.name LIKE \'%\' || $'+placeholder+' || \'%\') or (p.name LIKE \'%\' || $'+placeholder+' || \'%\') ' +
+        q += clause + ' ((lower(b.title) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' +
+            'or (lower(a.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') or (lower(p.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' +
             'or (b.isbn LIKE \'%\' || $'+placeholder+' || \'%\') or (b.isbn13  LIKE \'%\' || $'+placeholder+' || \'%\') ' +
-            'or (g.name  LIKE \'%\' || $'+placeholder+' || \'%\') or (b.theme  LIKE \'%\' || $'+placeholder+' || \'%\'))' + ' ';
+            'or (lower(g.name)  LIKE \'%\' || lower($'+placeholder+') || \'%\') or (lower(b.theme)  LIKE \'%\' || lower($'+placeholder+') || \'%\'))' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(query)
@@ -87,7 +87,7 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
         values.push(isbn)
     }
     if (genre !== undefined) {
-        q += clause + ' (g.name  LIKE \'%\' || $'+placeholder+' || \'%\')' + ' ';
+        q += clause + ' (lower(g.name)  LIKE \'%\' || lower($'+placeholder+') || \'%\')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(genre)
@@ -99,13 +99,13 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
         values.push(year)
     }
     if (author !== undefined) {
-        q += clause + ' (a.name  LIKE \'%\' || $'+placeholder+' || \'%\')' + ' ';
+        q += clause + ' (lower(a.name)  LIKE \'%\' || lower($'+placeholder+') || \'%\')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(author)
     }
     if (publisher !== undefined) {
-        q += clause + ' (p.name  LIKE \'%\' || $'+placeholder+' || \'%\')' + ' ';
+        q += clause + ' (lower(p.name)  LIKE \'%\' || lower($'+placeholder+') || \'%\')' + ' ';
         placeholder += 1;
         values.push(publisher)
     }
@@ -123,7 +123,7 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
         values.push(publisher_id)
     }
     if (theme !== undefined) {
-        q += clause + ' (b.theme  LIKE \'%\' || $'+placeholder+' || \'%\')' + ' ';
+        q += clause + ' (lower(b.theme)  LIKE \'%\' || lower($'+placeholder+') || \'%\')' + ' ';
         placeholder += 1;
         values.push(theme)
     }
@@ -267,21 +267,21 @@ module.exports.eventSearch = (query_string,name,author_name,author_id,book_name,
     let values = [];
 
     if (query_string !== undefined) {
-        q += clause + ' ((e.name LIKE \'%\' || $'+placeholder+' || \'%\') ' +
-            'or (a2.name LIKE \'%\' || $'+placeholder+' || \'%\') or (b.title LIKE \'%\' || $'+placeholder+' || \'%\')) ' +
+        q += clause + ' ((lower(e.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' +
+            'or (lower(a2.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') or (lower(b.title) LIKE \'%\' || lower($'+placeholder+') || \'%\')) ' +
             ' ';
         clause = 'and';
         placeholder += 1;
         values.push(query_string)
     }
     if (name !== undefined) {
-        q += clause + ' (e.name = $'+placeholder+')' + ' ';
+        q += clause + ' (lower(e.name) = lower($'+placeholder+'))' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(name)
     }
     if (author_name !== undefined) {
-        q += clause + ' (a2.name LIKE \'%\' || $'+placeholder+' || \'%\') ' + ' ';
+        q += clause + ' (lower(a2.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(author_name)
@@ -293,7 +293,7 @@ module.exports.eventSearch = (query_string,name,author_name,author_id,book_name,
         values.push(author_id)
     }
     if (book_name !== undefined) {
-        q += clause + ' (b.title LIKE \'%\' || $'+placeholder+' || \'%\') ' + ' ';
+        q += clause + ' (lower(b.title) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(book_name)
@@ -323,7 +323,7 @@ module.exports.eventSearch = (query_string,name,author_name,author_id,book_name,
         values.push(date_to)
     }
     if (location !== undefined) {
-        q += clause + ' (a.city = $'+placeholder+')' + ' ';
+        q += clause + ' (lower(a.city) = lower($'+placeholder+'))' + ' ';
         values.push(location)
     }
 

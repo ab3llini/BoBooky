@@ -79,6 +79,8 @@ $(() => {
                     // Set page title
                     document.title = book.title;
 
+                    let bd_arr = book.description.split(' ');
+
                     // Load JSON
                     api.map({
                         '.book-title': book.title,
@@ -90,8 +92,8 @@ $(() => {
                         '.book-isbn': book.isbn,
                         '.book-isbn-13': book.isbn13,
                         '.book-date': [book.publication_month, book.publication_year].join('/'),
-                        '.book-description': book.description.slice(0, 500),
-                        '.book-full-description': book.description.slice(500, book.description.length),
+                        '.book-description': bd_arr.slice(0, 80).join(' '),
+                        '.book-full-description': bd_arr.slice(80, bd_arr.length).join(' '),
                     });
 
                     $('.book-author-href').attr('href', '/author/?id='+book.author.id);

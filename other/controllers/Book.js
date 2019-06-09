@@ -95,6 +95,9 @@ module.exports.bookSearchGET = function bookSearchGET (req, res, next) {
   var theme = req.swagger.params['theme'].value;
   var offset = req.swagger.params['offset'].value;
   var limit = req.swagger.params['limit'].value;
+
+
+
   Book.bookSearchGET(query,isbn,genre,year,author,authorID,publisher,publisherID,theme,offset,limit)
     .then(function (response) {
       utils.writeJson(res, response);
