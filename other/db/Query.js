@@ -72,7 +72,7 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
     let values = [];
 
     if (query !== undefined) {
-        q += clause + ' ((lower(b.title) LIKE \'%\' || $lower('+placeholder+') || \'%\') ' +
+        q += clause + ' ((lower(b.title) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' +
             'or (lower(a.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') or (lower(p.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' +
             'or (b.isbn LIKE \'%\' || $'+placeholder+' || \'%\') or (b.isbn13  LIKE \'%\' || $'+placeholder+' || \'%\') ' +
             'or (lower(g.name)  LIKE \'%\' || lower($'+placeholder+') || \'%\') or (lower(b.theme)  LIKE \'%\' || lower($'+placeholder+') || \'%\'))' + ' ';
