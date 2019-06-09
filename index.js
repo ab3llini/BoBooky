@@ -41,7 +41,6 @@ passport.use(new Strategy(
             })
             .catch(e => {
                 console.warn(e)
-
                 console.log('Login failed: ' + username);
                 done(null, false)
             })
