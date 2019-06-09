@@ -60,12 +60,15 @@ $(() => {
                     // Set page title
                     document.title = author.name;
 
+                    let ad_arr = author.description.split(' ');
+
+
                     // Load JSON
                     api.map({
                         '.author-name': author.name,
                         '.author-rating-val': avg_rating,
-                        '.author-description': author.description.slice(0, 500),
-                        '.author-full-description': author.description.slice(500, author.description.length),
+                        '.author-description': ad_arr.slice(0, 80).join(' '),
+                        '.author-full-description': ad_arr.slice(80, ad_arr.length).join(' '),
                     });
 
                     $('.author-image > .img').css("background-image", "url(" + author.image_url + ")");

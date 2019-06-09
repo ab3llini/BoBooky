@@ -98,17 +98,20 @@ $(() => {
 
             let query = args.get('q')
 
-            // Fetch all authors that match the query
-            let authors = {};
-
             // Inject authors carousel
             api.get.book.search.author(query).then(books => {
-                books.forEach(book => {
-                    // Check-Add author
-                    if (!(book.author.id in authors)) {
-                        authors[book.author.id] = book.author
-                    }
-                })
+
+                // Fetch all authors that match the query
+                let authors = {};
+
+                if (books !== undefined) {
+                    books.forEach(book => {
+                        // Check-Add author
+                        if (!(book.author.id in authors)) {
+                            authors[book.author.id] = book.author
+                        }
+                    })
+                }
                 if (Object.values(authors).length > 0) {
                     loader.append('.author-container', '/components/carousel/container.html', 'author-carousel')
                         .then(() => {
