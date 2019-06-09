@@ -39,10 +39,9 @@ $(() => {
                 // Bind handlers for wishlist
                 book_obj.find('.wishlist').unbind().click(function () {
 
-                    let id = $(this).parents('.book').attr('id');
-                    let idx = inWishlist.indexOf(id)
+                    let idx = inWishlist.indexOf(book.id)
                     if (idx > 0) {
-                        api.post.user.wishlist.delete(id).then(() => {
+                        api.post.user.wishlist.delete(book.id).then(() => {
                             console.log('Removed')
                             let $heart = $(this).find('.fa');
                             $heart.removeClass('fa-heart');
@@ -50,12 +49,12 @@ $(() => {
                             inWishlist.splice(idx, 1)
                         }).catch(e => modal.error(e))
                     } else {
-                        api.post.user.wishlist.add(id).then(() => {
+                        api.post.user.wishlist.add(book.id).then(() => {
                             console.log('Added')
                             let $heart = $(this).find('.fa');
                             $heart.removeClass('fa-heart-o');
                             $heart.addClass('fa-heart')
-                            inWishlist.push(idx)
+                            inWishlist.push(book.id)
                         }).catch(e => modal.error(e))
                     }
                 });

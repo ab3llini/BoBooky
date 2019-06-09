@@ -20,7 +20,8 @@ export let inject = (type, id) => {
 export let show = (title, content, e = undefined) => {
     object.find('.modal-title').html(title);
     object.find('.modal-body .message').html(content);
-    object.find('.modal-body .error').html(e.message);
+    if (e !== undefined)
+        object.find('.modal-body .error').html(e.message);
     object.modal();
     return object
 };
