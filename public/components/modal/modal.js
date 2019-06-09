@@ -17,9 +17,10 @@ export let inject = (type, id) => {
     })
 };
 
-export let show = (title, content) => {
+export let show = (title, content, e = undefined) => {
     object.find('.modal-title').html(title);
-    object.find('.modal-body').html(content);
+    object.find('.modal-body .message').html(content);
+    object.find('.modal-body .error').html(e.message);
     object.modal();
     return object
 };
@@ -30,7 +31,7 @@ export let error = (error) => {
         show('Login or Register', 'Please login or register first!')
     }
     else {
-        show(error.statusText + ' (' + error.status + ')', 'Something went wrong.')
+        show(error.statusText + ' (' + error.status + ')', 'Something went wrong.', error)
     }
 }
 

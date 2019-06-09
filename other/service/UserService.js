@@ -164,6 +164,6 @@ exports.userWhishlistGET = function(id) {
  * no response value expected for this operation
  **/
 exports.userWhishlistPOST = function(id, bookID) {
-  return db.execute(db.userWishlistPOST, [id, book_id])
+  return db.execute(db.userWishlistPOST, [id, bookID])
 }
 

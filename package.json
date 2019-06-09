@@ -27,6 +27,5 @@
     "serve-static": "latest",
     "sha256": "^0.2.0",
     "swagger-tools": "^0.10.4",
-    "oas3-tools": "^1.0.1"
   }
 }
