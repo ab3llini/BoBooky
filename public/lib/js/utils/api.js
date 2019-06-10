@@ -137,8 +137,20 @@ export let get = {
             author_id : (author_id) => { return make.get('/api/book/search?authorID=' + author_id)},
             publisher : (publisher) => { return make.get('/api/book/search?publisher=' + publisher)},
             publisher_id : (publisher_id) => { return make.get('/api/book/search?publisherID=' + publisher_id)},
-            theme : (theme) => { return make.get('/api/book/search?theme=' + theme)}
-        }
+            theme : (theme) => { return make.get('/api/book/search?theme=' + theme)},
+            mixed : (args) => {
+                let params = [];
+                for (let param in args) {
+                    if (args.hasOwnProperty(param)) {
+                        params.push(param+'='+args[param]);
+                    }
+                }
+                return make.get('/api/book/search?' + params.join('&'));
+            }
+        },
+        genres : () => { return make.get('/api/book/genres') },
+        themes : () => { return make.get('/api/book/themes') }
+
     },
     address: () => { return make.get('/api/user/addresses')}, //FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
     chart: () => { return make.get('/api/user/cart')},

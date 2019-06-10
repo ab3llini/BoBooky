@@ -103,8 +103,8 @@ exports.bookReviewPOST = function(id, userID, body) {
  * limit Integer Defaults to 20 (optional)
  * returns List
  **/
-exports.bookSearchGET = function(query,isbn,genre,year,author,authorID,publisher,publisherID,theme,offset,limit) {
-  return db.execute(db.bookSearchGET, [query,isbn,genre,year,author,authorID,publisher,publisherID,theme, offset, limit])
+exports.bookSearchGET = function(query,isbn,genre,year,author,authorID,publisher,publisherID,theme,offset,limit, orderby, extra) {
+  return db.execute(db.bookSearchGET, [query,isbn,genre,year,author,authorID,publisher,publisherID,theme, offset, limit, orderby, extra])
 
 }
 
@@ -115,20 +115,6 @@ exports.bookSearchGET = function(query,isbn,genre,year,author,authorID,publisher
  * returns List
  **/
 exports.bookThemeGET = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "name" : "name",
-  "id" : 0
-}, {
-  "name" : "name",
-  "id" : 0
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return db.execute(db.bookThemeGET, [])
 }
 

@@ -9,11 +9,15 @@ import * as rating from '/components/review/rating/rating.js'
 
 $(() => {
 
+    //Assign static overlay;
+    loading.set('body > .loading');
+
+    // Create new job to load all elements first
+    let loadingJob = worker.newJob(4, loading.hide);
+
     let inject_books = (inWishlist, books) => {
         // append books
         books.forEach(book => {
-
-
             // Add book to results
             loader.append_map('.books-container', '/components/search/book.html', book.id, function (book_obj) {
                 book_obj.find('.book-href').attr('href', '/book/?id=' + book.id);
@@ -59,8 +63,7 @@ $(() => {
                     }
                 });
 
-                rating.append_rating(book_obj.find('.rating'), book.avg_rating).then(o => { /*loadingJob.completeTask() */
-                })
+                rating.append_rating(book_obj.find('.rating'), book.avg_rating);
 
                 api.get.book.reviews(book.id).then(reviews => {
                     if (reviews === undefined) {
@@ -70,22 +73,15 @@ $(() => {
                 })
             }).then(() => {
                 if (book === $(books).get(-1)) {
-                    //loadingJob.completeTask()
+                    loadingJob.completeTask()
                 }
             })
                 .catch(e => {
+                    loadingJob.completeTask();
                     modal.error(e)
                 });
-
-
         })
-    }
-
-    //Assign static overlay;
-    //loading.set('body > .loading');
-
-    // Create new job to load all elements first
-    //let loadingJob = worker.newJob(4, loading.hide);
+    };
 
     // Then Inject modal to handle messages, then perform all the rest..
     modal.inject(modal.type.alert, 'search').then(modal_obj => {
@@ -96,7 +92,47 @@ $(() => {
         //If id exists
         if (args.has('q')) {
 
-            let query = args.get('q')
+            let query = args.get('q');
+
+            // Utilities
+            let get_filter = (key) => args.has(key) ? args.get(key) : 'default';
+            let create_options = (filter, options) => options.forEach(option => $(filter).append(new Option(option, option)));
+
+            let filters = {
+                orderby: get_filter('orderby'),
+                genre: get_filter('genre'),
+                theme: get_filter('theme')
+            };
+
+            let filterJob = worker.newJob(2, () => {
+                // Set values to search and genre/theme filters
+                $('.search-bar').val(query);
+                $('.filter.orderby').val(filters.orderby);
+                $('.filter.genre').val(filters.genre);
+                $('.filter.theme').val(filters.theme);
+            });
+
+            $('.filter').change(() => $('.search-form').submit())
+
+            // Fetch all genres and populate filter
+            api.get.book.genres().then(genres => {
+                create_options('.filter.genre', genres.map(genre => genre.name).sort());
+                loadingJob.completeTask();
+                filterJob.completeTask()
+            }).catch(e => {
+                modal.error(e);
+                loadingJob.completeTask();
+            });
+
+            // Fetch all themes and populate filter
+            api.get.book.themes().then(themes => {
+                create_options('.filter.theme', themes.map(theme => theme.name).sort());
+                loadingJob.completeTask();
+                filterJob.completeTask()
+            }).catch(e => {
+                modal.error(e);
+                loadingJob.completeTask();
+            });
 
             // Inject authors carousel
             api.get.book.search.author(query).then(books => {
@@ -129,7 +165,7 @@ $(() => {
                                                 hoverPause: true
                                             }).multislider('pause');
 
-                                            //loadingJob.completeTask()
+                                            loadingJob.completeTask()
                                         }
                                     })
                                     .catch(e => {
@@ -143,6 +179,7 @@ $(() => {
                         });
 
                 } else {
+                    loadingJob.completeTask();
                     $('.author-container').html("No authors found..")
                 }
             }).catch(e => modal.error(e))
@@ -151,9 +188,22 @@ $(() => {
             let wishlist = [];
             let inWishlist = []
 
+            let query_args = {
+                query: query,
+                orderby : filters.orderby,
+                genre: filters.genre,
+                theme: filters.theme
+            };
+
+            if (query_args.orderby === 'default')
+                delete query_args.orderby;
+            if (query_args.genre === 'default')
+                delete query_args.genre;
+            if (query_args.theme === 'default')
+                delete query_args.theme;
 
             // Fetch all books that match the query
-            api.get.book.search.query(query).then(books => {
+            api.get.book.search.mixed(query_args).then(books => {
 
                 if (books !== undefined && books.length > 0) {
 
@@ -170,13 +220,19 @@ $(() => {
                         inject_books(inWishlist, books)
                     });
 
+                } else {
+                    $('.books-container').html("No books found..");
+                    loadingJob.completeTask()
                 }
-            }).catch(e => modal.error(e));
+            }).catch(
+                e => {
+                    loadingJob.completeTask();
+                    modal.error(e)
+                });
 
         } else {
-            modal.show('Warning', 'Unknown book id')
+            loading.hide();
+            modal.show('Warning', 'No query was provided!')
         }
     })
-
-
 });

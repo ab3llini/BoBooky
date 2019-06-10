@@ -55,9 +55,9 @@ module.exports.bookReviews = (bookID) => {
 };
 
 module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publisher, publisher_id, theme,
-                             offset = 0, limit = 20) => {
-    //TODO: Fif error when searching by year
-    let q = `select distinct b.id, b.title, a.id as author, b.description, p.name as publisher, b.price, b.isbn,
+                             offset = 0, limit = 20, orderby, extra) => {
+    //TODO: Fix error when searching by year
+    let q = `select distinct b.id, b.title, a.id as author, a.name as author_name, b.description, p.name as publisher, b.price, b.isbn,
                 b.isbn13, b.publication_year, b.publication_month, b.avg_rating, i.href as image_href,
                 i.href_small as image_href_small, b.theme
              from book b
@@ -127,8 +127,26 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
         placeholder += 1;
         values.push(theme)
     }
+    if (orderby !== undefined) {
+        if (orderby === 'author') {
+            q += ' order by a.name asc ';
+        }
+        else if (orderby === 'price') {
+            q += ' order by b.price asc ';
+        }
+        else if (orderby === 'name') {
+            q += ' order by b.title asc ';
+        }
+        else if (orderby === 'year') {
+            q += ' order by b.publication_year asc ';
+        }
+    }
     q += 'offset $'+placeholder+' limit $'+(placeholder+1);
     values.push(offset, limit);
+
+    console.log(q)
+    console.log(values)
+
     return {
         text: q,
         values: values
@@ -155,10 +173,18 @@ module.exports.relatedBooks = (bookID, offset, limit) => {
 
 module.exports.genres = () => {
     return {
-        text: `select id, name as genre_name from genre`,
+        text: `select id, name as name from genre`,
         values: []
     }
 };
+
+module.exports.themes = () => {
+    return {
+        text: `select distinct(theme) as name from book`,
+        values: []
+    }
+};
+
 
 module.exports.addBookReview = (userID, bookID, body) => {
     return {

@@ -39,8 +39,8 @@ exports.eventIdGET = function(id) {
  * location String  (optional)
  * returns List
  **/
-exports.eventSearchGET = function(query_string,name,author_name,authorID,book_name,bookID,date,date_from,date_to,location) {
+exports.eventSearchGET = function(query_string,name,author_name,authorID,book_name,bookID,date,date_from,date_to,location,offset,limit, orderby, extra) {
   return db.execute(db.eventSearchGET,
-      [query_string,name,author_name,authorID,book_name,bookID,date,date_from,date_to,location])
+      [query_string,name,author_name,authorID,book_name,bookID,date,date_from,date_to,location, offset,limit, orderby, extra])
 }
 
