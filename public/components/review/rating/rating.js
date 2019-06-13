@@ -11,4 +11,4 @@ export let append_rating = (container, rating) => {
             }
         })
     }, true)
-}
+};

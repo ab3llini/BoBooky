@@ -144,8 +144,8 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
     q += 'offset $'+placeholder+' limit $'+(placeholder+1);
     values.push(offset, limit);
 
-    console.log(q)
-    console.log(values)
+    console.log(q);
+    console.log(values);
 
     return {
         text: q,
@@ -392,6 +392,7 @@ module.exports.getUserOrder = (id, offset, limit) => {
         text: `select distinct o.id as OrderID, u.id as user_id, u.name, u.surname, u.email, u.birthdate, o.total_amount as amount, o.timestamp
             from "order" o join "user" u on o.user_id = u.id join order_to_book otb on o.id = otb.order_id
             where u.id = $1
+            order by timestamp desc 
             offset $2 limit $3`,
         values: [id, offset, limit]
     }

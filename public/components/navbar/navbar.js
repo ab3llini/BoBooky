@@ -45,7 +45,7 @@ $(function () {
         $('.logout').click(() => {
             session.logout()
                 .then(result => {
-                    console.log('Logged out')
+                    console.log('Logged out');
                     location.reload()
                 })
                 .catch(e => {

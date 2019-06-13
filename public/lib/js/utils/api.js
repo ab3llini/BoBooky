@@ -18,7 +18,7 @@ let make = {
                 complete: (xhr, textStatus) => {
                     if (xhr.status !== 200) {
                         var e = new Error(xhr.statusText);
-                        e.statusText = xhr.statusText
+                        e.statusText = xhr.statusText;
                         e.status = xhr.status;
                         reject(e)
                     }
@@ -72,7 +72,7 @@ let make = {
                 complete: (xhr, textStatus) => {
                     if (xhr.status !== 200) {
                         var e = new Error(xhr.statusText);
-                        e.statusText = xhr.statusText
+                        e.statusText = xhr.statusText;
                         e.status = xhr.status;
                         reject(e)
                     }
@@ -96,7 +96,7 @@ let make = {
                 },
                 complete: (xhr, textStatus) => {
                     if (xhr.status !== 200)
-                        reject(textStatus)
+                        reject(textStatus);
                     else
                         resolve()
                 }
@@ -152,10 +152,11 @@ export let get = {
         themes : () => { return make.get('/api/book/themes') }
 
     },
-    address: () => { return make.get('/api/user/addresses')}, //FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
+    address: () => { return make.get('/api/user/addresses')}, //TODO: FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
     chart: () => { return make.get('/api/user/cart')},
     user : {
-        wishlist: () => { return make.get('/api/user/wishlist') }
+        wishlist: () => { return make.get('/api/user/wishlist') },
+        order: () => { return make.get('/api/user/orders') }
     },
     author: {
         get : (id) => { return make.get('/api/author/' + id) },
@@ -189,14 +190,14 @@ export let post = {
             }
         }
     }
-}
+};
 export let put = {
     user : {
         cart : (id, qty) => {
             return make.put('/api/user/cart', {bookID : parseInt(id), qty: parseInt(qty)})
         }
     }
-}
+};
 
 export let map = (map_fn) => {
     for (let sel in map_fn) {
@@ -204,4 +205,4 @@ export let map = (map_fn) => {
             $(sel).html(map_fn[sel])
         }
     }
-}
+};
