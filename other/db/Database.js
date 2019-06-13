@@ -203,7 +203,7 @@ module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher
                 }
             })
             .catch(error => {
-                console.log('ERROR IN SEARCH QUERY:')
+                console.log('ERROR IN SEARCH QUERY:');
                 console.error(error);
                 reject()
             })
@@ -311,7 +311,7 @@ module.exports.authorIdReviewGET = (id) => {
                         birthdate: res.birthdate
                     };
                     ans.push(review);
-                })
+                });
                 resolve(ans)
             })
             .catch(error => {
@@ -401,7 +401,7 @@ module.exports.userOrderGET = (id, offset, limit) => {
                         delete order.email;
                         delete order.birthdate;
 
-                        pipe.query(make.getBooksForOrder(id))
+                        pipe.query(make.getBooksForOrder(order.orderid))
                             .then(books => {
                                 order.Books = [];
                                 books.rows.forEach((book, j) => {

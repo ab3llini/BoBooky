@@ -24,22 +24,22 @@ $(() => {
         //If id exists
         if (args.has('id')) {
 
-            let id = parseInt(args.get('id'))
+            let id = parseInt(args.get('id'));
 
             let avg_rating = 0;
 
             // Download author reviews
             api.get.author.reviews(id).then(reviews => {
                 if (reviews === undefined) {
-                    loadingJob.completeTask()
+                    loadingJob.completeTask();
                     return
                 }
 
-                $('.author-rating-qty').html(reviews.length)
+                $('.author-rating-qty').html(reviews.length);
 
                 reviews.forEach(function (review) {
                     loader.append_map('.author-reviews-container', '/components/review/review.html', review.id, (o) => {
-                        o.find('.author').html(review.author.name + ' ' + review.author.surname)
+                        o.find('.author').html(review.author.name + ' ' + review.author.surname);
                         o.find('.content').html(review.body);
                         o.find('.title').html(review.title);
                         avg_rating += review.rating;
@@ -51,7 +51,7 @@ $(() => {
                 })
             }).catch(e => {
                 modal.error(e)
-            })
+            });
 
             // Retrieve and map author
             api.get.author.get(id)
@@ -89,7 +89,7 @@ $(() => {
                     api.get.book.search.author_id(id).then(books => {
 
                         if (books === undefined) {
-                            loadingJob.completeTask()
+                            loadingJob.completeTask();
                             return;
                         }
                         $('.book-data').html(books[0].title);

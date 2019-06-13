@@ -22,7 +22,7 @@ $(() => {
         let pwd_2 = $(this).find('#inputPasswordRepeated').val();
         $(this)[0].classList.add('was-validated');
         if (pwd.length < 8) {
-            modal.show('Warning', 'Password must be at least 8 character long')
+            modal.show('Warning', 'Password must be at least 8 character long');
             return
         }
         if (pwd !== pwd_2) {
@@ -51,4 +51,4 @@ $(() => {
                 })
         }
     })
-})
+});

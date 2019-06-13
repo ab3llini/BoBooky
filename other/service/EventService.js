@@ -10,7 +10,7 @@ let db = require('../db/Database');
  **/
 exports.eventGET = function() {
   return db.execute(db.eventGET, [])
-}
+};
 
 
 /**
@@ -21,7 +21,7 @@ exports.eventGET = function() {
  **/
 exports.eventIdGET = function(id) {
   return db.execute(db.eventIdGET, [id])
-}
+};
 
 
 /**
@@ -42,5 +42,5 @@ exports.eventIdGET = function(id) {
 exports.eventSearchGET = function(query_string,name,author_name,authorID,book_name,bookID,date,date_from,date_to,location,offset,limit, orderby, extra) {
   return db.execute(db.eventSearchGET,
       [query_string,name,author_name,authorID,book_name,bookID,date,date_from,date_to,location, offset,limit, orderby, extra])
-}
+};
 

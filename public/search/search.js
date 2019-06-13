@@ -43,21 +43,21 @@ $(() => {
                 // Bind handlers for wishlist
                 book_obj.find('.wishlist').unbind().click(function () {
 
-                    let idx = inWishlist.indexOf(book.id)
+                    let idx = inWishlist.indexOf(book.id);
                     if (idx > 0) {
                         api.post.user.wishlist.delete(book.id).then(() => {
-                            console.log('Removed')
+                            console.log('Removed');
                             let $heart = $(this).find('.fa');
                             $heart.removeClass('fa-heart');
-                            $heart.addClass('fa-heart-o')
+                            $heart.addClass('fa-heart-o');
                             inWishlist.splice(idx, 1)
                         }).catch(e => modal.error(e))
                     } else {
                         api.post.user.wishlist.add(book.id).then(() => {
-                            console.log('Added')
+                            console.log('Added');
                             let $heart = $(this).find('.fa');
                             $heart.removeClass('fa-heart-o');
-                            $heart.addClass('fa-heart')
+                            $heart.addClass('fa-heart');
                             inWishlist.push(book.id)
                         }).catch(e => modal.error(e))
                     }
@@ -112,7 +112,7 @@ $(() => {
                 $('.filter.theme').val(filters.theme);
             });
 
-            $('.filter').change(() => $('.search-form').submit())
+            $('.filter').change(() => $('.search-form').submit());
 
             // Fetch all genres and populate filter
             api.get.book.genres().then(genres => {
@@ -182,11 +182,11 @@ $(() => {
                     loadingJob.completeTask();
                     $('.author-container').html("No authors found..")
                 }
-            }).catch(e => modal.error(e))
+            }).catch(e => modal.error(e));
 
             // Wishlist
             let wishlist = [];
-            let inWishlist = []
+            let inWishlist = [];
 
             let query_args = {
                 query: query,

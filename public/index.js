@@ -28,7 +28,7 @@ $(() => {
                         })
                 })
             })
-        })
+        });
 
     // Inject
     loader.append('.favourites', '/components/carousel/container.html', 'favourites-carousel')
