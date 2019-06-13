@@ -34,5 +34,5 @@ export let error = (error) => {
     else {
         show(error.statusText + ' (' + error.status + ')', 'Something went wrong.', error)
     }
-}
+};
 

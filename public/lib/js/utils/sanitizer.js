@@ -9,7 +9,7 @@ export let locate = (o) => {
         if ($(this).attr('name'))
             context[this.name] = this.value;
     });
-}
+};
 
 export let validate = () => {
     if (form[0].checkValidity() === false) {
@@ -17,11 +17,11 @@ export let validate = () => {
         return false
     }
     return true;
-}
+};
 
 export let getContext = () => {
     return context
-}
+};
 
 export let merge = function (target, keys) {
 
@@ -56,6 +56,6 @@ export let sanitize = () => {
             }
         }
     }
-}
+};
 
 

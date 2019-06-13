@@ -64,4 +64,4 @@ $(()=> {
             $('.summary-total').html('€ ' + total_amount);
             $('.summary-delivery').html('free')*/
         })
-})
+});

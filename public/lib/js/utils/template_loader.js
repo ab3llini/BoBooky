@@ -61,4 +61,4 @@ export let append = (container, template, id, processing = undefined) => {
             resolve($ans);
         });
     })
-}
+};

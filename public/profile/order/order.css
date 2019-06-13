@@ -1,0 +1,9 @@
+.book-element-container .order-book-element:last-child {
+  border-bottom: hidden;
+}
+
+.book-element-container .order-book-element {
+  border-bottom: 1px solid white;
+}
+
+/*# sourceMappingURL=order.css.map */

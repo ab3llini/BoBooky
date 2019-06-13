@@ -12,7 +12,7 @@ let db = require('../db/Database');
 exports.authorGET = function(offset,limit) {
   return db.execute(db.authorGET, [offset, limit])
 
-}
+};
 
 
 /**
@@ -24,7 +24,7 @@ exports.authorGET = function(offset,limit) {
 exports.authorIdGET = function(id) {
   return db.execute(db.authorIdGET, [id])
 
-}
+};
 
 
 /**
@@ -36,7 +36,7 @@ exports.authorIdGET = function(id) {
  **/
 exports.authorReviewDELETE = function(id,reviewID) {
   return db.execute(db.authorIdReviewDELETE(id,reviewID,userID))
-}
+};
 
 
 /**
@@ -48,7 +48,7 @@ exports.authorReviewDELETE = function(id,reviewID) {
 exports.authorReviewGET = function(id) {
   return db.execute(db.authorIdReviewGET, [id])
 
-}
+};
 
 
 /**
@@ -61,5 +61,5 @@ exports.authorReviewGET = function(id) {
 exports.authorReviewPOST = function(id,body) {
   return db.execute(db.authorIdReviewPOST, [id, userID, body])
 
-}
+};
 

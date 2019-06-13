@@ -13,7 +13,7 @@ let db = require('../db/Database');
 exports.bookGET = function(offset,limit) {
   return db.execute(db.bookGET, [offset, limit])
 
-}
+};
 
 
 /**
@@ -23,7 +23,7 @@ exports.bookGET = function(offset,limit) {
  **/
 exports.bookGenreGET = function() {
   return db.execute(db.bookGenreGET, [])
-}
+};
 
 
 /**
@@ -35,7 +35,7 @@ exports.bookGenreGET = function() {
  **/
 exports.bookIdGET = function(id) {
   return db.execute(db.bookIdGET, [id])
-}
+};
 
 
 /**
@@ -46,7 +46,7 @@ exports.bookIdGET = function(id) {
  **/
 exports.bookRelatedGET = function(id) {
   return db.execute(db.bookRelatedGET, [id])
-}
+};
 
 
 /**
@@ -60,7 +60,7 @@ exports.bookReviewDELETE = function(id,reviewID) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -71,7 +71,7 @@ exports.bookReviewDELETE = function(id,reviewID) {
  **/
 exports.bookReviewGET = function(id) {
   return db.execute(db.bookReviewGET, [id])
-}
+};
 
 
 /**
@@ -83,7 +83,7 @@ exports.bookReviewGET = function(id) {
  **/
 exports.bookReviewPOST = function(id, userID, body) {
   return db.execute(db.bookReviewPOST, [id, userID, body])
-}
+};
 
 
 /**
@@ -106,7 +106,7 @@ exports.bookReviewPOST = function(id, userID, body) {
 exports.bookSearchGET = function(query,isbn,genre,year,author,authorID,publisher,publisherID,theme,offset,limit, orderby, extra) {
   return db.execute(db.bookSearchGET, [query,isbn,genre,year,author,authorID,publisher,publisherID,theme, offset, limit, orderby, extra])
 
-}
+};
 
 
 /**
@@ -116,5 +116,5 @@ exports.bookSearchGET = function(query,isbn,genre,year,author,authorID,publisher
  **/
 exports.bookThemeGET = function() {
   return db.execute(db.bookThemeGET, [])
-}
+};
 
