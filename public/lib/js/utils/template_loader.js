@@ -31,7 +31,6 @@ export let append_map = (container, template, id, map_fn, prepend = false) => {
             map_fn($ans);
             if (prepend) {
                 $(container).prepend($ans
-                    .hide()
                     .fadeIn(500)
                 );
             }
