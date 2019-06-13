@@ -17,7 +17,7 @@ $(()=> {
                     o.find('.book-image').attr('src', book.image_href);
                     o.find('.plus-button').click(function(){
                         let $item = $(this).parents('.shopping-item').first();
-                        api.put.user.cart(book.id, qty).then(function () {
+                        api.put.user.cart(book.id, qty + 1).then(function () {
                             qty += 1;
                             $item.find('.book-qty').html(qty);
                             total_amount += book.price;
@@ -29,7 +29,7 @@ $(()=> {
                         let $item = $(this).parents('.shopping-item').first();
 
                         if(qty > 1) {
-                            api.put.user.cart(book.id, qty).then(function () {
+                            api.put.user.cart(book.id, qty - 1).then(function () {
                                 qty -= 1;
                                 $item.find('.book-qty').html(qty);
                                 total_amount -= book.price;
