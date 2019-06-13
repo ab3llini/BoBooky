@@ -18,6 +18,9 @@ $theme-colors: (
 
 ::selection { background-color: $yellow; }
 
+html {
+    scroll-behavior: smooth;
+}
 
 .form-group {
     position: relative;
