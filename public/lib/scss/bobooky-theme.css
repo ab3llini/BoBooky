@@ -10329,6 +10329,10 @@ h3 {
   background-color: #ffc107;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .form-group {
   position: relative;
   margin-bottom: 2rem;
@@ -10768,5 +10772,36 @@ body {
 .btn-circle-bobooky {
   border-radius: 50% !important;
 }
+
+/* <- Magic Stuff Start */
+.gradient-warning {
+  background-image: linear-gradient(to right, #F39325 0%, #F7BC5D 60%);
+}
+
+.gradient-primary {
+  background-image: linear-gradient(to right, #0D71B9 0%, #05AB9E 80%);
+}
+
+.gradient-secondary {
+  background-image: linear-gradient(to right, #05AB9E 0%, #5ef4e7 51%);
+}
+
+.gradient-purple {
+  background-image: linear-gradient(to right, #8E3089 0%, #E83273 51%);
+}
+
+.gradient-pink {
+  background-image: linear-gradient(to right, #E83273 0%, #fb8acd 51%);
+}
+
+.gradient-danger {
+  background-image: linear-gradient(to right, #AD2528 0%, #E83273 51%);
+}
+
+.gradient-dark {
+  background-image: linear-gradient(to right, #21263F 40%, #2c2746 60%);
+}
+
+/* Magic Stuff End -> */
 
 /*# sourceMappingURL=bobooky-theme.css.map */

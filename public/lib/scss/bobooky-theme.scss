@@ -16,7 +16,7 @@ $theme-colors: (
 @import "../../lib/bootstrap/scss/bootstrap";
 
 
-::selection { background-color: $yellow; }
+::selection { background-color: $warning; }
 
 html {
     scroll-behavior: smooth;
@@ -69,7 +69,6 @@ html {
         border-color: $color
     }
 
-
     /*
         Themed placeholders
      */
@@ -118,4 +117,40 @@ body {
 .btn-circle-bobooky {
     border-radius: 50% !important;
 }
+
+/* <- Magic Stuff Start */
+
+
+
+
+.gradient-warning {
+    background-image: linear-gradient(to right, $bobooky-orange 0%, $bobooky-warning 60%);
+}
+
+.gradient-primary {
+    background-image: linear-gradient(to right, $bobooky-primary 0%, $bobooky-secondary 80%);
+}
+
+.gradient-secondary {
+    background-image: linear-gradient(to right, $bobooky-secondary 0%, #5ef4e7 51%);
+}
+
+.gradient-purple {
+    background-image: linear-gradient(to right, $bobooky-purple 0%, $bobooky-pink 51%);
+}
+
+.gradient-pink {
+    background-image: linear-gradient(to right, $bobooky-pink 0%, #fb8acd 51%);
+}
+
+.gradient-danger {
+    background-image: linear-gradient(to right, $bobooky-danger 0%, $bobooky-pink 51%);
+}
+
+.gradient-dark {
+    background-image: linear-gradient(to right, $bobooky-dark 40%, #2c2746 60%);
+}
+
+/* Magic Stuff End -> */
+
 
