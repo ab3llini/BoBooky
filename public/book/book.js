@@ -24,7 +24,7 @@ $(() => {
         //If id exists
         if (args.has('id')) {
 
-            let id = parseInt(args.get('id'))
+            let id = parseInt(args.get('id'));
 
             let inWishlist = false;
 
@@ -45,19 +45,19 @@ $(() => {
             $('.wishlist').unbind().click(function () {
                 if (inWishlist) {
                     api.post.user.wishlist.delete(id).then(()=> {
-                        console.log('Removed')
+                        console.log('Removed');
                         let $heart = $(this).find('.fa');
                         $heart.removeClass('fa-heart');
-                        $heart.addClass('fa-heart-o')
+                        $heart.addClass('fa-heart-o');
                         inWishlist = false;
                     }).catch(e => modal.error(e))
                 }
                 else {
                     api.post.user.wishlist.add(id).then(()=> {
-                        console.log('Added')
+                        console.log('Added');
                         let $heart = $(this).find('.fa');
                         $heart.removeClass('fa-heart-o');
-                        $heart.addClass('fa-heart')
+                        $heart.addClass('fa-heart');
                         inWishlist = true;
                     }).catch(e => modal.error(e))
                 }
@@ -79,6 +79,8 @@ $(() => {
                     // Set page title
                     document.title = book.title;
 
+                    let bd_arr = book.description.split(' ');
+
                     // Load JSON
                     api.map({
                         '.book-title': book.title,
@@ -90,8 +92,8 @@ $(() => {
                         '.book-isbn': book.isbn,
                         '.book-isbn-13': book.isbn13,
                         '.book-date': [book.publication_month, book.publication_year].join('/'),
-                        '.book-description': book.description.slice(0, 500),
-                        '.book-full-description': book.description.slice(500, book.description.length),
+                        '.book-description': bd_arr.slice(0, 80).join(' '),
+                        '.book-full-description': bd_arr.slice(80, bd_arr.length).join(' '),
                     });
 
                     $('.book-author-href').attr('href', '/author/?id='+book.author.id);
@@ -114,7 +116,7 @@ $(() => {
                 .then(() => {
 
                     api.get.book.related(id).then(books => {
-                        $('.book-data').html(books[0].title)
+                        $('.book-data').html(books[0].title);
 
                         books.forEach(book => {
                             loader.append_map('#related-carousel .MS-content', '/components/carousel/items/book.html', book.id, function (book_obj) {
@@ -150,17 +152,17 @@ $(() => {
             // Download reviews
             api.get.book.reviews(id).then(reviews => {
                 if (reviews === undefined) {
-                    loadingJob.completeTask()
+                    loadingJob.completeTask();
                     return
                 }
 
-                $('.book-rating-qty').html(reviews.length)
+                $('.book-rating-qty').html(reviews.length);
 
                 reviews.forEach(function (review) {
                     loader.append_map('.book-reviews-container', '/components/review/review.html', review.id, (o) => {
-                        o.find('.author').html(review.author.name + ' ' + review.author.surname)
-                        o.find('.content').html(review.body)
-                        o.find('.title').html(review.title)
+                        o.find('.author').html(review.author.name + ' ' + review.author.surname);
+                        o.find('.content').html(review.body);
+                        o.find('.title').html(review.title);
                         rating.append_rating(o.find('.rating'), review.rating)
                     }).then(() => {
                         loadingJob.completeTask()

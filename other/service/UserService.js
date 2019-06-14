@@ -11,7 +11,7 @@ let db = require('../db/Database');
 exports.userAddressDELETE = function(id, addressID) {
   return db.execute(db.userAddressDELETE, [id, addressID])
 
-}
+};
 
 
 /**
@@ -22,7 +22,7 @@ exports.userAddressDELETE = function(id, addressID) {
 exports.userAddressGET = function(id) {
   return db.execute(db.userAddressGET, [id])
 
-}
+};
 
 
 /**
@@ -34,7 +34,7 @@ exports.userAddressGET = function(id) {
 exports.userAddressPOST = function(id, body) {
   return db.execute(db.userAddressPOST, [id, body])
 
-}
+};
 
 
 /**
@@ -47,7 +47,7 @@ exports.userAddressPOST = function(id, body) {
 exports.userAddressPUT = function(id, addressID, body) {
   return db.execute(db.userAddressPUT, [id, body])
 
-}
+};
 
 
 /**
@@ -58,7 +58,7 @@ exports.userAddressPUT = function(id, addressID, body) {
 exports.userChartDELETE = function(id) {
   return db.execute(db.userChartDELETE, [id])
 
-}
+};
 
 
 /**
@@ -68,7 +68,7 @@ exports.userChartDELETE = function(id) {
  **/
 exports.userChartGET = function(id) {
   return db.execute(db.userChartGET, [id])
-}
+};
 
 
 /**
@@ -80,7 +80,7 @@ exports.userChartGET = function(id) {
 exports.userChartPUT = function(id, body) {
   return db.execute(db.userChartPUT, [id, body])
 
-}
+};
 
 
 /**
@@ -93,7 +93,7 @@ exports.userChartPUT = function(id, body) {
 exports.userLoginPOST = function(body) {
   db.execute(db.userLoginPOST, [body])
 
-}
+};
 
 
 /**
@@ -106,7 +106,7 @@ exports.userLogoutGET = function() {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -116,9 +116,9 @@ exports.userLogoutGET = function() {
  * limit Integer  (optional)
  * returns List
  **/
-exports.userOrderGET = function(offset,limit) {
+exports.userOrderGET = function(id, offset,limit) {
   return db.execute(db.userOrderGET, [id, offset, limit])
-}
+};
 
 
 /**
@@ -131,7 +131,7 @@ exports.userOrderGET = function(offset,limit) {
 exports.userRegisterPOST = function(body) {
   return db.execute(db.userRegisterPOST, [body])
 
-}
+};
 
 
 /**
@@ -143,7 +143,7 @@ exports.userRegisterPOST = function(body) {
 exports.userWhishlistDELETE = function(id, bookID) {
   return db.execute(db.userWishlistDELETE, [id, bookID])
 
-}
+};
 
 
 /**
@@ -154,7 +154,7 @@ exports.userWhishlistDELETE = function(id, bookID) {
 exports.userWhishlistGET = function(id) {
   return db.execute(db.userWishlistGET, [id])
 
-}
+};
 
 
 /**
@@ -164,6 +164,6 @@ exports.userWhishlistGET = function(id) {
  * no response value expected for this operation
  **/
 exports.userWhishlistPOST = function(id, bookID) {
-  return db.execute(db.userWishlistPOST, [id, book_id])
-}
+  return db.execute(db.userWishlistPOST, [id, bookID])
+};
 

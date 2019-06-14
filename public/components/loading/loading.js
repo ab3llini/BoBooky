@@ -16,7 +16,7 @@ export let show = (loader) => {
             })
         }
     })
-}
+};
 export let hide = () => {
     if ($object !== undefined) {
         $object.fadeOut(200, function () {
@@ -24,4 +24,4 @@ export let hide = () => {
         });
         $object = undefined;
     }
-}
+};

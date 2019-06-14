@@ -430,6 +430,15 @@ paths:
           type: "integer"
           description: "Defaults to 20"
           x-example: 50
+        - name: "orderby"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "extra"
+          in: "query"
+          required: false
+          type: "string"
+          description: "Additional filtering parameter. Might be useful in the future"
       responses:
         200:
           description: "successful operation"
@@ -861,6 +870,22 @@ paths:
           type: "string"
           format: "date"
         - name: "Location"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "offset"
+          in: "query"
+          required: false
+          type: "integer"
+        - name: "limit"
+          in: "query"
+          required: false
+          type: "integer"
+        - name: "orderby"
+          in: "query"
+          required: false
+          type: "string"
+        - name: "extra"
           in: "query"
           required: false
           type: "string"

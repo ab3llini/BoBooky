@@ -11,7 +11,7 @@ export let login = (username, password) => {
         api.post.login(username, password)
             .then(result => {
                 $.cookie('session', JSON.stringify(result), { path: '/' });
-                console.log('Authorized' + JSON.stringify(result))
+                console.log('Authorized' + JSON.stringify(result));
                 resolve(result)
             })
             .catch(e => {
@@ -26,7 +26,7 @@ export let logout = () => {
     return new Promise((resolve, reject) => {
 
 
-        console.log($.removeCookie('session',{ path: '/' }))
+        console.log($.removeCookie('session',{ path: '/' }));
 
         api.post.logout()
             .then(result => {

@@ -10329,8 +10329,8 @@ h3 {
   background-color: #ffc107;
 }
 
-.bobooky.form-control:focus {
-  border-color: white;
+html {
+  scroll-behavior: smooth;
 }
 
 .form-group {
@@ -10373,6 +10373,10 @@ h3 {
   color: #0D71B9;
 }
 
+.bobooky-primary.form-control:focus {
+  border-color: #0D71B9;
+}
+
 /*
     Themed placeholders
  */
@@ -10396,6 +10400,10 @@ input.placeholder-primary::placeholder {
 
 .form-placeholder-secondary .form-control::placeholder {
   color: #05AB9E;
+}
+
+.bobooky-secondary.form-control:focus {
+  border-color: #05AB9E;
 }
 
 /*
@@ -10423,6 +10431,10 @@ input.placeholder-secondary::placeholder {
   color: #28a745;
 }
 
+.bobooky-success.form-control:focus {
+  border-color: #28a745;
+}
+
 /*
     Themed placeholders
  */
@@ -10446,6 +10458,10 @@ input.placeholder-success::placeholder {
 
 .form-placeholder-info .form-control::placeholder {
   color: #17a2b8;
+}
+
+.bobooky-info.form-control:focus {
+  border-color: #17a2b8;
 }
 
 /*
@@ -10473,6 +10489,10 @@ input.placeholder-info::placeholder {
   color: #F7BC5D;
 }
 
+.bobooky-warning.form-control:focus {
+  border-color: #F7BC5D;
+}
+
 /*
     Themed placeholders
  */
@@ -10496,6 +10516,10 @@ input.placeholder-warning::placeholder {
 
 .form-placeholder-danger .form-control::placeholder {
   color: #AD2528;
+}
+
+.bobooky-danger.form-control:focus {
+  border-color: #AD2528;
 }
 
 /*
@@ -10523,6 +10547,10 @@ input.placeholder-danger::placeholder {
   color: #f8f9fa;
 }
 
+.bobooky-light.form-control:focus {
+  border-color: #f8f9fa;
+}
+
 /*
     Themed placeholders
  */
@@ -10546,6 +10574,10 @@ input.placeholder-light::placeholder {
 
 .form-placeholder-dark .form-control::placeholder {
   color: #21263F;
+}
+
+.bobooky-dark.form-control:focus {
+  border-color: #21263F;
 }
 
 /*
@@ -10573,6 +10605,10 @@ input.placeholder-dark::placeholder {
   color: #F39325;
 }
 
+.bobooky-orange.form-control:focus {
+  border-color: #F39325;
+}
+
 /*
     Themed placeholders
  */
@@ -10596,6 +10632,10 @@ input.placeholder-orange::placeholder {
 
 .form-placeholder-pink .form-control::placeholder {
   color: #E83273;
+}
+
+.bobooky-pink.form-control:focus {
+  border-color: #E83273;
 }
 
 /*
@@ -10623,6 +10663,10 @@ input.placeholder-pink::placeholder {
   color: #8E3089;
 }
 
+.bobooky-purple.form-control:focus {
+  border-color: #8E3089;
+}
+
 /*
     Themed placeholders
  */
@@ -10646,6 +10690,10 @@ input.placeholder-purple::placeholder {
 
 .form-placeholder-white .form-control::placeholder {
   color: white;
+}
+
+.bobooky-white.form-control:focus {
+  border-color: white;
 }
 
 /*
@@ -10673,6 +10721,10 @@ input.placeholder-white::placeholder {
   color: #737373;
 }
 
+.bobooky-gray.form-control:focus {
+  border-color: #737373;
+}
+
 /*
     Themed placeholders
  */
@@ -10693,11 +10745,13 @@ input.placeholder-gray::placeholder {
   src: url(https://fonts.googleapis.com/css?family=Nunito&display=swap);
 }
 body {
-  font-family: "Open Sans", sans-serif;
+  /*
+  font-family: 'Open Sans', sans-serif;
   font-weight: lighter;
-}
-body h1, body h2, body h3, body h4, body h5, body h6, body .title {
-  font-family: "Nunito", sans-serif;
+  h1, h2, h3, h4, h5, h6, .title {
+      font-family: 'Nunito', sans-serif;
+  }
+  */
 }
 
 .linear-gradient {
@@ -10712,7 +10766,42 @@ body h1, body h2, body h3, body h4, body h5, body h6, body .title {
 }
 
 .rounded-bobooky {
-  border-radius: 2.5rem;
+  border-radius: 2rem;
 }
+
+.btn-circle-bobooky {
+  border-radius: 50% !important;
+}
+
+/* <- Magic Stuff Start */
+.gradient-warning {
+  background-image: linear-gradient(to right, #F39325 0%, #F7BC5D 60%);
+}
+
+.gradient-primary {
+  background-image: linear-gradient(to right, #0D71B9 0%, #05AB9E 80%);
+}
+
+.gradient-secondary {
+  background-image: linear-gradient(to right, #05AB9E 0%, #5ef4e7 51%);
+}
+
+.gradient-purple {
+  background-image: linear-gradient(to right, #8E3089 0%, #E83273 51%);
+}
+
+.gradient-pink {
+  background-image: linear-gradient(to right, #E83273 0%, #fb8acd 51%);
+}
+
+.gradient-danger {
+  background-image: linear-gradient(to right, #AD2528 0%, #E83273 51%);
+}
+
+.gradient-dark {
+  background-image: linear-gradient(to right, #21263F 40%, #2c2746 60%);
+}
+
+/* Magic Stuff End -> */
 
 /*# sourceMappingURL=bobooky-theme.css.map */

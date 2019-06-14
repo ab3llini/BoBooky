@@ -24,22 +24,22 @@ $(() => {
         //If id exists
         if (args.has('id')) {
 
-            let id = parseInt(args.get('id'))
+            let id = parseInt(args.get('id'));
 
             let avg_rating = 0;
 
             // Download author reviews
             api.get.author.reviews(id).then(reviews => {
                 if (reviews === undefined) {
-                    loadingJob.completeTask()
+                    loadingJob.completeTask();
                     return
                 }
 
-                $('.author-rating-qty').html(reviews.length)
+                $('.author-rating-qty').html(reviews.length);
 
                 reviews.forEach(function (review) {
                     loader.append_map('.author-reviews-container', '/components/review/review.html', review.id, (o) => {
-                        o.find('.author').html(review.author.name + ' ' + review.author.surname)
+                        o.find('.author').html(review.author.name + ' ' + review.author.surname);
                         o.find('.content').html(review.body);
                         o.find('.title').html(review.title);
                         avg_rating += review.rating;
@@ -51,7 +51,7 @@ $(() => {
                 })
             }).catch(e => {
                 modal.error(e)
-            })
+            });
 
             // Retrieve and map author
             api.get.author.get(id)
@@ -60,12 +60,15 @@ $(() => {
                     // Set page title
                     document.title = author.name;
 
+                    let ad_arr = author.description.split(' ');
+
+
                     // Load JSON
                     api.map({
                         '.author-name': author.name,
                         '.author-rating-val': avg_rating,
-                        '.author-description': author.description.slice(0, 500),
-                        '.author-full-description': author.description.slice(500, author.description.length),
+                        '.author-description': ad_arr.slice(0, 80).join(' '),
+                        '.author-full-description': ad_arr.slice(80, ad_arr.length).join(' '),
                     });
 
                     $('.author-image > .img').css("background-image", "url(" + author.image_url + ")");
@@ -86,7 +89,7 @@ $(() => {
                     api.get.book.search.author_id(id).then(books => {
 
                         if (books === undefined) {
-                            loadingJob.completeTask()
+                            loadingJob.completeTask();
                             return;
                         }
                         $('.book-data').html(books[0].title);

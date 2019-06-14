@@ -35,7 +35,12 @@ module.exports.eventSearchGET = function eventSearchGET (req, res, next) {
   var date_from = req.swagger.params['date_from'].value;
   var date_to = req.swagger.params['date_to'].value;
   var location = req.swagger.params['Location'].value;
-  Event.eventSearchGET(query_string,name,author_name,authorID,book_name,bookID,date,date_from,date_to,location)
+  var offset = req.swagger.params['offset'].value;
+  var limit = req.swagger.params['limit'].value;
+  var orderby = req.swagger.params['orderby'].value;
+  var extra = req.swagger.params['extra'].value;
+
+  Event.eventSearchGET(query_string,name,author_name,authorID,book_name,bookID,date,date_from,date_to,location, offset, limit, orderby, extra)
     .then(function (response) {
       utils.writeJson(res, response);
     })

@@ -29,7 +29,7 @@ passport.use(new Strategy(
             password: password
         })
             .then((result) => {
-                console.warn('1 username = ' + username + ' pass=' + password)
+                console.warn('1 username = ' + username + ' pass=' + password);
 
                 console.log('New login: ' + username);
                 done(null, {
@@ -40,8 +40,7 @@ passport.use(new Strategy(
                 })
             })
             .catch(e => {
-                console.warn(e)
-
+                console.warn(e);
                 console.log('Login failed: ' + username);
                 done(null, false)
             })
@@ -104,7 +103,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
     app.use(middleware.swaggerMetadata());
 
     // Validate Swagger requests
-    app.use(middleware.swaggerValidator())
+    app.use(middleware.swaggerValidator());
 
     app.use((req, res, next) => {
         middleware.swaggerSecurity({

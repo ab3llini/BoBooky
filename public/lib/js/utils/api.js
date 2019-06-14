@@ -18,7 +18,7 @@ let make = {
                 complete: (xhr, textStatus) => {
                     if (xhr.status !== 200) {
                         var e = new Error(xhr.statusText);
-                        e.statusText = xhr.statusText
+                        e.statusText = xhr.statusText;
                         e.status = xhr.status;
                         reject(e)
                     }
@@ -72,7 +72,7 @@ let make = {
                 complete: (xhr, textStatus) => {
                     if (xhr.status !== 200) {
                         var e = new Error(xhr.statusText);
-                        e.statusText = xhr.statusText
+                        e.statusText = xhr.statusText;
                         e.status = xhr.status;
                         reject(e)
                     }
@@ -96,7 +96,7 @@ let make = {
                 },
                 complete: (xhr, textStatus) => {
                     if (xhr.status !== 200)
-                        reject(textStatus)
+                        reject(textStatus);
                     else
                         resolve()
                 }
@@ -137,13 +137,26 @@ export let get = {
             author_id : (author_id) => { return make.get('/api/book/search?authorID=' + author_id)},
             publisher : (publisher) => { return make.get('/api/book/search?publisher=' + publisher)},
             publisher_id : (publisher_id) => { return make.get('/api/book/search?publisherID=' + publisher_id)},
-            theme : (theme) => { return make.get('/api/book/search?theme=' + theme)}
-        }
+            theme : (theme) => { return make.get('/api/book/search?theme=' + theme)},
+            mixed : (args) => {
+                let params = [];
+                for (let param in args) {
+                    if (args.hasOwnProperty(param)) {
+                        params.push(param+'='+args[param]);
+                    }
+                }
+                return make.get('/api/book/search?' + params.join('&'));
+            }
+        },
+        genres : () => { return make.get('/api/book/genres') },
+        themes : () => { return make.get('/api/book/themes') }
+
     },
-    address: () => { return make.get('/api/user/addresses')}, //FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
+    address: () => { return make.get('/api/user/addresses')}, //TODO: FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
     chart: () => { return make.get('/api/user/cart')},
     user : {
-        wishlist: () => { return make.get('/api/user/wishlist') }
+        wishlist: () => { return make.get('/api/user/wishlist') },
+        order: () => { return make.get('/api/user/orders') }
     },
     author: {
         get : (id) => { return make.get('/api/author/' + id) },
@@ -177,14 +190,14 @@ export let post = {
             }
         }
     }
-}
+};
 export let put = {
     user : {
         cart : (id, qty) => {
             return make.put('/api/user/cart', {bookID : parseInt(id), qty: parseInt(qty)})
         }
     }
-}
+};
 
 export let map = (map_fn) => {
     for (let sel in map_fn) {
@@ -192,4 +205,4 @@ export let map = (map_fn) => {
             $(sel).html(map_fn[sel])
         }
     }
-}
+};

@@ -166,40 +166,44 @@ module.exports.bookRelatedGET = (bookID, offset = 0, limit = 20) => {
     })
 };
 
-module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher,publisher_id,theme) => {
+module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher,publisher_id,theme,offset, limit, orderby, extra) => {
     return new Promise((resolve, reject) => {
-        pipe.query(make.bookSearch(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme))
+        pipe.query(make.bookSearch(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme,offset, limit, orderby, extra))
             .then(result => {
                 let ans = [];
-                result.rows.forEach((book, i) => {
-                    pipe.query(make.bookGenres(book.id))
-                        .then(genres => {
-                            book.genres = genres.rows;
-                            pipe.query(make.authorId(book.author))
-                                .then(authors => {
-                                    if(authors.rowCount !== 0) {
-                                        delete book.author;
-                                        book.author = authors.rows[0];
-                                        ans.push(book);
-                                        if (i === result.rowCount - 1)
-                                            resolve(ans)
-                                    }
-                                    else
+                if(result.rowCount === 0)
+                    reject();
+                else {
+                    result.rows.forEach((book, i) => {
+                        pipe.query(make.bookGenres(book.id))
+                            .then(genres => {
+                                book.genres = genres.rows;
+                                pipe.query(make.authorId(book.author))
+                                    .then(authors => {
+                                        if (authors.rowCount !== 0) {
+                                            delete book.author;
+                                            delete book.author_name;
+                                            book.author = authors.rows[0];
+                                            ans.push(book);
+                                            if (i === result.rowCount - 1)
+                                                resolve(ans)
+                                        } else
+                                            reject()
+                                    })
+                                    .catch(error => {
+                                        console.log(error);
                                         reject()
-                                })
-                                .catch(error => {
-                                    console.log(error);
-                                    reject()
-                                })
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            reject()
-                        })
-                })
+                                    })
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                reject()
+                            })
+                    })
+                }
             })
             .catch(error => {
-                console.log('ERROR IN SEARCH QUERY:')
+                console.log('ERROR IN SEARCH QUERY:');
                 console.error(error);
                 reject()
             })
@@ -212,6 +216,19 @@ module.exports.bookGenreGET = () => {
         pipe.query(make.genres())
             .then(genres => {
                 resolve(genres.rows)
+            })
+            .catch(error => {
+                console.log(error);
+                reject()
+            })
+    })
+};
+
+module.exports.bookThemeGET = () => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.themes())
+            .then(themes => {
+                resolve(themes.rows)
             })
             .catch(error => {
                 console.log(error);
@@ -294,7 +311,7 @@ module.exports.authorIdReviewGET = (id) => {
                         birthdate: res.birthdate
                     };
                     ans.push(review);
-                })
+                });
                 resolve(ans)
             })
             .catch(error => {
@@ -384,7 +401,7 @@ module.exports.userOrderGET = (id, offset, limit) => {
                         delete order.email;
                         delete order.birthdate;
 
-                        pipe.query(make.getBooksForOrder(id))
+                        pipe.query(make.getBooksForOrder(order.orderid))
                             .then(books => {
                                 order.Books = [];
                                 books.rows.forEach((book, j) => {
@@ -629,9 +646,9 @@ module.exports.eventIdGET = (id) => {
     })
 };
 
-module.exports.eventSearchGET = (query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location) => {
+module.exports.eventSearchGET = (query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location, offset, limit, oderby, extra) => {
     return new Promise((resolve, reject) =>  {
-        pipe.query(make.eventSearch(query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location))
+        pipe.query(make.eventSearch(query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location, offset, limit, oderby, extra))
             .then(events => {
                 if(events.rowCount > 0) {
                     let ans = [];
