@@ -1,6 +1,10 @@
 import psycopg2
 import requests
 from tqdm import tqdm
+import random
+import pandas as pd
+import numpy.random as rnd
+from gpt2.interactive_conditional_samples import interact_model
 
 
 def check_unavailable(connection) -> list:
@@ -56,10 +60,38 @@ def set_themes_to_books(connection):
     connection.commit()
 
 
+def add_events(connection):
+    address_ids = [46, 47]
+    hours = [9, 10, 11, 14, 15, 16, 17, 21, 22]
+    desc_1 = ['In this event', 'Today', 'During the event']
+    desc_2 = ['the famous writer', 'the writer', 'the author named', 'the famous author']
+    desc_3 = ['will present his new books', 'will talk about his last productions', 'will be our special guest']
+    sql_fetch = 'select id, name from author'
+
+    sql_insert = 'insert into event(name, description, location, timestamp, related_author) values (%s, %s, %s, %s, %s)'
+
+    cursor = connection.cursor()
+    cursor.execute(sql_fetch)
+
+    rows = cursor.fetchall()
+    for row in tqdm(rows, desc='updating...'):
+        cursor.close()
+        cursor = connection.cursor()
+        datetime = pd.to_datetime(rnd.choice(pd.bdate_range('2019-08-01', '2019-12-31')))
+        datetime = datetime.replace(hour=random.choice(hours))
+        desc = f'{random.choice(desc_1)} {random.choice(desc_2)} {row[1]} {random.choice(desc_3)}'
+        ans = interact_model(
+            prompt=desc
+        )
+        ans = desc + ans.split('\n')[0] + ' ' + ans.split('\n')[2]
+        cursor.execute(sql_insert, (f"{row[1]}'s Event", ans, random.choice(address_ids), datetime, row[0]))
+        connection.commit()
+
+
 if __name__ == '__main__':
     conn = psycopg2.connect(host="ec2-79-125-2-142.eu-west-1.compute.amazonaws.com",
                             database="d3k4sooera9fsh",
                             user="kaxtczmqrauqfc",
                             password="a46181c55c68f90d53b029a88daa5800f4b13f203287f0df528a993ef18e5b14")
-    set_themes_to_books(conn)
+    add_events(conn)
     conn.close()
