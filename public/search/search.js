@@ -95,14 +95,16 @@ $(() => {
             let query = args.get('q');
 
             // Utilities
-            let get_filter = (key) => args.has(key) ? args.get(key) : 'default';
+            let get_filter = (key, _default = undefined) => args.has(key) ? args.get(key) : (_default !== undefined ? _default : 'default');
             let create_options = (filter, options) => options.forEach(option => $(filter).append(new Option(option, option)));
 
             let filters = {
                 orderby: get_filter('orderby'),
                 genre: get_filter('genre'),
-                theme: get_filter('theme')
+                theme: get_filter('theme'),
+                page : parseInt(get_filter('page', 0))
             };
+
 
             let filterJob = worker.newJob(2, () => {
                 // Set values to search and genre/theme filters
@@ -110,6 +112,19 @@ $(() => {
                 $('.filter.orderby').val(filters.orderby);
                 $('.filter.genre').val(filters.genre);
                 $('.filter.theme').val(filters.theme);
+            });
+
+            let next_btn = $('.next');
+            let prev_btn = $('.previous');
+
+            next_btn.click(function () {
+               $('.search-form .page').val(filters.page + 1);
+               $('.search-form').submit();
+            });
+
+            prev_btn.click(function () {
+                $('.search-form .page').val(filters.page - 1);
+                $('.search-form').submit();
             });
 
             $('.filter').change(() => $('.search-form').submit());
@@ -148,6 +163,14 @@ $(() => {
                         }
                     })
                 }
+
+                if (books.length < 20) {
+                    next_btn.hide();
+                }
+                if (filters.page === 0) {
+                    prev_btn.hide();
+                }
+
                 if (Object.values(authors).length > 0) {
                     loader.append('.author-container', '/components/carousel/container.html', 'author-carousel')
                         .then(() => {
@@ -192,7 +215,8 @@ $(() => {
                 query: query,
                 orderby : filters.orderby,
                 genre: filters.genre,
-                theme: filters.theme
+                theme: filters.theme,
+                offset : filters.page
             };
 
             if (query_args.orderby === 'default')
@@ -201,6 +225,8 @@ $(() => {
                 delete query_args.genre;
             if (query_args.theme === 'default')
                 delete query_args.theme;
+            if (query_args.page === 0)
+                delete query_args.page;
 
             // Fetch all books that match the query
             api.get.book.search.mixed(query_args).then(books => {
