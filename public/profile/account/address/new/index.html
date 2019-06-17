@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/lib/scss/bobooky-theme.css">
     <link rel="stylesheet" href="/components/navbar/navbar.css">
+    <link rel="stylesheet" href="/index.css">
 
 
 </head>
@@ -32,7 +33,7 @@
                                 <input type="text" name="name" class="form-control bobooky text-secondary"
                                        id="inputName" required>
                                 <label class="col-form-label-md form-control-placeholder"
-                                       for="inputName">Name</label>
+                                       for="inputName">Name*</label>
                                 <div class="invalid-feedback">
                                     Name cannot be empty.
                                 </div>
@@ -42,7 +43,7 @@
                                        id="inputSurname"
                                        placeholder=" " required>
                                 <label class="col-form-label-md form-control-placeholder"
-                                       for="inputSurname">Surname</label>
+                                       for="inputSurname">Surname*</label>
 
                                 <div class="invalid-feedback">
                                     Surname cannot be empty.
@@ -55,16 +56,14 @@
                                        id="addressLine1"
                                        required>
                                 <label class="col-form-label-md form-control-placeholder"
-                                       for="addressLine1">Address</label>
+                                       for="addressLine1">Address*</label>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12">
                                 <input type="text" name="address_line_2" class="bobooky form-control text-secondary"
-                                       id="addressLine2"
-                                       required>
-                                <label class="col-form-label-md form-control-placeholder"
-                                       for="addressLine2">Additional details</label>
+                                       id="addressLine2" placeholder="Additional details"
+                                      >
                             </div>
                         </div>
                         <div class="form-row">
@@ -73,7 +72,7 @@
                                        id="inputPostalCode"
                                        required>
                                 <label class="col-form-label-md form-control-placeholder" for="inputPostalCode">Postal
-                                    Code</label>
+                                    Code*</label>
 
                                 <div class="invalid-feedback">
                                     Please insert a valid postal code.
@@ -83,7 +82,7 @@
                                 <input type="text" name="city" class="bobooky form-control text-secondary"
                                        id="inputCity"
                                        required>
-                                <label class="col-form-label-md form-control-placeholder" for="inputCity">City</label>
+                                <label class="col-form-label-md form-control-placeholder" for="inputCity">City*</label>
 
                                 <div class="invalid-feedback">
                                     City cannot be empty.
@@ -94,17 +93,28 @@
                                        id="inputCountry"
                                        required>
                                 <label class="col-form-label-md form-control-placeholder"
-                                       for="inputCountry">Country</label>
+                                       for="inputCountry">Country*</label>
 
                                 <div class="invalid-feedback">
                                     Country cannot be empty.
                                 </div>
                             </div>
-                            <div class="container mb-3">
-                                <button type="submit"
-                                        class="btn btn-secondary text-dark font-weight-bold rounded-pill mt-5 float-right">
-                                    Save
-                                </button>
+                            <div class="container mb-3 mt-5">
+                                <div class="row justify-content-end">
+                                    <div class="col-6 col-sm-2">
+                                    <button type="button"
+                                            class="btn font-weight-bold text-secondary border-secondary rounded-pill w-100"
+                                            onclick="window.history.back();">
+                                        Cancel
+                                    </button>
+                                    </div>
+                                    <div class="col-6 col-sm-2">
+                                    <button type="submit"
+                                            class="btn btn-secondary text-dark font-weight-bold rounded-pill w-100">
+                                        Save
+                                    </button>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
