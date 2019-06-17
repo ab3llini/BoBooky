@@ -1,0 +1,19 @@
+.theme-ribbon {
+  background-image: url("/assets/images/genre_bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.books-container .book .image {
+  width: calc(100vw - 2rem);
+  background-size: 100% 100%;
+  height: 140vw;
+}
+@media (min-width: 576px) {
+  .books-container .book .image {
+    width: 14rem;
+    height: 22.4rem;
+  }
+}
+
+/*# sourceMappingURL=search.css.map */
