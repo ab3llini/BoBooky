@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Search</title>
+    <title>Theme</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/lib/scss/bobooky-theme.css">
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
@@ -38,57 +38,23 @@ Loading template
         </ol>
     </div>
 </nav>
-<div class="section search mt-5">
-    <div class="container">
-        <form class="search-form">
-            <div class="row">
-                <div class="col-12 col-xl-6">
-                    <input type="search" name="q" value="" class="form-control form-control-lg rounded-pill search-bar"
-                           placeholder="Search..">
-                </div>
-                <div class="col-12 col-xl-6 d-flex justify-content-between mt-3 mt-xl-0">
-                    <select name="orderby"
-                            class="text-capitalize form-control custom-select custom-select-lg bg-dark rounded-pill text-white mr-3 filter orderby">
-                        <option selected value="default">order by</option>
-                        <option value="price">price</option>
-                        <option value="author">author</option>
-                        <option value="name">name</option>
-                        <option value="year">year</option>
 
-                    </select>
-                    <select name="genre"
-                            class="text-capitalize form-control custom-select custom-select-lg bg-dark rounded-pill text-white mx-3 filter genre">
-                        <option selected value="default">genre</option>
-                    </select>
-                    <select name="theme"
-                            class="text-capitalize form-control custom-select custom-select-lg bg-dark rounded-pill text-white ml-3 filter theme">
-                        <option selected value="default">theme</option>
-                    </select>
-                </div>
-            </div>
+<div class="container-fluid bg-warning theme-ribbon">
+    <div class="container text-white py-5">
+        <h2 class="name text-capitalize">theme name</h2>
+        <form class="search-form">
+            <input type="text" name="theme" class="d-none theme" value="">
             <input type="text" name="page" class="d-none page" value="0">
             <button type="submit" class="d-none"></button>
         </form>
     </div>
 </div>
-<div class="section authors mt-5">
-    <div class="container">
-        <h4 class="text-dark font-weight-bold">Authors</h4>
-        <div class="author-container mt-5"></div>
-    </div>
-</div>
-<div class="section events mt-5">
-    <div class="container">
-        <h4 class="text-dark font-weight-bold">Events</h4>
-        <div class="event-container mt-5"></div>
-    </div>
-</div>
 <div class="section books mt-5">
     <div class="container">
-        <h4 class="text-dark font-weight-bold">Books</h4>
         <div class="books-container"></div>
     </div>
 </div>
+
 <div class="section navigation my-5">
     <div class="container text-pink">
         <div class="row">
@@ -111,7 +77,6 @@ Loading template
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>
-<script src="/lib/multislider/multislider.js"></script>
 <script src="search.js" type="module"></script>
 
 
