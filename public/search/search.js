@@ -139,7 +139,7 @@ $(() => {
                 loadingJob.completeTask();
             });
 
-            // Fetch all themes and populate filter
+            // Fetch all discover and populate filter
             api.get.book.themes().then(themes => {
                 create_options('.filter.theme', themes.map(theme => theme.name).sort());
                 loadingJob.completeTask();

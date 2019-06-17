@@ -149,7 +149,7 @@ export let get = {
             }
         },
         genres : () => { return make.get('/api/book/genres') },
-        themes : () => { return make.get('/api/book/themes') }
+        themes : () => { return make.get('/api/book/discover') }
 
     },
     address: () => { return make.get('/api/user/addresses')}, //TODO: FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
@@ -195,6 +195,14 @@ export let put = {
     user : {
         cart : (id, qty) => {
             return make.put('/api/user/cart', {bookID : parseInt(id), qty: parseInt(qty)})
+        }
+    }
+};
+
+export let del = {
+    user: {
+        cart : () => {
+            return make.delete('/api/user/cart')
         }
     }
 };

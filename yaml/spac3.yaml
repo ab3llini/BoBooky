@@ -429,7 +429,7 @@ paths:
     get:
       tags:
         - book
-      summary: Returns all the themes in the db.
+      summary: Returns all the discover in the db.
       operationId: bookThemeGET
       responses:
         200:

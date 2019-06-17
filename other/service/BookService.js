@@ -110,7 +110,7 @@ exports.bookSearchGET = function(query,isbn,genre,year,author,authorID,publisher
 
 
 /**
- * Returns all the themes in the db.
+ * Returns all the discover in the db.
  *
  * returns List
  **/
