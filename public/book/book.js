@@ -81,13 +81,20 @@ $(() => {
 
                     let bd_arr = book.description.split(' ');
 
+                    let bind_link = (link, name) => {
+                        return '<a href="' + link + '" class="text-decoration-none text-gray">' + name + '</a>'
+                    };
+
+                    //TODO: ADD THEME IN RESULT !!!
+
                     // Load JSON
                     api.map({
                         '.book-title': book.title,
                         '.book-author': book.author.name,
                         '.book-rating-val': book.avg_rating,
                         '.book-price': book.price,
-                        '.book-genres': book.genres.join(' / '),
+                        '.book-genres': book.genres.map(genre => bind_link('/search/genre/?genre=' + genre, genre)).join(' / '),
+                        '.book-theme':  bind_link('/search/theme/?theme=' + book.theme, book.theme),
                         '.book-publisher': book.publisher,
                         '.book-isbn': book.isbn,
                         '.book-isbn-13': book.isbn13,

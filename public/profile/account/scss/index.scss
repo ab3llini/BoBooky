@@ -16,6 +16,29 @@
   }
 }
 
+.side-item {
+position: relative;
+  width: 100%;
+  height: 100%;
+  @include media-breakpoint-up(md) {
+    position: absolute;
+  }
+}
+
+.side-item-right {
+  position: relative;
+  float: right;
+  width: 100%;
+  height: 100%;
+}
+
+.make-me-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+
+  padding: 0 15px;
+}
 
 .main {
   font-size: 18pt;
@@ -36,3 +59,9 @@
 .profile-header-placeholder {
   margin-top: 55px;
 }
+
+.dropdown-menu > li > a:hover {
+  background-color: red;
+  background-image: none;
+}
+

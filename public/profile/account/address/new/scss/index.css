@@ -1,13 +1,17 @@
-.main {
-  font-size: 18pt;
+.btn-custom {
+  color: #05AB9E;
+  background-color: transparent;
+  border-color: #05AB9E;
 }
 
-.navbar {
-  background: #21263F;
+.btn-custom:hover {
+  color: #21263F;
+  background-color: #05AB9E;
+  border-color: #05AB9E;
 }
 
-.profile-header-placeholder {
-  margin-top: 55px;
+.btn:hover {
+  color: #21263F;
 }
 
 /*# sourceMappingURL=index.css.map */

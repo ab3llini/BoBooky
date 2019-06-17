@@ -1,14 +1,20 @@
 @import "../../../../../lib/scss/booboky-colors";
 
 
-.main {
-  font-size: 18pt;
+.btn-custom {
+  color: $bobooky-secondary;
+  background-color: transparent;
+  border-color: $bobooky-secondary;
 }
 
-.navbar {
-  background: $bobooky-dark;
+.btn-custom:hover {
+  color: $bobooky-dark;
+  background-color: $bobooky-secondary;
+  border-color: $bobooky-secondary;
 }
 
-.profile-header-placeholder {
-    margin-top: 55px;
+.btn:hover {
+  color: $bobooky-dark;
 }
+
+
