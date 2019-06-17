@@ -172,7 +172,7 @@ module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher
             .then(result => {
                 let ans = [];
                 if(result.rowCount === 0)
-                    reject();
+                    resolve(ans);
                 else {
                     result.rows.forEach((book, i) => {
                         pipe.query(make.bookGenres(book.id))
