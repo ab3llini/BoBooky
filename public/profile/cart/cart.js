@@ -1,10 +1,12 @@
 import * as loader from '/lib/js/utils/template_loader.js'
 import * as api from '/lib/js/utils/api.js';
+import * as modal from '/components/modal/modal.js'
 
 $(()=> {
     let total_amount = 0.0;
     api.get.chart()
         .then(chart => {
+            //todo: manage empty cart
             let books = chart.Books;
             books.forEach((b, idx) => {
                 loader.append_map('.shopping-cart-container', '/components/cart/cart-element.html', b.book.id, (o) => {
@@ -63,5 +65,16 @@ $(()=> {
             $('.summary-subtotal').html('€ ' + total_amount);
             $('.summary-total').html('€ ' + total_amount);
             $('.summary-delivery').html('free')*/
+
+            $('.buy-button').click(function () {
+                modal.inject(modal.type.alert, 'cart-modal').then(modal => {
+                    //TODO: create order
+                    console.log('Clicked');
+                    api.del.user.cart()
+                        .then(() => modal.show('Order completed', 'Your order has been accepted!'))
+                        .catch((error) => modal.error(error))
+                })
+            })
         })
+
 });
