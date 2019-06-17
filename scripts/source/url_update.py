@@ -66,8 +66,7 @@ def add_events(connection):
     hours = [9, 10, 11, 14, 15, 16, 17, 21, 22]
     desc_1 = ['The event']
     desc_2 = ['The famous writer', 'The writer', 'The author named', 'The famous author', 'The author']
-    desc_3 = ['will present his new book', 'will talk about his last production',
-              'will be our special guest presenting the book']
+    desc_3 = ['will present his new book', 'will be our special guest presenting the book']
 
     sql_fetch = 'select id, name, title, book_id from ( \
         select a.id, a.name, b.title, b.id as book_id, b.publication_year, row_number() \
@@ -103,10 +102,10 @@ def add_events(connection):
         ans = interact_model(
             prompt=desc
         )
-        ans = desc + ans.split('\n')[0] + ' ' + ans.split('\n')[2] + ' ' + ans.split('\n')[3]
+
+        ans = list(filter(lambda x: x != '' and x != '\n', ans.split('\n')))
+        ans = desc + ans[0] + ' ' + ans[1] + ' ' + ans[2]
         ans = ans.split(SPLIT_CHAR)[0]
-        print(ans)
-        exit(0)
         cursor.execute(sql_insert, (f"{row[1]}'s Event", ans, random.choice(address_ids), datetime, row[0], row[-1]))
         connection.commit()
 
