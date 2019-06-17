@@ -199,6 +199,14 @@ export let put = {
     }
 };
 
+export let del = {
+    user: {
+        cart : () => {
+            return make.delete('/api/user/cart')
+        }
+    }
+};
+
 export let map = (map_fn) => {
     for (let sel in map_fn) {
         if (map_fn.hasOwnProperty(sel)) {
