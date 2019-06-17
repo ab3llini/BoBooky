@@ -1,0 +1,33 @@
+.discover-section {
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -100;
+    padding-top: 100px;
+    background-image: url("/assets/images/genre_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nav-item > a {
+    font-size: 24px;
+}
+
+$radius : 10px;
+
+.blurred-bg {
+    z-index: -99;
+    background-color: #21263F;
+    opacity: 0.6;
+    filter: opacity($radius);
+}
+
+.text {
+    z-index: 100;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    /* For IE8 and earlier */
+}
