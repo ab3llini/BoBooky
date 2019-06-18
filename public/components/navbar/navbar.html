@@ -1,24 +1,33 @@
 <!-- NAVBAR -->
-<div class="">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark unscrolled">
-        <div class="container bg-success">
-            <div class="col-1">
-                <button class="navbar-toggler bg-warning border-0 no-glow" type="button" data-toggle="collapse" data-target="#navbarText"
-                        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="col-2 bg-danger float-left">
-                <a class="navbar-brand" href="/">
-                    <img src="/assets/logo_white.png"/>
-                </a>
-            </div>
-
-            <!-- MENù DA MOBILE A TENDINA -->
-            <div class="collapse navbar-collapse" id="navbarText">
+<div class="fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/assets/logo_white.png"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText, #navbarIcons"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse " id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Books</a>
+                        <a class="nav-link"  data-toggle="collapse" data-target="#books-expanded, #booksCollapse" href="#">Books</a>
+                        <div class="navbar-collapse collapse d-lg-none" id="booksCollapse">
+                            <ul class="navbar-nav">
+                                <li class="nav-item text-white">
+                                   Ciao
+                                </li>
+                                <li class="nav-item text-white">
+                                   Ciao
+                                </li>
+                                <li class="nav-item text-white">
+                                <li class="nav-item text-white">
+                                   Ciao
+                                </li>
+
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Authors</a>
@@ -31,32 +40,38 @@
                     </li>
                 </ul>
             </div>
-
-            <div class="row">
-                <div class="navbar-collapse" id="navbarIcons">
-                    <ul class="navbar-nav list-inline ml-auto">
-                        <li class="nav-item list-inline-item">
-                            <a href="/profile/cart" class="nav-link">
-                                <span class="fa font-weight-bold text-white fa-shopping-cart"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item list-inline-item">
-                            <a class="nav-link" href="#">
-                                <span class="fa font-weight-bold text-white fa-heart"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item list-inline-item">
-                            <a class="nav-link" id="profile-button" data-toggle="collapse" data-target="" aria-controls=""
-                               aria-expanded="false">
-                                <span class="fa font-weight-bold text-white fa-user"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="navbar-collapse collapse" id="navbarIcons">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/profile/cart" class="nav-link">
+                            <span class="fa font-weight-bold text-white fa-shopping-cart"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#">
+                            <span class="fa font-weight-bold text-white fa-heart"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-button" data-toggle="collapse" data-target="" aria-controls=""
+                           aria-expanded="false">
+                            <span class="fa font-weight-bold text-white fa-user"></span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
-
+    <div class="collapse d-none d-lg-block" id="books-expanded">
+        <div class="container d-flex justify-content-between py-4">
+            <a href="#">All the books</a>
+            <a href="#">All the books</a>
+            <a href="#">All the books</a>
+            <a href="#">All the books</a>
+            <a href="#">All the books</a>
+            <a href="#">All the books</a>
+        </div>
+    </div>
     <div class="collapse" id="register-login-ribbon">
         <div class="container-fluid">
             <div class="row h-100">
@@ -75,6 +90,7 @@
                                     </a>
                                 </h2>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -153,7 +169,6 @@
             </div>
         </div>
     </div>
-
     <div class="collapse ml-auto" id="shopping-cart-ribbon">
         <div class="blurred-bg">
             <div class="container text-white">

@@ -138,14 +138,11 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
             q += ' order by b.title asc ';
         }
         else if (orderby === 'year') {
-            q += ' order by b.publication_year asc ';
+            q += ' order by b.publication_year desc ';
         }
     }
     q += 'offset $'+placeholder+' limit $'+(placeholder+1);
     values.push(offset, limit);
-
-    console.log(q);
-    console.log(values);
 
     return {
         text: q,
