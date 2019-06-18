@@ -68,6 +68,16 @@ $(()=> {
 
             $('.buy-button').click(function () {
                 modal.inject(modal.type.alert, 'cart-modal').then(modal => {
+                    api.get.chart()
+                        .then(chart => {
+                            let order = {};
+                            order.books = chart.Books;
+                            order.amount = chart.Books.map(b => b.book.price * b.qty)
+                                .reduce((prev, curr) => prev + curr);
+
+
+                        })
+
                     //TODO: create order
                     console.log('Clicked');
                     api.del.user.cart()
