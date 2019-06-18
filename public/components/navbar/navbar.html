@@ -1,6 +1,6 @@
 <!-- NAVBAR -->
-<div class="">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark unscrolled">
+<div class="fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="/assets/logo_white.png"/>
@@ -9,10 +9,25 @@
                     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarText">
+            <div class="navbar-collapse collapse " id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Books</a>
+                        <a class="nav-link"  data-toggle="collapse" data-target="#books-expanded, #booksCollapse" href="#">Books</a>
+                        <div class="navbar-collapse collapse d-lg-none" id="booksCollapse">
+                            <ul class="navbar-nav">
+                                <li class="nav-item text-white">
+                                   Ciao
+                                </li>
+                                <li class="nav-item text-white">
+                                   Ciao
+                                </li>
+                                <li class="nav-item text-white">
+                                <li class="nav-item text-white">
+                                   Ciao
+                                </li>
+
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Authors</a>
@@ -32,7 +47,7 @@
                             <span class="fa font-weight-bold text-white fa-shopping-cart"></span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="#">
                             <span class="fa font-weight-bold text-white fa-heart"></span>
                         </a>
@@ -47,7 +62,16 @@
             </div>
         </div>
     </nav>
-
+    <div class="collapse d-none d-lg-block" id="books-expanded">
+        <div class="container d-flex justify-content-between py-4">
+            <a href="#">All the books</a>
+            <a href="#">All the books</a>
+            <a href="#">All the books</a>
+            <a href="#">All the books</a>
+            <a href="#">All the books</a>
+            <a href="#">All the books</a>
+        </div>
+    </div>
     <div class="collapse" id="register-login-ribbon">
         <div class="container-fluid">
             <div class="row h-100">
@@ -145,7 +169,6 @@
             </div>
         </div>
     </div>
-
     <div class="collapse ml-auto" id="shopping-cart-ribbon">
         <div class="blurred-bg">
             <div class="container text-white">
