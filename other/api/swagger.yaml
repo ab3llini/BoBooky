@@ -758,6 +758,28 @@ paths:
       security:
         - BoBookyAuth: []
       x-swagger-router-controller: "User"
+    post:
+      tags:
+        - "user"
+      summary: "Add new order fot the user"
+      operationId: "userOrderPOST"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Order"
+      responses:
+        200:
+          description: "Status 200"
+        400:
+          description: "Status 400"
+        404:
+          description: "Status 404"
+      security: []
+      x-swagger-router-controller: "User"
   /user/cart:
     get:
       tags:
@@ -1131,8 +1153,6 @@ definitions:
     required:
       - "amount"
       - "books"
-      - "timestamp"
-      - "user"
     properties:
       OrderID:
         type: "integer"
