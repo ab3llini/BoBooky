@@ -11,15 +11,11 @@
   background-size: cover;
 }
 
-.nav-item > a {
-  font-size: 24px;
-}
-
 .blurred-bg {
   z-index: -99;
   background-color: #21263F;
-  opacity: 0.6;
-  filter: opacity(10px);
+  opacity: 0.7;
+  filter: opacity(70px);
 }
 
 .text {
