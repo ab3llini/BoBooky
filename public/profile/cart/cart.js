@@ -90,7 +90,10 @@ $(()=> {
                                         })
                                         .catch((error) => modal.error(error))
                                 })
-                        });
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
                 })
             })
         })
