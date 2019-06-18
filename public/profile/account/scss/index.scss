@@ -60,8 +60,18 @@ position: relative;
   margin-top: 55px;
 }
 
+.dropdown-menu >li > a {
+  color: white;
+}
+
 .dropdown-menu > li > a:hover {
-  background-color: red;
+  background-color: $bobooky-dark;
+  opacity:0.9;
   background-image: none;
+}
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
 }
 

@@ -56,9 +56,19 @@
   margin-top: 55px;
 }
 
+.dropdown-menu > li > a {
+  color: white;
+}
+
 .dropdown-menu > li > a:hover {
-  background-color: red;
+  background-color: #21263F;
+  opacity: 0.9;
   background-image: none;
+}
+
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none;
 }
 
 /*# sourceMappingURL=index.css.map */

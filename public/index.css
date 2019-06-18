@@ -84,4 +84,9 @@
   border-radius: 0.2rem;
 }
 
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
 /*# sourceMappingURL=index.css.map */

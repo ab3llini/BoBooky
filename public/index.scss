@@ -143,3 +143,8 @@ $img_h : 1.6 * $img_w;
   height: $img_h;
   border-radius: 0.2rem;
 }
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
