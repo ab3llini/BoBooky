@@ -1,7 +1,9 @@
 let debug = true;
 
 let make = {
-    post: (url, data = undefined, map = (data) => {return JSON.stringify(data)}) => {
+    post: (url, data = undefined, map = (data) => {
+        return JSON.stringify(data)
+    }) => {
         if (debug) {
             console.info('New POST request to ' + url + ' with data = ' + JSON.stringify(data))
         }
@@ -21,14 +23,15 @@ let make = {
                         e.statusText = xhr.statusText;
                         e.status = xhr.status;
                         reject(e)
-                    }
-                    else
+                    } else
                         resolve()
                 }
             });
         })
     },
-    put: (url, data = undefined, map = (data) => {return JSON.stringify(data)}) => {
+    put: (url, data = undefined, map = (data) => {
+        return JSON.stringify(data)
+    }) => {
         if (debug) {
             console.info('New PUT request to ' + url + ' with data = ' + JSON.stringify(data))
         }
@@ -48,14 +51,15 @@ let make = {
                         e.statusText = xhr.statusText;
                         e.status = xhr.status;
                         reject(e)
-                    }
-                    else
+                    } else
                         resolve()
                 }
             });
         })
     },
-    delete: (url, data = undefined,  map = (data) => {return JSON.stringify(data)}) => {
+    delete: (url, data = undefined, map = (data) => {
+        return JSON.stringify(data)
+    }) => {
         if (debug) {
             console.info('New DELETE request to ' + url + ' with data = ' + JSON.stringify(data))
         }
@@ -75,8 +79,7 @@ let make = {
                         e.statusText = xhr.statusText;
                         e.status = xhr.status;
                         reject(e)
-                    }
-                    else
+                    } else
                         resolve()
                 }
             });
@@ -124,44 +127,99 @@ export let get = {
             });
         })
     },
-    book : {
-        get : (id) => { return make.get('/api/book/' + id) },
-        related : (id) => { return make.get('/api/book/' + id + '/related')},
-        reviews : (id) => { return make.get('/api/book/' + id + '/reviews') },
-        search : {
-            query: (query) => { return make.get('/api/book/search?query=' + query)},
-            isbn : (isbn) => { return make.get('/api/book/search?isbn=' + isbn)},
-            genre : (genre) => { return make.get('/api/book/search?genre=' + genre)},
-            year : (year) => { return make.get('/api/book/search?year=' + year)},
-            author : (author) => { return make.get('/api/book/search?author=' + author)},
-            author_id : (author_id) => { return make.get('/api/book/search?authorID=' + author_id)},
-            publisher : (publisher) => { return make.get('/api/book/search?publisher=' + publisher)},
-            publisher_id : (publisher_id) => { return make.get('/api/book/search?publisherID=' + publisher_id)},
-            theme : (theme) => { return make.get('/api/book/search?theme=' + theme)},
-            mixed : (args) => {
+    book: {
+        get: (id) => {
+            return make.get('/api/book/' + id)
+        },
+        related: (id) => {
+            return make.get('/api/book/' + id + '/related')
+        },
+        reviews: (id) => {
+            return make.get('/api/book/' + id + '/reviews')
+        },
+        search: {
+            query: (query) => {
+                return make.get('/api/book/search?query=' + query)
+            },
+            isbn: (isbn) => {
+                return make.get('/api/book/search?isbn=' + isbn)
+            },
+            genre: (genre) => {
+                return make.get('/api/book/search?genre=' + genre)
+            },
+            year: (year) => {
+                return make.get('/api/book/search?year=' + year)
+            },
+            author: (author) => {
+                return make.get('/api/book/search?author=' + author)
+            },
+            author_id: (author_id) => {
+                return make.get('/api/book/search?authorID=' + author_id)
+            },
+            publisher: (publisher) => {
+                return make.get('/api/book/search?publisher=' + publisher)
+            },
+            publisher_id: (publisher_id) => {
+                return make.get('/api/book/search?publisherID=' + publisher_id)
+            },
+            theme: (theme) => {
+                return make.get('/api/book/search?theme=' + theme)
+            },
+            mixed: (args) => {
                 let params = [];
                 for (let param in args) {
                     if (args.hasOwnProperty(param)) {
-                        params.push(param+'='+args[param]);
+                        params.push(param + '=' + args[param]);
                     }
                 }
                 return make.get('/api/book/search?' + params.join('&'));
             }
         },
-        genres : () => { return make.get('/api/book/genres') },
-        themes : () => { return make.get('/api/book/discover') }
+        genres: () => {
+            return make.get('/api/book/genres')
+        },
+        themes: () => {
+            return make.get('/api/book/discover')
+        }
 
     },
-    address: () => { return make.get('/api/user/addresses')}, //TODO: FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
-    chart: () => { return make.get('/api/user/cart')},
-    user : {
-        wishlist: () => { return make.get('/api/user/wishlist') },
-        order: () => { return make.get('/api/user/orders') }
+    address: () => {
+        return make.get('/api/user/addresses')
+    }, //TODO: FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
+    chart: () => {
+        return make.get('/api/user/cart')
+    },
+    user: {
+        wishlist: () => {
+            return make.get('/api/user/wishlist')
+        },
+        order: () => {
+            return make.get('/api/user/orders')
+        }
     },
     author: {
-        get : (id) => { return make.get('/api/author/' + id) },
-        books : (id) => { return get.book.search.author_id(id)},
-        reviews : (id) => { return make.get('/api/author/' + id + '/reviews') }
+        get: (id) => {
+            return make.get('/api/author/' + id)
+        },
+        books: (id) => {
+            return get.book.search.author_id(id)
+        },
+        reviews: (id) => {
+            return make.get('/api/author/' + id + '/reviews')
+        }
+    },
+    event: {
+        search: (date, query) => {
+            let url = '/api/events/search?';
+            if (query !== undefined)
+                url += 'query_string=' + query;
+            if (date !== undefined)
+                url += '&date_from=' + date;
+            return make.get(url)
+        },
+        all: () => {
+            return make.get('/api/events')
+        }
     }
 };
 export let post = {
@@ -177,31 +235,35 @@ export let post = {
     register: (body) => {
         return make.post('/api/user/register', body)
     },
-    user : {
-        address : (body) => {
+    user: {
+        address: (body) => {
             return make.post('/api/user/addresses', body)
         },
-        wishlist : {
-            add : (id) => {
-                return make.post('/api/user/wishlist/?bookID=' + id, undefined, data => {return data})
+        wishlist: {
+            add: (id) => {
+                return make.post('/api/user/wishlist/?bookID=' + id, undefined, data => {
+                    return data
+                })
             },
-            delete : (id) => {
-                return make.delete('/api/user/wishlist/?bookID=' + id, undefined, data => {return data})
+            delete: (id) => {
+                return make.delete('/api/user/wishlist/?bookID=' + id, undefined, data => {
+                    return data
+                })
             }
         }
     }
 };
 export let put = {
-    user : {
-        cart : (id, qty) => {
-            return make.put('/api/user/cart', {bookID : parseInt(id), qty: parseInt(qty)})
+    user: {
+        cart: (id, qty) => {
+            return make.put('/api/user/cart', {bookID: parseInt(id), qty: parseInt(qty)})
         }
     }
 };
 
 export let del = {
     user: {
-        cart : () => {
+        cart: () => {
             return make.delete('/api/user/cart')
         }
     }

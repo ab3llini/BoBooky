@@ -20,5 +20,9 @@
 - autori
 - CONTROLLA IL RESTO
 
+//Optional to implement
+- Possibility to choose an address on order checkout
+- Add shipping address to orders (API + Implementation)
+
 - ! Aggiungere il link all'evento dalla pagina del libro !
 - Delete address

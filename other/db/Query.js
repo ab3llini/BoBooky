@@ -259,9 +259,10 @@ module.exports.event = () => {
         text: `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
                 a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country
             from event e
-                join event_to_image eti on e.id = eti.event_id
-                join image i on eti.image_id = i.id
-                join address a on e.location = a.id`
+                left join event_to_image eti on e.id = eti.event_id
+                left join image i on eti.image_id = i.id
+                join address a on e.location = a.id
+            order by e.timestamp desc limit 30`
     }
 };
 
@@ -282,11 +283,11 @@ module.exports.eventSearch = (query_string,name,author_name,author_id,book_name,
     let q = `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
                     a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country
              from event e
-                      join event_to_image eti on e.id = eti.event_id
-                      join image i on eti.image_id = i.id
+                      left join event_to_image eti on e.id = eti.event_id
+                      left join image i on eti.image_id = i.id
                       join address a on e.location = a.id
-                      join author a2 on e.related_author = a2.id
-                      join book b on e.related_book = b.id` + ' ';
+                      left join author a2 on e.related_author = a2.id
+                      left join book b on e.related_book = b.id` + ' ';
 
     let clause = 'where';
     let placeholder = 1;
@@ -352,6 +353,10 @@ module.exports.eventSearch = (query_string,name,author_name,author_id,book_name,
         q += clause + ' (lower(a.city) = lower($'+placeholder+'))' + ' ';
         values.push(location)
     }
+
+    q += 'order by e.timestamp desc limit 30';
+
+    console.log(q);
 
     return {
         text: q,
