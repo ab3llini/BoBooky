@@ -153,24 +153,3 @@ $img_h : 1.6 * $img_w;
   outline: none !important;
   box-shadow: none;
 }
-
-/*
-  Navbar config
- */
-.navbar .fa {
-  font-size: 1.3rem;
-}
-.navbar .navbar-brand {
-  height: 100%;
-}
-.navbar .navbar-brand img {
-  height: 2rem;
-}
-
-#books-expanded {
-  background-color: rgba(33, 38, 63, 0.5);
-}
-
-#books-expanded a {
-  color : $white;
-}

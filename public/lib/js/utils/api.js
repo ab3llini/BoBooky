@@ -149,7 +149,7 @@ export let get = {
             }
         },
         genres : () => { return make.get('/api/book/genres') },
-        themes : () => { return make.get('/api/book/discover') }
+        themes : () => { return make.get('/api/book/themes') }
 
     },
     address: () => { return make.get('/api/user/addresses')}, //TODO: FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
