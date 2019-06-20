@@ -120,16 +120,6 @@ exports.userOrderGET = function(id, offset,limit) {
   return db.execute(db.userOrderGET, [id, offset, limit])
 };
 
-/**
- * Add new order fot the user
- *
- * body Order
- * no response value expected for this operation
- **/
-exports.userOrderPOST = function(body, id) {
-  return db.execute(db.userOrderPOST, [body, id])
-}
-
 
 /**
  * Registration

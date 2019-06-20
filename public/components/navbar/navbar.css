@@ -6,47 +6,36 @@
   transition: background-color 200ms linear;
 }
 
-#shopping-cart-ribbon {
-  width: 576px;
-  height: calc(100vh - 56px);
-  right: 8%;
-  position: absolute;
-  z-index: 1000;
-}
-@media (max-width: 575.98px) {
-  #shopping-cart-ribbon {
-    width: 100%;
-    right: 0;
-  }
+div .blurred-bg {
+  position: relative;
+  background: #21263F;
+  opacity: 0.9;
 }
 
-.blurred-bg {
-  background: rgba(0, 0, 0, 0.8);
+div .blurred-bg:before {
+  content: "";
+  position: absolute;
+  background: #21263F;
+  filter: blur(5px);
 }
 
 .objects {
   max-height: calc(100vh - 156px);
 }
 
-#cart-title {
-  height: 50px;
+.navbar-brand-b img {
+  height: 30px;
+}
+@media (max-width: 991.98px) {
+  .navbar-brand-b img {
+    height: 20px;
+  }
 }
 
-#cart-bottom {
-  height: 50px;
-}
-
-.container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.container::-webkit-scrollbar {
-  display: none;
-}
-
-.navbar-brand img {
-  height: 25px;
+@media (max-width: 991.98px) {
+  .sub-menu {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=navbar.css.map */

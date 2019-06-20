@@ -439,29 +439,6 @@ module.exports.userOrderGET = (id, offset, limit) => {
     })
 };
 
-module.exports.userOrderPOST = (order, id) => {
-    return new Promise((resolve, reject) => {
-        pipe.query(make.addUserOrder(order.amount, id))
-            .then(order_id => {
-                order.books.forEach((b, idx) => {
-                    pipe.query(make.addBookToOrder(b.book.id, order_id.rows[0].id, b.qty))
-                        .then(() => {
-                            if(idx === order.books.length - 1)
-                                resolve()
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            reject(error)
-                        })
-                })
-            })
-            .catch(error => {
-                console.log(error);
-                reject(error);
-            })
-    })
-};
-
 module.exports.userAddressPOST = (userID, address) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.addAddressForUser(address))

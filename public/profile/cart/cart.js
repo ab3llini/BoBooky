@@ -68,32 +68,11 @@ $(()=> {
 
             $('.buy-button').click(function () {
                 modal.inject(modal.type.alert, 'cart-modal').then(modal => {
-                    api.get.chart()
-                        .then(chart => {
-                            let order = {};
-                            order.books = chart.Books;
-                            order.books.forEach(book => {
-                                book.book.theme = {
-                                    id: 0,
-                                    name: 'Fuuuuuuuck'
-                                }
-                            });
-                            order.amount = chart.Books.map(b => b.book.price * b.qty)
-                                .reduce((prev, curr) => prev + curr);
-
-                            api.post.user.order(order)
-                                .then(() => {
-                                    console.log('Order Created!');
-                                    api.del.user.cart()
-                                        .then(() => {
-                                            window.location.replace('/profile/order')
-                                        })
-                                        .catch((error) => modal.error(error))
-                                })
-                        })
-                        .catch(error => {
-                            console.log(error)
-                        })
+                    //TODO: create order
+                    console.log('Clicked');
+                    api.del.user.cart()
+                        .then(() => modal.show('Order completed', 'Your order has been accepted!'))
+                        .catch((error) => modal.error(error))
                 })
             })
         })

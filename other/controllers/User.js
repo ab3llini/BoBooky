@@ -166,15 +166,3 @@ module.exports.userWhishlistPOST = function userWhishlistPOST(req, res, next) {
             utils.writeJson(res, response);
         });
 };
-
-module.exports.userOrderPOST = function userOrderPOST (req, res, next) {
-    var body = req.swagger.params['body'].value;
-    var id = req.user.id;
-    User.userOrderPOST(body, id)
-        .then(function (response) {
-            utils.writeJson(res, response);
-        })
-        .catch(function (response) {
-            utils.writeJson(res, response);
-        });
-};

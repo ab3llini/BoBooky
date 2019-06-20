@@ -2,30 +2,30 @@
 <div class="fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
         <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="/assets/logo_white.png"/>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText, #navbarIcons"
-                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler order-0" type="button" data-toggle="collapse" data-target="#navbarText1" aria-controls="navbarText1" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse " id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link"  data-toggle="collapse" data-target="#books-expanded, #booksCollapse" href="#">Books</a>
-                        <div class="navbar-collapse collapse d-lg-none" id="booksCollapse">
-                            <ul class="navbar-nav">
-                                <li class="nav-item text-white">
-                                   Ciao
-                                </li>
-                                <li class="nav-item text-white">
-                                   Ciao
-                                </li>
-                                <li class="nav-item text-white">
-                                <li class="nav-item text-white">
-                                   Ciao
-                                </li>
+            <div class="col order-1 d-flex align-content-sm-start">
+                <a class="navbar-brand-b" href="/">
+                    <img src="/assets/logo_white.png"/>
+                </a>
+            </div>
 
+            <div class="col-auto order-3 collapse navbar-collapse align-content-between" id="navbarText1">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" data-target="#booksCollapseLG, #booksCollapseXS" href="#">Books</a>
+                            <div class="navbar-collapse collapse d-lg-none" id="booksCollapseXS">
+                            <ul class="navbar-nav text-white d-lg-none">
+                                    <a class="text-light" href="">All the books</a>
+                                    <a class="text-light" href="">The latest books</a>
+                                    <a class="text-light" href="">All genres</a>
+                                    <a class="text-light" href="">All themes</a>
+                                    <a class="text-light" href="">Bestsellers</a>
+                                    <a class="text-light" href="">Our favorites</a>
                             </ul>
                         </div>
                     </li>
@@ -36,42 +36,62 @@
                         <a class="nav-link" href="#">Events</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" data-toggle="collapse" data-target="#aboutCollapseLG, #aboutCollapseXS" href="#">About us</a>
+                        <div class="navbar-collapse collapse d-lg-none" id="aboutCollapseXS">
+                            <ul class="navbar-nav text-white d-lg-none">
+                                <a class="text-light" href="">Who we are</a>
+                                <a class="text-light" href="">Contact us</a>
+                                <a class="text-light" href="">Ordering and shipping informations</a>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
-            <div class="navbar-collapse collapse" id="navbarIcons">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+            <div class="col-3 order-2 order-lg-last navbar-nav">
+                <div class="w-100 mr-2">
+                    <div class="row ml-auto justify-content-end">
                         <a href="/profile/cart" class="nav-link">
                             <span class="fa font-weight-bold text-white fa-shopping-cart"></span>
                         </a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link mx-2" href="#">
                             <span class="fa font-weight-bold text-white fa-heart"></span>
                         </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" id="profile-button" data-toggle="collapse" data-target="" aria-controls=""
                            aria-expanded="false">
                             <span class="fa font-weight-bold text-white fa-user"></span>
                         </a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
+
         </div>
     </nav>
-    <div class="collapse d-none d-lg-block" id="books-expanded">
-        <div class="container d-flex justify-content-between py-4">
-            <a href="#">All the books</a>
-            <a href="#">All the books</a>
-            <a href="#">All the books</a>
-            <a href="#">All the books</a>
-            <a href="#">All the books</a>
-            <a href="#">All the books</a>
+
+    <div class="collapse sub-menu blurred-bg" id="booksCollapseLG">
+        <div class="container w-100 py-4">
+            <div class="row">
+                <a class="mx-auto text-white" href="">All the books</a>
+                <a class="mx-auto text-white" href="">The latest books</a>
+                <a class="mx-auto text-white" href="">All genres</a>
+                <a class="mx-auto text-white" href="">All themes</a>
+                <a class="mx-auto text-white" href="">Bestsellers</a>
+                <a class="mx-auto text-white" href="">Our favorites</a>
+            </div>
         </div>
     </div>
+
+    <div class="collapse sub-menu blurred-bg" id="aboutCollapseLG">
+        <div class="container w-100 py-4">
+            <div class="row">
+                <a class="mx-auto text-white" href="">Who we are</a>
+                <a class="mx-auto text-white" href="">Contact us</a>
+                <a class="mx-auto text-white" href="">Ordering and shipping informations</a>
+            </div>
+        </div>
+    </div>
+
+    <!------------------------------------------------------------------------------------------------------------------->
+
     <div class="collapse" id="register-login-ribbon">
         <div class="container-fluid">
             <div class="row h-100">

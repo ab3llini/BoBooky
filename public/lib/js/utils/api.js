@@ -149,7 +149,7 @@ export let get = {
             }
         },
         genres : () => { return make.get('/api/book/genres') },
-        themes : () => { return make.get('/api/book/themes') }
+        themes : () => { return make.get('/api/book/discover') }
 
     },
     address: () => { return make.get('/api/user/addresses')}, //TODO: FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
@@ -188,8 +188,7 @@ export let post = {
             delete : (id) => {
                 return make.delete('/api/user/wishlist/?bookID=' + id, undefined, data => {return data})
             }
-        },
-        order: (body) => { return make.post('/api/user/orders', body) }
+        }
     }
 };
 export let put = {

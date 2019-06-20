@@ -10,7 +10,8 @@ $theme-colors: (
         "pink" : $bobooky-pink,
         "purple" : $bobooky-purple,
         "white" : white,
-        "gray" : #737373
+        "gray" : #737373,
+        "light" : $bobooky-light
 );
 
 @import "../../lib/bootstrap/scss/bootstrap";
