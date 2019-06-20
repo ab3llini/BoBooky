@@ -188,7 +188,8 @@ export let post = {
             delete : (id) => {
                 return make.delete('/api/user/wishlist/?bookID=' + id, undefined, data => {return data})
             }
-        }
+        },
+        order: (body) => { return make.post('/api/user/orders', body) }
     }
 };
 export let put = {
