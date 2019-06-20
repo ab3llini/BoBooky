@@ -2,47 +2,61 @@
 @import '../../lib/bootstrap/scss/functions';
 @import "../../lib/bootstrap/scss/variables";
 @import "../../lib/bootstrap/scss/mixins/breakpoints";
+
 $logo-height: 30px;
 
 .navbar.scrolled {
-  transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
 }
+
 .navbar.unscrolled {
-  transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
 }
 
 
 div .blurred-bg {
-  position: relative;
-  background: $bobooky-dark;
-  opacity: 0.9;
+    position: relative;
+    background: $bobooky-dark;
+    opacity: 0.9;
 }
 
 div .blurred-bg:before {
-  content: '';
-  position:absolute;
-  background: $bobooky-dark;
-  filter:blur(5px);
+    content: '';
+    position: absolute;
+    background: $bobooky-dark;
+    filter: blur(5px);
 }
 
 .objects {
-  max-height: calc(100vh - 156px);
+    max-height: calc(100vh - 156px);
 }
 
-
-
 .navbar-brand-b img {
-  height: $logo-height;
-  @include media-breakpoint-down(md) {
-    height: 20px;
-  }
+    height: $logo-height;
+    @include media-breakpoint-down(md) {
+        height: 25px;
+    }
 }
 
 .sub-menu {
-  @include media-breakpoint-down(md) {
-    display: none,
-  }
+    @include media-breakpoint-down(md) {
+        display: none;
+    }
+}
+
+/*
+  Navbar config
+ */
+.navbar .fa {
+    font-size: 20px;
 }
 
 
-//Esperimenti
+
+#books-expanded {
+    background-color: rgba(33, 38, 63, 0.5);
+}
+
+#books-expanded a {
+    color: $white;
+}

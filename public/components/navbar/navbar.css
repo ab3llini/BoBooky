@@ -28,7 +28,7 @@ div .blurred-bg:before {
 }
 @media (max-width: 991.98px) {
   .navbar-brand-b img {
-    height: 20px;
+    height: 25px;
   }
 }
 
@@ -36,6 +36,21 @@ div .blurred-bg:before {
   .sub-menu {
     display: none;
   }
+}
+
+/*
+  Navbar config
+ */
+.navbar .fa {
+  font-size: 20px;
+}
+
+#books-expanded {
+  background-color: rgba(33, 38, 63, 0.5);
+}
+
+#books-expanded a {
+  color: #fff;
 }
 
 /*# sourceMappingURL=navbar.css.map */

@@ -6,6 +6,13 @@ $(function () {
     // Inject navbar
     $(".nav-placeholder").load("/components/navbar/navbar.html", function() {
 
+        // Close all collapse items when a new one is opened
+        $('.nav-link').click(function () {
+            if ($(this).attr('data-toggle') === 'collapse') {
+                $('.auto-hide.show:not(.nav-collapse)').collapse('hide')
+            }
+        });
+
         // Bind collapse
         let profile_button = $('.navbar #profile-button');
         if (session.isLoggedIn()) {
@@ -53,9 +60,8 @@ $(function () {
                 })
         });
 
-
-
     });
+
 
 
 });

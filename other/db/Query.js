@@ -138,14 +138,11 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
             q += ' order by b.title asc ';
         }
         else if (orderby === 'year') {
-            q += ' order by b.publication_year asc ';
+            q += ' order by b.publication_year desc ';
         }
     }
     q += 'offset $'+placeholder+' limit $'+(placeholder+1);
     values.push(offset, limit);
-
-    console.log(q);
-    console.log(values);
 
     return {
         text: q,
@@ -392,7 +389,7 @@ module.exports.getUserSalt = (email) => {
     }
 };
 
-module.exports.getUserOrder = (id, offset, limit) => {
+module.exports.getUserOrder = (id, offset=0, limit=20) => {
     return {
         text: `select distinct o.id as OrderID, u.id as user_id, u.name, u.surname, u.email, u.birthdate, o.total_amount as amount, o.timestamp
             from "order" o join "user" u on o.user_id = u.id join order_to_book otb on o.id = otb.order_id
@@ -400,6 +397,20 @@ module.exports.getUserOrder = (id, offset, limit) => {
             order by timestamp desc 
             offset $2 limit $3`,
         values: [id, offset, limit]
+    }
+};
+
+module.exports.addUserOrder = (total_amount, user_id) => {
+    return {
+        text: `insert into "order"(total_amount, user_id) VALUES ($1, $2) returning id`,
+        values: [total_amount, user_id]
+    }
+};
+
+module.exports.addBookToOrder = (bookID, orderID, qty) => {
+    return {
+        text: `insert into order_to_book(order_id, book_id, qty) values ($1, $2, $3)`,
+        values: [orderID, bookID, qty]
     }
 };
 
