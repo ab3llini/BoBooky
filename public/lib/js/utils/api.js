@@ -250,7 +250,8 @@ export let post = {
                     return data
                 })
             }
-        }
+        },
+        order: (body) => { return make.post('/api/user/orders', body) }
     }
 };
 export let put = {
