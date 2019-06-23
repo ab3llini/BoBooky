@@ -1,4 +1,7 @@
-//Missing pages:
+
+! DA AGGIUSTARE OVUNQUE L'ALTEZZA DEL BODY IN BASE ALLA FIXED NAVBAR !
+
+//MISSING PAGES:
 - latest (in base a data pubblicazione)
 - our favorite (come?)
 - bestseller (come?)
@@ -9,20 +12,49 @@
 - ricerca eventi DA FARE PER DAVVERO
 - dettaglio evento
 
-//to fix:
-- Navbar: allineamenti mobile, subnav, collapse non in contemporanea
-- CALENDARSSS!!
+
+//TO FIX:
+- Breadcrumb vera
+- Nei libri spesso appare un tema "undefined"
+- CALENDARSSS!! Sia nella registrazione che nella ricerca eventi
+- Research: attenzione al feedback errore che appare sempre e comunque
+- Add new address: manca un feedback positivo e rimando alla pagina personale
+    (ora sembra un errore e resta sulla pagina ADD anche se in realtà è andato a buon fine)
+- Register: idem, controllare feedback e rimando a che pagina? (Home page)
+- (Navbar per mobile: full-screen?)
+- (Homepage: freccettina ora sotto la barra ricerca non riesco a metterla a fondo pagina, sarebbe carino metterci sopra "surprise me!")
+- (Breadcrumb/orientation info va messa anche nell'aera personale secondo voi?)
+
 
 //STILE
+- logo Bobooky vettoriale
+- cambiare icone navbar (user)
 - ordini
 --> eventi (ma manca barra di ricerca)
 - book
 - autori
+- allineamenti bottoni - e + carrello
 - CONTROLLA IL RESTO
+- ! definire grandezza font coerenti in tutto il sito !
+
+
+//MISSING LINKS
+- Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
+- Navbar
+- Homepage: show more di Latest, Bestsellers, Favorites
+- Tutti i generi / temi
+
 
 //Optional to implement
 - Possibility to choose an address on order checkout
 - Add shipping address to orders (API + Implementation)
+- Aggiungere un feedback al "contact us"
+- Far funzionare per davvero il "Delete" nella lista address
 
-- ! Aggiungere il link all'evento dalla pagina del libro !
-- Delete address
+
+//DON'T FORGET TO:
+- Controllare tutti i file, togliere eventuali commenti/template simpatici
+- Prezzi dei libri da fare più ragionevoli ahah
+
+
+/* QUANDO QUESTA SARà L'UNICA RIGA RIMASTA, SAREMO BRAVI TUTTI! CLAP CLAP CLAP */
