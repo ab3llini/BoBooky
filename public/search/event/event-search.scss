@@ -1,5 +1,13 @@
+@import "../../lib/bootstrap/scss/functions";
+@import "../../lib/bootstrap/scss/variables";
+@import "../../lib/bootstrap/scss/mixins/breakpoints";
+
 .event-date {
-  width: 5rem;
-  height: 5rem;
-  border-radius: 2.5rem;
+  height:120px;
+  width:120px;
+  border-radius:60px;
+  @include media-breakpoint-down(sm){
+    height:auto;
+    width:100%;
+  }
 }

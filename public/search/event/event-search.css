@@ -1,7 +1,13 @@
 .event-date {
-  width: 5rem;
-  height: 5rem;
-  border-radius: 2.5rem;
+  height: 120px;
+  width: 120px;
+  border-radius: 60px;
+}
+@media (max-width: 767.98px) {
+  .event-date {
+    height: auto;
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=event-search.css.map */
