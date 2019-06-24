@@ -6,6 +6,7 @@ $(() => {
         "July", "August", "September", "October", "November", "December"
     ];
 
+/*
     api.get.user.order()
         .then(orders => {
             console.log(orders);
@@ -31,6 +32,14 @@ $(() => {
         })
         .catch(error => {
             console.log(error.toString())
-        })
+        });
+*/
+
+for(let j = 0; j < 5; j++)
+    loader.append('.order-container', '/components/order/order-element.html', j, (o) => {
+        for (let i = 0; i < Math.floor(Math.random() * 4) + 1; i++)
+            loader.append(o.find('.book-element-container'), '/components/order/order-book-element.html', j + '_' + i, elem => {
+            })
+    })
 
 });

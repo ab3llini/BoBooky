@@ -8,12 +8,13 @@
 
 - All authors
 - Wishlist
-- Footer
 - ricerca eventi DA FARE PER DAVVERO
 - dettaglio evento
+- Footer (ora presente solo nell'homepage e nel file footer.html è da inserire in tutte le pagine (come per la navbar))
 
 
 //TO FIX:
+- logout doppio nella versione mobile
 - Breadcrumb vera
 - Nei libri spesso appare un tema "undefined"
 - CALENDARSSS!! Sia nella registrazione che nella ricerca eventi
@@ -35,12 +36,14 @@
 - autori
 - allineamenti bottoni - e + carrello
 - CONTROLLA IL RESTO
+- Controllare GLOW e colori feedback di buttons e form coerenti (bobooky-themes)
 - ! definire grandezza font coerenti in tutto il sito !
 
 
 //MISSING LINKS
 - Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
 - Navbar
+- Footer
 - Homepage: show more di Latest, Bestsellers, Favorites
 - Tutti i generi / temi
 
@@ -50,6 +53,8 @@
 - Add shipping address to orders (API + Implementation)
 - Aggiungere un feedback al "contact us"
 - Far funzionare per davvero il "Delete" nella lista address
+- Navbar: JS far trasformare icona hamburger in una X quando cliccata, far trasformare le frecce da down a up quando cliccate
+- (404 page)
 
 
 //DON'T FORGET TO:

@@ -70,6 +70,11 @@ html {
         border-color: $color
     }
 
+    .link-#{$key} > a:hover {
+        color: $color !important;
+        text-decoration: none
+    }
+
     /*
         Themed placeholders
      */
@@ -119,9 +124,11 @@ body {
     border-radius: 50% !important;
 }
 
-/* <- Magic Stuff Start */
 
-
+.no-glow:focus, .no-glow:active {
+    outline: none !important;
+    box-shadow: none;
+}
 
 
 .gradient-warning {

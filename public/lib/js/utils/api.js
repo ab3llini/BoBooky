@@ -179,7 +179,7 @@ export let get = {
             return make.get('/api/book/genres')
         },
         themes: () => {
-            return make.get('/api/book/discover')
+            return make.get('/api/book/themes')
         }
 
     },
