@@ -21,7 +21,9 @@ function process_events(events, index=0, last_day=undefined) {
         o.find(".day").html(date.getDate());
         o.find(".month").html(monthNames[date.getMonth()]);
         if(last_day === date.getDate()) {
-            o.find(".event-date").addClass("d-none")
+            let $o = o.find(".event-date")
+            $o.parent().removeClass('d-block').addClass('d-none')
+            $o.remove()
         }
     })
         .then(() => {

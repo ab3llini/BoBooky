@@ -10,4 +10,12 @@
   }
 }
 
+.event-item:first-child .col.d-block.d-lg-none {
+  margin-top: 0;
+}
+
+.event-item .col.d-block.d-lg-none {
+  margin-top: 70px;
+}
+
 /*# sourceMappingURL=event-search.css.map */
