@@ -329,11 +329,14 @@ module.exports.event = () => {
 module.exports.eventByID = (id) => {
     return {
         text: `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
-                a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country
+                a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country,
+                b.title, a2.name as author_name
             from event e
                 left join event_to_image eti on e.id = eti.event_id
                 left join image i on eti.image_id = i.id
-                left join address a on e.location = a.id
+                join address a on e.location = a.id
+                join author a2 on e.related_author = a2.id
+                join book b on e.related_book = b.id
             where e.id = $1`,
         values: [id]
     }
