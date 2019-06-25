@@ -192,21 +192,28 @@ $related-align: $related-book-section-margin + ($carousel-height + 2 * $padding)
     }
 }
 
-.author-reviews {
+.event-reviews {
     position: relative;
     bottom: 0;
     margin-top: - ($carousel-height + 2 * $carousel-margin) / 2;
 }
 
 
-.author-reviews > .container {
-    height: 100%;
-    padding-top: ($carousel-height + 2 * $carousel-margin) / 2 + 5rem;
-}
 
-
-.author-image .img {
+.event-image .img {
     width: 300px;
     height: 300px;
     background-size: cover;
+    @include media-breakpoint-down(lg) {
+        width: 250px;
+        height: 250px;
+    }
+    @include media-breakpoint-down(md) {
+        width: 150px;
+        height: 150px;
+    }
+    @include media-breakpoint-down(sm) {
+        width: 300px;
+        height: 300px;
+    }
 }

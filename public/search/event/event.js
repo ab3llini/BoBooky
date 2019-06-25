@@ -18,6 +18,7 @@ function process_events(events, index=0, last_day=undefined) {
         o.find(".event-location").html(event.location.city + ' ' + event.location.name);
         o.find(".event-time").html(date.getUTCHours() + ':' + date.getMinutes() + '0');
         o.find(".day").html(date.getDate());
+        o.find(".more").attr('href', '/event/?id=' + event.id)
         o.find(".month").html(monthNames[date.getMonth()]);
         if(last_day === date.getDate()) {
             let $o = o.find(".event-date");
@@ -44,9 +45,6 @@ $(()=> {
         date = args.get('date');
     if(args.has('q'))
         query = args.get('q');
-
-    console.log(date);
-    console.log(query);
 
     $(".search-button").click(e => {
         $(".search-form").submit()

@@ -220,5 +220,23 @@
   height: 300px;
   background-size: cover;
 }
+@media (max-width: 1199.98px) {
+  .author-image .img {
+    width: 250px;
+    height: 250px;
+  }
+}
+@media (max-width: 991.98px) {
+  .author-image .img {
+    width: 150px;
+    height: 150px;
+  }
+}
+@media (max-width: 767.98px) {
+  .author-image .img {
+    width: 300px;
+    height: 300px;
+  }
+}
 
 /*# sourceMappingURL=author.css.map */

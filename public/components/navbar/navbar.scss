@@ -9,7 +9,9 @@ $logo-height: 30px;
     /* IMPORTANT! IF YOU CHANGE THE NAVBAR HEIGHT
     MAKE SURE TO CHANGE THE BODY PADDING
     AS WELL IN BOBOOKY THEME!*/
-    height: 70px;
+    @include media-breakpoint-up(lg) {
+        height: 70px;
+    }
 }
 
 div .blurred-bg {

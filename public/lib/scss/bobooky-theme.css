@@ -10335,7 +10335,12 @@ html {
 
 /* This line adds an offset to all pages to account for the navbar */
 body {
-  padding-top: 70px;
+  padding-top: 56px;
+}
+@media (min-width: 992px) {
+  body {
+    padding-top: 70px;
+  }
 }
 
 .form-group {

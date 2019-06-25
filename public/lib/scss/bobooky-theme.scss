@@ -25,7 +25,10 @@ html {
 
 /* This line adds an offset to all pages to account for the navbar */
 body {
-    padding-top: 70px;
+    padding-top: 56px;
+    @include media-breakpoint-up(lg) {
+        padding-top: 70px;
+    }
 }
 
 .form-group {

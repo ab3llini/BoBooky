@@ -670,7 +670,7 @@ module.exports.eventGET = () => {
 
 module.exports.eventIdGET = (id) => {
     return new Promise((resolve, reject) =>  {
-        pipe.query(make.event())
+        pipe.query(make.eventByID(id))
             .then(event => {
                 if(event.rowCount > 0)
                     resolve(mapEvent(event.rows[0]));

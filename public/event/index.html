@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/components/loading/loading.css">
     <link rel="stylesheet" href="/components/navbar/navbar.css">
-    <link rel="stylesheet" href="author.css">
+    <link rel="stylesheet" href="event.css">
 
 
 </head>
@@ -28,7 +28,7 @@ Loading template
 -->
 
 <div class="nav-placeholder"></div>
-<nav aria-label="breadcrumb" class="bg-pink text-white">
+<nav aria-label="breadcrumb" class="bg-purple text-white">
     <div class="container">
         <ol class="breadcrumb bg-transparent px-0 m-0">
             <li class="breadcrumb-item"><a href="#" class="text-white">Home</a></li>
@@ -42,12 +42,22 @@ Loading template
         <div class="row">
             <div class="col-12 d-block d-md-none">
                 <div>
-                    <h1 class="text-danger author-name">Author name</h1>
+                    <h1 class="text-dark event-name text-capitalize">Event name</h1>
                 </div>
-                <div class="text-danger author-rating mt-1">
-                    <div class="ml-2 text-gray d-inline">
-                        <span class="author-rating-val">0</span>/5, <span class="author-rating-qty">0</span> reviews
-                    </div>
+                <div>
+                    <h3><a href="#" class="text-purple event-author text-decoration-none">Author name</a></h3>
+                </div>
+                <div class="mt-4">
+                    <h5 class="text-dark"><i class="fa fa-map-marker"></i> <span
+                            class="event-location">Location name</span></h5>
+                </div>
+                <div class="mt-2">
+                    <h5 class="text-dark"><i class="fa fa-clock-o"></i> <span class="event-time">Date & time</span></h5>
+                </div>
+                <div class="mt-5">
+                    <h5><i class="fa fa-book text-purple"></i> <a href="#"
+                                                                  class="text-purple text-decoration-none event-book">Book
+                        name</a></h5>
                 </div>
             </div>
             <div class="col-12 col-md-3">
@@ -55,7 +65,7 @@ Loading template
                     <div class="row px-0">
                         <div class="col-6 col-md-12 px-0">
                             <div>
-                                <div class="author-image w-100">
+                                <div class="event-image w-100">
                                     <div class="img rounded-circle"></div>
                                 </div>
                             </div>
@@ -65,12 +75,12 @@ Loading template
             </div>
             <div class="col-12 d-block d-md-none">
                 <div class="mt-4">
-                    <p class="author-description">
+                    <p class="event-description">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit non
                         deleniti reiciendis expedita, velit excepturi doloremque numquam. Blanditiis,
                         accusantium, at.
                     </p>
-                    <p class="collapse author-full-description">
+                    <p class="collapse event-full-description">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tempore asperiores et
                         vel perferendis ea quisquam eos incidunt veritatis, hic porro voluptates temporibus
                         laborum! Saepe natus vitae eum ex nam, laborum optio vel magni hic. Minima pariatur
@@ -82,7 +92,7 @@ Loading template
                         deserunt, ipsa sequi exercitationem assumenda dignissimos praesentium voluptatibus
                         incidunt!
                     </p>
-                    <a data-toggle="collapse" aria-expanded="false" href=".author-full-description"
+                    <a data-toggle="collapse" aria-expanded="false" href=".event-full-description"
                        class="text-dark text-decoration-none font-weight-bold">
                         <span class="collapsed">
                             continue
@@ -95,21 +105,30 @@ Loading template
             </div>
             <div class="col-12 col-md-9 d-none d-md-block px-5">
                 <div>
-                    <h1 class="text-danger author-name text-capitalize">Author name</h1>
+                    <h1 class="text-dark event-name text-capitalize">Event name</h1>
                 </div>
-                <div class="text-danger author-rating mt-3">
-                    <div class="ml-2 text-gray d-inline">
-                        <span class="author-rating-val">0</span>/5,
-                        <span class="author-rating-qty"> 0</span> reviews
-                    </div>
+                <div>
+                    <h3><a href="#" class="text-purple event-author text-decoration-none">Author name</a></h3>
                 </div>
                 <div class="mt-4">
-                    <p class="author-description">
+                    <h5 class="text-dark"><i class="fa fa-map-marker"></i> <span
+                            class="event-location">Location name</span></h5>
+                </div>
+                <div class="mt-2">
+                    <h5 class="text-dark"><i class="fa fa-clock-o"></i> <span class="event-time">Date & time</span></h5>
+                </div>
+                <div class="mt-5">
+                    <h5><i class="fa fa-book text-purple"></i> <a href="#"
+                                                                  class="text-purple text-decoration-none event-book">Book
+                        name</a></h5>
+                </div>
+                <div class="mt-4">
+                    <p class="event-description">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit non
                         deleniti reiciendis expedita, velit excepturi doloremque numquam. Blanditiis,
                         accusantium, at.
                     </p>
-                    <p class="collapse author-full-description">
+                    <p class="collapse event-full-description">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tempore asperiores et
                         vel perferendis ea quisquam eos incidunt veritatis, hic porro voluptates temporibus
                         laborum! Saepe natus vitae eum ex nam, laborum optio vel magni hic. Minima pariatur
@@ -121,7 +140,7 @@ Loading template
                         deserunt, ipsa sequi exercitationem assumenda dignissimos praesentium voluptatibus
                         incidunt!
                     </p>
-                    <a data-toggle="collapse" aria-expanded="false" href=".author-full-description"
+                    <a data-toggle="collapse" aria-expanded="false" href=".event-full-description"
                        class="text-dark text-decoration-none font-weight-bold">
                         <span class="collapsed">
                             continue
@@ -137,52 +156,58 @@ Loading template
 </div>
 <div class="section bottom">
     <div class="related-books mt-5 ">
-
-        <svg class="head" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 184.73 368.45">
-            <defs>
-                <style>.cls-1 {
-                    fill: #d4145a;
-                    stroke: #d4145a;
-                    stroke-miterlimit: 10;
-                }</style>
-            </defs>
+        <svg class="head" version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             x="0px"
+             y="0px"
+             viewBox="0 0 184.7 368.5" style="enable-background:new 0 0 184.7 368.5;" xml:space="preserve">
+<style type="text/css">
+	.st0 {
+        fill: #8C2F87;
+        stroke: #8C2F87;
+        stroke-miterlimit: 10;
+    }
+</style>
             <title>testa_suggestion_bg</title>
-            <g id="Livello_2" data-name="Livello 2">
-                <g id="back">
-                    <path class="cls-1" d="M184.23,368C82.76,368,.5,285.69.5,184.23h0A183.73,183.73,0,0,1,184.23.5Z"/>
-                </g>
-            </g>
-        </svg>
-        <svg preserveAspectRatio="none" class="tail" xmlns="http://www.w3.org/2000/svg"
-             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1609.94 367.45">
-            <defs>
-                <style>.cls-1 {
-                    fill: url(#Sfumatura_senza_nome_5);
-                }</style>
-                <linearGradient id="Sfumatura_senza_nome_5" x1="311.59" y1="10913.69" x2="1825.43" y2="10913.69"
-                                gradientTransform="matrix(0.64, 0.71, -0.64, 0.71, 7124.72, -8288.96)"
-                                gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#d5085a"/>
-                    <stop offset="0.18" stop-color="#d6075c"/>
-                    <stop offset="1" stop-color="#ac2428"/>
-                </linearGradient>
-            </defs>
+            <g>
+	<g id="back">
+		<path class="st0" d="M184.2,368C82.8,368,0.5,285.7,0.5,184.2l0,0C0.5,82.8,82.8,0.5,184.2,0.5c0,0,0,0,0,0V368z"/>
+	</g>
+</g>
+</svg>
+        <svg preserveAspectRatio="none" class="tail"  version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             x="0px" y="0px"
+             viewBox="0 0 1609.9 367.5" style="enable-background:new 0 0 1609.9 367.5;" xml:space="preserve">
+<style type="text/css">
+	.st0 {
+        fill: url(#SVGID_1_);
+    }
+</style>
             <title>corpo_suggestion_bg</title>
-            <g id="Livello_2" data-name="Livello 2">
-                <g id="back">
-                    <rect class="cls-1" width="1609.94" height="367.45"/>
-                </g>
-            </g>
-        </svg>
+            <g>
+	<g id="back">
+
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="527.9025" y1="-10308.6719" x2="2041.7426"
+                            y2="-10308.6719" gradientTransform="matrix(0.64 0.71 0.64 -0.71 6605.2803 -8019.8701)">
+			<stop offset="6.819570e-07" style="stop-color:#8C2F87"/>
+                <stop offset="0.1792" style="stop-color:#952A81"/>
+                <stop offset="0.4753" style="stop-color:#AE1D72"/>
+                <stop offset="0.8336" style="stop-color:#D5085A"/>
+		</linearGradient>
+        <rect class="st0" width="1609.9" height="367.5"/>
+	</g>
+</g>
+</svg>
+
         <div class="container-fluid">
             <div class="row m-0 p-0">
                 <div class="col-12 m-0 p-0 col-lg-3 d-flex flex-column justify-content-center">
                     <h2 class="text-white d-none d-lg-block">
-                        Author of
+                        The author's books
                     </h2>
                     <div class="container d-block d-lg-none mt-4">
                         <h4 class="text-white">
-                            Author of
+                            The author's books
                         </h4>
                     </div>
                 </div>
@@ -196,15 +221,8 @@ Loading template
 
         </div>
     </div>
-    <div class="author-reviews bg-dark vh-100">
-        <div class="container text-white">
-
-            <h3 class="d-inline">Reviews (<span class="author-rating-qty">0</span>)</h3>
-            <div class="text-pink ml-4 author-rating d-inline"></div>
-
-            <div class="author-reviews-container d-flex flex-column justify-content-start mt-5">
-            </div>
-        </div>
+    <div class="event-reviews bg-dark vh-100">
+        <div class="container"></div>
     </div>
 </div>
 
@@ -212,7 +230,7 @@ Loading template
 <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>
 <script src="/lib/multislider/multislider.js"></script>
-<script src="author.js" type="module"></script>
+<script src="event.js" type="module"></script>
 
 </body>
 </html>

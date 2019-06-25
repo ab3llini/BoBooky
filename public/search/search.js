@@ -88,177 +88,172 @@ $(() => {
 
         // GET Args
         let args = new URLSearchParams(window.location.search);
-
+        let query = '';
         //If id exists
-        if (args.has('q')) {
+        if (args.has('q'))
+            query = args.get('q');
 
-            let query = args.get('q');
+        // Utilities
+        let get_filter = (key, _default = undefined) => args.has(key) ? args.get(key) : (_default !== undefined ? _default : 'default');
+        let create_options = (filter, options) => options.forEach(option => $(filter).append(new Option(option, option)));
 
-            // Utilities
-            let get_filter = (key, _default = undefined) => args.has(key) ? args.get(key) : (_default !== undefined ? _default : 'default');
-            let create_options = (filter, options) => options.forEach(option => $(filter).append(new Option(option, option)));
-
-            let filters = {
-                orderby: get_filter('orderby'),
-                genre: get_filter('genre'),
-                theme: get_filter('theme'),
-                page : parseInt(get_filter('page', 0))
-            };
+        let filters = {
+            orderby: get_filter('orderby'),
+            genre: get_filter('genre'),
+            theme: get_filter('theme'),
+            page: parseInt(get_filter('page', 0))
+        };
 
 
-            let filterJob = worker.newJob(2, () => {
-                // Set values to search and genre/theme filters
-                $('.search-bar').val(query);
-                $('.filter.orderby').val(filters.orderby);
-                $('.filter.genre').val(filters.genre);
-                $('.filter.theme').val(filters.theme);
-            });
+        let filterJob = worker.newJob(2, () => {
+            // Set values to search and genre/theme filters
+            $('.search-bar').val(query);
+            $('.filter.orderby').val(filters.orderby);
+            $('.filter.genre').val(filters.genre);
+            $('.filter.theme').val(filters.theme);
+        });
 
-            let next_btn = $('.next');
-            let prev_btn = $('.previous');
+        let next_btn = $('.next');
+        let prev_btn = $('.previous');
 
-            next_btn.click(function () {
-               $('.search-form .page').val(filters.page + 1);
-               $('.search-form').submit();
-            });
+        next_btn.click(function () {
+            $('.search-form .page').val(filters.page + 1);
+            $('.search-form').submit();
+        });
 
-            prev_btn.click(function () {
-                $('.search-form .page').val(filters.page - 1);
-                $('.search-form').submit();
-            });
+        prev_btn.click(function () {
+            $('.search-form .page').val(filters.page - 1);
+            $('.search-form').submit();
+        });
 
-            $('.filter').change(() => $('.search-form').submit());
+        $('.filter').change(() => $('.search-form').submit());
 
-            // Fetch all genres and populate filter
-            api.get.book.genres().then(genres => {
-                create_options('.filter.genre', genres.map(genre => genre.name).sort());
-                loadingJob.completeTask();
-                filterJob.completeTask()
-            }).catch(e => {
-                modal.error(e);
-                loadingJob.completeTask();
-            });
+        // Fetch all genres and populate filter
+        api.get.book.genres().then(genres => {
+            create_options('.filter.genre', genres.map(genre => genre.name).sort());
+            loadingJob.completeTask();
+            filterJob.completeTask()
+        }).catch(e => {
+            modal.error(e);
+            loadingJob.completeTask();
+        });
 
-            // Fetch all discover and populate filter
-            api.get.book.themes().then(themes => {
-                create_options('.filter.theme', themes.map(theme => theme.name).sort());
-                loadingJob.completeTask();
-                filterJob.completeTask()
-            }).catch(e => {
-                modal.error(e);
-                loadingJob.completeTask();
-            });
+        // Fetch all discover and populate filter
+        api.get.book.themes().then(themes => {
+            create_options('.filter.theme', themes.map(theme => theme.name).sort());
+            loadingJob.completeTask();
+            filterJob.completeTask()
+        }).catch(e => {
+            modal.error(e);
+            loadingJob.completeTask();
+        });
 
-            // Inject authors carousel
-            api.get.book.search.author(query).then(books => {
+        // Inject authors carousel
+        api.get.book.search.author(query).then(books => {
 
-                // Fetch all authors that match the query
-                let authors = {};
+            // Fetch all authors that match the query
+            let authors = {};
 
-                if (books !== undefined) {
-                    books.forEach(book => {
-                        // Check-Add author
-                        if (!(book.author.id in authors)) {
-                            authors[book.author.id] = book.author
-                        }
-                    })
-                }
+            if (books !== undefined) {
+                books.forEach(book => {
+                    // Check-Add author
+                    if (!(book.author.id in authors)) {
+                        authors[book.author.id] = book.author
+                    }
+                })
+            }
 
-                if (Object.values(authors).length > 0) {
-                    loader.append('.author-container', '/components/carousel/container.html', 'author-carousel')
-                        .then(() => {
-                            Object.values(authors).forEach(author => {
-                                loader.append_map('#author-carousel .MS-content', '/components/carousel/items/author.html', author.id, function (book_obj) {
-                                    book_obj.find('.author-href').attr('href', '/author/?id=' + author.id);
-                                    book_obj.find('.image').css("background-image", "url(" + author.image_url + ")");
-                                    book_obj.find('.title').html(author.name);
-                                })
-                                    .then(() => {
-                                        if (author === $(Object.values(authors)).get(-1)) {
-                                            let ms = $('#author-carousel');
-                                            ms.multislider({
-                                                interval: 3000,
-                                                hoverPause: true
-                                            }).multislider('pause');
-
-                                            loadingJob.completeTask()
-                                        }
-                                    })
-                                    .catch(e => {
-                                        modal.error(e)
-                                    });
+            if (Object.values(authors).length > 0) {
+                loader.append('.author-container', '/components/carousel/container.html', 'author-carousel')
+                    .then(() => {
+                        Object.values(authors).forEach(author => {
+                            loader.append_map('#author-carousel .MS-content', '/components/carousel/items/author.html', author.id, function (book_obj) {
+                                book_obj.find('.author-href').attr('href', '/author/?id=' + author.id);
+                                book_obj.find('.image').css("background-image", "url(" + author.image_url + ")");
+                                book_obj.find('.title').html(author.name);
                             })
+                                .then(() => {
+                                    if (author === $(Object.values(authors)).get(-1)) {
+                                        let ms = $('#author-carousel');
+                                        ms.multislider({
+                                            interval: 3000,
+                                            hoverPause: true
+                                        }).multislider('pause');
 
+                                        loadingJob.completeTask()
+                                    }
+                                })
+                                .catch(e => {
+                                    modal.error(e)
+                                });
                         })
-                        .catch(e => {
-                            modal.error(e)
-                        });
 
-                } else {
-                    loadingJob.completeTask();
-                    $('.author-container').html("No authors found..")
-                }
-            }).catch(e => modal.error(e));
-
-            // Wishlist
-            let wishlist = [];
-            let inWishlist = [];
-
-            let query_args = {
-                query: query,
-                orderby : filters.orderby,
-                genre: filters.genre,
-                theme: filters.theme,
-                offset : filters.page
-            };
-
-            if (query_args.orderby === 'default')
-                delete query_args.orderby;
-            if (query_args.genre === 'default')
-                delete query_args.genre;
-            if (query_args.theme === 'default')
-                delete query_args.theme;
-            if (query_args.page === 0)
-                delete query_args.page;
-
-            // Fetch all books that match the query
-            api.get.book.search.mixed(query_args).then(books => {
-
-                if (books.length < 20) {
-                    next_btn.hide();
-                }
-                if (filters.page === 0) {
-                    prev_btn.hide();
-                }
-
-                if (books !== undefined && books.length > 0) {
-
-                    // Init wishlist
-                    api.get.user.wishlist().then(_wishlist => {
-
-                        wishlist = _wishlist;
-                        _wishlist.forEach(book => {
-                            inWishlist.push(book.id);
-                        });
-                        inject_books(inWishlist, books)
-
-                    }).catch(e => {
-                        inject_books(inWishlist, books)
+                    })
+                    .catch(e => {
+                        modal.error(e)
                     });
 
-                } else {
-                    $('.books-container').html("No books found..");
-                    loadingJob.completeTask()
-                }
-            }).catch(
-                e => {
-                    loadingJob.completeTask();
-                    modal.error(e)
+            } else {
+                loadingJob.completeTask();
+                $('.author-container').html("No authors found..")
+            }
+        }).catch(e => modal.error(e));
+
+        // Wishlist
+        let wishlist = [];
+        let inWishlist = [];
+
+        let query_args = {
+            query: query,
+            orderby: filters.orderby,
+            genre: filters.genre,
+            theme: filters.theme,
+            offset: filters.page
+        };
+
+        if (query_args.orderby === 'default')
+            delete query_args.orderby;
+        if (query_args.genre === 'default')
+            delete query_args.genre;
+        if (query_args.theme === 'default')
+            delete query_args.theme;
+        if (query_args.page === 0)
+            delete query_args.page;
+
+        // Fetch all books that match the query
+        api.get.book.search.mixed(query_args).then(books => {
+
+            if (books.length < 20) {
+                next_btn.hide();
+            }
+            if (filters.page === 0) {
+                prev_btn.hide();
+            }
+
+            if (books !== undefined && books.length > 0) {
+
+                // Init wishlist
+                api.get.user.wishlist().then(_wishlist => {
+
+                    wishlist = _wishlist;
+                    _wishlist.forEach(book => {
+                        inWishlist.push(book.id);
+                    });
+                    inject_books(inWishlist, books)
+
+                }).catch(e => {
+                    inject_books(inWishlist, books)
                 });
 
-        } else {
-            loading.hide();
-            modal.show('Warning', 'No query was provided!')
-        }
+            } else {
+                $('.books-container').html("No books found..");
+                loadingJob.completeTask()
+            }
+        }).catch(
+            e => {
+                loadingJob.completeTask();
+                modal.error(e)
+            });
+
     })
 });

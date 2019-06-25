@@ -223,6 +223,9 @@ export let get = {
         },
         all: () => {
             return make.get('/api/events')
+        },
+        get : (id) => {
+            return make.get('/api/event/' + id)
         }
     }
 };
