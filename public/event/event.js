@@ -11,6 +11,8 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
 $(() => {
 
+    loader.load_breadcrumb(['bg-purple']);
+
     //Assign static overlay;
     loading.set('body > .loading');
 
@@ -44,12 +46,14 @@ $(() => {
                         api.map({
                             '.event-name': event.name,
                             '.event-location' : event.location.name + ', ' +  event.location.address_line_1 + ', ' +  event.location.cap + ', ' +  event.location.city + ', ' +  event.location.country,
-                            '.event-author': author.name,
+                            '.event-author': event.related_author.name,
                             '.event-time': date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear() + ' at ' + date.getUTCHours() + ':00',
                             '.event-book' : event.relater_book.title,
                             '.event-description': ad_arr.slice(0, 80).join(' '),
                             '.event-full-description': ad_arr.slice(80, ad_arr.length).join(' '),
                         });
+
+                        $('.event-author').attr('href', '/author/?id=' + event.related_author.id)
                         $('.event-book').attr('href', '/book/?id=' + event.relater_book.id)
                         $('.event-image > .img').css("background-image", "url(" + author.image_url + ")");
 
@@ -109,7 +113,7 @@ $(() => {
 
 
         } else {
-            modal.show('Warning', 'Unknown author id')
+            modal.show('Warning', 'Unknown event id')
         }
     })
 

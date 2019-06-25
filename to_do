@@ -3,6 +3,7 @@
 - Wishlist - gianpy
 - Footer (ora presente solo nell'homepage e nel file footer.html è da inserire in tutte le pagine (come per la navbar))
 
+BREADCUMB DOES NOT WORK WHEN IN PAGES WITH MANDATORY ID SUCH AS BOOK, EVENT AND AUTHOR. NEED FIXING
 
 //TO FIX:
 - logout doppio nella versione mobile
