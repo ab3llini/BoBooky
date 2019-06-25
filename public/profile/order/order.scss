@@ -1,6 +1,28 @@
+@import "../../lib/bootstrap/scss/functions";
+@import "../../lib/bootstrap/scss/variables";
+@import "../../lib/bootstrap/scss/mixins/breakpoints";
+
 .book-element-container .order-book-element:last-child {
   border-bottom: hidden;
 }
 .book-element-container .order-book-element {
   border-bottom: 1px solid white;
+}
+
+.book-cover {
+  @include media-breakpoint-down(md) {
+    min-width: 100px;
+  }
+}
+
+.opacity {
+  z-index: 90;
+  opacity: 0.5;
+  filter: opacity(50px);;
+}
+
+.solid {
+  z-index: 150;
+  opacity: 1;
+  filter: opacity(100px);;
 }
