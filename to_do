@@ -1,15 +1,12 @@
 
 //MISSING PAGES:
-
 - Wishlist - gianpy
-- ricerca eventi DA FARE PER DAVVERO - gianpy
-- dettaglio evento
 - Footer (ora presente solo nell'homepage e nel file footer.html è da inserire in tutte le pagine (come per la navbar))
 
 
 //TO FIX:
 - logout doppio nella versione mobile
-- Breadcrumb vera - gianpy
+- Breadcrumb vera - da aggiungere alle varie pagine - gianpy
 - Nei libri spesso appare un tema "undefined" <------------------------ GIANPY DECIDI A FIXARE IL BACKEND PLS <3  <-------- Questo problema era dovuto al discover che non si era ancora risolto ieri
 - CALENDARSSS!! Sia nella registrazione che nella ricerca eventi
 - Research: attenzione al feedback errore che appare sempre e comunque ?? cosa intendete <-----------------
@@ -28,7 +25,6 @@ ora sto collegando io tutto ciò che è nella navbar
 //STILE
 - logo Bobooky vettoriale
 - cambiare icone navbar (user)
-- ordini
 --> eventi (ma manca barra di ricerca)
 - book
 - autori
@@ -42,7 +38,6 @@ ora sto collegando io tutto ciò che è nella navbar
 - Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
 - Navbar
 - Footer
-- Homepage: show more di Latest, Bestsellers, Favorites
 - Tutti i generi / temi
 
 

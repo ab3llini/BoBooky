@@ -9,7 +9,6 @@ function process_events(events, index=0, last_day=undefined) {
     if(index === events.length)
         return;
     let event = events[index];
-    console.log(event);
     let date = new Date(event.timestamp);
     loader.append_map('.event-per-day-container', '/components/search/event/event-search.html', event.id, (o) => {
 
@@ -21,8 +20,8 @@ function process_events(events, index=0, last_day=undefined) {
         o.find(".day").html(date.getDate());
         o.find(".month").html(monthNames[date.getMonth()]);
         if(last_day === date.getDate()) {
-            let $o = o.find(".event-date")
-            $o.parent().removeClass('d-block').addClass('d-none')
+            let $o = o.find(".event-date");
+            $o.parent().removeClass('d-block').addClass('d-none');
             $o.remove()
         }
     })
@@ -32,6 +31,11 @@ function process_events(events, index=0, last_day=undefined) {
 }
 
 $(()=> {
+
+    //Loading breadcrumb
+    loader.load_breadcrumb(['bg-primary']);
+
+    // Loading events
     let args = new URLSearchParams(window.location.search);
     let date = "";
     let query = "";
