@@ -33,61 +33,75 @@
             </li>
             <li class="nav-item">
                 <a class="text-decoration-none" id="pills-genre-tab" data-toggle="pill" href="#pills-genre" role="tab"
-                   aria-controls="pills-genre" aria-selected="true"><h3 class="border-bottom border-white text-white">
+                   aria-controls="pills-genre" aria-selected="true"><h3 id="genres" class="border-white text-white">
                     Genre</h3></a>
             </li>
-            <h4 class="d-inline mx-5">or</h4>
+            <h4 class="d-inline mx-3">or</h4>
             <li class="nav-item">
                 <a class="text-decoration-none" id="pills-themes-tab" data-toggle="pill" href="#pills-themes" role="tab"
-                   aria-controls="pills-genre" aria-selected="true"><h3 class="bottom border-white text-white">
+                   aria-controls="pills-genre" aria-selected="true"><h3 id="themes"
+                                                                        class="bottom border-white text-white">
                     Themes</h3></a>
             </li>
         </ul>
-            <div class="tab-content rounded-bobooky position-relative" id="pills-tabContent">
-                <div class="blurred-bg rounded-bobooky h-100 w-100 position-absolute"></div>
-                <div class="tab-pane fade show active m-5 p-5 position-relative" id="pills-genre" role="tabpanel"
-                     aria-labelledby="pills-genre-tab">
-                    <div class="row text">
-                        <div class="col-12 col-md-6">
-                            <a href="http://localhost/search/theme/?theme=Mistery" class="text-white text-decoration-none">Childhood</a><br>
-                            <a href="http://localhost/search/theme/?theme=Chick-Lit" class="text-white text-decoration-none">Comic</a><br>
-                            <a href="http://localhost/search/theme/?theme=Adventure" class="text-white text-decoration-none">Fantasy</a><br>
-                            <a href="http://localhost/search/theme/?theme=Dystopia" class="text-white text-decoration-none">Graphic Novel</a><br>
-                            <a href="http://localhost/search/theme/?theme=Classics" class="text-white text-decoration-none">Horror</a><br>
-                            <a href="http://localhost/search/theme/?theme=Epic-Fantasy" class="text-white text-decoration-none"></a><br>
+        <div class="tab-content rounded-bobooky position-relative" id="pills-tabContent">
+            <div class="blurred-bg rounded-bobooky h-100 w-100 position-absolute"></div>
+            <div class="tab-pane fade show m-5 p-5 position-relative genres" id="pills-genre" role="tabpanel"
+                 aria-labelledby="pills-genre-tab">
+                <div class="row text">
+                    <div class="col-12 col-md-6">
+                        <a href="http://localhost/search/theme/?theme=Mistery" class="text-white text-decoration-none">Childhood</a><br>
+                        <a href="http://localhost/search/theme/?theme=Chick-Lit"
+                           class="text-white text-decoration-none">Comic</a><br>
+                        <a href="http://localhost/search/theme/?theme=Adventure"
+                           class="text-white text-decoration-none">Fantasy</a><br>
+                        <a href="http://localhost/search/theme/?theme=Dystopia" class="text-white text-decoration-none">Graphic
+                            Novel</a><br>
+                        <a href="http://localhost/search/theme/?theme=Classics" class="text-white text-decoration-none">Horror</a><br>
+                        <a href="http://localhost/search/theme/?theme=Epic-Fantasy"
+                           class="text-white text-decoration-none"></a><br>
 
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <a href="http://localhost/search/theme/?theme=Historical" class="text-white text-decoration-none">Literature</a><br>
-                            <a href="http://localhost/search/theme/?theme=Magic" class="text-white text-decoration-none">Religion</a><br>
-                            <a href="http://localhost/search/theme/?theme=Fear" class="text-white text-decoration-none">Romance</a><br>
-                            <a href="http://localhost/search/theme/?theme=Dystopia" class="text-white text-decoration-none">Sci-fi</a><br>
-                            <a href="http://localhost/search/theme/?theme=Humor" class="text-white text-decoration-none">Thriller</a><br>
-                            <a href="http://localhost/search/theme/?theme=Dystopia" class="text-white text-decoration-none">Vampire</a><br>
-                            <a href="http://localhost/search/theme/?theme=Mythology" class="text-white text-decoration-none">Young Adult</a><br>
-                        </div>
                     </div>
-                </div>
-                <div class="tab-pane fade m-5 p-5 position-relative" id="pills-themes" role="tabpanel" aria-labelledby="pills-themes-tab">
-                    <div class="row text">
-                        <div class="col-12 col-md-6">
-                            <a href="http://localhost/search/theme/?theme=Adventure" class="text-white text-decoration-none">Adventure</a><br>
-                            <a href="http://localhost/search/theme/?theme=Chick-Lit" class="text-white text-decoration-none">Chick lit</a><br>
-                            <a href="http://localhost/search/theme/?theme=Classics" class="text-white text-decoration-none">Classics</a><br>
-                            <a href="http://localhost/search/theme/?theme=Dystopia" class="text-white text-decoration-none">Dystopia</a><br>
-                            <a href="http://localhost/search/theme/?theme=Epic-Fantasy" class="text-white text-decoration-none">Epic Fantasy</a><br>
-                            <a href="http://localhost/search/theme/?theme=Fear" class="text-white text-decoration-none">Fear</a><br>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <a href="http://localhost/search/theme/?theme=Historical" class="text-white text-decoration-none">Historical</a><br>
-                            <a href="http://localhost/search/theme/?theme=Humor" class="text-white text-decoration-none">Humor</a><br>
-                            <a href="http://localhost/search/theme/?theme=Magic" class="text-white text-decoration-none">Magic</a><br>
-                            <a href="http://localhost/search/theme/?theme=Mistery" class="text-white text-decoration-none">Mistery</a><br>
-                            <a href="http://localhost/search/theme/?theme=Mythology" class="text-white text-decoration-none">Mythology</a><br>
-                        </div>
+                    <div class="col-12 col-md-6">
+                        <a href="http://localhost/search/theme/?theme=Historical"
+                           class="text-white text-decoration-none">Literature</a><br>
+                        <a href="http://localhost/search/theme/?theme=Magic" class="text-white text-decoration-none">Religion</a><br>
+                        <a href="http://localhost/search/theme/?theme=Fear" class="text-white text-decoration-none">Romance</a><br>
+                        <a href="http://localhost/search/theme/?theme=Dystopia" class="text-white text-decoration-none">Sci-fi</a><br>
+                        <a href="http://localhost/search/theme/?theme=Humor" class="text-white text-decoration-none">Thriller</a><br>
+                        <a href="http://localhost/search/theme/?theme=Dystopia" class="text-white text-decoration-none">Vampire</a><br>
+                        <a href="http://localhost/search/theme/?theme=Mythology"
+                           class="text-white text-decoration-none">Young Adult</a><br>
                     </div>
                 </div>
             </div>
+            <div class="tab-pane fade m-5 p-5 position-relative themes" id="pills-themes" role="tabpanel"
+                 aria-labelledby="pills-themes-tab">
+                <div class="row text">
+                    <div class="col-12 col-md-6">
+                        <a href="http://localhost/search/theme/?theme=Adventure"
+                           class="text-white text-decoration-none">Adventure</a><br>
+                        <a href="http://localhost/search/theme/?theme=Chick-Lit"
+                           class="text-white text-decoration-none">Chick lit</a><br>
+                        <a href="http://localhost/search/theme/?theme=Classics" class="text-white text-decoration-none">Classics</a><br>
+                        <a href="http://localhost/search/theme/?theme=Dystopia" class="text-white text-decoration-none">Dystopia</a><br>
+                        <a href="http://localhost/search/theme/?theme=Epic-Fantasy"
+                           class="text-white text-decoration-none">Epic Fantasy</a><br>
+                        <a href="http://localhost/search/theme/?theme=Fear"
+                           class="text-white text-decoration-none">Fear</a><br>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <a href="http://localhost/search/theme/?theme=Historical"
+                           class="text-white text-decoration-none">Historical</a><br>
+                        <a href="http://localhost/search/theme/?theme=Humor" class="text-white text-decoration-none">Humor</a><br>
+                        <a href="http://localhost/search/theme/?theme=Magic" class="text-white text-decoration-none">Magic</a><br>
+                        <a href="http://localhost/search/theme/?theme=Mistery" class="text-white text-decoration-none">Mistery</a><br>
+                        <a href="http://localhost/search/theme/?theme=Mythology"
+                           class="text-white text-decoration-none">Mythology</a><br>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

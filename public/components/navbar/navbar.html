@@ -1,6 +1,6 @@
 <!-- NAVBAR -->
 <div class="fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container p-0">
             <div class="col-auto order-1 px-0 mx-0">
                 <button class="navbar-toggler no-glow border-0 order-0" type="button" data-toggle="collapse" data-target="#navbarText1" aria-controls="navbarText1" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,29 +20,29 @@
                             Books <span class="fa d-inline-block align-middle font-weight-light text-light fa-angle-down"></span></a>
                             <div class="navbar-collapse collapse d-lg-none" id="booksCollapseXS">
                             <ul class="navbar-nav text-white d-lg-none px-3">
-                                    <a class="text-light" href="">All the books</a>
-                                    <a class="text-light" href="">The latest books</a>
-                                    <a class="text-light" href="">All genres</a>
-                                    <a class="text-light" href="">All themes</a>
-                                    <a class="text-light" href="">Bestsellers</a>
-                                    <a class="text-light" href="">Our favorites</a>
+                                    <a class="text-light" href="/search">Search</a>
+                                    <a class="text-light" href="/search/more/?keyword=latest">The latest books</a>
+                                    <a class="text-light" href="/discover/?show=genres">All genres</a>
+                                    <a class="text-light" href="/discover/?show=themes">All themes</a>
+                                    <a class="text-light" href="/search/more/?keyword=bestsellers">Bestsellers</a>
+                                    <a class="text-light" href="/search/more/?keyword=favourites">Our favorites</a>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Authors</a>
+                        <a class="nav-link" href="/search/author/?q=">Authors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Events</a>
+                        <a class="nav-link" href="/search/event/?q=">Events</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" data-target="#aboutCollapseLG, #aboutCollapseXS" href="#">
                             About us <span class="fa nav-arrows d-inline-block align-middle font-weight-light text-light fa-angle-down"></span></a>
                         <div class="navbar-collapse collapse d-lg-none" id="aboutCollapseXS">
                             <ul class="navbar-nav text-white d-lg-none px-3">
-                                <a class="text-light" href="">Who we are</a>
-                                <a class="text-light" href="">Contact us</a>
-                                <a class="text-light" href="">Ordering and shipping informations</a>
+                                <a class="text-light" href="/about/">Who we are</a>
+                                <a class="text-light" href="/about/contact">Contact us</a>
+                                <a class="text-light" href="/about/shipping">Ordering and shipping informations</a>
                             </ul>
                         </div>
                     </li>
@@ -71,12 +71,12 @@
     <div class="auto-hide collapse sub-menu blurred-bg" id="booksCollapseLG">
         <div class="container w-100 py-4">
             <div class="row">
-                <a class="mx-auto text-white" href="">All the books</a>
-                <a class="mx-auto text-white" href="">The latest books</a>
-                <a class="mx-auto text-white" href="">All genres</a>
-                <a class="mx-auto text-white" href="">All themes</a>
-                <a class="mx-auto text-white" href="">Bestsellers</a>
-                <a class="mx-auto text-white" href="">Our favorites</a>
+                <a class="mx-auto text-white" href="/search/?q=">All the books</a>
+                <a class="mx-auto text-white" href="/search/more/?keyword=latest">The latest books</a>
+                <a class="mx-auto text-white" href="/discover/?show=genres">All genres</a>
+                <a class="mx-auto text-white" href="/discover/?show=themes">All themes</a>
+                <a class="mx-auto text-white" href="/search/more/?keyword=bestsellers">Bestsellers</a>
+                <a class="mx-auto text-white" href="/search/more/?keyword=favourites">Our favorites</a>
             </div>
         </div>
     </div>
@@ -84,9 +84,9 @@
     <div class="auto-hide collapse sub-menu blurred-bg" id="aboutCollapseLG">
         <div class="container w-100 py-4">
             <div class="row">
-                <a class="mx-auto text-white" href="">Who we are</a>
-                <a class="mx-auto text-white" href="">Contact us</a>
-                <a class="mx-auto text-white" href="">Ordering and shipping informations</a>
+                <a class="mx-auto text-white" href="/about/">Who we are</a>
+                <a class="mx-auto text-white" href="/about/contact">Contact us</a>
+                <a class="mx-auto text-white" href="/about/shipping">Ordering and shipping informations</a>
             </div>
         </div>
     </div>

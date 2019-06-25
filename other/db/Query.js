@@ -3,14 +3,13 @@ const sha256 = require('sha256');
 
 function getRandomString(length) {
     let result = '';
-    const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
-    for (let i = 0; i < length; i++ ) {
+    for (let i = 0; i < length; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
 }
-
 
 
 /***************************
@@ -54,6 +53,45 @@ module.exports.bookReviews = (bookID) => {
     }
 };
 
+module.exports.authorSearch = (query, theme, genre, offset = 0, limit = 20) => {
+    let q = `
+        select a.id, a.name, i.href
+        from author a
+        join book b on a.id = b.author
+        join image i on a.image = i.id
+        join book_to_genre btg on b.id = btg.book_id
+        join genre g on btg.genre_id = g.id `
+
+    let clause = 'where';
+    let placeholder = 1;
+    let values = [];
+
+    if (query !== undefined) {
+        q += clause + ' (lower(a.name)  LIKE \'%\' || lower($' + placeholder + ') || \'%\')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(query)
+    }
+    if (genre !== undefined) {
+        q += clause + ' (lower(g.name)  LIKE \'%\' || lower($' + placeholder + ') || \'%\')' + ' ';
+        clause = 'and';
+        placeholder += 1;
+        values.push(genre)
+    }
+    if (theme !== undefined) {
+        q += clause + ' (lower(b.theme)  LIKE \'%\' || lower($' + placeholder + ') || \'%\')' + ' ';
+        placeholder += 1;
+        values.push(theme)
+    }
+
+    q += ' group by a.id, a.name, i.href offset $' + placeholder + ' limit $' + (placeholder + 1);
+    values.push(offset * limit, limit);
+    return {
+        text: q,
+        values: values
+    }
+}
+
 module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publisher, publisher_id, theme,
                              offset = 0, limit = 20, orderby, extra) => {
     //TODO: Fix error when searching by year
@@ -72,78 +110,100 @@ module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publis
     let values = [];
 
     if (query !== undefined) {
-        q += clause + ' ((lower(b.title) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' +
-            'or (lower(a.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') or (lower(p.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' +
-            'or (b.isbn LIKE \'%\' || $'+placeholder+' || \'%\') or (b.isbn13  LIKE \'%\' || $'+placeholder+' || \'%\') ' +
-            'or (lower(g.name)  LIKE \'%\' || lower($'+placeholder+') || \'%\') or (lower(b.theme)  LIKE \'%\' || lower($'+placeholder+') || \'%\'))' + ' ';
+        q += clause + ' ((lower(b.title) LIKE \'%\' || lower($' + placeholder + ') || \'%\') ' +
+            'or (lower(a.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') or (lower(p.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') ' +
+            'or (b.isbn LIKE \'%\' || $' + placeholder + ' || \'%\') or (b.isbn13  LIKE \'%\' || $' + placeholder + ' || \'%\') ' +
+            'or (lower(g.name)  LIKE \'%\' || lower($' + placeholder + ') || \'%\') or (lower(b.theme)  LIKE \'%\' || lower($' + placeholder + ') || \'%\'))' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(query)
     }
     if (isbn !== undefined) {
-        q += clause + ' (b.isbn = $'+placeholder+' or b.isbn13 = $'+placeholder+')' + ' ';
+        q += clause + ' (b.isbn = $' + placeholder + ' or b.isbn13 = $' + placeholder + ')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(isbn)
     }
     if (genre !== undefined) {
-        q += clause + ' (lower(g.name)  LIKE \'%\' || lower($'+placeholder+') || \'%\')' + ' ';
+        q += clause + ' (lower(g.name)  LIKE \'%\' || lower($' + placeholder + ') || \'%\')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(genre)
     }
     if (year !== undefined) {
-        q += clause + ' (b.publication_year  LIKE \'%\' || $'+placeholder+' || \'%\')' + ' ';
+        q += clause + ' (b.publication_year  LIKE \'%\' || $' + placeholder + ' || \'%\')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(year)
     }
     if (author !== undefined) {
-        q += clause + ' (lower(a.name)  LIKE \'%\' || lower($'+placeholder+') || \'%\')' + ' ';
+        q += clause + ' (lower(a.name)  LIKE \'%\' || lower($' + placeholder + ') || \'%\')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(author)
     }
     if (publisher !== undefined) {
-        q += clause + ' (lower(p.name)  LIKE \'%\' || lower($'+placeholder+') || \'%\')' + ' ';
+        q += clause + ' (lower(p.name)  LIKE \'%\' || lower($' + placeholder + ') || \'%\')' + ' ';
         placeholder += 1;
         values.push(publisher)
     }
     if (author_id !== undefined) {
         // If matching exact values (i.e. IDs) there is no point in using LIKE% syntax
-        q += clause + ' (a.id = $'+placeholder+')' + ' ';
+        q += clause + ' (a.id = $' + placeholder + ')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(parseInt(author_id))
     }
     if (publisher_id !== undefined) {
-        q += clause + ' (p.id = \'%\' || $'+placeholder+' || \'%\')' + ' ';
+        q += clause + ' (p.id = \'%\' || $' + placeholder + ' || \'%\')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(publisher_id)
     }
     if (theme !== undefined) {
-        q += clause + ' (lower(b.theme)  LIKE \'%\' || lower($'+placeholder+') || \'%\')' + ' ';
+        q += clause + ' (lower(b.theme)  LIKE \'%\' || lower($' + placeholder + ') || \'%\')' + ' ';
         placeholder += 1;
         values.push(theme)
     }
+
+    clause = ' ' + 'order by' + ' ';
+
     if (orderby !== undefined) {
         if (orderby === 'author') {
-            q += ' order by a.name asc ';
+            if (extra !== undefined && extra === 'latest')
+                q += clause + 'b.publication_year desc, a.name asc ';
+            else
+                q += clause + 'a.name asc ';
+        } else if (orderby === 'price') {
+            if (extra !== undefined && extra === 'latest')
+                q += clause + 'b.publication_year desc, b.price asc ';
+            else
+                q += clause + 'b.price asc ';
+        } else if (orderby === 'name') {
+            if (extra !== undefined && extra === 'latest')
+                q += clause + 'b.publication_year desc, b.title asc ';
+
+            else
+                q += clause + 'b.title asc ';
+        } else if (orderby === 'year') {
+            q += clause + 'b.publication_year desc ';
         }
-        else if (orderby === 'price') {
-            q += ' order by b.price asc ';
-        }
-        else if (orderby === 'name') {
-            q += ' order by b.title asc ';
-        }
-        else if (orderby === 'year') {
-            q += ' order by b.publication_year desc ';
+        clause = ','
+    }
+
+    if (extra !== undefined) {
+        switch (extra) {
+            case 'favourites':
+                q += clause + 'publisher asc';
+                break;
+            case 'bestsellers':
+                q += clause + 'publisher desc, b.publication_month asc';
+                break;
         }
     }
-    q += 'offset $'+placeholder+' limit $'+(placeholder+1);
-    values.push(offset, limit);
 
+    q += ' offset $' + placeholder + ' limit $' + (placeholder + 1);
+    values.push(offset * limit, limit);
     return {
         text: q,
         values: values
@@ -231,7 +291,7 @@ module.exports.authorReviews = (authorID) => {
     }
 };
 
-module.exports.addAuthorReview = (id,userID,body) => {
+module.exports.addAuthorReview = (id, userID, body) => {
     return {
         text: `insert into author_review(title, content, book_author, author, rating) 
             values($1, $2, $3, $4, $5)`,
@@ -239,7 +299,7 @@ module.exports.addAuthorReview = (id,userID,body) => {
     }
 };
 
-module.exports.deleteAuthorReview = (id,reviewID,userID) => {
+module.exports.deleteAuthorReview = (id, reviewID, userID) => {
     return {
         text: `delete from author_review 
             where book_author = $1 and author = $2 and id = $3`,
@@ -276,7 +336,7 @@ module.exports.eventByID = (id) => {
     }
 };
 
-module.exports.eventSearch = (query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location) => {
+module.exports.eventSearch = (query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location) => {
     let q = `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
                     a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country
              from event e
@@ -291,63 +351,63 @@ module.exports.eventSearch = (query_string,name,author_name,author_id,book_name,
     let values = [];
 
     if (query_string !== undefined) {
-        q += clause + ' ((lower(e.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' +
-            'or (lower(a2.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') or (lower(b.title) LIKE \'%\' || lower($'+placeholder+') || \'%\')) ' +
+        q += clause + ' ((lower(e.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') ' +
+            'or (lower(a2.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') or (lower(b.title) LIKE \'%\' || lower($' + placeholder + ') || \'%\')) ' +
             ' ';
         clause = 'and';
         placeholder += 1;
         values.push(query_string)
     }
     if (name !== undefined) {
-        q += clause + ' (lower(e.name) = lower($'+placeholder+'))' + ' ';
+        q += clause + ' (lower(e.name) = lower($' + placeholder + '))' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(name)
     }
     if (author_name !== undefined) {
-        q += clause + ' (lower(a2.name) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' + ' ';
+        q += clause + ' (lower(a2.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') ' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(author_name)
     }
     if (author_id !== undefined) {
-        q += clause + ' (a2.id = $'+placeholder+')' + ' ';
+        q += clause + ' (a2.id = $' + placeholder + ')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(author_id)
     }
     if (book_name !== undefined) {
-        q += clause + ' (lower(b.title) LIKE \'%\' || lower($'+placeholder+') || \'%\') ' + ' ';
+        q += clause + ' (lower(b.title) LIKE \'%\' || lower($' + placeholder + ') || \'%\') ' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(book_name)
     }
     if (book_id !== undefined) {
-        q += clause + ' (b.id = $'+placeholder+')' + ' ';
+        q += clause + ' (b.id = $' + placeholder + ')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(book_id)
     }
     if (date !== undefined) {
-        q += clause + ' (CAST(e.timestamp AS DATE) = $'+placeholder+')' + ' ';
+        q += clause + ' (CAST(e.timestamp AS DATE) = $' + placeholder + ')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(date)
     }
     if (date_from !== undefined) {
-        q += clause + ' (e.timestamp >= $'+placeholder+')' + ' ';
+        q += clause + ' (e.timestamp >= $' + placeholder + ')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(date_from)
     }
     if (date_to !== undefined) {
-        q += clause + ' (e.timestamp <= $'+placeholder+')' + ' ';
+        q += clause + ' (e.timestamp <= $' + placeholder + ')' + ' ';
         clause = 'and';
         placeholder += 1;
         values.push(date_to)
     }
     if (location !== undefined) {
-        q += clause + ' (lower(a.city) = lower($'+placeholder+'))' + ' ';
+        q += clause + ' (lower(a.city) = lower($' + placeholder + '))' + ' ';
         values.push(location)
     }
 
@@ -389,7 +449,7 @@ module.exports.getUserSalt = (email) => {
     }
 };
 
-module.exports.getUserOrder = (id, offset=0, limit=20) => {
+module.exports.getUserOrder = (id, offset = 0, limit = 20) => {
     return {
         text: `select distinct o.id as OrderID, u.id as user_id, u.name, u.surname, u.email, u.birthdate, o.total_amount as amount, o.timestamp
             from "order" o join "user" u on o.user_id = u.id join order_to_book otb on o.id = otb.order_id
@@ -541,7 +601,7 @@ module.exports.addBookToUserWishList = (userID, bookID) => {
     return {
         text: `insert into user_to_book_wl(user_id, book_id)
             values ($1, $2)`,
-            values: [userID, bookID]
+        values: [userID, bookID]
     }
 };
 

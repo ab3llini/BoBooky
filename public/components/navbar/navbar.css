@@ -1,9 +1,8 @@
-.navbar.scrolled {
-  transition: background-color 200ms linear;
-}
-
-.navbar.unscrolled {
-  transition: background-color 200ms linear;
+.navbar {
+  /* IMPORTANT! IF YOU CHANGE THE NAVBAR HEIGHT
+  MAKE SURE TO CHANGE THE BODY PADDING
+  AS WELL IN BOBOOKY THEME!*/
+  height: 70px;
 }
 
 div .blurred-bg {

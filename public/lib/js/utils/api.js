@@ -98,8 +98,12 @@ let make = {
                     resolve(result)
                 },
                 complete: (xhr, textStatus) => {
-                    if (xhr.status !== 200)
+                    if (xhr.status !== 200) {
+                        if (xhr.status === 401) {
+                            console.warn('The user has not logged in!')
+                        }
                         reject(textStatus);
+                    }
                     else
                         resolve()
                 }

@@ -1,24 +1,18 @@
 
-! DA AGGIUSTARE OVUNQUE L'ALTEZZA DEL BODY IN BASE ALLA FIXED NAVBAR !
-
 //MISSING PAGES:
-- latest (in base a data pubblicazione)
-- our favorite (come?)
-- bestseller (come?)
 
-- All authors
-- Wishlist
-- ricerca eventi DA FARE PER DAVVERO
+- Wishlist - gianpy
+- ricerca eventi DA FARE PER DAVVERO - gianpy
 - dettaglio evento
 - Footer (ora presente solo nell'homepage e nel file footer.html è da inserire in tutte le pagine (come per la navbar))
 
 
 //TO FIX:
 - logout doppio nella versione mobile
-- Breadcrumb vera
-- Nei libri spesso appare un tema "undefined"
+- Breadcrumb vera - gianpy
+- Nei libri spesso appare un tema "undefined" <------------------------ GIANPY DECIDI A FIXARE IL BACKEND PLS <3
 - CALENDARSSS!! Sia nella registrazione che nella ricerca eventi
-- Research: attenzione al feedback errore che appare sempre e comunque
+- Research: attenzione al feedback errore che appare sempre e comunque ?? cosa intendete <-----------------
 - Add new address: manca un feedback positivo e rimando alla pagina personale
     (ora sembra un errore e resta sulla pagina ADD anche se in realtà è andato a buon fine)
 - Register: idem, controllare feedback e rimando a che pagina? (Home page)
@@ -26,6 +20,10 @@
 - (Homepage: freccettina ora sotto la barra ricerca non riesco a metterla a fondo pagina, sarebbe carino metterci sopra "surprise me!")
 - (Breadcrumb/orientation info va messa anche nell'aera personale secondo voi?)
 
+// LINKS
+
+collegate i link subito quando finite una sezione/pagina per favore :)
+ora sto collegando io tutto ciò che è nella navbar
 
 //STILE
 - logo Bobooky vettoriale
@@ -58,7 +56,7 @@
 
 
 //DON'T FORGET TO:
-- Controllare tutti i file, togliere eventuali commenti/template simpatici
+- Controllare tutti i file, togliere eventuali commenti/template simpatici <-------------------------------------------------------------GIANPY I TUI FUCKS IN GIRO AD ESEMPIO ?
 - Prezzi dei libri da fare più ragionevoli ahah
 
 

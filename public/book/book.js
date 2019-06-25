@@ -158,7 +158,7 @@ $(() => {
 
             // Download reviews
             api.get.book.reviews(id).then(reviews => {
-                if (reviews === undefined) {
+                if (reviews.length === 0) {
                     loadingJob.completeTask();
                     return
                 }

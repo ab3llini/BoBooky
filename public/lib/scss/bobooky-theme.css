@@ -10333,6 +10333,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* This line adds an offset to all pages to account for the navbar */
+body {
+  padding-top: 70px;
+}
+
 .form-group {
   position: relative;
   margin-bottom: 2rem;

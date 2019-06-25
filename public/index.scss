@@ -33,6 +33,7 @@
 
   background-image: get-svg(4);
   background-repeat: no-repeat;
+  height: calc(100vh - 70px);
 
   @include media-breakpoint-up(xs) {
     $ribbon-size: 0.8;

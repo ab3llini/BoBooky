@@ -9,6 +9,7 @@ class Job {
         if (this.completed === this.size)
             return;
         this.completed += 1;
+        console.log(this.completed + '/' + this.size + ' tasks completed')
         if (this.completed === this.size) {
             if (this.callback !== undefined) {
                 this.callback()

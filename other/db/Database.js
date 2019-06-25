@@ -41,8 +41,8 @@ module.exports.execute = (func, args) => {
                 resolve(result)
             })
             .catch(error => {
-                console.log(error);
-                reject()
+                console.log('EXECUTE ERROR!!!!! : func is ' + func + ', args are = ' + args + ', error = ' + error);
+                reject(error)
             })
     });
 };
@@ -70,7 +70,7 @@ let process_book = (book) => {
                 resolve(book)
             })
             .catch(error => {
-                reject()
+                reject(error)
             })
     })
 };
@@ -88,12 +88,12 @@ module.exports.bookGET = (offset, limit) => {
                             }
                         })
                         .catch(error => {
-                            reject()
+                            reject(error)
                         })
                 })
             })
             .catch(error => {
-                reject()
+                reject(error)
             })
     })
 };
@@ -103,19 +103,19 @@ module.exports.bookIdGET = (id) => {
         pipe.query(make.bookID(id))
             .then(book => {
                 if (book.rowCount === 0) {
-                    reject();
+                    reject(new Error('No books for id = ' + id));
                 } else {
                     process_book(book.rows[0])
                         .then(processed => {
                             resolve(processed)
                         })
                         .catch(error => {
-                            reject()
+                            reject(error)
                         })
                 }
             })
             .catch(error => {
-                reject()
+                reject(error)
             })
     })
 };
@@ -125,7 +125,7 @@ module.exports.bookReviewGET = (id) => {
         pipe.query(make.bookReviews(id))
             .then(reviews => {
                 if (reviews.rowCount === 0) {
-                    reject()
+                    resolve([])
                 } else {
                     reviews.rows.forEach((review) => {
                         review.author = {
@@ -156,58 +156,67 @@ module.exports.bookRelatedGET = (bookID, offset = 0, limit = 20) => {
                             }
                         })
                         .catch(error => {
-                            reject()
+                            reject(error)
                         })
                 })
             })
             .catch(error => {
-                reject()
+                reject(error)
             })
     })
 };
 
 module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher,publisher_id,theme,offset, limit, orderby, extra) => {
     return new Promise((resolve, reject) => {
-        pipe.query(make.bookSearch(query,isbn,genre,year,author,author_id,publisher,publisher_id,theme,offset, limit, orderby, extra))
-            .then(result => {
-                let ans = [];
-                if(result.rowCount === 0)
-                    resolve(ans);
-                else {
-                    result.rows.forEach((book, i) => {
-                        pipe.query(make.bookGenres(book.id))
-                            .then(genres => {
-                                book.genres = genres.rows;
-                                pipe.query(make.authorId(book.author))
-                                    .then(authors => {
-                                        if (authors.rowCount !== 0) {
-                                            delete book.author;
-                                            delete book.author_name;
-                                            book.author = authors.rows[0];
-                                            ans.push(book);
-                                            if (i === result.rowCount - 1)
-                                                resolve(ans)
-                                        } else
-                                            reject()
-                                    })
-                                    .catch(error => {
-                                        console.log(error);
-                                        reject()
-                                    })
-                            })
-                            .catch(error => {
-                                console.log(error);
-                                reject()
-                            })
-                    })
-                }
-            })
-            .catch(error => {
-                console.log('ERROR IN SEARCH QUERY:');
-                console.error(error);
-                reject()
-            })
 
+        if (extra === 'author-bypass') {
+            pipe.query(make.authorSearch(query, theme, genre, offset, limit))
+                .then(result => resolve(result.rows))
+                .catch(error => {
+                    console.error(error);
+                    reject(error)
+                })
+        }
+        else {
+            pipe.query(make.bookSearch(query, isbn, genre, year, author, author_id, publisher, publisher_id, theme, offset, limit, orderby, extra))
+                .then(result => {
+                    let ans = [];
+                    if (result.rowCount === 0)
+                        resolve(ans);
+                    else {
+                        result.rows.forEach((book, i) => {
+                            pipe.query(make.bookGenres(book.id))
+                                .then(genres => {
+                                    book.genres = genres.rows;
+                                    pipe.query(make.authorId(book.author))
+                                        .then(authors => {
+                                            if (authors.rowCount !== 0) {
+                                                delete book.author;
+                                                delete book.author_name;
+                                                book.author = authors.rows[0];
+                                                ans.push(book);
+                                                if (i === result.rowCount - 1)
+                                                    resolve(ans)
+                                            } else
+                                                reject(new Error('No author for id = ' + book.author))
+                                        })
+                                        .catch(error => {
+                                            console.log(error);
+                                            reject(error)
+                                        })
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                    reject(error)
+                                })
+                        })
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    reject(error)
+                })
+        }
     })
 };
 
@@ -219,7 +228,7 @@ module.exports.bookGenreGET = () => {
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -232,7 +241,7 @@ module.exports.bookThemeGET = () => {
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -243,7 +252,7 @@ module.exports.bookReviewPOST = (id,userID,body) => {
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -255,7 +264,7 @@ module.exports.bookReviewDELETE = (id,reviewID,userID) => {
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -270,7 +279,7 @@ module.exports.authorGET = (offset, limit) => {
             .then(authors => resolve(authors.rows))
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -282,11 +291,11 @@ module.exports.authorIdGET = (id) => {
                 if(authors.rowCount !== 0)
                     resolve(authors.rows[0]);
                 else
-                    reject()
+                    reject(new Error('No author for id = ' + id))
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -327,7 +336,7 @@ module.exports.authorIdReviewPOST = (id,userID,body) => {
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -338,7 +347,7 @@ module.exports.authorIdReviewDELETE = (id,reviewID,userID) => {
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -353,7 +362,7 @@ module.exports.userRegisterPOST = (body) => {
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -363,19 +372,19 @@ module.exports.userLoginPOST = (body) => {
         pipe.query(make.getUserSalt(body.username))
             .then(result => {
                 if (result.rowCount === 0) {
-                    reject()
+                    reject(new Error('No salt for ' + body.username))
                 } else {
                     pipe.query(make.loginUser(body.username, sha256(body.password + result.rows[0].salt16)))
                         .then(res => res.rowCount > 0 ? resolve(res.rows[0]) : reject('Wrong password'))
                         .catch(error => {
                             console.log(error);
-                            reject()
+                            reject(error)
                         })
                 }
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -428,13 +437,13 @@ module.exports.userOrderGET = (id, offset, limit) => {
                             })
                             .catch(error => {
                                 console.log(error);
-                                reject()
+                                reject(error)
                             })
                     })
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -470,12 +479,12 @@ module.exports.userAddressPOST = (userID, address) => {
                     .then(() => resolve())
                     .catch(error => {
                         console.log(error);
-                        reject()
+                        reject(error)
                     })
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -487,11 +496,11 @@ module.exports.userAddressDELETE = (userID, address) => {
                 if (deleted.rowCount !== 0)
                     resolve();
                 else
-                    reject()
+                    reject(new Error('Can\'t delete address'))
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -504,7 +513,7 @@ module.exports.userAddressGET = (userID) => {
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -515,7 +524,7 @@ module.exports.userAddressPUT = (userID, address) => {
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -529,19 +538,19 @@ module.exports.userChartPUT = (userID, book_info) => {
                        .then(() => resolve())
                        .catch(error => {
                            console.log(error);
-                           reject()
+                           reject(error)
                        });
                 else
                     pipe.query(make.updateUserChart(userID, book_info))
                         .then(() => resolve())
                         .catch(error => {
                             console.log(error);
-                            reject()
+                            reject(error)
                         })
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -552,7 +561,7 @@ module.exports.userChartDELETE = (userID) => {
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -592,7 +601,7 @@ module.exports.userChartGET = (userID) => {
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -603,7 +612,7 @@ module.exports.userWishlistPOST = (userID, bookID) => {
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -614,7 +623,7 @@ module.exports.userWishlistGET = (userID) => {
             .then(wl => resolve(wl.rows))
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -625,7 +634,7 @@ module.exports.userWishlistDELETE = (userID, bookID) => {
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -648,7 +657,7 @@ module.exports.eventGET = () => {
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -660,11 +669,11 @@ module.exports.eventIdGET = (id) => {
                 if(event.rowCount > 0)
                     resolve(mapEvent(event.rows[0]));
                 else
-                    reject()
+                    reject(new Error('Event row count is 0'))
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
@@ -685,7 +694,7 @@ module.exports.eventSearchGET = (query_string,name,author_name,author_id,book_na
             })
             .catch(error => {
                 console.log(error);
-                reject()
+                reject(error)
             })
     })
 };
