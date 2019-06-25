@@ -8,8 +8,14 @@ function mapEvent(e) {
         name: e.name,
         description: e.description,
         timestamp: e.timestamp,
-        related_author: e.related_author,
-        relater_book: e.related_book,
+        related_author: {
+            id: e.related_author,
+            name: e.author_name
+        },
+        relater_book: {
+            id: e.related_book,
+            title: e.title
+        },
         image_urls: [e.href, e.href_small],
         location: {
             id: e.address_id,

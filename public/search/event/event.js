@@ -2,16 +2,49 @@ import * as loader from '/lib/js/utils/template_loader.js'
 import * as api from '/lib/js/utils/api.js';
 import * as modal from '/components/modal/modal.js'
 
-function process_events(events) {
-    console.log(events)
+const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+function process_events(events, index=0, last_day=undefined) {
+    if(index === events.length)
+        return;
+    let event = events[index];
+    let date = new Date(event.timestamp);
+    loader.append_map('.event-per-day-container', '/components/search/event/event-search.html', event.id, (o) => {
+
+        o.find(".event-title").html(event.name.toUpperCase());
+        o.find(".event-author").html(event.related_author.name);
+        o.find(".event-book").html(event.relater_book.title);
+        o.find(".event-location").html(event.location.city + ' ' + event.location.name);
+        o.find(".event-time").html(date.getUTCHours() + ':' + date.getMinutes() + '0');
+        o.find(".day").html(date.getDate());
+        o.find(".month").html(monthNames[date.getMonth()]);
+        if(last_day === date.getDate()) {
+            o.find(".event-date").addClass("d-none")
+        }
+    })
+        .then(() => {
+            process_events(events, index + 1, date.getDate())
+        })
 }
 
 $(()=> {
     let args = new URLSearchParams(window.location.search);
-    let date = args.get('date');
-    let query = args.get('query');
+    let date = "";
+    let query = "";
 
-    if (date !== undefined || query !== undefined)
+    if(args.has('date'))
+        date = args.get('date');
+    if(args.has('q'))
+        query = args.get('q');
+
+    console.log(date);
+    console.log(query);
+
+
+
+    if (date !== "" || query !== "")
         api.get.event.search(date, query)
             .then(results => {
                 process_events(results)
@@ -27,8 +60,4 @@ $(()=> {
             .catch(error => {
                 console.log(error.toString())
             });
-
-    loader.append_map('.event-per-day-container', '/components/search/event/event-search.html', 0, (o) => {
-        console.log('Loaded')
-    })
 });

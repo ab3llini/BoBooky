@@ -6,7 +6,7 @@ $(() => {
         "July", "August", "September", "October", "November", "December"
     ];
 
-/*
+
     api.get.user.order()
         .then(orders => {
             console.log(orders);
@@ -15,7 +15,7 @@ $(() => {
                 loader.append_map('.order-container', '/components/order/order-element.html', id, (o) => {
                     let ts = new Date(order.timestamp);
 
-                    o.find('.order-date').html(ts.getDay() + ' ' + monthNames[ts.getMonth()] + ' ' + ts.getFullYear());
+                    o.find('.order-date').html(ts.getDate() + ' ' + monthNames[ts.getMonth()] + ' ' + ts.getFullYear());
                     o.find('.order-amount').html('Total € ' + order.amount.split('$')[1]);
                     order.Books.forEach((book, idx) => {
                         loader.append_map(o.find('.book-element-container'), '/components/order/order-book-element.html', id + '_' + book.book.id, elem => {
@@ -33,13 +33,4 @@ $(() => {
         .catch(error => {
             console.log(error.toString())
         });
-*/
-
-for(let j = 0; j < 5; j++)
-    loader.append('.order-container', '/components/order/order-element.html', j, (o) => {
-        for (let i = 0; i < Math.floor(Math.random() * 4) + 1; i++)
-            loader.append(o.find('.book-element-container'), '/components/order/order-book-element.html', j + '_' + i, elem => {
-            })
-    })
-
 });
