@@ -129,35 +129,54 @@ body {
     border-radius: 50% !important;
 }
 
+.navigation-btn {
+    width: 120px;
+}
 
 .no-glow:focus, .no-glow:active {
     outline: none !important;
     box-shadow: none;
 }
 
+.btn-gradient > a:hover {
+    color: white  !important;
+    background-position: right center !important;
+}
 
 .gradient-warning {
-    background-image: linear-gradient(to right, $bobooky-orange 0%, $bobooky-warning 60%);
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right, #f1491c 0%, $bobooky-orange 51%, #ffb820 100%);
 }
 
 .gradient-primary {
-    background-image: linear-gradient(to right, $bobooky-primary 0%, $bobooky-secondary 80%);
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right, #10385d 0%, $bobooky-primary 51%, #3c97a8 100%);
 }
 
 .gradient-secondary {
-    background-image: linear-gradient(to right, $bobooky-secondary 0%, #5ef4e7 51%);
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right,  #00704d 0%, $bobooky-secondary 51%, #58a85c 100%);
 }
 
 .gradient-purple {
-    background-image: linear-gradient(to right, $bobooky-purple 0%, $bobooky-pink 51%);
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right, $bobooky-pink 0%, $bobooky-purple, #7f56aa 100%);
 }
 
 .gradient-pink {
-    background-image: linear-gradient(to right, $bobooky-pink 0%, #fb8acd 51%);
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right, #9a077e 0%, $bobooky-pink 51%, #fb63a0 100%);
 }
 
 .gradient-danger {
-    background-image: linear-gradient(to right, $bobooky-danger 0%, $bobooky-pink 51%);
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right, #7b0353 0%, $bobooky-danger 51%, #ff5f4e 100% );
 }
 
 .gradient-dark {
