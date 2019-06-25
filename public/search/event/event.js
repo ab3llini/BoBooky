@@ -1,6 +1,5 @@
 import * as loader from '/lib/js/utils/template_loader.js'
 import * as api from '/lib/js/utils/api.js';
-import * as modal from '/components/modal/modal.js'
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -10,6 +9,7 @@ function process_events(events, index=0, last_day=undefined) {
     if(index === events.length)
         return;
     let event = events[index];
+    console.log(event);
     let date = new Date(event.timestamp);
     loader.append_map('.event-per-day-container', '/components/search/event/event-search.html', event.id, (o) => {
 
@@ -43,6 +43,10 @@ $(()=> {
 
     console.log(date);
     console.log(query);
+
+    $(".search-button").click(e => {
+        $(".search-form").submit()
+    });
 
 
 

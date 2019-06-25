@@ -215,9 +215,9 @@ export let get = {
     event: {
         search: (date, query) => {
             let url = '/api/events/search?';
-            if (query !== undefined)
+            if (query !== "")
                 url += 'query_string=' + query;
-            if (date !== undefined)
+            if (date !== "")
                 url += '&date_from=' + date;
             return make.get(url)
         },
