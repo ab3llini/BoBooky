@@ -1,7 +1,6 @@
 
 Gianpy
 ----------------------------------------------------------------------------
--gli eventi... hanno descrizioni shiftate
 - Possibility to choose an address on order checkout
 - Add shipping address to orders (API + Implementation)
 
@@ -28,6 +27,7 @@ Luna - style
 Tutti
 ---------------------------------------------------------------------------------------------------------------
 - mancano buttons next-preview negli eventi, ci saranno?
+- ricerca eventi problemi di stile nella search bar
 
 //MISSING LINKS
 - Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
