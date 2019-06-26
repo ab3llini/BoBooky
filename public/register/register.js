@@ -35,16 +35,15 @@ $(() => {
             let ctx = sanitizer.getContext();
             api.post.register(ctx)
                 .then(result => {
-                    modal.show('Welcome!', 'You have successfully registered')
-                        .on('hidden.bs.modal', function (e) {
-                            session.login(ctx['email'], ctx['password'])
-                                .then(result => {
-                                    $(window.location).attr('href', '/');
-                                })
-                                .catch(e => {
-                                    modal.error(e)
-                                })
-                        })
+                    modal.show('Welcome!', 'You have successfully registered').then(o => {
+                        session.login(ctx['email'], ctx['password'])
+                            .then(result => {
+                                $(window.location).attr('href', '/');
+                            })
+                            .catch(e => {
+                                modal.error(e)
+                            })
+                    })
                 })
                 .catch(e => {
                     modal.error(e)

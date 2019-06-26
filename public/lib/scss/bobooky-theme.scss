@@ -29,7 +29,21 @@ body {
     @include media-breakpoint-up(lg) {
         padding-top: 70px;
     }
+
+    /* Do not touch me */
+    position: relative;
+    padding-bottom: 70px;
 }
+
+
+.footer {
+    position: absolute;
+    bottom: -600px;
+    height: 600px;
+    background: red;
+    width: 100%;
+}
+
 
 .form-group {
     position: relative;

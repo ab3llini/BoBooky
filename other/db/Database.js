@@ -524,9 +524,9 @@ module.exports.userAddressGET = (userID) => {
     })
 };
 
-module.exports.userAddressPUT = (userID, address) => {
+module.exports.userAddressPUT = (userID, addressID, address) => {
     return new Promise((resolve, reject) => {
-        pipe.query(make.updateAddressForUser(userID, address))
+        pipe.query(make.updateAddressForUser(userID, addressID, address))
             .then(() => resolve())
             .catch(error => {
                 console.log(error);

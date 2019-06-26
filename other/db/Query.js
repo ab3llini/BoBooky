@@ -36,7 +36,7 @@ module.exports.bookGenres = (book_id) => {
 
 module.exports.bookID = (id) => {
     return {
-        text: `SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img, b.avg_rating
+        text: `SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img, b.avg_rating, b.theme
             from book_view bw join author a on bw.author = a.id join image i on a.image = i.id join book b on b.id = bw.id
             where bw.id = $1`,
         values: [id]
@@ -444,7 +444,7 @@ module.exports.registerUser = (user) => {
 
 module.exports.loginUser = (email, pswSHA256) => {
     return {
-        text: `select id, name, surname, email from "user" where email = $1 and sha256 = $2`,
+        text: `select id, name, surname, email, birthdate from "user" where email = $1 and sha256 = $2`,
         values: [email, pswSHA256]
     }
 };
@@ -501,7 +501,7 @@ module.exports.addAddressForUser = (address) => {
     }
 };
 
-module.exports.updateAddressForUser = (userID, address) => {
+module.exports.updateAddressForUser = (userID, addressID, address) => {
     return {
         text: `update address a
             set name = $1,
@@ -513,7 +513,7 @@ module.exports.updateAddressForUser = (userID, address) => {
             from user_to_address uta
             where a.id = $7 and uta.user_id = $8 and uta.address_id = $7`,
         values: [address.name, address.address_line_1, address.address_line_2, address.cap, address.city,
-            address.country, address.id, userID]
+            address.country, addressID, userID]
     }
 };
 

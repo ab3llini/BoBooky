@@ -13,15 +13,7 @@
 </head>
 
 <div class="nav-placeholder"></div>
-<nav aria-label="breadcrumb" class="bg-warning text-dark">
-    <div class="container">
-        <ol class="breadcrumb bg-transparent px-0 m-0">
-            <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
-            <li class="breadcrumb-item"><a href="#" class="text-dark">About us</a></li>
-            <li class="breadcrumb-item"><a href="#" class="text-dark">Contact us</a></li>
-        </ol>
-    </div>
-</nav>
+<div class="breadcrumb-placeholder" color="warning"></div>
 
 <div class="container-fluid bg-warning px-0">
     <div class="container h-100">
@@ -31,7 +23,8 @@
 
 <div class="container pt-3">
     <p class="text-muted">
-        *Please note that this website was made for educational purposes and all the information written below are invented
+        *Please note that this website was made for educational purposes and all the information written below are
+        invented
     </p>
 </div>
 
@@ -67,27 +60,34 @@
                             </div>
                         </div>
                         <div class="form-group col-12 p-0">
-                            <textarea type="text" id="message" class="bobooky-warning form-control" rows="3" placeholder="Your message" required></textarea>
+                            <textarea type="text" id="message" class="bobooky-warning form-control" rows="3"
+                                      placeholder="Your message" required></textarea>
                             <div class="invalid-feedback">
                                 Write here your message.
                             </div>
                         </div>
                     </div>
-                    <div class="container">
-                        <button type="submit" class="btn btn-warning text-dark font-weight-bold rounded-pill float-right my-4">
-                            Send
-                        </button>
-                    </div>
-
                 </div>
             </form>
+
+            <div class="container">
+                <button class="btn btn-warning text-dark font-weight-bold rounded-pill float-right my-4">
+                    Send
+                </button>
+            </div>
+
         </div>
     </div>
+</div>
 </div>
 
 
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>
+<script src="/components/breadcrumb/breadcumb.js" type="module"></script>
+<script src="/components/footer/footer.js" type="module"></script>
+<script src="contact.js" type="module"></script>
+
 </body>
 </html>

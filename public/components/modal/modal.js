@@ -18,12 +18,16 @@ export let inject = (type, id) => {
 };
 
 export let show = (title, content, e = undefined) => {
-    object.find('.modal-title').html(title);
-    object.find('.modal-body .message').html(content);
-    if (e !== undefined)
-        object.find('.modal-body .error').html(e.message);
-    object.modal();
-    return object
+    return new Promise( resolve => {
+        object.find('.modal-title').html(title);
+        object.find('.modal-body .message').html(content);
+        if (e !== undefined)
+            object.find('.modal-body .error').html(e.message);
+        object.modal();
+        object.on('hidden.bs.modal', function (e) {
+            resolve(object)
+        })
+    })
 };
 
 

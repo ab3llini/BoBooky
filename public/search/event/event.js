@@ -32,10 +32,6 @@ function process_events(events, index=0, last_day=undefined) {
 }
 
 $(()=> {
-
-    //Loading breadcrumb
-    loader.load_breadcrumb(['bg-primary']);
-
     // Loading events
     let args = new URLSearchParams(window.location.search);
     let date = "";

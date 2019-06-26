@@ -36,6 +36,7 @@ passport.use(new Strategy(
                     name: result.name,
                     surname: result.surname,
                     email: result.email,
+                    birthdate : result.birthdate,
                     id: result.id
                 })
             })

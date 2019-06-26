@@ -265,7 +265,10 @@ export let put = {
     user: {
         cart: (id, qty) => {
             return make.put('/api/user/cart', {bookID: parseInt(id), qty: parseInt(qty)})
-        }
+        },
+        address: (id, body) => {
+            return make.put('/api/user/addresses/?addressID=' + id, body)
+        },
     }
 };
 
@@ -273,6 +276,9 @@ export let del = {
     user: {
         cart: () => {
             return make.delete('/api/user/cart')
+        },
+        address : (id) => {
+            return make.delete('/api/user/addresses?addressID=' + id)
         }
     }
 };

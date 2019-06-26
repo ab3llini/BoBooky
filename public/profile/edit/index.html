@@ -18,10 +18,11 @@
 <body class="bg-dark">
 
 <div class="nav-placeholder"></div>
+<div class="breadcrumb-placeholder" color="pink"></div>
 <div class="section container main text-white">
     <div class="row">
         <div class="col-12 mt-5">
-            <h2 class="font-weight-bold text-secondary">New Address</h2>
+            <h2 class="font-weight-bold text-secondary">Edit Address</h2>
             <div class="container mt-4 border border-secondary rounded" style="border-width: 2px !important;">
                 <form class="needs-validation form-secondary" id="new-address" novalidate>
                     <div class="container p-3">
@@ -63,7 +64,7 @@
                             <div class="form-group col-12">
                                 <input type="text" name="address_line_2" class="bobooky form-control text-secondary"
                                        id="addressLine2" placeholder="Additional details"
-                                      >
+                                >
                             </div>
                         </div>
                         <div class="form-row">
@@ -101,18 +102,25 @@
                             </div>
                             <div class="container mb-3 mt-5">
                                 <div class="row justify-content-end">
-                                    <div class="col-6 col-sm-2">
-                                    <button type="button"
-                                            class="btn font-weight-bold text-secondary border-secondary rounded-pill w-100"
-                                            onclick="window.history.back();">
-                                        Cancel
-                                    </button>
+                                    <div class="col-auto">
+                                        <button type="button"
+                                                class="btn font-weight-bold text-secondary border-secondary rounded-pill w-100"
+                                                onclick="window.history.back();">
+                                            Back
+                                        </button>
                                     </div>
-                                    <div class="col-6 col-sm-2">
-                                    <button type="submit"
-                                            class="btn btn-secondary text-dark font-weight-bold rounded-pill w-100">
-                                        Save
-                                    </button>
+                                    <div class="col-auto">
+
+                                        <button type="button"
+                                                class="btn btn-secondary text-dark font-weight-bold rounded-pill w-100 delete">
+                                            Delete
+                                        </button>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit"
+                                                class="btn btn-secondary text-dark font-weight-bold rounded-pill w-100">
+                                            Save
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +138,9 @@
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>
-<script src="newaddress.js" type="module"></script>
+<script src="/components/breadcrumb/breadcumb.js" type="module"></script>
+<script src="/components/footer/footer.js" type="module"></script>
+<script src="editaddress.js" type="module"></script>
 
 </body>
 </html>

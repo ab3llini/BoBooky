@@ -11,8 +11,6 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
 $(() => {
 
-    loader.load_breadcrumb(['bg-purple']);
-
     //Assign static overlay;
     loading.set('body > .loading');
 

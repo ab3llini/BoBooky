@@ -51,37 +51,6 @@ export let append_map = (container, template, id, map_fn, prepend = false, anima
     })
 };
 
-function insertPath(path, href = '/', index = 0) {
-    if (index === path.length - 1)
-        return;
-
-    append_map('.breadcrumb', '/components/breadcrumb/breadcrumb-element.html', undefined, o => {
-        console.log(href);
-        o.find('.bc-item').html(path[index]).attr('href', href)
-    })
-        .then(() => insertPath(path,
-            href !== '/' ? href + '/' + path[index + 1] : href + path[index + 1],
-            index + 1))
-
-}
-
-export let load_breadcrumb = (classes = [], map_fn = o => {
-}) => {
-    console.log(window.location.pathname);
-    let path = window.location.pathname;
-    return append_map('.breadcrumb-placeholder', '/components/breadcrumb/breadcrumb.html', path, function (o) {
-        let path = window.location.pathname.split('/');
-        path[0] = 'Home';
-
-        insertPath(path);
-
-        for (let i = 0; i < classes.length; i++)
-            o.addClass(classes[i]);
-
-        map_fn(o)
-    }, false, false)
-};
-
 export let append = (container, template, id, processing = undefined) => {
     return new Promise(resolve => {
         let $ctx = $('<div>');

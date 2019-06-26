@@ -1,58 +1,51 @@
 
-//MISSING PAGES:
-- Wishlist - gianpy
-- Footer (ora presente solo nell'homepage e nel file footer.html è da inserire in tutte le pagine (come per la navbar))
+Gianpy
+----------------------------------------------------------------------------
+- Wishlist
+- fixare il cart. se vuoto da errori un foreach. dobbiamo scegliere gli address di spedizione ?? mi  sa di si
+- backend crash con cart vuoto (}, args are = 37, error = TypeError: Cannot read property 'user_id' of undefined)
+- La ricerca degli event non funzioa come deve. devi mettere ciò che hai cercato negli input.
+lo avevo già fatto tutto il meccanismo cmq....
+- la breadcumb deve avere i parametri get
 
-BREADCUMB DOES NOT WORK WHEN IN PAGES WITH MANDATORY ID SUCH AS BOOK, EVENT AND AUTHOR. NEED FIXING
+- Possibility to choose an address on order checkout
+- Add shipping address to orders (API + Implementation)
 
-//TO FIX:
-- logout doppio nella versione mobile
-- Breadcrumb vera - da aggiungere alle varie pagine - gianpy
-- Nei libri spesso appare un tema "undefined" <------------------------ GIANPY DECIDI A FIXARE IL BACKEND PLS <3  <-------- Questo problema era dovuto al discover che non si era ancora risolto ieri
-- CALENDARSSS!! Sia nella registrazione che nella ricerca eventi
-- Research: attenzione al feedback errore che appare sempre e comunque ?? cosa intendete <-----------------
-- Add new address: manca un feedback positivo e rimando alla pagina personale
-    (ora sembra un errore e resta sulla pagina ADD anche se in realtà è andato a buon fine)
-- Register: idem, controllare feedback e rimando a che pagina? (Home page)
-- (Navbar per mobile: full-screen?)
-- (Homepage: freccettina ora sotto la barra ricerca non riesco a metterla a fondo pagina, sarebbe carino metterci sopra "surprise me!")
-- (Breadcrumb/orientation info va messa anche nell'aera personale secondo voi?)
 
-// LINKS
-
-collegate i link subito quando finite una sezione/pagina per favore :)
-ora sto collegando io tutto ciò che è nella navbar
-
-//STILE
+Luna - style
+-----------------------------------------------------------------------------
 - logo Bobooky vettoriale
 - cambiare icone navbar (user)
 --> eventi (ma manca barra di ricerca)
 - book
+- cambiare colore breadcumbs settando color="dark, warning etc". non moddare la classe del placeholder ty
 - autori
 - allineamenti bottoni - e + carrello
-- CONTROLLA IL RESTO
+- CONTROLLA IL RESTO -> tipo next/prev nelle sezioni /search/more
 - Controllare GLOW e colori feedback di buttons e form coerenti (bobooky-themes)
 - ! definire grandezza font coerenti in tutto il sito !
+- i font sono giusti in tutto il sito ? (alby)
 
+
+Tutti
+---------------------------------------------------------------------------------------------------------------
 
 //MISSING LINKS
 - Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
 - Navbar
+- profile nella navbar
 - Footer
 - Tutti i generi / temi
 
 
 //Optional to implement
-- Possibility to choose an address on order checkout
-- Add shipping address to orders (API + Implementation)
-- Aggiungere un feedback al "contact us"
-- Far funzionare per davvero il "Delete" nella lista address
+
 - Navbar: JS far trasformare icona hamburger in una X quando cliccata, far trasformare le frecce da down a up quando cliccate
 - (404 page)
 
 
 //DON'T FORGET TO:
-- Controllare tutti i file, togliere eventuali commenti/template simpatici <-------------------------------------------------------------GIANPY I TUI FUCKS IN GIRO AD ESEMPIO ?
+- Controllare tutti i file, togliere eventuali commenti/template simpatici
 - Prezzi dei libri da fare più ragionevoli ahah
 
 

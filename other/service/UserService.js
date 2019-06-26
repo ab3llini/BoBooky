@@ -45,7 +45,7 @@ exports.userAddressPOST = function(id, body) {
  * no response value expected for this operation
  **/
 exports.userAddressPUT = function(id, addressID, body) {
-  return db.execute(db.userAddressPUT, [id, body])
+  return db.execute(db.userAddressPUT, [id, addressID, body])
 
 };
 

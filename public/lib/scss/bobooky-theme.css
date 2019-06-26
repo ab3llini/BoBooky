@@ -10336,11 +10336,22 @@ html {
 /* This line adds an offset to all pages to account for the navbar */
 body {
   padding-top: 56px;
+  /* Do not touch me */
+  position: relative;
+  padding-bottom: 70px;
 }
 @media (min-width: 992px) {
   body {
     padding-top: 70px;
   }
+}
+
+.footer {
+  position: absolute;
+  bottom: -600px;
+  height: 600px;
+  background: red;
+  width: 100%;
 }
 
 .form-group {
