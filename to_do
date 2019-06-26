@@ -11,16 +11,20 @@ lo avevo già fatto tutto il meccanismo cmq....
 - Possibility to choose an address on order checkout
 - Add shipping address to orders (API + Implementation)
 
+Albi
+----------------------------------------------------------------------------
+- controlla pagina all themes / genres, a me il footer copre tutto :( (Luna)
+- Profile: Il footer taglia le cards degli indirizzi
+- whishlist: nel css non trova il file incluso
+
 
 Luna - style
 -----------------------------------------------------------------------------
-- logo Bobooky vettoriale
-- cambiare icone navbar (user)
 --> eventi (ma manca barra di ricerca)
 - book
 - cambiare colore breadcumbs settando color="dark, warning etc". non moddare la classe del placeholder ty
 - autori
-- allineamenti bottoni - e + carrello
+- Carrello: allineamenti bottoni - e + ; barra bottoom mobile bianca
 - CONTROLLA IL RESTO -> tipo next/prev nelle sezioni /search/more & /wishlist
 - Controllare GLOW e colori feedback di buttons e form coerenti (bobooky-themes)
 - ! definire grandezza font coerenti in tutto il sito !
@@ -29,6 +33,8 @@ Luna - style
 
 Tutti
 ---------------------------------------------------------------------------------------------------------------
+
+- Sezione "my reviews da togliere"
 
 //MISSING LINKS
 - Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
