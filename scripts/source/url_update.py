@@ -106,7 +106,7 @@ def add_events(connection):
         ans = list(filter(lambda x: x != '' and x != '\n', ans.split('\n')))
         ans = desc + ans[0] + ' ' + ans[1] + ' ' + ans[2]
         ans = ans.split(SPLIT_CHAR)[0]
-        cursor.execute(sql_insert, (f"{row[1]}'s Event", ans, random.choice(address_ids), datetime, row[0], row[-1]))
+        cursor.execute(sql_insert, (f"{row[1]}'s Event", ans, address, datetime, row[0], row[-1]))
         connection.commit()
 
 
