@@ -86,10 +86,12 @@ body {
         color: $color
     }
 
+    //colore del bordo a tema quando cliccato
     .bobooky-#{$key}:focus {
         border-color: $color
     }
 
+  //hover link a tema
     .link-#{$key} > a:hover {
         color: $color !important;
         text-decoration: none
@@ -197,7 +199,5 @@ body {
 .gradient-dark {
     background-image: linear-gradient(to right, $bobooky-dark 40%, #2c2746 60%);
 }
-
-/* Magic Stuff End -> */
 
 

@@ -13,33 +13,32 @@ lo avevo già fatto tutto il meccanismo cmq....
 
 Albi
 ----------------------------------------------------------------------------
-- controlla pagina all themes / genres, a me il footer copre tutto :( (Luna)
+- Search/Authors/Events: far funzionare il nuovo button della lente inclusa nel form, come nell'homepage (importante per uso da mobile)
+- Controlla pagina all themes / genres, a me il footer copre tutto :( (Luna)
 - Profile: Il footer taglia le cards degli indirizzi
-- whishlist: nel css non trova il file incluso
 
 
 Luna - style
 -----------------------------------------------------------------------------
---> eventi (ma manca barra di ricerca)
-- book
+- single book
+- single author
+- single event
+- stile dei filtri di ricerca (responsive)
 - cambiare colore breadcumbs settando color="dark, warning etc". non moddare la classe del placeholder ty
-- autori
-- Carrello: allineamenti bottoni - e + ; barra bottoom mobile bianca
-- CONTROLLA IL RESTO -> tipo next/prev nelle sezioni /search/more & /wishlist
-- Controllare GLOW e colori feedback di buttons e form coerenti (bobooky-themes)
+- Carrello: allineamenti bottoni - e + ; barra bottom mobile bianca
+- CONTROLLA IL RESTO -> events, orders, register, add new address
 - ! definire grandezza font coerenti in tutto il sito !
-- i font sono giusti in tutto il sito ? (alby)
+- i font sono giusti in tutto il sito ? (alby) Secondo me no, li devo settare giusti (Luna)
 
 
 Tutti
 ---------------------------------------------------------------------------------------------------------------
-
-- Sezione "my reviews da togliere"
+- mancano buttons next-preview negli eventi, ci saranno?
 
 //MISSING LINKS
 - Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
 - Navbar
-- profile nella navbar
+- profile nella navbar: sezione "my reviews da togliere" (?)
 - Footer
 - Tutti i generi / temi
 
@@ -48,6 +47,7 @@ Tutti
 
 - Navbar: JS far trasformare icona hamburger in una X quando cliccata, far trasformare le frecce da down a up quando cliccate
 - (404 page)
+- accessibilità (valutata ahime non si sa su cosa): ritrovare e rimettere voci leggibili navbar + aggiungere nel footer o navbar possibilità di ingrandire i font
 
 
 //DON'T FORGET TO:
