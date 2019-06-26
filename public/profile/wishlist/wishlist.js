@@ -51,6 +51,7 @@ $(() => {
                             $heart.removeClass('fa-heart');
                             $heart.addClass('fa-heart-o');
                             inWishlist.splice(idx, 1)
+                            $(this).parents('.book').first().slideUp()
                         }).catch(e => modal.error(e))
                     } else {
                         api.post.user.wishlist.add(book.id).then(() => {
@@ -86,91 +87,31 @@ $(() => {
     // Then Inject modal to handle messages, then perform all the rest..
     modal.inject(modal.type.alert, 'search').then(modal_obj => {
 
-        // GET Args
-        let args = new URLSearchParams(window.location.search);
+        // Wishlist
+        let wishlist = [];
+        let inWishlist = [];
 
-        //If id exists
-        if (args.has('genre')) {
+        // Fetch all books that match the query
+        api.get.user.wishlist().then(books => {
 
-            // Utilities
-            let get_filter = (key, _default = undefined) => args.has(key) ? args.get(key) : (_default !== undefined ? _default : 'default');
+            if (books !== undefined && books.length > 0) {
 
-            let filters = {
-                genre: get_filter('genre'),
-                page : parseInt(get_filter('page', 0))
-            };
-
-            document.title = filters.genre.charAt(0).toUpperCase() + filters.genre.slice(1);
-            $('.genre .name').html(filters.genre);
-            $('.search-form .genre').val(filters.genre);
-
-            let next_btn = $('.next');
-            let prev_btn = $('.previous');
-
-            next_btn.click(function () {
-               $('.search-form .page').val(filters.page + 1);
-               $('.search-form').submit();
-            });
-
-            prev_btn.click(function () {
-                $('.search-form .page').val(filters.page - 1);
-                $('.search-form').submit();
-            });
-
-
-
-            // Wishlist
-            let wishlist = [];
-            let inWishlist = [];
-
-            let query_args = {
-                genre: filters.genre,
-                offset : filters.page
-            };
-
-            if (query_args.genre === 'default')
-                delete query_args.genre;
-            if (query_args.page === 0)
-                delete query_args.page;
-
-            // Fetch all books that match the query
-            api.get.book.search.mixed(query_args).then(books => {
-
-                if (books.length < 20) {
-                    next_btn.hide();
-                }
-                if (filters.page === 0) {
-                    prev_btn.hide();
-                }
-
-                if (books !== undefined && books.length > 0) {
-
-                    // Init wishlist
-                    api.get.user.wishlist().then(_wishlist => {
-
-                        wishlist = _wishlist;
-                        _wishlist.forEach(book => {
-                            inWishlist.push(book.id);
-                        });
-                        inject_books(inWishlist, books)
-
-                    }).catch(e => {
-                        inject_books(inWishlist, books)
-                    });
-
-                } else {
-                    $('.books-container').html("No books found..");
-                    loadingJob.completeTask()
-                }
-            }).catch(
-                e => {
-                    loadingJob.completeTask();
-                    modal.error(e)
+                wishlist = books;
+                books.forEach(book => {
+                    inWishlist.push(book.id);
                 });
+                inject_books(inWishlist, books)
 
-        } else {
-            loading.hide();
-            modal.show('Warning', 'No genre was provided!')
-        }
+            } else {
+                $('.books-container').html("Your wishlist is empty! Add something :)");
+                loadingJob.completeTask()
+            }
+        }).catch(
+            e => {
+                loadingJob.completeTask();
+                modal.error(e)
+            });
+
+
     })
 });

@@ -626,9 +626,41 @@ module.exports.userWishlistPOST = (userID, bookID) => {
 module.exports.userWishlistGET = (userID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.getWishList(userID))
-            .then(wl => resolve(wl.rows))
+            .then(result => {
+                let ans = [];
+                if (result.rowCount === 0)
+                    resolve(ans);
+                else {
+                    result.rows.forEach((book, i) => {
+                        pipe.query(make.bookGenres(book.id))
+                            .then(genres => {
+                                book.genres = genres.rows;
+                                pipe.query(make.authorId(book.author))
+                                    .then(authors => {
+                                        if (authors.rowCount !== 0) {
+                                            delete book.author;
+                                            delete book.author_name;
+                                            book.author = authors.rows[0];
+                                            ans.push(book);
+                                            if (i === result.rowCount - 1)
+                                                resolve(ans)
+                                        } else
+                                            reject(new Error('No author for id = ' + book.author))
+                                    })
+                                    .catch(error => {
+                                        console.log(error);
+                                        reject(error)
+                                    })
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                reject(error)
+                            })
+                    })
+                }
+            })
             .catch(error => {
-                console.log(error);
+                console.error(error);
                 reject(error)
             })
     })

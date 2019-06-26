@@ -622,13 +622,9 @@ module.exports.deleteBookFromUserWishList = (userID, bookID) => {
 
 module.exports.getWishList = (userID) => {
     return {
-        text: `select b.id, b.title, a.name as author, b.description, p.name as publisher,
-                b.price, b.isbn, b.publication_year, b.avg_rating, i.href as image_href
+        text: `SELECT bw.*, a.id as a_id, a.name as a_name, a.description as a_desc, i.href as a_img, b.avg_rating, b.theme 
             from user_to_book_wl utbw
-                join book b on utbw.book_id = b.id
-                join author a on b.author = a.id
-                join publisher p on b.publisher = p.id
-                join image i on b.image_id = i.id
+            join book_view bw on utbw.book_id = bw.id join author a on bw.author = a.id join image i on a.image = i.id join book b on b.id = bw.id
             where user_id = $1`,
         values: [userID]
     };

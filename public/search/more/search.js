@@ -33,7 +33,7 @@ $(() => {
                 book_obj.find('.book-rating-val').html(book.avg_rating);
 
                 // Setup in wishlist
-                if (inWishlist.indexOf(book.id) > 0) {
+                if (inWishlist.indexOf(book.id) >= 0) {
                     let $btn = book_obj.find('.wishlist');
                     let $heart = $btn.find('.fa');
                     $heart.removeClass('fa-heart-o');
@@ -44,7 +44,7 @@ $(() => {
                 book_obj.find('.wishlist').unbind().click(function () {
 
                     let idx = inWishlist.indexOf(book.id);
-                    if (idx > 0) {
+                    if (idx >= 0) {
                         api.post.user.wishlist.delete(book.id).then(() => {
                             console.log('Removed');
                             let $heart = $(this).find('.fa');
