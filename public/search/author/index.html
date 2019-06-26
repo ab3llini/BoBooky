@@ -22,31 +22,38 @@ Loading template
 <div class="loading d-flex flex-column justify-content-center text-white bg-dark">
     <div class="container text-center">
         <img src="/assets/images/loading.gif" alt="Loading" style="width:30%"><br>
-        <img class="mt-5" src="/assets/logo_white.png" alt="Bobooky">
+        <img  class="mt-5" src="/assets/images/logo_vettoriale.svg" style="width:150px" alt="Bobooky"/>
         <h6 class="text-white mt-5">Finding authors..</h6>
     </div>
 </div>
 
 
 <div class="nav-placeholder"></div>
-<div class="breadcrumb-placeholder" color="pink"></div>
+<div class="breadcrumb-placeholder" color="danger"></div>
 
 <div class="section search mt-5">
     <div class="container">
         <form class="search-form">
             <div class="row">
                 <div class="col-12 col-xl-6">
+                    <div class="input-group">
                     <input type="search" name="q" value=""
-                           class="form-control no-glow bobooky-pink form-control-lg rounded-pill search-bar"
+                           class="form-control no-glow bobooky-danger form-control-lg rounded-bobooky search-bar border-right-0"
                            placeholder="Search author by name">
+                        <div class="input-group-append ">
+                            <button class="btn border no-glow search-button rounded-bobooky border-left-0 pr-4" type="button">
+                                <i class="fa fa-search text-dark"></i>
+                            </button>
+                        </div>
+                     </div>
                 </div>
                 <div class="col-12 col-xl-6 d-flex justify-content-between mt-3 mt-xl-0">
                     <select name="genre"
-                            class="text-capitalize form-control custom-select custom-select-lg bg-dark rounded-pill text-white filter genre">
+                            class="text-capitalize form-control no-glow custom-select custom-select-lg bg-dark rounded-pill text-white filter genre">
                         <option selected value="default">genre</option>
                     </select>
                     <select name="theme"
-                            class="text-capitalize form-control custom-select custom-select-lg bg-dark rounded-pill text-white ml-3 filter theme">
+                            class="text-capitalize form-control no-glow custom-select custom-select-lg bg-dark rounded-pill text-white ml-3 filter theme">
                         <option selected value="default">theme</option>
                     </select>
                 </div>
@@ -62,16 +69,16 @@ Loading template
     </div>
 </div>
 <div class="section navigation my-5">
-    <div class="container text-pink">
+    <div class="container text-danger">
         <div class="row">
             <div class="col-6">
-                <button class="previous btn btn-outline-pink rounded-pill" type="button">
+                <button class="previous btn btn-outline-danger navigation-btn rounded-pill" type="button">
                     <i class="fa fa-angle-left"></i>
                     <span class="ml-2">previous</span>
                 </button>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <button class="next btn btn-outline-pink rounded-pill" type="button">
+                <button class="next btn btn-outline-danger navigation-btn rounded-pill" type="button">
                     <span class="mr-2">next</span>
                     <i class="fa fa-angle-right"></i>
                 </button>

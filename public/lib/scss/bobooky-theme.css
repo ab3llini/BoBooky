@@ -10393,7 +10393,7 @@ body {
   color: #0D71B9;
 }
 
-.bobooky-primary.form-control:focus {
+.bobooky-primary:focus {
   border-color: #0D71B9;
 }
 
@@ -10427,7 +10427,7 @@ input.placeholder-primary::placeholder {
   color: #05AB9E;
 }
 
-.bobooky-secondary.form-control:focus {
+.bobooky-secondary:focus {
   border-color: #05AB9E;
 }
 
@@ -10461,7 +10461,7 @@ input.placeholder-secondary::placeholder {
   color: #28a745;
 }
 
-.bobooky-success.form-control:focus {
+.bobooky-success:focus {
   border-color: #28a745;
 }
 
@@ -10495,7 +10495,7 @@ input.placeholder-success::placeholder {
   color: #17a2b8;
 }
 
-.bobooky-info.form-control:focus {
+.bobooky-info:focus {
   border-color: #17a2b8;
 }
 
@@ -10529,7 +10529,7 @@ input.placeholder-info::placeholder {
   color: #F7BC5D;
 }
 
-.bobooky-warning.form-control:focus {
+.bobooky-warning:focus {
   border-color: #F7BC5D;
 }
 
@@ -10563,7 +10563,7 @@ input.placeholder-warning::placeholder {
   color: #AD2528;
 }
 
-.bobooky-danger.form-control:focus {
+.bobooky-danger:focus {
   border-color: #AD2528;
 }
 
@@ -10597,7 +10597,7 @@ input.placeholder-danger::placeholder {
   color: #999999;
 }
 
-.bobooky-light.form-control:focus {
+.bobooky-light:focus {
   border-color: #999999;
 }
 
@@ -10631,7 +10631,7 @@ input.placeholder-light::placeholder {
   color: #21263F;
 }
 
-.bobooky-dark.form-control:focus {
+.bobooky-dark:focus {
   border-color: #21263F;
 }
 
@@ -10665,7 +10665,7 @@ input.placeholder-dark::placeholder {
   color: #F39325;
 }
 
-.bobooky-orange.form-control:focus {
+.bobooky-orange:focus {
   border-color: #F39325;
 }
 
@@ -10699,7 +10699,7 @@ input.placeholder-orange::placeholder {
   color: #E83273;
 }
 
-.bobooky-pink.form-control:focus {
+.bobooky-pink:focus {
   border-color: #E83273;
 }
 
@@ -10733,7 +10733,7 @@ input.placeholder-pink::placeholder {
   color: #8E3089;
 }
 
-.bobooky-purple.form-control:focus {
+.bobooky-purple:focus {
   border-color: #8E3089;
 }
 
@@ -10767,7 +10767,7 @@ input.placeholder-purple::placeholder {
   color: white;
 }
 
-.bobooky-white.form-control:focus {
+.bobooky-white:focus {
   border-color: white;
 }
 
@@ -10801,7 +10801,7 @@ input.placeholder-white::placeholder {
   color: #737373;
 }
 
-.bobooky-gray.form-control:focus {
+.bobooky-gray:focus {
   border-color: #737373;
 }
 
@@ -10911,7 +10911,5 @@ body {
 .gradient-dark {
   background-image: linear-gradient(to right, #21263F 40%, #2c2746 60%);
 }
-
-/* Magic Stuff End -> */
 
 /*# sourceMappingURL=bobooky-theme.css.map */
