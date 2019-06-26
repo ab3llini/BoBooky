@@ -86,7 +86,7 @@ def add_events(connection):
         cursor.close()
         cursor = connection.cursor()
         # Creating the date
-        datetime = pd.to_datetime(rnd.choice(pd.bdate_range('2019-09-01', '2019-12-15')))
+        datetime = pd.to_datetime(rnd.choice(pd.bdate_range('2019-09-15', '2019-11-15')))
         datetime = datetime.replace(hour=random.choice(hours))
         weekday = datetime.day_name() + ', ' + datetime.month_name() + ' ' + datetime.strftime('%d')
         time = datetime.strftime('%I%p')
