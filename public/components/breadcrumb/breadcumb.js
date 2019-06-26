@@ -1,15 +1,19 @@
 import * as loader from '/lib/js/utils/template_loader.js'
 
 function insertPath(path, href = '/', index = 0) {
+    console.log(href);
     if (index === path.length - 1)
         return;
 
     loader.append_map('.breadcrumb', '/components/breadcrumb/breadcrumb-element.html', undefined, o => {
         o.find('.bc-item').html(path[index]).attr('href', href)
     })
-        .then(() => insertPath(path,
-            href !== '/' ? href + '/' + path[index + 1] : href + path[index + 1],
-            index + 1))
+        .then(() => {
+            let _href = href !== '/' ? href + '/' + path[index + 1] : href + path[index + 1];
+            if (index + 1 === path.length - 2)
+                _href += window.location.search;
+            insertPath(path, _href, index + 1)
+        })
 
 }
 

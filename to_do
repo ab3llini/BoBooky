@@ -1,12 +1,6 @@
 
 Gianpy
 ----------------------------------------------------------------------------
-- il cart se vuoto dovrebbe mostrare qualcosa tipo "The cart is empty" e non 45 euro di spesa. No bottne buy now se vuoto.
-- fixare il cart. se vuoto da errori un foreach. dobbiamo scegliere gli address di spedizione ?? mi  sa di si
-- backend crash con cart vuoto (}, args are = 37, error = TypeError: Cannot read property 'user_id' of undefined)
-- La ricerca degli event non funzioa come deve. devi mettere ciò che hai cercato negli input.
-lo avevo già fatto tutto il meccanismo cmq....
-- la breadcumb deve avere i parametri get
 -gli eventi... hanno descrizioni shiftate
 - Possibility to choose an address on order checkout
 - Add shipping address to orders (API + Implementation)

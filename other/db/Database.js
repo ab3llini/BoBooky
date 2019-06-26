@@ -576,6 +576,10 @@ module.exports.userChartGET = (userID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.getChart(userID))
             .then(chart => {
+                if(chart.rowCount === 0) {
+                    resolve({});
+                    return
+                }
                 let ans = { Books: [] };
                 chart.rows.forEach(ch => {
                     ans.Books.push({

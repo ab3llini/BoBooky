@@ -37,10 +37,14 @@ $(()=> {
     let date = "";
     let query = "";
 
-    if(args.has('date'))
+    if(args.has('date')) {
         date = args.get('date');
-    if(args.has('q'))
+        $('#form-date').prop('value', date)
+    }
+    if(args.has('q')) {
         query = args.get('q');
+        $("#form-q").prop('value', query)
+    }
 
     $(".search-button").click(e => {
         $(".search-form").submit()
