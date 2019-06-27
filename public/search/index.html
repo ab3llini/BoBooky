@@ -35,8 +35,7 @@ Loading template
     <div class="container">
         <form class="search-form">
             <div class="row">
-                <div class="col-12 col-xl-6">
-
+                <div class="col-12 col-lg-6">
                     <div class="input-group">
                         <input type="search" name="q" value="" class="form-control no-glow bobooky-pink form-control-lg rounded-bobooky search-bar border-right-0"
                                placeholder="Search more than 700 books..">
@@ -48,23 +47,31 @@ Loading template
                     </div>
 
                 </div>
-                <div class="col-12 col-xl-6 d-flex justify-content-between mt-3 mt-xl-0">
-                    <select name="orderby"
-                            class="text-capitalize form-control no-glow border-0 custom-select custom-select-lg bg-dark rounded-pill text-white mr-3 filter orderby">
-                        <option selected value="default">order by</option>
-                        <option value="price">price</option>
-                        <option value="author">author</option>
-                        <option value="name">name</option>
-                        <option value="year">year</option>
-                    </select>
-                    <select name="genre"
-                            class="text-capitalize form-control no-glow border-0 custom-select custom-select-lg bg-dark rounded-pill text-white mx-3 filter genre">
-                        <option selected value="default">genre</option>
-                    </select>
-                    <select name="theme"
-                            class="text-capitalize form-control no-glow custom-select custom-select-lg bg-dark rounded-pill text-white ml-3 filter theme">
-                        <option selected value="default">theme</option>
-                    </select>
+                <div class="col-12 col-lg-6 d-flex justify-content-between mt-3 mt-lg-0">
+                    <div class="row">
+                    <div class="col-12 col-md-auto">
+                        <select name="orderby"
+                                class="text-capitalize font-body form-control w-100 no-glow border-0 custom-select custom-select-lg bg-dark rounded-pill text-white mb-3 filter orderby">
+                            <option selected value="default">order by</option>
+                            <option value="price">price</option>
+                            <option value="author">author</option>
+                            <option value="name">name</option>
+                            <option value="year">year</option>
+                        </select>
+                    </div>
+                        <div class="col-6 col-md-auto">
+                        <select name="genre"
+                                class="text-capitalize font-body w-100 form-control no-glow border-0 custom-select custom-select-lg bg-dark rounded-pill text-white filter genre">
+                            <option selected value="default">genre</option>
+                        </select>
+                            </div>
+                        <div class="col-6 col-md-auto">
+                        <select name="theme"
+                                class="text-capitalize font-body form-control no-glow border-0 custom-select custom-select-lg bg-dark rounded-pill text-white filter theme">
+                            <option selected value="default">theme</option>
+                        </select>
+                        </div>
+                    </div>
                 </div>
             </div>
             <input type="text" name="page" class="d-none page" value="0">
