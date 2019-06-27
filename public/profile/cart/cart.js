@@ -103,7 +103,6 @@ $(() => {
 
                         api.post.user.order(order)
                             .then(() => {
-                                console.log('Order Created!');
                                 api.del.user.cart()
                                     .then(() => {
                                         window.location.replace('/profile/order')

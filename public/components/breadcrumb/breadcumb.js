@@ -1,7 +1,6 @@
 import * as loader from '/lib/js/utils/template_loader.js'
 
 function insertPath(path, href = '/', index = 0) {
-    console.log(href);
     if (index === path.length - 1)
         return;
 

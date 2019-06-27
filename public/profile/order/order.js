@@ -38,7 +38,6 @@ function processOrders(orders, idx=0) {
 $(() => {
     api.get.user.order()
         .then(orders => {
-            console.log(orders);
             processOrders(orders)
         })
         .catch(error => {
