@@ -32,6 +32,14 @@ function process_events(events, index=0, last_day=undefined) {
 }
 
 $(()=> {
+
+    $('.search-bar').focus(function () {
+        $(this).parents('.search-bar-wrapper').addClass('focused')
+    })
+    $('.search-bar').focusout(function () {
+        $(this).parents('.search-bar-wrapper').removeClass('focused')
+    })
+
     // Loading events
     let args = new URLSearchParams(window.location.search);
     let date = "";

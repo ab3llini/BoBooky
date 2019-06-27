@@ -15,7 +15,75 @@
 }
 
 .author-container .item .description .title {
-  color: #e83e8c;
+  color: #AD2528;
+}
+
+.search-bar-wrapper {
+  border: 1px solid #21263F;
+  transition: 0.2s ease-in-out;
+  border-radius: 34px;
+  overflow: hidden;
+  color: #21263F;
+}
+
+.search-bar-wrapper .form-control {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.search-bar-wrapper .form-control, .search-bar-wrapper .btn.round {
+  border: hidden;
+  background: transparent;
+}
+
+.search-bar-wrapper .form-control::placeholder {
+  color: #21263F;
+}
+
+.search-bar-wrapper .form-control {
+  outline: none !important;
+  box-shadow: none !important;
+  color: #21263F;
+  transition: 0.2s ease-in-out;
+}
+
+.search-bar-wrapper i {
+  color: #21263F;
+  transition: 0.2s ease-in-out;
+}
+
+.search-bar-wrapper .btn.round {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.search-bar-wrapper .btn.round:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.search-bar-wrapper .form-control:focus-within {
+  border-color: white;
+}
+
+.focused {
+  transition: 0.2s ease-in-out;
+  border-color: #AD2528;
+}
+
+.focused .search-bar {
+  transition: 0.2s ease-in-out;
+  color: #AD2528;
+}
+
+.focused i {
+  transition: 0.2s ease-in-out;
+  color: #AD2528;
+}
+
+.search-bar-wrapper.focused .form-control::placeholder {
+  transition: 0.2s ease-in-out;
+  color: #AD2528;
 }
 
 /*# sourceMappingURL=search.css.map */

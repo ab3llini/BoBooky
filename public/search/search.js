@@ -9,6 +9,13 @@ import * as rating from '/components/review/rating/rating.js'
 
 $(() => {
 
+    $('.search-bar').focus(function () {
+        $(this).parents('.search-bar-wrapper').addClass('focused')
+    })
+    $('.search-bar').focusout(function () {
+        $(this).parents('.search-bar-wrapper').removeClass('focused')
+    })
+
     //Assign static overlay;
     loading.set('body > .loading');
 
