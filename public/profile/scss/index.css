@@ -46,4 +46,14 @@ body {
   box-shadow: none;
 }
 
+.in-front {
+  z-index: 1000;
+}
+
+.footer {
+  position: relative;
+  bottom: -200px;
+  min-height: 30vh !important;
+}
+
 /*# sourceMappingURL=index.css.map */

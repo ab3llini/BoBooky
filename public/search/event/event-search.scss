@@ -1,6 +1,7 @@
 @import "../../lib/bootstrap/scss/functions";
 @import "../../lib/bootstrap/scss/variables";
 @import "../../lib/bootstrap/scss/mixins/breakpoints";
+@import "../../lib/scss/booboky-colors";
 
 
 .event-date {
@@ -19,4 +20,79 @@
 
 .event-item  .col.d-block.d-lg-none {
   margin-top: 70px;
+}
+
+.search-bar-wrapper {
+  border: 1px solid $bobooky-dark;
+  transition: 0.2s ease-in-out;
+
+  border-radius: 34px;
+  overflow: hidden;
+  color: $bobooky-dark;
+}
+
+
+.search-bar-wrapper .form-control {
+  font-size: 20px;
+  font-weight: 400;
+
+}
+
+.search-bar-wrapper .form-control, .search-bar-wrapper .btn.round {
+  border: hidden;
+  background: transparent;
+}
+
+.search-bar-wrapper .form-control::placeholder {
+  color: $bobooky-dark;
+}
+
+
+.search-bar-wrapper .form-control {
+  outline: none !important;
+  box-shadow: none !important;
+  color: $bobooky-dark;
+  transition: 0.2s ease-in-out;
+}
+
+.search-bar-wrapper i {
+  color: $bobooky-dark;
+  transition: 0.2s ease-in-out;
+}
+
+.search-bar-wrapper .btn.round {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.search-bar-wrapper .btn.round:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.search-bar-wrapper .form-control:focus-within {
+  //box-shadow: white;
+  border-color: white;
+
+
+}
+
+.focused {
+  transition: 0.2s ease-in-out;
+  border-color: $bobooky-purple;
+}
+
+.focused .search-bar {
+  transition: 0.2s ease-in-out;
+  color: $bobooky-purple;
+}
+
+.focused i {
+  transition: 0.2s ease-in-out;
+  color: $bobooky-purple;
+}
+
+.search-bar-wrapper.focused .form-control::placeholder {
+  transition: 0.2s ease-in-out;
+  color: $bobooky-purple;
 }

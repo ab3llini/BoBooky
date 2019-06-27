@@ -10348,9 +10348,7 @@ body {
 .footer {
   position: absolute;
   bottom: -600px;
-  height: 600px;
-  background: red;
-  width: 100%;
+  height: auto !important;
 }
 
 .form-group {
@@ -10829,14 +10827,12 @@ input.placeholder-gray::placeholder {
   font-family: "Nunito";
   src: url(https://fonts.googleapis.com/css?family=Nunito&display=swap);
 }
-body {
-  /*
-  font-family: 'Open Sans', sans-serif;
-  font-weight: lighter;
-  h1, h2, h3, h4, h5, h6, .title {
-      font-family: 'Nunito', sans-serif;
-  }
-  */
+html, input, p, span, .font-body {
+  font-family: "Open Sans", sans-serif;
+}
+html h1, html h2, html h3, html h4, html h5, html h6, html .title, input h1, input h2, input h3, input h4, input h5, input h6, input .title, p h1, p h2, p h3, p h4, p h5, p h6, p .title, span h1, span h2, span h3, span h4, span h5, span h6, span .title, .font-body h1, .font-body h2, .font-body h3, .font-body h4, .font-body h5, .font-body h6, .font-body .title {
+  font-min-size: 18px;
+  font-family: "Nunito", sans-serif;
 }
 
 .linear-gradient {

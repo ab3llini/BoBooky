@@ -86,7 +86,7 @@ def add_events(connection):
         cursor.close()
         cursor = connection.cursor()
         # Creating the date
-        datetime = pd.to_datetime(rnd.choice(pd.bdate_range('2019-08-01', '2019-12-31')))
+        datetime = pd.to_datetime(rnd.choice(pd.bdate_range('2019-09-15', '2019-11-15')))
         datetime = datetime.replace(hour=random.choice(hours))
         weekday = datetime.day_name() + ', ' + datetime.month_name() + ' ' + datetime.strftime('%d')
         time = datetime.strftime('%I%p')
@@ -106,7 +106,7 @@ def add_events(connection):
         ans = list(filter(lambda x: x != '' and x != '\n', ans.split('\n')))
         ans = desc + ans[0] + ' ' + ans[1] + ' ' + ans[2]
         ans = ans.split(SPLIT_CHAR)[0]
-        cursor.execute(sql_insert, (f"{row[1]}'s Event", ans, random.choice(address_ids), datetime, row[0], row[-1]))
+        cursor.execute(sql_insert, (f"{row[1]}'s Event", ans, address, datetime, row[0], row[-1]))
         connection.commit()
 
 
