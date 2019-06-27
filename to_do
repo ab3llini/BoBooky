@@ -1,30 +1,50 @@
-Don't forget to:
-- suggest our favourite readings (homepage?)
-- show the latest books
 
-Missing pages:
-//multiple topics
-- All books research with filters
-- Single book
-- All authors research
-- Single Author
-- All events
-- Single event
+Gianpy
+----------------------------------------------------------------------------
+- Possibility to choose an address on order checkout
+- Add shipping address to orders (API + Implementation)
+- mancano buttons next-preview negli eventi, ci saranno? (Per gianpy: Io ti avevo già fatto tutto il sistema di prev/next, usalo!)
+- negli events metti lo stesso cal del register pls.
+- toglimi le console.log di debug che hai messo nei breadcumb/cart/events/ etc pls.
 
-//?
-- All literary genre
-- All themes
-- All books by theme X
-- All books by genre
+Albi
+----------------------------------------------------------------------------
 
-//single topic
-- Shopping Cart / Book Reservations
-- Wishlist
-- Ordering and shipping info
-- Contact us
-- (FAQ)
+Luna - style
+-----------------------------------------------------------------------------
+- single book
+- single author
+- single event
+- stile dei filtri di ricerca (responsive)
+- cambiare colore breadcumbs settando color="dark, warning etc". non moddare la classe del placeholder ty
+- Carrello: allineamenti bottoni - e + ; barra bottom mobile bianca
+- CONTROLLA IL RESTO -> events, orders, register, add new address
+- ! definire grandezza font coerenti in tutto il sito !
+- i font sono giusti in tutto il sito ? (alby) Secondo me no, li devo settare giusti (Luna)
 
-//personal profile
-- past orders
-- (wishlist in grande)
-- my reviews
+
+Tutti
+---------------------------------------------------------------------------------------------------------------
+- Tutti i link dentro a genres/themes sono rotti (o quasi tutti). Tra l'a
+
+//MISSING LINKS
+- Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
+- Navbar
+- profile nella navbar: sezione "my reviews da togliere" (?)
+- Footer
+- Tutti i generi / temi
+
+
+//Optional to implement
+
+- Navbar: JS far trasformare icona hamburger in una X quando cliccata, far trasformare le frecce da down a up quando cliccate
+- (404 page)
+- accessibilità (valutata ahime non si sa su cosa): ritrovare e rimettere voci leggibili navbar + aggiungere nel footer o navbar possibilità di ingrandire i font
+
+
+//DON'T FORGET TO:
+- Controllare tutti i file, togliere eventuali commenti/template simpatici
+- Prezzi dei libri da fare più ragionevoli ahah
+
+
+/* QUANDO QUESTA SARà L'UNICA RIGA RIMASTA, SAREMO BRAVI TUTTI! CLAP CLAP CLAP */

@@ -1,0 +1,27 @@
+.book-element-container .order-book-element:last-child {
+  border-bottom: hidden;
+}
+
+.book-element-container .order-book-element {
+  border-bottom: 1px solid white;
+}
+
+@media (max-width: 991.98px) {
+  .book-cover {
+    min-width: 100px;
+  }
+}
+
+.opacity {
+  z-index: 90;
+  opacity: 0.5;
+  filter: opacity(50px);
+}
+
+.solid {
+  z-index: 150;
+  opacity: 1;
+  filter: opacity(100px);
+}
+
+/*# sourceMappingURL=order.css.map */

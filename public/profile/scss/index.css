@@ -1,0 +1,59 @@
+body {
+  background-image: url("/assets/images/account_mailbox.svg");
+  background-position: 10% bottom;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 40vh;
+}
+@media (max-width: 991.98px) {
+  body {
+    background-image: none;
+  }
+}
+
+.main {
+  font-size: 18pt;
+}
+
+.navbar {
+  background: #21263F;
+}
+
+.address-card {
+  border-radius: 24px;
+}
+
+.address-card:hover {
+  border-color: white;
+}
+
+.profile-header-placeholder {
+  margin-top: 55px;
+}
+
+.dropdown-menu > li > a {
+  color: white;
+}
+
+.dropdown-menu > li > a:hover {
+  background-color: #21263F;
+  opacity: 0.9;
+  background-image: none;
+}
+
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+.in-front {
+  z-index: 1000;
+}
+
+.footer {
+  position: relative;
+  bottom: -200px;
+  min-height: 30vh !important;
+}
+
+/*# sourceMappingURL=index.css.map */

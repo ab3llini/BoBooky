@@ -1,0 +1,60 @@
+@import "../../lib/scss/booboky-colors";
+@import "../../lib/bootstrap/scss/functions";
+@import "../../lib/bootstrap/scss/variables";
+@import "../../lib/bootstrap/scss/mixins/breakpoints";
+
+//background trial
+body {
+  background-image: url("/assets/images/account_mailbox.svg");
+  background-position: 10% bottom;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 40vh;
+
+  @include media-breakpoint-down(md) {
+    background-image: none;
+  }
+}
+
+.main {
+  font-size: 18pt;
+}
+
+.navbar {
+  background: $bobooky-dark;
+}
+
+.address-card {
+  border-radius: 24px;
+}
+
+.address-card:hover {
+  border-color: white;
+}
+
+.profile-header-placeholder {
+  margin-top: 55px;
+}
+
+.dropdown-menu >li > a {
+  color: white;
+}
+
+.dropdown-menu > li > a:hover {
+  background-color: $bobooky-dark;
+  opacity:0.9;
+  background-image: none;
+}
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+.in-front {
+  z-index: 1000;
+}
+.footer {
+  position: relative;
+  bottom: -200px;
+  min-height: 30vh !important;
+}

@@ -1,0 +1,176 @@
+@import "../lib/bootstrap/scss/functions";
+@import "../lib/bootstrap/scss/mixins/breakpoints";
+@import "../lib/scss/booboky-colors";
+@import "../lib/bootstrap/scss/variables";
+
+
+[aria-expanded="false"] > .expanded,
+[aria-expanded="true"] > .collapsed {
+    display: none;
+}
+
+$debug: false;
+$related-book-section-margin: 15rem;
+$padding: 0rem;
+$carousel-margin: 2rem;
+
+.carousel .MS-content {
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 $carousel-margin 0 $carousel-margin;
+}
+
+.carousel .MS-content .item {
+    display: inline-block;
+    height: 100%;
+    overflow: hidden;
+    white-space: normal;
+    @if $debug {
+        border: 1px dashed blueviolet;
+    }
+    vertical-align: top;
+}
+
+
+.carousel .MS-controls button {
+    position: absolute;
+    border: none;
+    background: transparent;
+    font-size: 30px;
+    color: $dark;
+    outline: 0;
+    top: calc(50% - 15px);
+}
+
+.carousel .MS-controls .MS-left {
+    left: 0px;
+    @include media-breakpoint-down(md) {
+        left: 10px;
+    }
+}
+
+.carousel .MS-controls .MS-right {
+    right: 0px;
+    @include media-breakpoint-down(md) {
+        right: 10px;
+    }
+}
+.carousel .MS-content .item {
+    @include media-breakpoint-up(xs) {
+        width: 100%;
+    }
+    @include media-breakpoint-up(md) {
+        width: 33.33%;
+    }
+    @include media-breakpoint-up(lg) {
+        width: 25%;
+    }
+    @include media-breakpoint-up(xl) {
+        width: 20%;
+    }
+}
+
+.carousel .MS-content .item .container {
+    width: 10rem;
+    height: 100%;
+    padding: 0;
+    text-align: center;
+}
+
+
+.item .image {
+    background-size: cover;
+    height: 10rem;
+    border-radius: 2.5rem;
+}
+
+.item .description .title {
+    color: $pink;
+}
+
+$book-width: 14rem;
+
+.books-container .book .image {
+    width : calc(100vw - 2rem);
+    background-size: 100% 100%;
+    height: 140vw;
+    @include media-breakpoint-up(sm) {
+        width: $book-width;
+        height: 1.6 * $book-width;
+    }
+}
+
+.search-bar-wrapper {
+    border: 1px solid $bobooky-dark;
+    transition: 0.2s ease-in-out;
+
+    border-radius: 34px;
+    overflow: hidden;
+    color: $bobooky-dark;
+}
+
+
+.search-bar-wrapper .form-control {
+    font-size: 20px;
+    font-weight: 400;
+
+}
+
+.search-bar-wrapper .form-control, .search-bar-wrapper .btn.round {
+    border: hidden;
+    background: transparent;
+}
+
+.search-bar-wrapper .form-control::placeholder {
+    color: $bobooky-dark;
+}
+
+
+.search-bar-wrapper .form-control {
+    outline: none !important;
+    box-shadow: none !important;
+    color: $bobooky-dark;
+    transition: 0.2s ease-in-out;
+}
+
+.search-bar-wrapper i {
+    color: $bobooky-dark;
+    transition: 0.2s ease-in-out;
+}
+
+.search-bar-wrapper .btn.round {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.search-bar-wrapper .btn.round:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.search-bar-wrapper .form-control:focus-within {
+    //box-shadow: white;
+    border-color: white;
+
+
+}
+
+.focused {
+    transition: 0.2s ease-in-out;
+    border-color: $bobooky-pink;
+}
+
+.focused .search-bar {
+    transition: 0.2s ease-in-out;
+    color: $bobooky-pink;
+}
+
+.focused i {
+    transition: 0.2s ease-in-out;
+    color: $bobooky-pink;
+}
+
+.search-bar-wrapper.focused .form-control::placeholder {
+    transition: 0.2s ease-in-out;
+    color: $bobooky-pink;
+}

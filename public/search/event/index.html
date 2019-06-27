@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Search Events</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/lib/scss/bobooky-theme.css">
+    <link rel="stylesheet" href="/components/navbar/navbar.css">
+    <link rel="stylesheet" href="/search/event/event-search.css">
+
+</head>
+
+<body>
+<div class="nav-placeholder"></div>
+<div class="breadcrumb-placeholder" color="purple"></div>
+
+
+<div class="container-fluid bg-purple px-0 ">
+    <div class="container h-100">
+        <h3 class="text-white my-auto title py-3">Events</h3>
+    </div>
+</div>
+
+<div class="section search mt-5">
+    <div class="container">
+        <form class="search-form">
+            <div class="row">
+                <div class="col">
+                    <h5>Events from</h5>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 col-md-4">
+                    <input type="date" name="date" value="" id="form-date"
+                           class="form-control no-glow bobooky-purple form-control pl-4 rounded-pill datepicker border-dark">
+                </div>
+                <div class="col-12 mt-3 mt-md-0 col-md">
+                    <div class="form-group search-bar-wrapper">
+                        <div class="input-group">
+                            <input type="text" name="q" id="form-q" class="search-bar form-control pl-4 border-right-0"
+                                   placeholder="Search hundreds of events">
+                            <div class="input-group-append ">
+                                <button class="btn search-button round border-left-0 pr-4" type="submit">
+                                    <i class="fa fa-search border-0"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <input type="submit" class="d-none">
+        </form>
+    </div>
+</div>
+
+<div class="container events">
+    <div class="row mt-5">
+        <div class="col events-container p-0">
+            <div class="container event-per-day-container">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="/components/navbar/navbar.js" type="module"></script>
+<script src="/components/breadcrumb/breadcumb.js" type="module"></script>
+<script src="/components/footer/footer.js" type="module"></script>
+<script src="/search/event/event.js" type="module"></script>
+
+
+</body>
+</html>

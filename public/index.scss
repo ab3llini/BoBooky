@@ -33,6 +33,7 @@
 
   background-image: get-svg(4);
   background-repeat: no-repeat;
+  height: calc(100vh - 56px);
 
   @include media-breakpoint-up(xs) {
     $ribbon-size: 0.8;
@@ -56,6 +57,7 @@
   }
 
   @include media-breakpoint-up(lg) {
+    height: calc(100vh - 70px);
     $ribbon-size: 1;
     $ribbon-length: 0.6;
     $ribbon-relative-offset: 0.2;
@@ -67,34 +69,43 @@
 
 }
 
-.search-bar .form-control, .search-bar .btn.round {
-  background-color: rgba(0, 15, 55, 0.4);
+
+.search-bar {
+  border: 1px solid $light;
+  background: rgba(0, 15, 55, 0.4);
+  border-radius: 34px;
+  overflow: hidden;
 }
 
 
 .search-bar .form-control {
-  border: 1px solid $light;
- // border-right: hidden;
+  font-size: 24px;
+  font-weight: 400;
+
+}
+
+.search-bar .form-control, .search-bar .btn.round {
+  height: 3.5rem;
+  border: hidden;
+  background: transparent;
+}
+
+.search-bar .form-control::placeholder {
+  color: #d6d6d6;
+}
+
+
+.search-bar .form-control {
   outline: none !important;
   box-shadow: none !important;
-  border-top-left-radius: 24px;
-  border-bottom-left-radius: 24px;
 }
 
 .search-bar .btn.round {
-  border: 1px solid $light;
-  //border-left: hidden;
-  //margin-left: 1px; //risolve il bordino blu tra label e button ma non è responsive :(
   outline: none !important;
   box-shadow: none !important;
-  border-top-right-radius: 24px;
-  border-bottom-right-radius: 24px;
 }
 
 .search-bar .btn.round:active {
-  background: rgba(142, 142, 142, 0.5);
-  border: 1px solid $light;
-  //border-left: hidden;
   outline: none !important;
   box-shadow: none !important;
 }
@@ -124,6 +135,20 @@
   margin-right: -10%;
 }
 
-.search-bar .form-control::placeholder {
-  color: #d6d6d6;
+.book {
+
 }
+$img_w : 10rem;
+$img_h : 1.6 * $img_w;
+.book .image {
+  width: $img_w;
+  height: $img_h;
+  border-radius: 0.2rem;
+}
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+

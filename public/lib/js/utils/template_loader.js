@@ -1,4 +1,4 @@
-export let append_selectors = (container, template, id=undefined, selectors) => {
+export let append_selectors = (container, template, id = undefined, selectors) => {
     return new Promise(resolve => {
         let $ctx = $('<div>');
         $ctx.load(template, () => {
@@ -14,13 +14,13 @@ export let append_selectors = (container, template, id=undefined, selectors) => 
             $(container).append($ans
                 .hide()
                 .fadeIn(500)
-        );
+            );
             resolve($ans);
         });
     })
 };
 
-export let append_map = (container, template, id, map_fn, prepend = false) => {
+export let append_map = (container, template, id, map_fn, prepend = false, animation = true) => {
     return new Promise(resolve => {
 
         let $ctx = $('<div>');
@@ -30,16 +30,21 @@ export let append_map = (container, template, id, map_fn, prepend = false) => {
                 $ans.attr('id', id);
             map_fn($ans);
             if (prepend) {
-                $(container).prepend($ans
-                    .hide()
-                    .fadeIn(500)
-                );
-            }
-            else {
+                if (animation)
+                    $(container).prepend($ans
+                        .fadeIn(500)
+                    );
+                else
+                    $(container).prepend($ans);
+
+            } else {
+                if (animation)
                 $(container).append($ans
                     .hide()
                     .fadeIn(500)
                 );
+                else
+                    $(container).append($ans);
             }
             resolve($ans);
         });
@@ -62,4 +67,4 @@ export let append = (container, template, id, processing = undefined) => {
             resolve($ans);
         });
     })
-}
+};

@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="/components/loading/loading.css">
     <link rel="stylesheet" href="/components/navbar/navbar.css">
     <link rel="stylesheet" href="book.css">
-    <link rel="stylesheet" href="/components/animated-heart/animated-heart.css">
-
 
 </head>
 
@@ -20,11 +18,13 @@
 <!--
 Loading template
 -->
-<div class="loading d-flex flex-column justify-content-center text-dark">
-    <div class="text-center">
-        <h1 class="display-1">Loading..</h1>
+<div class="loading d-flex flex-column justify-content-center text-white bg-dark">
+    <div class="container text-center">
+        <img src="/assets/images/loading.gif" alt="Loading" style="width:30%"><br>
+        <img  class="mt-5" src="/assets/images/logo_vettoriale.svg" style="width:150px" alt="Bobooky"/>
     </div>
 </div>
+
 
 <div class="fixed-bottom vw-100 shadow d-block d-md-none">
     <div class="container-fluid">
@@ -32,12 +32,12 @@ Loading template
             <div class="col">
                 <div class="row py-3">
                     <div class="col d-flex flex-column justify-content-center">
-                        <h3 class="m-0 p-0"><span class="book-price font-weight-bold">00,00</span> €</h3>
+                        <h4 class="m-0 p-0"><span class="book-price font-weight-bold">00,00</span> €</h4>
                     </div>
                     <div class="col-auto">
-                        <div class="input-group input-group">
+                        <div class="input-group input-group-lg">
                             <div class="input-group-prepend">
-                                <select class="custom-select cart-qty">
+                                <select class="custom-select custom-select-lg cart-qty">
                                     <option selected value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -49,7 +49,7 @@ Loading template
                                 <button class="btn btn-pink cart-add" type="button">Add</button>
                             </div>
                             <div class="input-group-append">
-                                <button class="btn btn-pink text-white wishlist" type="button">
+                                <button class="d-inline btn btn-outline-pink btn-sm wishlist" type="button">
                                     <i class="fa fa-heart-o"></i>
                                 </button>
                             </div>
@@ -62,31 +62,27 @@ Loading template
 </div>
 
 <div class="nav-placeholder"></div>
-<nav aria-label="breadcrumb" class="bg-pink text-white">
-    <div class="container">
-        <ol class="breadcrumb bg-transparent px-0 m-0">
-            <li class="breadcrumb-item"><a href="#" class="text-white">Home</a></li>
-            <li class="breadcrumb-item"><a href="#" class="text-white">Library</a></li>
-            <li class="breadcrumb-item" class="text-white">Data</li>
-        </ol>
-    </div>
-</nav>
+<div class="breadcrumb-placeholder" color="pink"></div>
+
 <div class="section top mt-5">
     <div class="container">
         <div class="row">
             <div class="col-12 d-block d-md-none">
                 <div>
-                    <h1 class="text-dark book-title">Book title</h1>
+                    <h2 class="text-dark book-title">Book title</h2>
                 </div>
                 <div>
                     <a href="#" class="book-author-href text-decoration-none">
-                        <h3 class="text-pink book-author text-capitalize">
+                        <h4 class="text-pink book-author text-capitalize">
                             Author name
-                        </h3>
+                        </h4>
                     </a>
                 </div>
                 <div class="text-gray book-genres text-capitalize mt-4">
                     Horror / Fantasy
+                </div>
+                <div class="text-gray book-theme text-capitalize">
+                    Theme
                 </div>
                 <div class="text-light text-pink book-rating mt-1">
                     <div class="ml-2 text-gray d-inline">
@@ -192,16 +188,19 @@ Loading template
             </div>
             <div class="col-12 col-md-9 d-none d-md-block px-5">
                 <div>
-                    <h1 class="text-dark book-title text-capitalize">Book title</h1>
+                    <h2 class="text-dark book-title text-capitalize">Book title</h2>
                 </div>
                 <div>
                     <a href="#" class="book-author-href text-decoration-none">
-                        <h3 class="text-pink book-author text-capitalize">
+                        <h4 class="text-pink book-author text-capitalize">
                             Author name
-                        </h3>
+                        </h4>
                     </a>                </div>
                 <div class="text-gray book-genres mt-4 text-capitalize">
                     Horror / Fantasy
+                </div>
+                <div class="text-gray book-theme text-capitalize">
+                    Theme
                 </div>
                 <div class="text-light text-pink book-rating mt-1">
                     <div class="ml-2 text-gray d-inline">
@@ -211,7 +210,7 @@ Loading template
                 </div>
                 <div class="mt-4 d-flex justify-content-start" style="height: 3rem">
                     <div class="text-dark font-weight-bold d-flex flex-column justify-content-center h-100">
-                        <h3 class="mt-2"><span class="book-price">00,00</span> €</h3>
+                        <h4 class="mt-2"><span class="book-price">00,00</span> €</h4>
                     </div>
                     <div class="text-dark font-weight-bold d-flex flex-column justify-content-center ml-5 h-100">
                         <div class="input-group input-group-sm">
@@ -233,7 +232,7 @@ Loading template
                         or
                     </div>
                     <div class="text-gray d-flex flex-column justify-content-center h-100" style="width: 2rem">
-                        <button class="btn btn-pink btn-sm text-white wishlist" type="button">
+                        <button class="d-inline btn rounded-circle btn-outline-pink btn-sm wishlist" type="button">
                             <i class="fa fa-heart-o"></i>
                         </button>
                     </div>
@@ -334,7 +333,7 @@ Loading template
     <div class="book-reviews bg-dark vh-100">
         <div class="container text-white">
 
-            <h3 class="d-inline">Reviews (<span class="book-rating-qty">0</span>)</h3>
+            <h4 class="d-inline">Reviews (<span class="book-rating-qty">0</span>)</h4>
             <div class="text-pink ml-4 book-rating d-inline"></div>
 
             <div class="book-reviews-container d-flex flex-column justify-content-start mt-5">
@@ -346,6 +345,9 @@ Loading template
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>
+<script src="/components/breadcrumb/breadcumb.js" type="module"></script>
+<script src="/components/footer/footer.js" type="module"></script>
+
 <script src="/lib/multislider/multislider.js"></script>
 <script src="book.js" type="module"></script>
 

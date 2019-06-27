@@ -1,5 +1,6 @@
 .summary-container {
   height: 70vh;
+  max-height: 450px;
   position: -webkit-sticky;
   /* Safari */
   position: sticky;

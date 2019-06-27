@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/components/loading/loading.css">
     <link rel="stylesheet" href="/components/navbar/navbar.css">
     <link rel="stylesheet" href="author.css">
-    <link rel="stylesheet" href="/components/animated-heart/animated-heart.css">
 
 
 </head>
@@ -20,22 +19,16 @@
 <!--
 Loading template
 -->
-<div class="loading d-flex flex-column justify-content-center text-dark">
-    <div class="text-center">
-        <h1 class="display-1">Loading..</h1>
+<div class="loading d-flex flex-column justify-content-center text-white bg-dark">
+    <div class="container text-center">
+        <img src="/assets/images/loading.gif" alt="Loading" style="width:30%"><br>
+        <img  class="mt-5" src="/assets/images/logo_vettoriale.svg" style="width:150px" alt="Bobooky"/>
     </div>
 </div>
 
 <div class="nav-placeholder"></div>
-<nav aria-label="breadcrumb" class="bg-pink text-white">
-    <div class="container">
-        <ol class="breadcrumb bg-transparent px-0 m-0">
-            <li class="breadcrumb-item"><a href="#" class="text-white">Home</a></li>
-            <li class="breadcrumb-item"><a href="#" class="text-white">Library</a></li>
-            <li class="breadcrumb-item" class="text-white">Data</li>
-        </ol>
-    </div>
-</nav>
+<div class="breadcrumb-placeholder" color="pink"></div>
+
 <div class="section top mt-5">
     <div class="container">
         <div class="row">
@@ -210,6 +203,8 @@ Loading template
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>
+<script src="/components/breadcrumb/breadcumb.js" type="module"></script>
+<script src="/components/footer/footer.js" type="module"></script>
 <script src="/lib/multislider/multislider.js"></script>
 <script src="author.js" type="module"></script>
 

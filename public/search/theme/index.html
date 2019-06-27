@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Theme</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/lib/scss/bobooky-theme.css">
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/components/loading/loading.css">
+    <link rel="stylesheet" href="/components/navbar/navbar.css">
+    <link rel="stylesheet" href="search.css">
+
+
+</head>
+
+<body>
+<!--
+Loading template
+-->
+<div class="loading d-flex flex-column justify-content-center text-white bg-dark">
+    <div class="container text-center">
+        <img src="/assets/images/loading.gif" alt="Loading" style="width:30%"><br>
+        <img  class="mt-5" src="/assets/images/logo_vettoriale.svg" style="width:150px" alt="Bobooky"/>
+        <h6 class="text-white mt-5">Searching more than 700 books..</h6>
+    </div>
+</div>
+
+
+<div class="nav-placeholder"></div>
+<div class="breadcrumb-placeholder" color="pink"></div>
+
+
+<div class="container-fluid theme-ribbon">
+    <div class="container text-white py-5">
+        <h2 class="name text-capitalize">theme name</h2>
+        <form class="search-form">
+            <input type="text" name="theme" class="d-none theme" value="">
+            <input type="text" name="page" class="d-none page" value="0">
+            <button type="submit" class="d-none"></button>
+        </form>
+    </div>
+</div>
+<div class="section books pt-5">
+    <div class="container">
+        <div class="books-container"></div>
+    </div>
+</div>
+
+<div class="section navigation my-5">
+    <div class="container text-pink">
+        <div class="row">
+            <div class="col-6">
+                <button class="next btn btn-outline-pink navigation-btn rounded-pill" type="button">
+                    <i class="fa fa-angle-left"></i>
+                    <span class="ml-2">previous</span>
+                </button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button class="next btn btn-outline-pink navigation-btn rounded-pill" type="button">
+                    <span class="mr-2">next</span>
+                    <i class="fa fa-angle-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="/components/navbar/navbar.js" type="module"></script>
+<script src="/components/breadcrumb/breadcumb.js" type="module"></script>
+<script src="/components/footer/footer.js" type="module"></script>
+<script src="search.js" type="module"></script>
+
+
+</body>
+</html>

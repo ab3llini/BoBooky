@@ -1,0 +1,242 @@
+[aria-expanded=false] > .expanded,
+[aria-expanded=true] > .collapsed {
+  display: none;
+}
+
+.related-books > .container-fluid {
+  position: relative;
+  z-index: 102;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+@media (min-width: 992px) {
+  .related-books > .container-fluid {
+    padding: 2rem 0 2rem 25.9rem;
+  }
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel .MS-content {
+  height: 18rem;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 2rem 0 2rem;
+}
+
+.carousel .MS-content .item {
+  display: inline-block;
+  height: 100%;
+  overflow: hidden;
+  white-space: normal;
+  position: relative;
+  vertical-align: top;
+}
+
+.carousel .MS-controls button {
+  position: absolute;
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  color: #fff;
+  outline: 0;
+  top: calc(50% - 15px);
+}
+
+.carousel .MS-controls .MS-left {
+  left: 0;
+}
+@media (max-width: 991.98px) {
+  .carousel .MS-controls .MS-left {
+    left: 10px;
+  }
+}
+
+.carousel .MS-controls .MS-right {
+  right: 0px;
+}
+@media (max-width: 991.98px) {
+  .carousel .MS-controls .MS-right {
+    right: 10px;
+  }
+}
+
+.carousel {
+  height: 100%;
+}
+
+.carousel .MS-content .item {
+  width: 100%;
+}
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .carousel .MS-content .item {
+    width: 50%;
+  }
+}
+@media (min-width: 768px) {
+  .carousel .MS-content .item {
+    width: 33.33%;
+  }
+}
+@media (min-width: 992px) {
+  .carousel .MS-content .item {
+    width: 100%;
+  }
+}
+
+@media (min-width: 67.8583333333rem) {
+  .carousel .MS-content .item {
+    width: 50%;
+  }
+}
+@media (min-width: 85.6708333333rem) {
+  .carousel .MS-content .item {
+    width: 33.3333333333%;
+  }
+}
+@media (min-width: 103.4833333333rem) {
+  .carousel .MS-content .item {
+    width: 25%;
+  }
+}
+@media (min-width: 121.2958333333rem) {
+  .carousel .MS-content .item {
+    width: 20%;
+  }
+}
+@media (min-width: 139.1083333333rem) {
+  .carousel .MS-content .item {
+    width: 16.6666666667%;
+  }
+}
+@media (min-width: 156.9208333333rem) {
+  .carousel .MS-content .item {
+    width: 14.2857142857%;
+  }
+}
+@media (min-width: 174.7333333333rem) {
+  .carousel .MS-content .item {
+    width: 12.5%;
+  }
+}
+@media (min-width: 192.5458333333rem) {
+  .carousel .MS-content .item {
+    width: 11.1111111111%;
+  }
+}
+.carousel .MS-content .item .container {
+  width: 11.25rem;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.item .image {
+  background-size: 100% 100%;
+  height: 100%;
+  width: 100%;
+}
+
+.item .description p {
+  position: relative;
+  margin: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.8rem;
+  font-size: 14px;
+  color: #fff;
+}
+
+.carousel .MS-content .item .container > .description {
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.carousel .MS-content .item .container:hover > .description {
+  opacity: 1;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  right: 0;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  left: 0;
+  top: 0;
+  text-align: center;
+  background: linear-gradient(to top, #343a40 0%, black 100%);
+  transition: all 0.2s ease-in-out;
+}
+
+.related-books {
+  position: relative;
+}
+
+.related-books > svg.head {
+  z-index: 100;
+  height: 100%;
+  position: absolute;
+  margin-left: 15rem;
+}
+@media (max-width: 991.98px) {
+  .related-books > svg.head {
+    visibility: hidden;
+    margin: 0;
+  }
+}
+
+.related-books > svg.tail {
+  z-index: 101;
+  height: 100%;
+  width: calc(100% - 25.9rem);
+  position: absolute;
+  margin-left: 25.9rem;
+}
+@media (max-width: 991.98px) {
+  .related-books > svg.tail {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.author-reviews {
+  position: relative;
+  bottom: 0;
+  margin-top: -11rem;
+}
+
+.author-reviews > .container {
+  height: 100%;
+  padding-top: 16rem;
+}
+
+.author-image .img {
+  width: 300px;
+  height: 300px;
+  background-size: cover;
+}
+@media (max-width: 1199.98px) {
+  .author-image .img {
+    width: 250px;
+    height: 250px;
+  }
+}
+@media (max-width: 991.98px) {
+  .author-image .img {
+    width: 150px;
+    height: 150px;
+  }
+}
+@media (max-width: 767.98px) {
+  .author-image .img {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/*# sourceMappingURL=author.css.map */

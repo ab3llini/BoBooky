@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Add new address</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/lib/scss/bobooky-theme.css">
+    <link rel="stylesheet" href="/components/navbar/navbar.css">
+    <link rel="stylesheet" href="/index.css">
+
+
+</head>
+
+<body class="bg-dark">
+
+<div class="nav-placeholder"></div>
+<div class="breadcrumb-placeholder d-none" color="secondary"></div>
+<div class="section container main text-white">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <h2 class="font-weight-bold text-secondary">New Address</h2>
+            <div class="container mt-4 border border-secondary rounded" style="border-width: 2px !important;">
+                <form class="needs-validation form-secondary" id="new-address" novalidate>
+                    <div class="container p-3">
+                        <div class="form-row justify-content-end">
+                            <img class="py-4" src="/assets/images/stamp.svg" alt="stamp">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-5 mr-auto">
+                                <input type="text" name="name" class="form-control bobooky text-secondary"
+                                       id="inputName" required>
+                                <label class="col-form-label-md form-control-placeholder"
+                                       for="inputName">Name*</label>
+                                <div class="invalid-feedback">
+                                    Name cannot be empty.
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-md-5">
+                                <input type="text" name="surname" class="bobooky form-control text-secondary"
+                                       id="inputSurname"
+                                       placeholder=" " required>
+                                <label class="col-form-label-md form-control-placeholder"
+                                       for="inputSurname">Surname*</label>
+
+                                <div class="invalid-feedback">
+                                    Surname cannot be empty.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <input type="text" name="address_line_1" class="bobooky form-control text-secondary"
+                                       id="addressLine1"
+                                       required>
+                                <label class="col-form-label-md form-control-placeholder"
+                                       for="addressLine1">Address*</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <input type="text" name="address_line_2" class="bobooky form-control text-secondary"
+                                       id="addressLine2" placeholder="Additional details"
+                                      >
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12 col-sm-4">
+                                <input type="number" name="cap" class="bobooky form-control text-secondary"
+                                       id="inputPostalCode"
+                                       required>
+                                <label class="col-form-label-md form-control-placeholder" for="inputPostalCode">Postal
+                                    Code*</label>
+
+                                <div class="invalid-feedback">
+                                    Please insert a valid postal code.
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-sm-4">
+                                <input type="text" name="city" class="bobooky form-control text-secondary"
+                                       id="inputCity"
+                                       required>
+                                <label class="col-form-label-md form-control-placeholder" for="inputCity">City*</label>
+
+                                <div class="invalid-feedback">
+                                    City cannot be empty.
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-sm-4">
+                                <input type="text" name="country" class="bobooky form-control text-secondary"
+                                       id="inputCountry"
+                                       required>
+                                <label class="col-form-label-md form-control-placeholder"
+                                       for="inputCountry">Country*</label>
+
+                                <div class="invalid-feedback">
+                                    Country cannot be empty.
+                                </div>
+                            </div>
+                            <div class="container mb-3 mt-5">
+                                <div class="row justify-content-end">
+                                    <div class="col-6 col-sm-2">
+                                    <button type="button"
+                                            class="btn font-weight-bold text-secondary border-secondary rounded-pill w-100"
+                                            onclick="window.history.back();">
+                                        Cancel
+                                    </button>
+                                    </div>
+                                    <div class="col-6 col-sm-2">
+                                    <button type="submit"
+                                            class="btn btn-secondary text-dark font-weight-bold rounded-pill w-100">
+                                        Save
+                                    </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="/components/navbar/navbar.js" type="module"></script>
+<script src="/components/breadcrumb/breadcumb.js" type="module"></script>
+<script src="/components/footer/footer.js" type="module"></script>
+<script src="newaddress.js" type="module"></script>
+
+</body>
+</html>

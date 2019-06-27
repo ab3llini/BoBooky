@@ -1,0 +1,164 @@
+[aria-expanded=false] > .expanded,
+[aria-expanded=true] > .collapsed {
+  display: none;
+}
+
+.carousel .MS-content {
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 2rem 0 2rem;
+}
+
+.carousel .MS-content .item {
+  display: inline-block;
+  height: 100%;
+  overflow: hidden;
+  white-space: normal;
+  vertical-align: top;
+}
+
+.carousel .MS-controls button {
+  position: absolute;
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  color: #343a40;
+  outline: 0;
+  top: calc(50% - 15px);
+}
+
+.carousel .MS-controls .MS-left {
+  left: 0px;
+}
+@media (max-width: 991.98px) {
+  .carousel .MS-controls .MS-left {
+    left: 10px;
+  }
+}
+
+.carousel .MS-controls .MS-right {
+  right: 0px;
+}
+@media (max-width: 991.98px) {
+  .carousel .MS-controls .MS-right {
+    right: 10px;
+  }
+}
+
+.carousel .MS-content .item {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .carousel .MS-content .item {
+    width: 33.33%;
+  }
+}
+@media (min-width: 992px) {
+  .carousel .MS-content .item {
+    width: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  .carousel .MS-content .item {
+    width: 20%;
+  }
+}
+
+.carousel .MS-content .item .container {
+  width: 10rem;
+  height: 100%;
+  padding: 0;
+  text-align: center;
+}
+
+.item .image {
+  background-size: cover;
+  height: 10rem;
+  border-radius: 2.5rem;
+}
+
+.item .description .title {
+  color: #e83e8c;
+}
+
+.books-container .book .image {
+  width: calc(100vw - 2rem);
+  background-size: 100% 100%;
+  height: 140vw;
+}
+@media (min-width: 576px) {
+  .books-container .book .image {
+    width: 14rem;
+    height: 22.4rem;
+  }
+}
+
+.search-bar-wrapper {
+  border: 1px solid #21263F;
+  transition: 0.2s ease-in-out;
+  border-radius: 34px;
+  overflow: hidden;
+  color: #21263F;
+}
+
+.search-bar-wrapper .form-control {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.search-bar-wrapper .form-control, .search-bar-wrapper .btn.round {
+  border: hidden;
+  background: transparent;
+}
+
+.search-bar-wrapper .form-control::placeholder {
+  color: #21263F;
+}
+
+.search-bar-wrapper .form-control {
+  outline: none !important;
+  box-shadow: none !important;
+  color: #21263F;
+  transition: 0.2s ease-in-out;
+}
+
+.search-bar-wrapper i {
+  color: #21263F;
+  transition: 0.2s ease-in-out;
+}
+
+.search-bar-wrapper .btn.round {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.search-bar-wrapper .btn.round:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.search-bar-wrapper .form-control:focus-within {
+  border-color: white;
+}
+
+.focused {
+  transition: 0.2s ease-in-out;
+  border-color: #E83273;
+}
+
+.focused .search-bar {
+  transition: 0.2s ease-in-out;
+  color: #E83273;
+}
+
+.focused i {
+  transition: 0.2s ease-in-out;
+  color: #E83273;
+}
+
+.search-bar-wrapper.focused .form-control::placeholder {
+  transition: 0.2s ease-in-out;
+  color: #E83273;
+}
+
+/*# sourceMappingURL=search.css.map */

@@ -3,24 +3,20 @@
     <div class="card-body pt-0">
         <label class="col-form-label-md address_line_1">Address line 1</label><br>
         <label class="col-form-label-md address_line_2">Address line 2</label><br>
-        <div class="container">
+        <div class="container px-0">
             <label class="col-form-label-md cap">Postal Code</label>
             <label class="col-form-label-md mx-3 city">City</label>
             <label class="col-form-label-md country">Country</label>
 
-            <span class="fa text-secondary float-right fa-ellipsis-h fa-2x"></span>
-           <!-- not working dropup menu -->
-            <!--
             <div class="btn-group dropup float-right">
-                <button type="button" class="btn dropdown-toggle dropdown-toggle-split" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn no-glow dropdown-toggle-split " id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="fa text-secondary fa-ellipsis-h fa-2x"></span>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                    <a class="dropdown-item" href="#">Edit</a>
-                    <a class="dropdown-item" href="#">Delete</a>
-                </div>
+                <ul class="dropdown-menu dropdown-menu-right bg-secondary border-0 address-actions" aria-labelledby="dropdownMenu">
+                    <li><a class="dropdown-item text-white edit">Edit </a></li>
+                    <li><a class="dropdown-item text-white trash-button delete">Delete </a></li>
+                </ul>
             </div>
-            -->
         </div>
     </div>
 </div>

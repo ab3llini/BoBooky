@@ -1,6 +1,7 @@
 .search-section {
   background-image: url("../../assets/component/home_bg_4.svg"), url("../../assets/component/home_bg_3.svg"), url("../../assets/component/home_bg_2.svg"), url("/assets/component/home_bg_1.svg");
   background-repeat: no-repeat;
+  height: calc(100vh - 56px);
   background-size: 80vh;
   background-position: right calc(-10vw - 18vh) bottom -20vh, left calc(110vw - 18vh) top -20vh, right calc(110vw - 18vh) bottom -20vh, left calc(-10vw - 18vh) top -20vh;
 }
@@ -12,34 +13,45 @@
 }
 @media (min-width: 992px) {
   .search-section {
+    height: calc(100vh - 70px);
     background-size: 100vh;
     background-position: right calc(20vw - 20vh) bottom -40vh, left calc(80vw - 20vh) top -40vh, right calc(80vw - 20vh) bottom -40vh, left calc(20vw - 20vh) top -40vh;
   }
 }
 
-.search-bar .form-control, .search-bar .btn.round {
-  background-color: rgba(0, 15, 55, 0.4);
+.search-bar {
+  border: 1px solid #f8f9fa;
+  background: rgba(0, 15, 55, 0.4);
+  border-radius: 34px;
+  overflow: hidden;
 }
 
 .search-bar .form-control {
-  border: 1px solid #f8f9fa;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.search-bar .form-control, .search-bar .btn.round {
+  height: 3.5rem;
+  border: hidden;
+  background: transparent;
+}
+
+.search-bar .form-control::placeholder {
+  color: #d6d6d6;
+}
+
+.search-bar .form-control {
   outline: none !important;
   box-shadow: none !important;
-  border-top-left-radius: 24px;
-  border-bottom-left-radius: 24px;
 }
 
 .search-bar .btn.round {
-  border: 1px solid #f8f9fa;
   outline: none !important;
   box-shadow: none !important;
-  border-top-right-radius: 24px;
-  border-bottom-right-radius: 24px;
 }
 
 .search-bar .btn.round:active {
-  background: rgba(142, 142, 142, 0.5);
-  border: 1px solid #f8f9fa;
   outline: none !important;
   box-shadow: none !important;
 }
@@ -68,8 +80,15 @@
   margin-right: -10%;
 }
 
-.search-bar .form-control::placeholder {
-  color: #d6d6d6;
+.book .image {
+  width: 10rem;
+  height: 16rem;
+  border-radius: 0.2rem;
+}
+
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -1,10 +1,19 @@
 import * as session from '/lib/js/utils/session.js'
+import * as modal from "/components/modal/modal.js";
+
 
 $(function () {
 
 
     // Inject navbar
-    $(".nav-placeholder").load("/components/navbar/navbar.html", function() {
+    $(".nav-placeholder").load("/components/navbar/navbar.html", function () {
+
+        // Close all collapse items when a new one is opened
+        $('.nav-link').click(function () {
+            if ($(this).attr('data-toggle') === 'collapse') {
+                $('.auto-hide.show:not(.nav-collapse)').collapse('hide')
+            }
+        });
 
         // Bind collapse
         let profile_button = $('.navbar #profile-button');
@@ -12,8 +21,7 @@ $(function () {
             profile_button.attr('data-target', '#profile-ribbon');
             profile_button.attr('aria-controls', 'profile-ribbon')
 
-        }
-        else {
+        } else {
             profile_button.attr('data-target', '#register-login-ribbon');
             profile_button.attr('aria-controls', 'register-login-ribbon')
         }
@@ -23,8 +31,11 @@ $(function () {
             $('#profile-ribbon #username').html(session.get().user.name)
         }
 
+        //Inject modal container
+        modal.inject(modal.type.alert, 'navbar-modal');
+
         // Bind login functionality
-        $("#register-login-form").submit(function(evt){
+        $("#register-login-form").submit(function (evt) {
             evt.preventDefault();
             // Fields
             let inputs = $(this).find('input');
@@ -34,26 +45,37 @@ $(function () {
             });
             session.login(form.username, form.password)
                 .then(result => {
-                    // Refresh page
-                    location.reload();
+                    //modal.show('Welcome back ' + session.get().user.name + '!', 'We were missing you!')
+                    location.reload()
                 })
                 .catch(e => {
                     alert('Wrong username or password')
                 })
         });
-
         $('.logout').click(() => {
             session.logout()
                 .then(result => {
-                    console.log('Logged out')
-                    location.reload()
+                    modal.show('See you soon!', 'You have successfully disconnected.').then(o => {
+                        window.location.href = '/'
+                    })
                 })
                 .catch(e => {
-                    console.log("Unable to logout, reason: " + JSON.stringify(e))
+                    modal.error(e)
                 })
         });
 
-
+        $('.navbar #cart-button').click(function () {
+            if (session.isLoggedIn())
+                window.location.href = '/profile/cart'
+            else
+                modal.show('Please login or register!', 'You need to be logged in in order to see your cart.')
+        })
+        $('.navbar #wishlist-button').click(function () {
+            if (session.isLoggedIn())
+                window.location.href = '/profile/wishlist'
+            else
+                modal.show('Please login or register!', 'You need to be logged in in order to see your wishlist.')
+        })
 
     });
 

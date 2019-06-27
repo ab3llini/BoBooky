@@ -2,53 +2,64 @@
 @import '../../lib/bootstrap/scss/functions';
 @import "../../lib/bootstrap/scss/variables";
 @import "../../lib/bootstrap/scss/mixins/breakpoints";
-$logo-height: 25px;
 
-.navbar.scrolled {
-  transition: background-color 200ms linear;
-}
-.navbar.unscrolled {
-  transition: background-color 200ms linear;
-}
+$logo-height: 30px;
 
-#shopping-cart-ribbon {
-  width: 576px;
-  height: calc(100vh - 56px);
-  right: 8%;
-  position: absolute;
-  z-index: 1000;
-  @include media-breakpoint-down(xs) {
-    width: 100%;
-    right: 0;
-  }
+.navbar {
+    /* IMPORTANT! IF YOU CHANGE THE NAVBAR HEIGHT
+    MAKE SURE TO CHANGE THE BODY PADDING
+    AS WELL IN BOBOOKY THEME!*/
+    @include media-breakpoint-up(lg) {
+        height: 70px;
+    }
 }
 
-.blurred-bg {
-  background: rgba(0, 0, 0, 0.8);
+div .blurred-bg {
+    position: relative;
+    background: $bobooky-dark;
+    opacity: 0.9;
+}
+
+div .blurred-bg:before {
+    content: '';
+    position: absolute;
+    background: $bobooky-dark;
+    filter: blur(5px);
 }
 
 .objects {
-  max-height: calc(100vh - 156px);
+    max-height: calc(100vh - 156px);
 }
 
-#cart-title{
-  height: 50px;
+.navbar-brand-b img {
+    height: $logo-height;
+    @include media-breakpoint-down(md) {
+        height: 25px;
+    }
 }
 
-#cart-bottom{
-  height: 50px;
+.sub-menu {
+    @include media-breakpoint-down(md) {
+        display: none;
+    }
 }
 
-//TODO: fix this shit
-.container {
-  -ms-overflow-style: none;  // IE 10+
-  scrollbar-width: none;  // Firefox
-}
-.container::-webkit-scrollbar {
-  display: none;  // Safari and Chrome
+/*
+  Navbar config
+ */
+.navbar .fa {
+    font-size: 20px;
 }
 
-.navbar-brand img {
-  height: $logo-height;
+.nav-arrows:focus, .nav-arrows:active {
+
+}
+
+#books-expanded {
+    background-color: rgba(33, 38, 63, 0.5);
+}
+
+#books-expanded a {
+    color: $white;
 }
 

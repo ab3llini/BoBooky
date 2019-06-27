@@ -1,0 +1,18 @@
+@import "../lib/bootstrap/scss/functions";
+@import "../lib/bootstrap/scss/variables";
+@import "../lib/bootstrap/scss/mixins/breakpoints";
+@import "../lib/bootstrap/scss/variables";
+
+
+
+$book-width: 14rem;
+
+.books-container .book .image {
+    width : calc(100vw - 2rem);
+    background-size: 100% 100%;
+    height: 140vw;
+    @include media-breakpoint-up(sm) {
+        width: $book-width;
+        height: 1.6 * $book-width;
+    }
+}

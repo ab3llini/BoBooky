@@ -1,0 +1,20 @@
+@import "../../../lib/scss/booboky-colors.css";
+
+
+.btn-custom {
+  color: $bobooky-secondary;
+  background-color: transparent;
+  border-color: $bobooky-secondary;
+}
+
+.btn-custom:hover {
+  color: $bobooky-dark;
+  background-color: $bobooky-secondary;
+  border-color: $bobooky-secondary;
+}
+
+.btn:hover {
+  color: $bobooky-dark;
+}
+
+

@@ -1,52 +1,59 @@
-.navbar.scrolled {
-  transition: background-color 200ms linear;
+.navbar {
+  /* IMPORTANT! IF YOU CHANGE THE NAVBAR HEIGHT
+  MAKE SURE TO CHANGE THE BODY PADDING
+  AS WELL IN BOBOOKY THEME!*/
 }
-
-.navbar.unscrolled {
-  transition: background-color 200ms linear;
-}
-
-#shopping-cart-ribbon {
-  width: 576px;
-  height: calc(100vh - 56px);
-  right: 8%;
-  position: absolute;
-  z-index: 1000;
-}
-@media (max-width: 575.98px) {
-  #shopping-cart-ribbon {
-    width: 100%;
-    right: 0;
+@media (min-width: 992px) {
+  .navbar {
+    height: 70px;
   }
 }
 
-.blurred-bg {
-  background: rgba(0, 0, 0, 0.8);
+div .blurred-bg {
+  position: relative;
+  background: #21263F;
+  opacity: 0.9;
+}
+
+div .blurred-bg:before {
+  content: "";
+  position: absolute;
+  background: #21263F;
+  filter: blur(5px);
 }
 
 .objects {
   max-height: calc(100vh - 156px);
 }
 
-#cart-title {
-  height: 50px;
+.navbar-brand-b img {
+  height: 30px;
+}
+@media (max-width: 991.98px) {
+  .navbar-brand-b img {
+    height: 25px;
+  }
 }
 
-#cart-bottom {
-  height: 50px;
+@media (max-width: 991.98px) {
+  .sub-menu {
+    display: none;
+  }
 }
 
-.container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+/*
+  Navbar config
+ */
+.navbar .fa {
+  font-size: 20px;
 }
 
-.container::-webkit-scrollbar {
-  display: none;
+#books-expanded {
+  background-color: rgba(33, 38, 63, 0.5);
 }
 
-.navbar-brand img {
-  height: 25px;
+#books-expanded a {
+  color: #fff;
 }
 
 /*# sourceMappingURL=navbar.css.map */

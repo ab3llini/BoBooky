@@ -10,17 +10,36 @@ $theme-colors: (
         "pink" : $bobooky-pink,
         "purple" : $bobooky-purple,
         "white" : white,
-        "gray" : #737373
+        "gray" : #737373,
+        "light" : $bobooky-light
 );
 
 @import "../../lib/bootstrap/scss/bootstrap";
 
 
-::selection { background-color: $yellow; }
+::selection { background-color: $warning; }
 
-.bobooky.form-control:focus {
-   border-color: white;
+html {
+    scroll-behavior: smooth;
 }
+
+/* This line adds an offset to all pages to account for the navbar */
+body {
+    padding-top: 56px;
+    @include media-breakpoint-up(lg) {
+        padding-top: 70px;
+    }
+
+    /* Do not touch me */
+    position: relative;
+}
+
+.footer {
+    position: absolute;
+    bottom: -600px;
+    height: auto !important;
+}
+
 
 .form-group {
     position: relative;
@@ -65,6 +84,17 @@ $theme-colors: (
         color: $color
     }
 
+    //colore del bordo a tema quando cliccato
+    .bobooky-#{$key}:focus {
+        border-color: $color
+    }
+
+  //hover link a tema
+    .link-#{$key} > a:hover {
+        color: $color !important;
+        text-decoration: none
+    }
+
     /*
         Themed placeholders
      */
@@ -89,10 +119,11 @@ $theme-colors: (
     src: url(https://fonts.googleapis.com/css?family=Nunito&display=swap);
 }
 
-body {
+html, input, p, span, .font-body {
     font-family: 'Open Sans', sans-serif;
-    font-weight: lighter;
+    font-size: 16px !important;
     h1, h2, h3, h4, h5, h6, .title {
+      font-min-size: 18px;
         font-family: 'Nunito', sans-serif;
     }
 }
@@ -105,5 +136,65 @@ body {
 }
 
 .rounded-bobooky {
-    border-radius: 2.5rem;
+    border-radius: 2rem;
 }
+
+.btn-circle-bobooky {
+    border-radius: 50% !important;
+}
+
+.navigation-btn {
+    width: 120px;
+}
+
+.no-glow:focus, .no-glow:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+.btn-gradient > a:hover {
+    color: white  !important;
+    background-position: right center !important;
+}
+
+.gradient-warning {
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right, #f1491c 0%, $bobooky-orange 51%, #ffb820 100%);
+}
+
+.gradient-primary {
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right, #10385d 0%, $bobooky-primary 51%, #3c97a8 100%);
+}
+
+.gradient-secondary {
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right,  #00704d 0%, $bobooky-secondary 51%, #58a85c 100%);
+}
+
+.gradient-purple {
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right, $bobooky-pink 0%, $bobooky-purple, #7f56aa 100%);
+}
+
+.gradient-pink {
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right, #9a077e 0%, $bobooky-pink 51%, #fb63a0 100%);
+}
+
+.gradient-danger {
+    background-size: 150% auto;
+    transition: 0.5s;
+    background-image: linear-gradient(to right, #7b0353 0%, $bobooky-danger 51%, #ff5f4e 100% );
+}
+
+.gradient-dark {
+    background-image: linear-gradient(to right, $bobooky-dark 40%, #2c2746 60%);
+}
+
+

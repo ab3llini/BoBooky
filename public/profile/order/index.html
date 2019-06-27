@@ -10,81 +10,28 @@
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/lib/scss/bobooky-theme.css">
     <link rel="stylesheet" href="/components/navbar/navbar.css">
+    <link rel="stylesheet" href="/profile/order/order.css">
 
 </head>
 
-<body>
+<body class="bg-dark text-white">
 <div class="nav-placeholder"></div>
-<div class="container-fluid bg-primary px-0">
+<div class="breadcrumb-placeholder" color="secondary"></div>
+<div class="container-fluid bg-secondary px-0">
     <div class="container h-100">
-        <h5 class="text-white my-auto font-weight-bold py-3">Shopping cart</h5>
+        <h5 class="text-white my-auto font-weight-bold py-3">My orders</h5>
     </div>
-</div>
-<div class="container h-100">
-    <h6 class="text-primary py-3">
-        <span class="fa fa-arrow-left"></span> back to shop
-    </h6>
 </div>
 
-<div class="container order-container">
-    <div class="row">
-        <div class="col shopping-cart-container">
-            <div class="container shopping-item border border-dark rounded mb-3">
-                <div class="py-3">
-                    <div class="row">
-                        <div class="col-2">
-                            <img class="w-100 book-image"
-                                 src="https://images-na.ssl-images-amazon.com/images/I/51DA1hQNnJL._SX324_BO1,204,203,200_.jpg">
-                        </div>
-                        <div class="col mb-0">
-                            <div class="container px-0">
-                                <div class="row">
-                                    <div class="my-auto col-12 col-md-4 title h-100 mb-0">
-                                        <h5 class="book-title">Title</h5>
-                                        <h6 class="book-author">Author</h6>
-                                    </div>
-                                    <div class="col-12 col-md-3">
-                                        <div class="container px-0">
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <button class="btn btn-primary btn-sm text-white minus-button rounded-pill mx-2">
-                                                        <i class="fa fa-minus"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="col-4"><h5 class="book-qty text-center">#</h5></div>
-                                                <div class="col-4">
-                                                    <button class="btn btn-primary btn-sm text-white plus-button rounded-pill mx-2">
-                                                        <i class="fa fa-plus"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-5">
-                                        <div class="container px-0">
-                                            <div class="row">
-                                                <div class="col-9"><h5 class="book-price">€ 15.00</h5></div>
-                                                <div class="col-3">
-                                                    <button class="btn btn-primary btn-sm text-white trash-button mx-2">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container order-container mt-5">
 </div>
 
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>
+<script src="/components/breadcrumb/breadcumb.js" type="module"></script>
+<script src="/components/footer/footer.js" type="module"></script>
+<script src="order.js" type="module"></script>
 
 </body>
 </html>
