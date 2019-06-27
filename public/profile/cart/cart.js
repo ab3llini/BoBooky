@@ -5,8 +5,8 @@ import * as modal from '/components/modal/modal.js'
 
 let total_amount = 0.0;
 
-function process_cart(cart, idx=0) {
-    if(idx >= cart.Books.length) {
+function process_cart(cart, idx = 0) {
+    if (idx >= cart.Books.length) {
         $('.summary-subtotal').html('€ ' + total_amount.toFixed(2));
         $('.summary-total').html('€ ' + total_amount.toFixed(2));
         $('.summary-delivery').html('free');
@@ -22,7 +22,7 @@ function process_cart(cart, idx=0) {
         o.find('.book-qty').html(qty);
         o.find('.book-price').html('€ ' + (qty * book.price).toFixed(2));
         o.find('.book-image').attr('src', book.image_href);
-        o.find('.plus-button').click(function(){
+        o.find('.plus-button').click(function () {
             let $item = $(this).parents('.shopping-item').first();
             api.put.user.cart(book.id, qty + 1).then(function () {
                 qty += 1;
@@ -33,10 +33,10 @@ function process_cart(cart, idx=0) {
                 $('.summary-total').html('€ ' + total_amount.toFixed(2));
             })
         });
-        o.find('.minus-button').click(function(){
+        o.find('.minus-button').click(function () {
             let $item = $(this).parents('.shopping-item').first();
 
-            if(qty > 1) {
+            if (qty > 1) {
                 api.put.user.cart(book.id, qty - 1).then(function () {
                     qty -= 1;
                     $item.find('.book-qty').html(qty);
@@ -47,11 +47,11 @@ function process_cart(cart, idx=0) {
                 })
             }
         }).prop('disabled', qty === 1);
-        o.find('.trash-button').click(function() {
+        o.find('.trash-button').click(function () {
             let $item = $(this).parents('.shopping-item').first();
             api.put.user.cart(book.id, 0).then(() => {
                 $item.slideUp(() => {
-                    total_amount -= qty*book.price;
+                    total_amount -= qty * book.price;
                     $('.summary-subtotal').html('€ ' + total_amount.toFixed(2));
                     $('.summary-total').html('€ ' + total_amount.toFixed(2));
                     $item.remove()
@@ -68,16 +68,22 @@ function process_cart(cart, idx=0) {
     }).then(() => process_cart(cart, idx + 1))
 }
 
-$(()=> {
-    api.get.chart()
-        .then(cart => {
-            if(jQuery.isEmptyObject(cart)) {
-                $('.empty-cart').removeClass('d-none')
-            } else {
-                process_cart(cart);
-            }
+$(() => {
+    // Filling up the modal
+    api.get.address()
+        .then(addresses => {
+            addresses.forEach((addr, idx) => {
+                loader.append_map('#modal-addresses-list', '/components/cart/address-radio.html', 'address_' + addr.id, (o) => {
+                    o.find('input').attr('id', addr.id);
+                    o.find('.label-text').html(addr.name + ' (' + addr.city + ', ' + addr.country + ')')
+                });
+            });
 
-            $('.buy-button').prop('disabled', jQuery.isEmptyObject(cart)).click(function () {
+            $('#continue-modal-button').click(() => {
+                // Getting selected ID
+                let address_id = $("input[name='address']:checked");
+
+                // Sending order request
                 api.get.chart()
                     .then(chart => {
                         let order = {};
@@ -105,6 +111,20 @@ $(()=> {
                     .catch(error => {
                         console.log(error)
                     })
-                })
             })
+        });
 });
+
+
+api.get.chart()
+    .then(cart => {
+        if (jQuery.isEmptyObject(cart)) {
+            $('.empty-cart').removeClass('d-none')
+        } else {
+            process_cart(cart);
+        }
+
+        $('.buy-button').prop('disabled', jQuery.isEmptyObject(cart)).click(function () {
+            $('#address-modal').modal('show');
+        })
+    })

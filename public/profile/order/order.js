@@ -23,7 +23,9 @@ function processOrders(orders, idx=0) {
                 elem.find('.book-author').html(book.book.author);
                 elem.find('.book-qty').html(book.qty);
                 elem.find('.book-price').html('€ ' + book.book.price);
-                elem.find('.buy-button').attr('href', '/book/?id=' + book.book.id);
+                elem.find('.buy-button').click(() => {
+                    window.location.href = '/book/?id=' + book.book.id
+                });
                 elem.find('.book-image').attr('src', book.book.image_href)
             });
         })
