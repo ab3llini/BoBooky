@@ -69,10 +69,13 @@ function process_cart(cart, idx = 0) {
 }
 
 $(() => {
+    let addresses_map = {};
+
     // Filling up the modal
     api.get.address()
         .then(addresses => {
             addresses.forEach((addr, idx) => {
+                addresses_map[addr.id] = addr;
                 loader.append_map('#modal-addresses-list', '/components/cart/address-radio.html', 'address_' + addr.id, (o) => {
                     o.find('input').attr('id', addr.id);
                     o.find('.label-text').html(addr.name + ' (' + addr.city + ', ' + addr.country + ')')
@@ -87,6 +90,7 @@ $(() => {
                 api.get.chart()
                     .then(chart => {
                         let order = {};
+                        order.address = addresses_map[address_id.attr('id')];
                         order.books = chart.Books;
                         order.books.forEach(book => {
                             book.book.theme = {

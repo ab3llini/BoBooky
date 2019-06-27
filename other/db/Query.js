@@ -458,7 +458,7 @@ module.exports.getUserSalt = (email) => {
 
 module.exports.getUserOrder = (id, offset = 0, limit = 20) => {
     return {
-        text: `select distinct o.id as OrderID, u.id as user_id, u.name, u.surname, u.email, u.birthdate, o.total_amount as amount, o.timestamp
+        text: `select distinct o.id as OrderID, address_id, u.id as user_id, u.name, u.surname, u.email, u.birthdate, o.total_amount as amount, o.timestamp
             from "order" o join "user" u on o.user_id = u.id join order_to_book otb on o.id = otb.order_id
             where u.id = $1
             order by timestamp desc 
@@ -467,10 +467,10 @@ module.exports.getUserOrder = (id, offset = 0, limit = 20) => {
     }
 };
 
-module.exports.addUserOrder = (total_amount, user_id) => {
+module.exports.addUserOrder = (total_amount, user_id, address_id=1) => {
     return {
-        text: `insert into "order"(total_amount, user_id) VALUES ($1, $2) returning id`,
-        values: [total_amount, user_id]
+        text: `insert into "order"(total_amount, user_id, address_id) VALUES ($1, $2, $3) returning id`,
+        values: [total_amount, user_id, address_id]
     }
 };
 
