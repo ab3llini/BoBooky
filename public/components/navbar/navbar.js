@@ -49,7 +49,7 @@ $(function () {
                     location.reload()
                 })
                 .catch(e => {
-                    alert('Wrong username or password')
+                    modal.show('Well, that didn\'t work', 'Check your credentials and try again!')
                 })
         });
         $('.logout').click(() => {
