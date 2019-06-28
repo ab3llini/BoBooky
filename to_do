@@ -1,11 +1,10 @@
 
 Gianpy
 ----------------------------------------------------------------------------
-- Possibility to choose an address on order checkout
-- Add shipping address to orders (API + Implementation)
-- mancano buttons next-preview negli eventi, ci saranno? (Per gianpy: Io ti avevo già fatto tutto il sistema di prev/next, usalo!)
-- negli events metti lo stesso cal del register pls.
-- toglimi le console.log di debug che hai messo nei breadcumb/cart/events/ etc pls.
+Ti ho fixato tutti gli events. Ora per favore fixami tu la search che fa pena. Nel senso che se cerco qualcosa non cerca nulla
+se non il nome autore e altre 2 cose. Se guardi la query per search events, dato in ingresso query_string, confronta con 3 o 4 colonne e stop.
+Deve guardare anche location, titolo libro, etc etc. Grazie.
+
 
 Albi
 ----------------------------------------------------------------------------
@@ -16,11 +15,10 @@ Luna - style
 - single author
 - single event
 - stile dei filtri di ricerca (responsive)
-- cambiare colore breadcumbs settando color="dark, warning etc". non moddare la classe del placeholder ty
 - Carrello: allineamenti bottoni - e + ; barra bottom mobile bianca
 - CONTROLLA IL RESTO -> events, orders, register, add new address
 - ! definire grandezza font coerenti in tutto il sito !
-- i font sono giusti in tutto il sito ? (alby) Secondo me no, li devo settare giusti (Luna)
+- Footer links pls ? (albi)
 
 
 Tutti
@@ -31,8 +29,7 @@ Tutti
 - Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
 - Navbar
 - profile nella navbar: sezione "my reviews da togliere" (?)
-- Footer
-- Tutti i generi / temi
+- Tutti i generi / temi (da controllare se fungono)
 
 
 //Optional to implement

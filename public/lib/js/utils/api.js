@@ -141,6 +141,9 @@ export let get = {
         reviews: (id) => {
             return make.get('/api/book/' + id + '/reviews')
         },
+        event : (id) => {
+            return make.get('/api/events/search/?extra=' + id)
+        },
         search: {
             query: (query) => {
                 return make.get('/api/book/search?query=' + query)
@@ -213,13 +216,14 @@ export let get = {
         }
     },
     event: {
-        search: (date, query) => {
-            let url = '/api/events/search?';
-            if (query !== "")
-                url += 'query_string=' + query;
-            if (date !== "")
-                url += '&date_from=' + date;
-            return make.get(url)
+        search: (args) => {
+            let params = [];
+            for (let param in args) {
+                if (args.hasOwnProperty(param)) {
+                    params.push(param + '=' + args[param]);
+                }
+            }
+            return make.get('/api/events/search?'+ params.join('&'));
         },
         all: () => {
             return make.get('/api/events')

@@ -72,6 +72,7 @@ $(() => {
                     });
 
                     $('.author-image > .img').css("background-image", "url(" + author.image_url + ")");
+                    $('.author-events').attr('href', '/search/event/?q=' + author.name);
 
                     //Inject rating
                     rating.append_rating('.author-rating', avg_rating).then(o => { loadingJob.completeTask() })

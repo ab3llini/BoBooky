@@ -12,7 +12,6 @@ let db = require('../db/Database');
  **/
 exports.bookGET = function(offset,limit) {
   return db.execute(db.bookGET, [offset, limit])
-
 };
 
 

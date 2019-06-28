@@ -342,7 +342,7 @@ module.exports.eventByID = (id) => {
     }
 };
 
-module.exports.eventSearch = (query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location) => {
+module.exports.eventSearch = (query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location, offset, limit, oderby, extra) => {
     let q = `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
                     a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country,
                     a2.name as author_name, b.title
@@ -415,13 +415,19 @@ module.exports.eventSearch = (query_string, name, author_name, author_id, book_n
     }
     if (location !== undefined) {
         q += clause + ' (lower(a.city) = lower($' + placeholder + '))' + ' ';
+        placeholder += 1;
         values.push(location)
     }
 
-    q += 'order by e.timestamp asc limit 30';
+    if (extra !== undefined) {
+        // Filter by bookid
+        q += clause + ' e.related_book = $' + placeholder + ' ';
+        placeholder += 1;
+        values.push(extra)
+    }
 
-    console.log(q);
-
+    q += ' order by e.timestamp asc offset $' + placeholder + ' limit $' + (placeholder + 1);
+    values.push(offset * limit, limit);
     return {
         text: q,
         values: values
@@ -458,7 +464,7 @@ module.exports.getUserSalt = (email) => {
 
 module.exports.getUserOrder = (id, offset = 0, limit = 20) => {
     return {
-        text: `select distinct o.id as OrderID, u.id as user_id, u.name, u.surname, u.email, u.birthdate, o.total_amount as amount, o.timestamp
+        text: `select distinct o.id as OrderID, address_id, u.id as user_id, u.name, u.surname, u.email, u.birthdate, o.total_amount as amount, o.timestamp
             from "order" o join "user" u on o.user_id = u.id join order_to_book otb on o.id = otb.order_id
             where u.id = $1
             order by timestamp desc 
@@ -467,10 +473,10 @@ module.exports.getUserOrder = (id, offset = 0, limit = 20) => {
     }
 };
 
-module.exports.addUserOrder = (total_amount, user_id) => {
+module.exports.addUserOrder = (total_amount, user_id, address_id=1) => {
     return {
-        text: `insert into "order"(total_amount, user_id) VALUES ($1, $2) returning id`,
-        values: [total_amount, user_id]
+        text: `insert into "order"(total_amount, user_id, address_id) VALUES ($1, $2, $3) returning id`,
+        values: [total_amount, user_id, address_id]
     }
 };
 

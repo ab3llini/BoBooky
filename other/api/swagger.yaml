@@ -1167,6 +1167,8 @@ definitions:
       amount:
         type: "number"
         description: "Amount to pay for this order"
+      address:
+        $ref: "#/definitions/Address"
       timestamp:
         type: "string"
         format: "date-time"
