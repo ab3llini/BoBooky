@@ -172,7 +172,7 @@ module.exports.bookRelatedGET = (bookID, offset = 0, limit = 20) => {
     })
 };
 
-module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher,publisher_id,theme,offset, limit, orderby, extra) => {
+module.exports.bookSearchGET = (query, isbn, genre, year, author, author_id, publisher, publisher_id, theme, offset, limit, orderby, extra) => {
     return new Promise((resolve, reject) => {
 
         if (extra === 'author-bypass') {
@@ -182,8 +182,7 @@ module.exports.bookSearchGET = (query,isbn,genre,year,author,author_id,publisher
                     console.error(error);
                     reject(error)
                 })
-        }
-        else {
+        } else {
             pipe.query(make.bookSearch(query, isbn, genre, year, author, author_id, publisher, publisher_id, theme, offset, limit, orderby, extra))
                 .then(result => {
                     let ans = [];
@@ -252,7 +251,7 @@ module.exports.bookThemeGET = () => {
     })
 };
 
-module.exports.bookReviewPOST = (id,userID,body) => {
+module.exports.bookReviewPOST = (id, userID, body) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.addBookReview(userID, id, body))
             .then(() => resolve())
@@ -263,10 +262,10 @@ module.exports.bookReviewPOST = (id,userID,body) => {
     })
 };
 
-module.exports.bookReviewDELETE = (id,reviewID,userID) => {
+module.exports.bookReviewDELETE = (id, reviewID, userID) => {
     //TODO: need also the user
     return new Promise((resolve, reject) => {
-        pipe.query(make.deleteReview(id,reviewID,userID))
+        pipe.query(make.deleteReview(id, reviewID, userID))
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
@@ -294,7 +293,7 @@ module.exports.authorIdGET = (id) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.authorId(id))
             .then(authors => {
-                if(authors.rowCount !== 0)
+                if (authors.rowCount !== 0)
                     resolve(authors.rows[0]);
                 else
                     reject(new Error('No author for id = ' + id))
@@ -336,7 +335,7 @@ module.exports.authorIdReviewGET = (id) => {
     })
 };
 
-module.exports.authorIdReviewPOST = (id,userID,body) => {
+module.exports.authorIdReviewPOST = (id, userID, body) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.addAuthorReview(id, userID, body))
             .then(() => resolve())
@@ -347,9 +346,9 @@ module.exports.authorIdReviewPOST = (id,userID,body) => {
     })
 };
 
-module.exports.authorIdReviewDELETE = (id,reviewID,userID) => {
+module.exports.authorIdReviewDELETE = (id, reviewID, userID) => {
     return new Promise((resolve, reject) => {
-        pipe.query(make.deleteAuthorReview(id,reviewID,userID))
+        pipe.query(make.deleteAuthorReview(id, reviewID, userID))
             .then(() => resolve())
             .catch(error => {
                 console.log(error);
@@ -436,9 +435,28 @@ module.exports.userOrderGET = (id, offset, limit) => {
                                             avg_rating: book.avg_rating
                                         }
                                     });
-                                    if (j === books.rowCount - 1)
-                                        if (i === results.rowCount - 1)
-                                            resolve(results.rows)
+
+                                    pipe.query(make.getUserAddress(id))
+                                        .then(result_addresses => {
+                                            let address;
+                                            for (let k = 0; k < result_addresses.rowCount; k++)
+                                                if (result_addresses.rows[k].id === order.address_id) {
+                                                    address = result_addresses.rows[k];
+                                                    break
+                                                }
+                                            if (address !== undefined) {
+                                                order.address = address;
+                                            }
+                                            delete order.address_id;
+                                            if (j === books.rowCount - 1)
+                                                if (i === results.rowCount - 1)
+                                                    resolve(results.rows)
+                                        })
+                                        .catch(error => {
+                                            console.log(error);
+                                            reject(error)
+                                        })
+
                                 })
                             })
                             .catch(error => {
@@ -456,12 +474,12 @@ module.exports.userOrderGET = (id, offset, limit) => {
 
 module.exports.userOrderPOST = (order, id) => {
     return new Promise((resolve, reject) => {
-        pipe.query(make.addUserOrder(order.amount, id))
+        pipe.query(make.addUserOrder(order.amount, id, order.address.id))
             .then(order_id => {
                 order.books.forEach((b, idx) => {
                     pipe.query(make.addBookToOrder(b.book.id, order_id.rows[0].id, b.qty))
                         .then(() => {
-                            if(idx === order.books.length - 1)
+                            if (idx === order.books.length - 1)
                                 resolve()
                         })
                         .catch(error => {
@@ -540,12 +558,12 @@ module.exports.userChartPUT = (userID, book_info) => {
         pipe.query(make.getBooksForUserChart(userID, book_info.bookID))
             .then(books => {
                 if (books.rowCount === 0)
-                   pipe.query(make.addBookToUserChart(userID, book_info))
-                       .then(() => resolve())
-                       .catch(error => {
-                           console.log(error);
-                           reject(error)
-                       });
+                    pipe.query(make.addBookToUserChart(userID, book_info))
+                        .then(() => resolve())
+                        .catch(error => {
+                            console.log(error);
+                            reject(error)
+                        });
                 else
                     pipe.query(make.updateUserChart(userID, book_info))
                         .then(() => resolve())
@@ -576,11 +594,11 @@ module.exports.userChartGET = (userID) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.getChart(userID))
             .then(chart => {
-                if(chart.rowCount === 0) {
+                if (chart.rowCount === 0) {
                     resolve({});
                     return
                 }
-                let ans = { Books: [] };
+                let ans = {Books: []};
                 chart.rows.forEach(ch => {
                     ans.Books.push({
                         qty: ch.qty,
@@ -693,7 +711,7 @@ module.exports.eventGET = () => {
             .then(events => {
                 events.rows.forEach((e, idx) => {
                     ans.push(mapEvent(e));
-                    if(idx === events.rowCount - 1)
+                    if (idx === events.rowCount - 1)
                         resolve(ans);
                 })
             })
@@ -705,10 +723,10 @@ module.exports.eventGET = () => {
 };
 
 module.exports.eventIdGET = (id) => {
-    return new Promise((resolve, reject) =>  {
+    return new Promise((resolve, reject) => {
         pipe.query(make.eventByID(id))
             .then(event => {
-                if(event.rowCount > 0)
+                if (event.rowCount > 0)
                     resolve(mapEvent(event.rows[0]));
                 else
                     reject(new Error('Event row count is 0'))
@@ -720,15 +738,15 @@ module.exports.eventIdGET = (id) => {
     })
 };
 
-module.exports.eventSearchGET = (query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location, offset, limit, oderby, extra) => {
-    return new Promise((resolve, reject) =>  {
-        pipe.query(make.eventSearch(query_string,name,author_name,author_id,book_name,book_id,date,date_from,date_to,location, offset, limit, oderby, extra))
+module.exports.eventSearchGET = (query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location, offset, limit, oderby, extra) => {
+    return new Promise((resolve, reject) => {
+        pipe.query(make.eventSearch(query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location, offset, limit, oderby, extra))
             .then(events => {
-                if(events.rowCount > 0) {
+                if (events.rowCount > 0) {
                     let ans = [];
                     events.rows.forEach((event, idx) => {
                         ans.push(mapEvent(event));
-                        if(idx === events.rowCount - 1)
+                        if (idx === events.rowCount - 1)
                             resolve(ans)
                     })
                 } else
