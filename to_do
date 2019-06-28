@@ -1,10 +1,6 @@
 
 Gianpy
 ----------------------------------------------------------------------------
-Ti ho fixato tutti gli events. Ora per favore fixami tu la search che fa pena. Nel senso che se cerco qualcosa non cerca nulla
-se non il nome autore e altre 2 cose. Se guardi la query per search events, dato in ingresso query_string, confronta con 3 o 4 colonne e stop.
-Deve guardare anche location, titolo libro, etc etc. Grazie.
-
 
 Albi
 ----------------------------------------------------------------------------

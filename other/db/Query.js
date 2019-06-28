@@ -358,9 +358,9 @@ module.exports.eventSearch = (query_string, name, author_name, author_id, book_n
     let values = [];
 
     if (query_string !== undefined) {
-        q += clause + ' ((lower(e.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') ' +
+        q += clause + ' ((lower(e.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') or (lower(a.city) LIKE \'%\' || lower($' + placeholder + ') || \'%\')' +
             'or (lower(a2.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') or (lower(b.title) LIKE \'%\' || lower($' + placeholder + ') || \'%\')) ' +
-            ' ';
+            'or  (lower(a.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\')';
         clause = 'and';
         placeholder += 1;
         values.push(query_string)
