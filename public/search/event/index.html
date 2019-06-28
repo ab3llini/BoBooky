@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/lib/scss/bobooky-theme.css">
     <link rel="stylesheet" href="/components/navbar/navbar.css">
     <link rel="stylesheet" href="/search/event/event-search.css">
+    <link rel="stylesheet" href="/register/scss/datepicker.css">
+
 
 </head>
 
@@ -35,13 +37,13 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12 col-md-4">
-                    <input type="date" name="date" value="" id="form-date"
-                           class="form-control no-glow bobooky-purple form-control pl-4 rounded-pill datepicker border-dark">
+                    <input type="date" name="date" value=""
+                           class="form-control no-glow bobooky-purple form-control form-control pl-4 rounded-pill border-dark filter date">
                 </div>
                 <div class="col-12 mt-3 mt-md-0 col-md">
                     <div class="form-group search-bar-wrapper">
                         <div class="input-group">
-                            <input type="text" name="q" id="form-q" class="search-bar form-control pl-4 border-right-0"
+                            <input type="text" name="q" class="search-bar form-control pl-4 border-right-0 filter query"
                                    placeholder="Search hundreds of events">
                             <div class="input-group-append ">
                                 <button class="btn search-button round border-left-0 pr-4" type="submit">
@@ -53,6 +55,7 @@
                 </div>
 
             </div>
+            <input type="text" name="page" class="d-none page" value="0">
             <input type="submit" class="d-none">
         </form>
     </div>
@@ -66,12 +69,31 @@
         </div>
     </div>
 </div>
+<div class="section navigation my-5">
+    <div class="container text-purple">
+        <div class="row">
+            <div class="col-6">
+                <button class="previous btn btn-outline-purple navigation-btn rounded-pill" type="button">
+                    <i class="fa fa-angle-left"></i>
+                    <span class="ml-2">previous</span>
+                </button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button class="next btn btn-outline-purple navigation-btn rounded-pill" type="button">
+                    <span class="mr-2">next</span>
+                    <i class="fa fa-angle-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="/components/navbar/navbar.js" type="module"></script>
 <script src="/components/breadcrumb/breadcumb.js" type="module"></script>
 <script src="/components/footer/footer.js" type="module"></script>
+<script src="/register/calendar.js" type="module"></script>
 <script src="/search/event/event.js" type="module"></script>
 
 

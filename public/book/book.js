@@ -85,8 +85,6 @@ $(() => {
                         return '<a href="' + link + '" class="text-decoration-none text-gray">' + name + '</a>'
                     };
 
-                    //TODO: ADD THEME IN RESULT !!!
-
                     // Load JSON
                     api.map({
                         '.book-title': book.title,
@@ -104,6 +102,7 @@ $(() => {
                     });
 
                     $('.book-author-href').attr('href', '/author/?id='+book.author.id);
+                    $('.author-events').attr('href', '/search/event/?q=' + book.author.name);
 
                     // Load book image
                     image.load('.book-image > img', book.image_href).then(() => {

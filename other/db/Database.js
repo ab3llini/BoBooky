@@ -738,7 +738,7 @@ module.exports.eventIdGET = (id) => {
     })
 };
 
-module.exports.eventSearchGET = (query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location, offset, limit, oderby, extra) => {
+module.exports.eventSearchGET = (query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location, offset = 0, limit = 20, oderby, extra) => {
     return new Promise((resolve, reject) => {
         pipe.query(make.eventSearch(query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location, offset, limit, oderby, extra))
             .then(events => {

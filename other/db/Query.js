@@ -342,7 +342,7 @@ module.exports.eventByID = (id) => {
     }
 };
 
-module.exports.eventSearch = (query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location) => {
+module.exports.eventSearch = (query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location, offset, limit, oderby, extra) => {
     let q = `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
                     a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country,
                     a2.name as author_name, b.title
@@ -415,13 +415,19 @@ module.exports.eventSearch = (query_string, name, author_name, author_id, book_n
     }
     if (location !== undefined) {
         q += clause + ' (lower(a.city) = lower($' + placeholder + '))' + ' ';
+        placeholder += 1;
         values.push(location)
     }
 
-    q += 'order by e.timestamp asc limit 30';
+    if (extra !== undefined) {
+        // Filter by bookid
+        q += clause + ' e.related_book = $' + placeholder + ' ';
+        placeholder += 1;
+        values.push(extra)
+    }
 
-    console.log(q);
-
+    q += ' order by e.timestamp asc offset $' + placeholder + ' limit $' + (placeholder + 1);
+    values.push(offset * limit, limit);
     return {
         text: q,
         values: values

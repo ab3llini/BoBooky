@@ -1,17 +1,13 @@
-/* Error: Can't find stylesheet to import.
- *   ,
- * 1 | @import "../lib/bootstrap/scss/functions";
- *   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- *   '
- *   wishlist.scss 1:9  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"../lib/bootstrap/scss/functions\";\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   wishlist.scss 1:9  root stylesheet";
+.books-container .book .image {
+  width: calc(100vw - 2rem);
+  background-size: 100% 100%;
+  height: 140vw;
 }
+@media (min-width: 576px) {
+  .books-container .book .image {
+    width: 14rem;
+    height: 22.4rem;
+  }
+}
+
+/*# sourceMappingURL=wishlist.css.map */

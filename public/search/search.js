@@ -34,8 +34,8 @@ $(() => {
                 book_obj.find('.title').html(book.title);
                 book_obj.find('.author').html(book.author.name);
                 book_obj.find('.date').html([book.publication_month, book.publication_year].join('/'));
-                book_obj.find('.genres').html(book.genres.map(genre => genre.name).join(' / '));
-                book_obj.find('.theme').html(book.theme);
+                book_obj.find('.genres').html(book.genres.map(genre => '<a class="text-decoration-none text-gray" href="/search/genre/?genre=' + genre.name + '">' + genre.name + '</a>').join(' / '));
+                book_obj.find('.theme').html('<a class="text-decoration-none text-gray" href="/search/theme/?theme=' + book.theme + '">' + book.theme + '</a>');
                 book_obj.find('.price').html(book.price);
                 book_obj.find('.book-rating-val').html(book.avg_rating);
 

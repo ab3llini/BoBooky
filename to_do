@@ -1,8 +1,10 @@
 
 Gianpy
 ----------------------------------------------------------------------------
-- mancano buttons next-preview negli eventi, ci saranno?(preferirei no ;) (Per gianpy: Io ti avevo già fatto tutto il sistema di prev/next, usalo! Ma doveeeeee) Ahahahah (Luna)
-- negli events metti lo stesso cal del register pls (cal?! calendar?? come lo metto? ask @Luna)br. (ma il calendar del register a voi funziona? Luna)
+Ti ho fixato tutti gli events. Ora per favore fixami tu la search che fa pena. Nel senso che se cerco qualcosa non cerca nulla
+se non il nome autore e altre 2 cose. Se guardi la query per search events, dato in ingresso query_string, confronta con 3 o 4 colonne e stop.
+Deve guardare anche location, titolo libro, etc etc. Grazie.
+
 
 Albi
 ----------------------------------------------------------------------------
@@ -16,6 +18,7 @@ Luna - style
 - Carrello: allineamenti bottoni - e + ; barra bottom mobile bianca
 - CONTROLLA IL RESTO -> events, orders, register, add new address
 - ! definire grandezza font coerenti in tutto il sito !
+- Footer links pls ? (albi)
 
 
 Tutti
@@ -26,7 +29,6 @@ Tutti
 - Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
 - Navbar
 - profile nella navbar: sezione "my reviews da togliere" (?)
-- Footer
 - Tutti i generi / temi (da controllare se fungono)
 
 
