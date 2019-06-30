@@ -1,3 +1,17 @@
+
+/* This line adds an offset to all pages to account for the navbar */
+body {
+    /* Do not touch me */
+    position: relative;
+}
+
+.footer {
+    position: absolute;
+    top: calc(100vh - 100px);
+
+}
+
+
 .discover-section {
     position: absolute;
     left: 0;
@@ -23,8 +37,4 @@
     opacity: 1;
     filter: alpha(opacity=100);
     /* For IE8 and earlier */
-}
-
-.footer {
-    top: calc(100vh - 100px);
 }
