@@ -7,12 +7,9 @@ Albi & Gianpy
 - aggiungere le reviews ai libri/autori.
 - diagrammi er etc etc etc. CE N'E' DI ROBA DA FARE.
 
-
-Gianpy
-----------------------------------------------------------------------------
-
-Albi
-----------------------------------------------------------------------------
+- il footer continua a dare problemi nella visualizzazione mobile del carrello vuoto e del discover :(
+- Events: rendere cliccabile anche il titolo dell'evento
+- My orders: togliere "total" da dove iniettiamo il dato del prezzo pls
 
 Luna - style
 -----------------------------------------------------------------------------
@@ -20,10 +17,8 @@ Luna - style
 - single author
 - single event
 - stile dei filtri di ricerca (responsive)
-- Carrello: allineamenti bottoni - e + ; barra bottom mobile bianca
 - CONTROLLA IL RESTO -> events, orders, register, add new address
 - ! definire grandezza font coerenti in tutto il sito !
-- Footer links pls ? (albi)
 
 
 Tutti
