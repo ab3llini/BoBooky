@@ -10331,24 +10331,18 @@ h3 {
 
 html {
   scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
 }
 
 /* This line adds an offset to all pages to account for the navbar */
 body {
   padding-top: 56px;
-  /* Do not touch me */
-  position: relative;
 }
 @media (min-width: 992px) {
   body {
     padding-top: 70px;
   }
-}
-
-.footer {
-  position: absolute;
-  bottom: -600px;
-  height: auto !important;
 }
 
 .form-group {
