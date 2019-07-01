@@ -94,7 +94,6 @@ module.exports.authorSearch = (query, theme, genre, offset = 0, limit = 20) => {
 
 module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publisher, publisher_id, theme,
                              offset = 0, limit = 20, orderby, extra) => {
-    //TODO: Fix error when searching by year
     let q = `select distinct b.id, b.title, a.id as author, a.name as author_name, b.description, p.name as publisher, b.price, b.isbn,
                 b.isbn13, b.publication_year, b.publication_month, b.avg_rating, i.href as image_href,
                 i.href_small as image_href_small, b.theme
