@@ -313,12 +313,10 @@ module.exports.deleteAuthorReview = (id, reviewID, userID) => {
 
 module.exports.event = () => {
     return {
-        text: `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
+        text: `select e.id, e.name, e.description, e.timestamp, e.related_author, e.related_book,
                 a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country,
                 b.title, a2.name as author_name
             from event e
-                left join event_to_image eti on e.id = eti.event_id
-                left join image i on eti.image_id = i.id
                 join address a on e.location = a.id
                 join author a2 on e.related_author = a2.id
                 join book b on e.related_book = b.id
@@ -328,12 +326,10 @@ module.exports.event = () => {
 
 module.exports.eventByID = (id) => {
     return {
-        text: `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
+        text: `select e.id, e.name, e.description, e.timestamp, e.related_author, e.related_book,
                 a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country,
                 b.title, a2.name as author_name
             from event e
-                left join event_to_image eti on e.id = eti.event_id
-                left join image i on eti.image_id = i.id
                 join address a on e.location = a.id
                 join author a2 on e.related_author = a2.id
                 join book b on e.related_book = b.id
@@ -343,12 +339,10 @@ module.exports.eventByID = (id) => {
 };
 
 module.exports.eventSearch = (query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location, offset, limit, oderby, extra) => {
-    let q = `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
+    let q = `select e.id, e.name, e.description, e.timestamp, e.related_author, e.related_book,
                     a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country,
                     a2.name as author_name, b.title
              from event e
-                      left join event_to_image eti on e.id = eti.event_id
-                      left join image i on eti.image_id = i.id
                       join address a on e.location = a.id
                       left join author a2 on e.related_author = a2.id
                       left join book b on e.related_book = b.id` + ' ';

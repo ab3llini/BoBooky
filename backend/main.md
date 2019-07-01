@@ -92,30 +92,39 @@ application. How these map to the OpenAPI data model?
 Describe here which tools, languages and frameworks did you use for the backend
 of the application.
 
-languages
-nodejs
-scss WHY -> EXPLAIN css preprocessor 
-css
-html
-js
-jquery -> why ?? write less do more
+### languages
+- nodejs
+- SCSS: this is an extention of the css language. We chose to adopt this programming language for its simplicity
+in organizing the code with the help of variables, math expression, helpers and so on. with SCSS we are able to write
+more flexible, structured and readable code. 
+- css
+- html
+- js
+- JQUERY: this is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal
+and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API. With jQuery we can write
+less code for the same operation that we generally have done with the usual javascript language.
 
-framweokrs
+### framweokrs
 
-backend:
-var express = require('express');
-var session = require("express-session"),
-    bodyParser = require("body-parser");
-var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
-var swaggerTools = require('swagger-tools');
-const {Client} = require('pg');
+#### backend:
+- express: This is our core web application framework that we have chosen for its minimality and simplicity.
+- express-session: We used this framework for building session middleware in order to do different pre-processing
+on the incoming requests for different pages.
+- body-parser: We used this framework for extracting the body portion of an incoming POST or PUT request and parsing
+the json into java objects.
+- passport: With passport we managed all the authentication phase, we built a login strategy (passport-local strategy)
+that makes usage of username and password authentication and with this framework we can provide an encrypted
+cookie for the user session.
+- swagger-tools: With this framework we can integrate our openAPI specification into the backend server application.
+swagger tools takes care of reading and parsing the Swagger specification file, create the handlers for the different
+requests, parsing and checking the body schemas and so on.
+- pg: This framework is used for manage the connection to the database and to execute query and fetch data
+for the api implementation
 
-frontend:
-bootstrap
-font-awesome
-jquery
-multislider (carousel)
+#### frontend:
+- bootstrap
+- font-awesome
+- multislider (carousel)
 
 
 
