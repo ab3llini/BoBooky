@@ -95,6 +95,8 @@ $(() => {
                     // Getting selected ID
                     let address_id = $("input[name='address']:checked");
 
+                    $('#address-modal').modal('hide');
+
                     // Sending order request
                     api.get.chart()
                         .then(chart => {
@@ -114,7 +116,9 @@ $(() => {
                                 .then(() => {
                                     api.del.user.cart()
                                         .then(() => {
-                                            window.location.replace('/profile/order')
+                                            modal.show('Thanks!', 'We have received your order!').then(() => {
+                                                window.location.replace('/profile/order')
+                                            });
                                         })
 
                                         .catch((error) => modal.error(error))
