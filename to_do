@@ -1,13 +1,19 @@
-
-Gianpy
+Albi & Gianpy
 ----------------------------------------------------------------------------
-Ti ho fixato tutti gli events. Ora per favore fixami tu la search che fa pena. Nel senso che se cerco qualcosa non cerca nulla
-se non il nome autore e altre 2 cose. Se guardi la query per search events, dato in ingresso query_string, confronta con 3 o 4 colonne e stop.
-Deve guardare anche location, titolo libro, etc etc. Grazie.
+- Ho creato una cartella backend e iniziato a mettere dentro le varie cose.
+- Leggiti le guidelines (pdf nella cartella)
+- Aiutami a scrivere il file MD che poi lo convertiamo a html
+- nella spec dobbiamo mettere gli esempi che vanno
+- aggiungere le reviews ai libri/autori.
+- diagrammi er etc etc etc. CE N'E' DI ROBA DA FARE.
 
+- il footer continua a dare problemi nella visualizzazione mobile del carrello vuoto e del discover :(
+- Events: rendere cliccabile anche il titolo dell'evento
+- My orders: togliere "total" da dove iniettiamo il dato del prezzo pls
 
-Albi
-----------------------------------------------------------------------------
+gian
+----
+events crasha. si crasha.
 
 Luna - style
 -----------------------------------------------------------------------------
@@ -15,10 +21,8 @@ Luna - style
 - single author
 - single event
 - stile dei filtri di ricerca (responsive)
-- Carrello: allineamenti bottoni - e + ; barra bottom mobile bianca
 - CONTROLLA IL RESTO -> events, orders, register, add new address
 - ! definire grandezza font coerenti in tutto il sito !
-- Footer links pls ? (albi)
 
 
 Tutti

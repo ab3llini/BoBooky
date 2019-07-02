@@ -10331,24 +10331,18 @@ h3 {
 
 html {
   scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
 }
 
 /* This line adds an offset to all pages to account for the navbar */
 body {
   padding-top: 56px;
-  /* Do not touch me */
-  position: relative;
 }
 @media (min-width: 992px) {
   body {
     padding-top: 70px;
   }
-}
-
-.footer {
-  position: absolute;
-  bottom: -600px;
-  height: auto !important;
 }
 
 .form-group {
@@ -10397,7 +10391,6 @@ body {
 
 .link-primary > a:hover {
   color: #0D71B9 !important;
-  text-decoration: none;
 }
 
 /*
@@ -10431,7 +10424,6 @@ input.placeholder-primary::placeholder {
 
 .link-secondary > a:hover {
   color: #05AB9E !important;
-  text-decoration: none;
 }
 
 /*
@@ -10465,7 +10457,6 @@ input.placeholder-secondary::placeholder {
 
 .link-success > a:hover {
   color: #28a745 !important;
-  text-decoration: none;
 }
 
 /*
@@ -10499,7 +10490,6 @@ input.placeholder-success::placeholder {
 
 .link-info > a:hover {
   color: #17a2b8 !important;
-  text-decoration: none;
 }
 
 /*
@@ -10533,7 +10523,6 @@ input.placeholder-info::placeholder {
 
 .link-warning > a:hover {
   color: #F7BC5D !important;
-  text-decoration: none;
 }
 
 /*
@@ -10567,7 +10556,6 @@ input.placeholder-warning::placeholder {
 
 .link-danger > a:hover {
   color: #AD2528 !important;
-  text-decoration: none;
 }
 
 /*
@@ -10601,7 +10589,6 @@ input.placeholder-danger::placeholder {
 
 .link-light > a:hover {
   color: #999999 !important;
-  text-decoration: none;
 }
 
 /*
@@ -10635,7 +10622,6 @@ input.placeholder-light::placeholder {
 
 .link-dark > a:hover {
   color: #21263F !important;
-  text-decoration: none;
 }
 
 /*
@@ -10669,7 +10655,6 @@ input.placeholder-dark::placeholder {
 
 .link-orange > a:hover {
   color: #F39325 !important;
-  text-decoration: none;
 }
 
 /*
@@ -10703,7 +10688,6 @@ input.placeholder-orange::placeholder {
 
 .link-pink > a:hover {
   color: #E83273 !important;
-  text-decoration: none;
 }
 
 /*
@@ -10737,7 +10721,6 @@ input.placeholder-pink::placeholder {
 
 .link-purple > a:hover {
   color: #8E3089 !important;
-  text-decoration: none;
 }
 
 /*
@@ -10771,7 +10754,6 @@ input.placeholder-purple::placeholder {
 
 .link-white > a:hover {
   color: white !important;
-  text-decoration: none;
 }
 
 /*
@@ -10805,7 +10787,6 @@ input.placeholder-white::placeholder {
 
 .link-gray > a:hover {
   color: #737373 !important;
-  text-decoration: none;
 }
 
 /*

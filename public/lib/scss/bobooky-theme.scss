@@ -21,6 +21,8 @@ $theme-colors: (
 
 html {
     scroll-behavior: smooth;
+    padding: 0;
+    margin: 0;
 }
 
 /* This line adds an offset to all pages to account for the navbar */
@@ -29,17 +31,7 @@ body {
     @include media-breakpoint-up(lg) {
         padding-top: 70px;
     }
-
-    /* Do not touch me */
-    position: relative;
 }
-
-.footer {
-    position: absolute;
-    bottom: -600px;
-    height: auto !important;
-}
-
 
 .form-group {
     position: relative;
@@ -91,8 +83,7 @@ body {
 
   //hover link a tema
     .link-#{$key} > a:hover {
-        color: $color !important;
-        text-decoration: none
+        color: $color !important
     }
 
     /*

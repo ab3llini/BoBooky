@@ -30,7 +30,7 @@ $(() => {
                 book_obj.find('.genres').html(book.genres.map(genre => '<a class="text-decoration-none text-gray" href="/search/genre/?genre=' + genre.name + '">' + genre.name + '</a>').join(' / '));
                 book_obj.find('.theme').html('<a class="text-decoration-none text-gray" href="/search/theme/?theme=' + book.theme + '">' + book.theme + '</a>');
                 book_obj.find('.price').html(book.price);
-                book_obj.find('.book-rating-val').html(book.avg_rating);
+                book_obj.find('.book-rating-val').html(parseInt(book.avg_rating));
 
                 // Setup in wishlist
                 if (inWishlist.indexOf(book.id) >= 0) {
@@ -63,7 +63,7 @@ $(() => {
                     }
                 });
 
-                rating.append_rating(book_obj.find('.rating'), book.avg_rating);
+                rating.append_rating(book_obj.find('.rating'), parseInt(book.avg_rating));
 
                 api.get.book.reviews(book.id).then(reviews => {
                     if (reviews === undefined) {

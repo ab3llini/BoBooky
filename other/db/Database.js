@@ -263,7 +263,6 @@ module.exports.bookReviewPOST = (id, userID, body) => {
 };
 
 module.exports.bookReviewDELETE = (id, reviewID, userID) => {
-    //TODO: need also the user
     return new Promise((resolve, reject) => {
         pipe.query(make.deleteReview(id, reviewID, userID))
             .then(() => resolve())

@@ -2,10 +2,10 @@ import psycopg2
 import requests
 from tqdm import tqdm
 import random
-import pandas as pd
+# import pandas as pd
 import numpy.random as rnd
-from gpt2.interactive_conditional_samples import interact_model
-
+# from gpt2.interactive_conditional_samples import interact_model
+import random
 
 def check_unavailable(connection) -> list:
     cursor = connection.cursor()
@@ -109,11 +109,86 @@ def add_events(connection):
         cursor.execute(sql_insert, (f"{row[1]}'s Event", ans, address, datetime, row[0], row[-1]))
         connection.commit()
 
+def insert_reviews(connection):
+    book_templates = [
+        {
+            'title': 'I love this book!',
+            'content': 'I really appreciated reading this book. Well written and extremely interesting',
+            'rating': 5,
+        },
+        {
+            'title': 'Definitely a book to read',
+            'content': 'Except from certain sections that were a bit too long I would definitely advise you to read this book!',
+            'rating': 4,
+        },
+        {
+            'title': 'Good, but..',
+            'content': 'I bought this book because I usually appreciate the author but this time I was a bit disappointed. I hope the next one will be better..',
+            'rating': 3,
+        },
+        {
+            'title': 'Boring, extremely boring.',
+            'content': 'Unless you have plenty of time to waste reading uninteresting stuff, do not buy this book',
+            'rating': 2,
+        },
+        {
+            'title': 'I want my money back!',
+            'content': 'I thought a book couldn\'t be soo bad until I bought this. I will never read this author again!!',
+            'rating': 1,
+        }
+    ]
+    author_templates = [
+        {
+            'title': 'I love this author!',
+            'content': 'I really love this author, he writes masterpieces!',
+            'rating': 5,
+        },
+        {
+            'title': 'Amazing writer',
+            'content': 'Exceptionally well written books but not a very kind person. He refused to sign a book for my son..',
+            'rating': 4,
+        },
+        {
+            'title': 'Thought contents were a bit more interesting..',
+            'content': 'I bought two of his books but never finished one!',
+            'rating': 3,
+        },
+        {
+            'title': 'Boring and expensive books.',
+            'content': 'Everybody told me he was a good writer but I am very disappointed about the last book I read..',
+            'rating': 2,
+        },
+        {
+            'title': 'The solution to insomnia..',
+            'content': 'I challenge you to read 10 pages straight without falling asleep.',
+            'rating': 1,
+        }
+    ]
+
+    q_fetch_books = 'select id from author'
+    cursor = connection.cursor()
+    cursor.execute(q_fetch_books)
+
+    # 4 stands for User = "User"
+    q_insert_review = 'insert into author_review(title, content, book_author, rating, author) values (%s, %s, %s, %s, %s)'
+
+    for row in tqdm(cursor.fetchall()):
+        book_id = row[0]
+
+        choices = [i for i in range(5)]
+        ids = [4, 43, 44, 45, 46]
+        random.shuffle(ids)
+        random.shuffle(choices)
+        for k in range(3):
+            pick = author_templates[choices.pop(0)]
+            cursor.execute(q_insert_review, (pick['title'], pick['content'], book_id, pick['rating'], ids.pop(0)))
+
+    connection.commit()
 
 if __name__ == '__main__':
     conn = psycopg2.connect(host="ec2-79-125-2-142.eu-west-1.compute.amazonaws.com",
                             database="d3k4sooera9fsh",
                             user="kaxtczmqrauqfc",
                             password="a46181c55c68f90d53b029a88daa5800f4b13f203287f0df528a993ef18e5b14")
-    add_events(conn)
+    insert_reviews(conn)
     conn.close()

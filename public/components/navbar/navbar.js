@@ -66,7 +66,7 @@ $(function () {
 
         $('.navbar #cart-button').click(function () {
             if (session.isLoggedIn())
-                window.location.href = '/profile/cart'
+                window.location.href = '/profile/cart';
             else
                 modal.show('Please login or register!', 'You need to be logged in in order to see your cart.')
         })

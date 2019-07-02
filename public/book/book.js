@@ -89,7 +89,7 @@ $(() => {
                     api.map({
                         '.book-title': book.title,
                         '.book-author': book.author.name,
-                        '.book-rating-val': book.avg_rating,
+                        '.book-rating-val': parseInt(book.avg_rating),
                         '.book-price': book.price,
                         '.book-genres': book.genres.map(genre => bind_link('/search/genre/?genre=' + genre, genre)).join(' / '),
                         '.book-theme':  bind_link('/search/theme/?theme=' + book.theme, book.theme),
@@ -110,7 +110,7 @@ $(() => {
                     });
 
                     //Inject rating
-                    rating.append_rating('.book-rating', book.avg_rating).then(o => { loadingJob.completeTask() })
+                    rating.append_rating('.book-rating', parseInt(book.avg_rating)).then(o => { loadingJob.completeTask() })
 
                 })
                 .catch(e => {

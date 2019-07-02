@@ -10,7 +10,7 @@ export let login = (username, password) => {
     return new Promise((resolve, reject) => {
         api.post.login(username, password)
             .then(result => {
-                $.cookie('session', JSON.stringify(result), { path: '/' });
+                $.cookie('session', JSON.stringify(result), { path: '/', expires: 1 });
                 console.log('Authorized' + JSON.stringify(result));
                 resolve(result)
             })
