@@ -32,51 +32,54 @@ paths:
       parameters:
         - name: "offset"
           in: "query"
-          description: "Page offset. Defaults to 0"
           required: false
           type: "integer"
+          description: "Page offset. Defaults to 0"
         - name: "limit"
           in: "query"
-          description: "Result limit. Defaults to 20, max 500."
           required: false
           type: "integer"
+          description: "Result limit. Defaults to 20, max 500."
       responses:
         200:
           description: "Returns the list of authors in the specified range."
-          examples:
-            application/json: "[\n{\n    \"image_url\": \"image_url\",\n    \"name\"\
-              : \"name\",\n    \"description\": \"description\",\n    \"id\": 0\n\
-              \  }\n]"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/Author"
+          examples:
+            application/json: "[\n{\n    \"image_url\": \"image_url\",\n    \"name\"\
+              : \"name\",\n    \"description\": \"description\",\n    \"id\": 0\n\
+              \  }\n]"
         400:
           description: "Unable to fetch all authors"
         404:
           description: "Unable to find the specified resource"
-      x-swagger-router-controller: "Author"
   /author/{id}:
     get:
       tags:
         - "author"
       summary: "Fetch a specific author"
       operationId: "authorIdGET"
-      parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          type: "string"
+      parameters: []
       responses:
         200:
           description: "Status 200"
           schema:
             $ref: "#/definitions/Author"
+          examples:
+            application/json: "{\n    \"image_url\": \"image_url\",\n    \"name\"\
+              : \"name\",\n    \"description\": \"description\",\n    \"id\": 0\n\
+              \  }"
         400:
           description: "Unable to fetch this author."
         404:
           description: "Unable to find this author."
-      x-swagger-router-controller: "Author"
+    parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /author/{id}/reviews:
     get:
       tags:
@@ -85,14 +88,14 @@ paths:
       operationId: "authorReviewGET"
       produces:
         - "application/json"
-      parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          type: "string"
+      parameters: []
       responses:
         200:
           description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
           examples:
             application/json: "[\n  {\n   \"author\":{\n      \"id\":1,\n      \"\
               name\":\"Alan\",\n      \"surname\":\"Turing\",\n      \"email\":\"\
@@ -100,15 +103,10 @@ paths:
               \   \"rating\":6.027456183070403,\n   \"id\":0,\n   \"title\":\"title\"\
               ,\n   \"body\":\"body\",\n   \"timestamp\":\"2000-01-23T04:56:07.000+00:00\"\
               \n}\n]"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Review"
         400:
           description: "Bad author id"
         404:
           description: "Status 404"
-      x-swagger-router-controller: "Author"
     post:
       tags:
         - "author"
@@ -117,36 +115,33 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          type: "string"
-        - in: "body"
-          name: "body"
+        - name: "body"
+          in: "body"
           required: true
           schema:
             $ref: "#/definitions/Review"
+          x-examples:
+            application/json: "{\n   \"author\":{\n      \"id\":1,\n      \"name\":\"\
+            Alan\",\n      \"surname\":\"Turing\",\n      \"email\":\"alan.turing@example.com\"\
+            ,\n      \"birthdate\":\"1989-01-01\"\n   },\n   \"rating\":6.027456183070403,\n\
+            \   \"id\":0,\n   \"title\":\"title\",\n   \"body\":\"body\",\n   \"timestamp\"\
+            :\"2000-01-23T04:56:07.000+00:00\"\n}"
       responses:
         200:
           description: "Status 200"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "Author"
     delete:
       tags:
         - "author"
       summary: "Deletes a review written by the authenticated user."
       operationId: "authorReviewDELETE"
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          type: "string"
         - name: "reviewID"
           in: "query"
-          description: "The id of the review to be removed"
           required: true
           type: "integer"
+          description: "The id of the review to be removed"
       responses:
         200:
           description: "Status 200"
@@ -156,7 +151,11 @@ paths:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "Author"
+    parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /books:
     get:
       tags:
@@ -169,23 +168,27 @@ paths:
       parameters:
         - name: "offset"
           in: "query"
-          description: "Pagination offset. Default is 0."
           required: false
           type: "integer"
+          description: "Pagination offset. Default is 0."
           default: 0
           minimum: 0
         - name: "limit"
           in: "query"
-          description: "Maximum number of items per page. Default is 20 and cannot exceed\
-          \ 500."
           required: false
           type: "integer"
+          description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
           default: 20
-          maximum: 500
           minimum: 1
+          maximum: 500
       responses:
         200:
           description: "A collection of Books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
           examples:
             application/json: "[\n  {\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
               \ #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\": \"Veronica\
@@ -200,14 +203,10 @@ paths:
               : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
               \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
               ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-              ,\n    \"dystopian\",\n    \"dystopia\"\n  ]\n}\n]"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Book"
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }\n]"
         404:
           description: "Book not found"
-      x-swagger-router-controller: "Book"
   /book/{id}:
     get:
       tags:
@@ -217,41 +216,14 @@ paths:
       operationId: "bookIdGET"
       produces:
         - "application/json"
-      parameters:
-        - name: "id"
-          in: "path"
-          description: "ID of book to return"
-          required: true
-          type: "integer"
-          format: "int64"
+      parameters: []
       responses:
         200:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Book"
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Book not found"
-      x-swagger-router-controller: "Book"
-  /book/{id}/related:
-    get:
-      tags:
-        - "book"
-      summary: "Get the related books for the given book id"
-      operationId: "bookRelatedGET"
-      produces:
-        - "application/json"
-      parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          type: "string"
-      responses:
-        200:
-          description: "Status 200"
           examples:
-            application/json: "[\n  {\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
+            application/json: "{\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
               \ #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\": \"Veronica\
               \ Roth\",\n    \"description\": \"Veronica Roth, born in 1988, is a\
               \ renowned novelist and short story writer of American origin.\",\n\
@@ -264,14 +236,58 @@ paths:
               : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
               \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
               ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-              ,\n    \"dystopian\",\n    \"dystopia\"\n  ]\n}\n]"
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Book not found"
+    parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+        description: "ID of book to return"
+  /book/{id}/related:
+    get:
+      tags:
+        - "book"
+      summary: "Get the related books for the given book id"
+      operationId: "bookRelatedGET"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/Book"
+          examples:
+            application/json: "[\n{\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
+              \ #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\": \"Veronica\
+              \ Roth\",\n    \"description\": \"Veronica Roth, born in 1988, is a\
+              \ renowned novelist and short story writer of American origin.\",\n\
+              \    \"image_url\": \"https://images.gr-assets.com/authors/1544540525p8/4039811.jpg\"\
+              \n  },\n  \"description\": \"The Traitor takes place two years after\
+              \ \\\"The Son\\\" and runs parallel with the early events in Divergent.\"\
+              ,\n  \"publisher\": \"Katherine Tegen Books\",\n  \"price\": 20.25,\n\
+              \  \"isbn\": \"006228567X\",\n  \"isbn13\": \"9780062285676\",\n  \"\
+              publication_year\": 2014,\n  \"publication_month\": 7,\n  \"image_href\"\
+              : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
+              \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
+              ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }\n]"
         404:
           description: "Status 404"
-      x-swagger-router-controller: "Book"
+    parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /book/{id}/reviews:
     get:
       tags:
@@ -280,30 +296,25 @@ paths:
       operationId: "bookReviewGET"
       produces:
         - "application/json"
-      parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          type: "string"
+      parameters: []
       responses:
         200:
           description: "Status 200"
-          examples:
-            application/json: "[\n  {\n   \"author\":{\n      \"id\":1,\n      \"\
-              name\":\"Alan\",\n      \"surname\":\"Turing\",\n      \"email\":\"\
-              alan.turing@example.com\",\n      \"birthdate\":\"1989-01-01\"\n   },\n\
-              \   \"rating\":6.027456183070403,\n   \"id\":0,\n   \"title\":\"title\"\
-              ,\n   \"body\":\"body\",\n   \"timestamp\":\"2000-01-23T04:56:07.000+00:00\"\
-              \n}\n]"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/Review"
+          examples:
+            application/json: "[\n  {\n   \"author\":{\n      \"id\":1,\n      \"\
+              name\":\"Alan\",\n      \"surname\":\"Turing\",\n      \"email\":\"\
+              alan.turing@example.com\",\n      \"birthdate\":\"1989-01-01\"\n   },\n\
+              \   \"rating\":4.027456183070403,\n   \"id\":0,\n   \"title\":\"title\"\
+              ,\n   \"body\":\"body\",\n   \"timestamp\":\"2000-01-23T04:56:07.000+00:00\"\
+              \n}\n]"
         400:
           description: "Bad author id"
         404:
           description: "Status 404"
-      x-swagger-router-controller: "Book"
     post:
       tags:
         - "book"
@@ -312,36 +323,33 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          type: "string"
-        - in: "body"
-          name: "body"
+        - name: "body"
+          in: "body"
           required: true
           schema:
             $ref: "#/definitions/Review"
+          x-examples:
+            application/json: "{\n   \"author\":{\n      \"id\":1,\n      \"name\":\"\
+            Alan\",\n      \"surname\":\"Turing\",\n      \"email\":\"alan.turing@example.com\"\
+            ,\n      \"birthdate\":\"1989-01-01\"\n   },\n   \"rating\":4.027456183070403,\n\
+            \   \"id\":0,\n   \"title\":\"title\",\n   \"body\":\"body\",\n   \"timestamp\"\
+            :\"2000-01-23T04:56:07.000+00:00\"\n}"
       responses:
         200:
           description: "Status 200"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "Book"
     delete:
       tags:
         - "book"
       summary: "Deletes a review written by the authenticated user."
       operationId: "bookReviewDELETE"
       parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          type: "string"
         - name: "reviewID"
           in: "query"
-          description: "The id of the review to be removed"
           required: false
           type: "integer"
+          description: "The id of the review to be removed"
       responses:
         200:
           description: "Status 200"
@@ -351,7 +359,11 @@ paths:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "Book"
+    parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /book/themes:
     get:
       tags:
@@ -366,11 +378,12 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Theme"
+          examples:
+            application/json: "[\n  {\n  \"name\": \"name\",\n  \"id\": 0\n}\n]"
         400:
           description: "Status 400"
         404:
           description: "Status 404"
-      x-swagger-router-controller: "Book"
   /book/genres:
     get:
       tags:
@@ -383,18 +396,17 @@ paths:
       responses:
         200:
           description: "Status 200"
-          examples:
-            application/json: "[\n  {\n  \"id\" : 53,\n  \"name\" : \"Drama\"\n}\n\
-              ]"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/Genre"
+          examples:
+            application/json: "[\n  {\n  \"id\" : 53,\n  \"name\" : \"Drama\"\n}\n\
+              ]"
         400:
           description: "Status 400"
         404:
           description: "Status 404"
-      x-swagger-router-controller: "Book"
   /book/search:
     get:
       tags:
@@ -407,9 +419,9 @@ paths:
       parameters:
         - name: "query"
           in: "query"
-          description: "generic search query for the book"
           required: false
           type: "string"
+          description: "generic search query for the book"
         - name: "isbn"
           in: "query"
           required: false
@@ -444,15 +456,15 @@ paths:
           type: "string"
         - name: "offset"
           in: "query"
-          description: "Defaults to 0"
           required: false
           type: "integer"
+          description: "Defaults to 0"
           x-example: 10
         - name: "limit"
           in: "query"
-          description: "Defaults to 20"
           required: false
           type: "integer"
+          description: "Defaults to 20"
           x-example: 50
         - name: "orderby"
           in: "query"
@@ -460,14 +472,18 @@ paths:
           type: "string"
         - name: "extra"
           in: "query"
-          description: "Additional filtering parameter. Might be useful in the future"
           required: false
           type: "string"
+          description: "Additional filtering parameter. Might be useful in the future"
       responses:
         200:
           description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
           examples:
-            application/json: "[\n  {\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
+            application/json: "[\n{\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
               \ #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\": \"Veronica\
               \ Roth\",\n    \"description\": \"Veronica Roth, born in 1988, is a\
               \ renowned novelist and short story writer of American origin.\",\n\
@@ -480,16 +496,12 @@ paths:
               : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
               \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
               ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-              ,\n    \"dystopian\",\n    \"dystopia\"\n  ]\n}\n]"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Book"
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }\n]"
         400:
           description: "At least one parameter must be specified"
         404:
           description: "Book not found"
-      x-swagger-router-controller: "Book"
   /user/register:
     post:
       tags:
@@ -500,11 +512,16 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - in: "body"
-          name: "body"
+        - name: "body"
+          in: "body"
           required: true
           schema:
             $ref: "#/definitions/User"
+          x-examples:
+            application/json: "{\n\n   \"id\":45,\n\n   \"name\":\"Alberto\",\n\n  \
+            \ \"surname\":\"Rossi\",\n\n   \"email\":\"alberto.rossi@gmail.com\",\n\
+            \n   \"birthdate\":\"1989-01-01\",\n\n   \"password\":\"abcde1234\"\n\n\
+            }"
       responses:
         200:
           description: "succesfull registration"
@@ -512,7 +529,6 @@ paths:
           description: "User already present"
         404:
           description: "unauthorized"
-      x-swagger-router-controller: "User"
   /user/login:
     post:
       tags:
@@ -523,17 +539,19 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - in: "body"
-          name: "body"
+        - name: "body"
+          in: "body"
           required: true
           schema:
             $ref: "#/definitions/login_request"
+          x-examples:
+            application/json: "{\n  \"username\":\"alberto.rossi@gmail.com\",\n   \"\
+            password\":\"abcde1234\"\n}"
       responses:
         200:
           description: "succesfull login"
         404:
           description: "unauthorized"
-      x-swagger-router-controller: "User"
   /user/logout:
     get:
       tags:
@@ -547,7 +565,6 @@ paths:
           description: "Status 200"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
   /user/addresses:
     get:
       tags:
@@ -558,20 +575,19 @@ paths:
       responses:
         200:
           description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Address"
           examples:
             application/json: "[\n{\n    \"id\": 14,\n    \"name\": \"aaaa bbb\",\n\
               \    \"address_line_1\": \"afadf\",\n    \"address_line_2\": \"asDASda\"\
               ,\n    \"cap\": 3423,\n    \"city\": \"DADSAD\",\n    \"country\": \"\
               ASAGGAS\"\n  }\n]"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Address"
         404:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
     post:
       tags:
         - "user"
@@ -579,11 +595,16 @@ paths:
       operationId: "userAddressPOST"
       consumes: []
       parameters:
-        - in: "body"
-          name: "body"
+        - name: "body"
+          in: "body"
           required: true
           schema:
             $ref: "#/definitions/Address"
+          x-examples:
+            application/json: "{\n    \"id\": 14,\n    \"name\": \"aaaa bbb\",\n   \
+            \ \"address_line_1\": \"afadf\",\n    \"address_line_2\": \"asDASda\"\
+            ,\n    \"cap\": 3423,\n    \"city\": \"DADSAD\",\n    \"country\": \"\
+            ASAGGAS\"\n  }"
       responses:
         200:
           description: "Status 200"
@@ -591,7 +612,6 @@ paths:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
     put:
       tags:
         - "user"
@@ -602,14 +622,19 @@ paths:
       parameters:
         - name: "addressID"
           in: "query"
-          description: "The identifier for the address to update"
           required: true
           type: "integer"
-        - in: "body"
-          name: "body"
+          description: "The identifier for the address to update"
+        - name: "body"
+          in: "body"
           required: true
           schema:
             $ref: "#/definitions/Address"
+          x-examples:
+            application/json: "{\n    \"id\": 14,\n    \"name\": \"aaaa bbb\",\n   \
+            \ \"address_line_1\": \"afadf\",\n    \"address_line_2\": \"asDASda\"\
+            ,\n    \"cap\": 3423,\n    \"city\": \"DADSAD\",\n    \"country\": \"\
+            ASAGGAS\"\n  }"
       responses:
         200:
           description: "Status 200"
@@ -619,7 +644,6 @@ paths:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
     delete:
       tags:
         - "user"
@@ -628,9 +652,9 @@ paths:
       parameters:
         - name: "addressID"
           in: "query"
-          description: "The id of the address to be removed"
           required: true
           type: "integer"
+          description: "The id of the address to be removed"
       responses:
         200:
           description: "The address has been removed"
@@ -640,7 +664,6 @@ paths:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
   /user/wishlist:
     get:
       tags:
@@ -651,8 +674,12 @@ paths:
       responses:
         200:
           description: "Status 200"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
           examples:
-            application/json: "[\n  {\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
+            application/json: "[\n{\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
               \ #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\": \"Veronica\
               \ Roth\",\n    \"description\": \"Veronica Roth, born in 1988, is a\
               \ renowned novelist and short story writer of American origin.\",\n\
@@ -665,16 +692,12 @@ paths:
               : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
               \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
               ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-              ,\n    \"dystopian\",\n    \"dystopia\"\n  ]\n}\n]"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Book"
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }\n]"
         404:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
     post:
       tags:
         - "user"
@@ -694,7 +717,6 @@ paths:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
     delete:
       tags:
         - "user"
@@ -703,9 +725,9 @@ paths:
       parameters:
         - name: "bookID"
           in: "query"
-          description: "The id of the book to be removed from the whishlist"
           required: true
           type: "integer"
+          description: "The id of the book to be removed from the whishlist"
       responses:
         200:
           description: "Status 200"
@@ -715,7 +737,6 @@ paths:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
   /user/orders:
     get:
       tags:
@@ -736,28 +757,34 @@ paths:
       responses:
         200:
           description: "Status 200"
-          examples:
-            application/json: "[\n  {\n   \"OrderID\":123456789,\n   \"user\":{\n\
-              \      \"id\":1,\n      \"name\":\"Alan\",\n      \"surname\":\"Turing\"\
-              ,\n      \"email\":\"alan.turing@example.com\",\n      \"birthdate\"\
-              :\"1989-01-01\"\n   },\n   \"books\":[\n      {\n         \"id\":0,\n\
-              \         \"title\":\"Il deserto dei tartari\",\n         \"author\"\
-              :\"Dino Buzzati\",\n         \"price\":{\n            \"value\":10,\n\
-              \            \"currency\":\"eur\"\n         }\n      },\n      {\n \
-              \        \"id\":1,\n         \"title\":\"Il deserto dei tartari\",\n\
-              \         \"author\":\"Dino Buzzati\",\n         \"price\":{\n     \
-              \       \"value\":10,\n            \"currency\":\"eur\"\n         }\n\
-              \      }\n   ],\n  \"amount\" : 450,\n  \"timestamp\": \"1989-01-01\"\
-              \n}\n]"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/Order"
+          examples:
+            application/json: "[\n  {\n   \"OrderID\":123456789,\n   \"user\":{\n\
+              \      \"id\":1,\n      \"name\":\"Alan\",\n      \"surname\":\"Turing\"\
+              ,\n      \"email\":\"alan.turing@example.com\",\n      \"birthdate\"\
+              :\"1989-01-01\"\n   },\n   \"books\":[\n     {\n  \"id\": 10,\n  \"\
+              title\": \"The Traitor (Divergent, #0.4)\",\n  \"author\": {\n    \"\
+              id\": 10,\n    \"name\": \"Veronica Roth\",\n    \"description\": \"\
+              Veronica Roth, born in 1988, is a renowned novelist and short story\
+              \ writer of American origin.\",\n    \"image_url\": \"https://images.gr-assets.com/authors/1544540525p8/4039811.jpg\"\
+              \n  },\n  \"description\": \"The Traitor takes place two years after\
+              \ \\\"The Son\\\" and runs parallel with the early events in Divergent.\"\
+              ,\n  \"publisher\": \"Katherine Tegen Books\",\n  \"price\": 20.25,\n\
+              \  \"isbn\": \"006228567X\",\n  \"isbn13\": \"9780062285676\",\n  \"\
+              publication_year\": 2014,\n  \"publication_month\": 7,\n  \"image_href\"\
+              : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
+              \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
+              ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }\n   ],\n  \"amount\" :\
+              \ 450,\n  \"timestamp\": \"1989-01-01\"\n}\n]"
         404:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
     post:
       tags:
         - "user"
@@ -766,11 +793,30 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - in: "body"
-          name: "body"
+        - name: "body"
+          in: "body"
           required: true
           schema:
             $ref: "#/definitions/Order"
+          x-examples:
+            application/json: "{\n   \"OrderID\":123456789,\n   \"user\":{\n      \"\
+            id\":1,\n      \"name\":\"Alan\",\n      \"surname\":\"Turing\",\n   \
+            \   \"email\":\"alan.turing@example.com\",\n      \"birthdate\":\"1989-01-01\"\
+            \n   },\n   \"books\":[\n     {\n  \"id\": 10,\n  \"title\": \"The Traitor\
+            \ (Divergent, #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\"\
+            : \"Veronica Roth\",\n    \"description\": \"Veronica Roth, born in 1988,\
+            \ is a renowned novelist and short story writer of American origin.\"\
+            ,\n    \"image_url\": \"https://images.gr-assets.com/authors/1544540525p8/4039811.jpg\"\
+            \n  },\n  \"description\": \"The Traitor takes place two years after \\\
+            \"The Son\\\" and runs parallel with the early events in Divergent.\"\
+            ,\n  \"publisher\": \"Katherine Tegen Books\",\n  \"price\": 20.25,\n\
+            \  \"isbn\": \"006228567X\",\n  \"isbn13\": \"9780062285676\",\n  \"publication_year\"\
+            : 2014,\n  \"publication_month\": 7,\n  \"image_href\": \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\"\
+            ,\n  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
+            ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
+            ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"id\"\
+            ; 0,\n   \"name\": \"literature\"\n }\n }\n   ],\n  \"amount\" : 450,\n\
+            \  \"timestamp\": \"1989-01-01\"\n}"
       responses:
         200:
           description: "Status 200"
@@ -779,7 +825,6 @@ paths:
         404:
           description: "Status 404"
       security: []
-      x-swagger-router-controller: "User"
   /user/cart:
     get:
       tags:
@@ -792,11 +837,23 @@ paths:
           description: "Status 200"
           schema:
             $ref: "#/definitions/Cart"
+          examples:
+            application/json: "{\n\n   \"user\":{\n\n      \"id\":1,\n\n      \"name\"\
+              :\"Alan\",\n\n      \"surname\":\"Turing\",\n\n      \"email\":\"alan.turing@example.com\"\
+              ,\n\n      \"birthdate\":\"1989-01-01\"\n\n   },\n\n   \"books\":[\n\
+              \n      {\n\n         \"id\":0,\n\n         \"title\":\"Il deserto dei\
+              \ tartari\",\n\n         \"author\":\"Dino Buzzati\",\n\n         \"\
+              price\":{\n\n            \"value\":10,\n\n            \"currency\":\"\
+              eur\"\n\n         }\n\n      },\n\n      {\n\n         \"id\":1,\n\n\
+              \         \"title\":\"Il deserto dei tartari\",\n\n         \"author\"\
+              :\"Dino Buzzati\",\n\n         \"price\":{\n\n            \"value\"\
+              :10,\n\n            \"currency\":\"eur\"\n\n         }\n\n      }\n\n\
+              \   ],\n\n  \"amount\" : 450,\n\n  \"timestamp\": \"1989-01-01\"\n\n\
+              }"
         404:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
     put:
       tags:
         - "user"
@@ -805,17 +862,18 @@ paths:
       consumes:
         - "application/json"
       parameters:
-        - in: "body"
-          name: "body"
+        - name: "body"
+          in: "body"
           required: true
           schema:
             $ref: "#/definitions/update_cart_request"
+          x-examples:
+            application/json: "{\n  \"bookID\": 0,\n  \"qty\": 3\n}"
       responses:
         200:
           description: "Status 200"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
     delete:
       tags:
         - "user"
@@ -829,7 +887,6 @@ paths:
           description: "Status 404"
       security:
         - BoBookyAuth: []
-      x-swagger-router-controller: "User"
   /events:
     get:
       tags:
@@ -842,22 +899,31 @@ paths:
       responses:
         200:
           description: "Status 200"
-          examples:
-            application/json: "[\n  {\n    \"related_book\": 1,\n    \"related_author\"\
-              : 6,\n    \"name\": \"name\",\n    \"description\": \"description\"\
-              ,\n    \"image_urls\": [\n      \"image_urls\",\n      \"image_urls\"\
-              \n    ],\n    \"location\": {\n      \"country\": \"country\",\n   \
-              \   \"cap\": 6,\n      \"city\": \"city\",\n      \"name\": \"name\"\
-              ,\n      \"address_line_1\": \"address_line_1\",\n      \"id\": 0,\n\
-              \      \"address_line_2\": \"address_line_2\"\n    },\n    \"id\": 0,\n\
-              \    \"timestamp\": \"2000-01-23T04:56:07.000+00:00\"\n  }\n]"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/Event"
+          examples:
+            application/json: "[\n {\n    \"id\": 244,\n    \"name\": \"Robert Kirkman's\
+              \ Event\",\n    \"description\": \"The event will take place on Monday,\
+              \ September 16 at 09PM at the Ney York Public Theater. The famous author\
+              \ Robert Kirkman will be our special guest presenting the book \\\"\
+              The Walking Dead, Vol. 01: Days Gone Bye\\\" by Scott Snyder and Greg\
+              \ Capullo. All sales of the book will benefit the Robert Kirkman Foundation.\
+              \ Please RSVP to the event page to be taken to the event. The event\
+              \ will take place at the Public Theater between 9AM and 10AM, and the\
+              \ book will be available for purchase at the bookstore that same evening.\"\
+              ,\n    \"timestamp\": \"2019-09-16T19:00:00.000Z\",\n    \"related_author\"\
+              : {\n      \"id\": 70,\n      \"name\": \"Robert Kirkman\"\n    },\n\
+              \    \"relater_book\": {\n      \"id\": 8845,\n      \"title\": \"The\
+              \ Walking Dead, Vol. 01: Days Gone Bye\"\n    },\n    \"image_urls\"\
+              : [\n      null,\n      null\n    ],\n    \"location\": {\n      \"\
+              id\": 50,\n      \"name\": \"Public Theater\",\n      \"address_line_1\"\
+              : \"425 Lafayette St\",\n      \"address_line_2\": null,\n      \"cap\"\
+              : 10003,\n      \"city\": \"Ney York\",\n      \"country\": \"USA\"\n\
+              \    }\n  }\n]"
         404:
           description: "Status 404"
-      x-swagger-router-controller: "Event"
   /event/{id}:
     get:
       tags:
@@ -866,19 +932,38 @@ paths:
       operationId: "eventIdGET"
       produces:
         - "application/json"
-      parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          type: "string"
+      parameters: []
       responses:
         200:
           description: "Status 200"
           schema:
             $ref: "#/definitions/Event"
+          examples:
+            application/json: "{\n    \"id\": 244,\n    \"name\": \"Robert Kirkman's\
+              \ Event\",\n    \"description\": \"The event will take place on Monday,\
+              \ September 16 at 09PM at the Ney York Public Theater. The famous author\
+              \ Robert Kirkman will be our special guest presenting the book \\\"\
+              The Walking Dead, Vol. 01: Days Gone Bye\\\" by Scott Snyder and Greg\
+              \ Capullo. All sales of the book will benefit the Robert Kirkman Foundation.\
+              \ Please RSVP to the event page to be taken to the event. The event\
+              \ will take place at the Public Theater between 9AM and 10AM, and the\
+              \ book will be available for purchase at the bookstore that same evening.\"\
+              ,\n    \"timestamp\": \"2019-09-16T19:00:00.000Z\",\n    \"related_author\"\
+              : {\n      \"id\": 70,\n      \"name\": \"Robert Kirkman\"\n    },\n\
+              \    \"relater_book\": {\n      \"id\": 8845,\n      \"title\": \"The\
+              \ Walking Dead, Vol. 01: Days Gone Bye\"\n    },\n    \"image_urls\"\
+              : [\n      null,\n      null\n    ],\n    \"location\": {\n      \"\
+              id\": 50,\n      \"name\": \"Public Theater\",\n      \"address_line_1\"\
+              : \"425 Lafayette St\",\n      \"address_line_2\": null,\n      \"cap\"\
+              : 10003,\n      \"city\": \"Ney York\",\n      \"country\": \"USA\"\n\
+              \    }\n  }"
         404:
           description: "Status 404"
-      x-swagger-router-controller: "Event"
+    parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
   /events/search:
     get:
       tags:
@@ -890,24 +975,24 @@ paths:
       parameters:
         - name: "query_string"
           in: "query"
-          description: "The search query"
           required: false
           type: "string"
+          description: "The search query"
         - name: "name"
           in: "query"
-          description: "The name of the event"
           required: false
           type: "string"
+          description: "The name of the event"
         - name: "author_name"
           in: "query"
-          description: "The name of the author for the event"
           required: false
           type: "string"
+          description: "The name of the author for the event"
         - name: "authorID"
           in: "query"
-          description: "The id of the author for the event"
           required: false
           type: "integer"
+          description: "The id of the author for the event"
         - name: "book_name"
           in: "query"
           required: false
@@ -958,11 +1043,29 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Event"
+          examples:
+            application/json: "[\n  {\n    \"id\": 244,\n    \"name\": \"Robert Kirkman's\
+              \ Event\",\n    \"description\": \"The event will take place on Monday,\
+              \ September 16 at 09PM at the Ney York Public Theater. The famous author\
+              \ Robert Kirkman will be our special guest presenting the book \\\"\
+              The Walking Dead, Vol. 01: Days Gone Bye\\\" by Scott Snyder and Greg\
+              \ Capullo. All sales of the book will benefit the Robert Kirkman Foundation.\
+              \ Please RSVP to the event page to be taken to the event. The event\
+              \ will take place at the Public Theater between 9AM and 10AM, and the\
+              \ book will be available for purchase at the bookstore that same evening.\"\
+              ,\n    \"timestamp\": \"2019-09-16T19:00:00.000Z\",\n    \"related_author\"\
+              : {\n      \"id\": 70,\n      \"name\": \"Robert Kirkman\"\n    },\n\
+              \    \"relater_book\": {\n      \"id\": 8845,\n      \"title\": \"The\
+              \ Walking Dead, Vol. 01: Days Gone Bye\"\n    },\n    \"image_urls\"\
+              : [\n      null,\n      null\n    ],\n    \"location\": {\n      \"\
+              id\": 50,\n      \"name\": \"Public Theater\",\n      \"address_line_1\"\
+              : \"425 Lafayette St\",\n      \"address_line_2\": null,\n      \"cap\"\
+              : 10003,\n      \"city\": \"Ney York\",\n      \"country\": \"USA\"\n\
+              \    }\n  }\n]"
         400:
           description: "At least one query parameter must exist"
         404:
           description: "Status 404"
-      x-swagger-router-controller: "Event"
 securityDefinitions:
   BoBookyAuth:
     type: "basic"
@@ -1060,7 +1163,8 @@ definitions:
       : 7,\n  \"image_href\": \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\"\
       ,\n  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
       ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-      ,\n    \"dystopian\",\n    \"dystopia\"\n  ]\n}"
+      ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"id\"; 0,\n\
+      \   \"name\": \"literature\"\n }\n }"
   Genre:
     type: "object"
     properties:
@@ -1197,17 +1301,23 @@ definitions:
       timestamp:
         type: "string"
     description: "An order for some books"
-    example: "{\r\n   \"user\":{\r\n      \"id\":1,\r\n      \"name\":\"Alan\",\r\n\
-      \      \"surname\":\"Turing\",\r\n      \"email\":\"alan.turing@example.com\"\
-      ,\r\n      \"birthdate\":\"1989-01-01\"\r\n   },\r\n   \"books\":[\r\n     \
-      \ {\r\n         \"id\":0,\r\n         \"title\":\"Il deserto dei tartari\",\r\
-      \n         \"author\":\"Dino Buzzati\",\r\n         \"price\":{\r\n        \
-      \    \"value\":10,\r\n            \"currency\":\"eur\"\r\n         }\r\n   \
-      \   },\r\n      {\r\n         \"id\":1,\r\n         \"title\":\"Il deserto dei\
-      \ tartari\",\r\n         \"author\":\"Dino Buzzati\",\r\n         \"price\"\
-      :{\r\n            \"value\":10,\r\n            \"currency\":\"eur\"\r\n    \
-      \     }\r\n      }\r\n   ],\r\n  \"amount\" : 450,\r\n  \"timestamp\": \"1989-01-01\"\
-      \r\n}"
+    example: "{\n   \"user\":{\n      \"id\":1,\n      \"name\":\"Alan\",\n      \"\
+      surname\":\"Turing\",\n      \"email\":\"alan.turing@example.com\",\n      \"\
+      birthdate\":\"1989-01-01\"\n   },\n   \"books\":[\n      {\n  \"id\": 10,\n\
+      \  \"title\": \"The Traitor (Divergent, #0.4)\",\n  \"author\": {\n    \"id\"\
+      : 10,\n    \"name\": \"Veronica Roth\",\n    \"description\": \"Veronica Roth,\
+      \ born in 1988, is a renowned novelist and short story writer of American origin.\"\
+      ,\n    \"image_url\": \"https://images.gr-assets.com/authors/1544540525p8/4039811.jpg\"\
+      \n  },\n  \"description\": \"The Traitor takes place two years after \\\"The\
+      \ Son\\\" and runs parallel with the early events in Divergent.\",\n  \"publisher\"\
+      : \"Katherine Tegen Books\",\n  \"price\": 20.25,\n  \"isbn\": \"006228567X\"\
+      ,\n  \"isbn13\": \"9780062285676\",\n  \"publication_year\": 2014,\n  \"publication_month\"\
+      : 7,\n  \"image_href\": \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\"\
+      ,\n  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
+      ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
+      ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"id\"; 0,\n\
+      \   \"name\": \"literature\"\n }\n }\n   ],\n  \"amount\" : 450,\n  \"timestamp\"\
+      : \"1989-01-01\"\n}"
   CartBook:
     type: "object"
     required:
@@ -1239,6 +1349,7 @@ definitions:
       qty:
         type: "integer"
   Book_author:
+    type: "object"
     properties:
       id:
         type: "number"
@@ -1249,6 +1360,7 @@ definitions:
       image_url:
         type: "string"
   Review_author:
+    type: "object"
     properties:
       id:
         type: "number"
@@ -1261,6 +1373,7 @@ definitions:
       birthdate:
         type: "string"
   Event_location:
+    type: "object"
     properties:
       country:
         type: "string"
@@ -1277,12 +1390,14 @@ definitions:
       address_line_2:
         type: "string"
   Cart_price:
+    type: "object"
     properties:
       value:
         type: "number"
       currency:
         type: "string"
   Cart_books:
+    type: "object"
     properties:
       id:
         type: "number"
