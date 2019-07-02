@@ -111,7 +111,7 @@ $(() => {
                             });
                             order.amount = chart.Books.map(b => b.book.price * b.qty)
                                 .reduce((prev, curr) => prev + curr);
-
+                            console.log(order)
                             api.post.user.order(order)
                                 .then(() => {
                                     api.del.user.cart()

@@ -1134,11 +1134,11 @@ definitions:
   Address:
     type: "object"
     required:
-    - "address_line_1"
-    - "cap"
-    - "city"
-    - "country"
-    - "name"
+      - "address_line_1"
+      - "cap"
+      - "city"
+      - "country"
+      - "name"
     properties:
       id:
         type: "integer"
@@ -1218,8 +1218,8 @@ definitions:
   Theme:
     type: "object"
     required:
-    - "id"
-    - "name"
+      - "id"
+      - "name"
     properties:
       id:
         type: "integer"
@@ -1297,8 +1297,8 @@ definitions:
   Order:
     type: "object"
     required:
-    - "amount"
-    - "books"
+      - "amount"
+      - "books"
     properties:
       OrderID:
         type: "integer"
@@ -1363,8 +1363,8 @@ definitions:
   CartBook:
     type: "object"
     required:
-    - "book"
-    - "qty"
+      - "book"
+      - "qty"
     properties:
       book:
         $ref: "#/definitions/Book"
@@ -1373,8 +1373,8 @@ definitions:
   login_request:
     type: "object"
     required:
-    - "password"
-    - "username"
+      - "password"
+      - "username"
     properties:
       username:
         type: "string"
@@ -1383,15 +1383,14 @@ definitions:
   update_cart_request:
     type: "object"
     required:
-    - "bookID"
-    - "qty"
+      - "bookID"
+      - "qty"
     properties:
       bookID:
         type: "integer"
       qty:
         type: "integer"
   Book_author:
-    type: "object"
     properties:
       id:
         type: "number"
@@ -1402,7 +1401,6 @@ definitions:
       image_url:
         type: "string"
   Review_author:
-    type: "object"
     properties:
       id:
         type: "number"
@@ -1415,7 +1413,6 @@ definitions:
       birthdate:
         type: "string"
   Event_location:
-    type: "object"
     properties:
       country:
         type: "string"
@@ -1432,14 +1429,12 @@ definitions:
       address_line_2:
         type: "string"
   Cart_price:
-    type: "object"
     properties:
       value:
         type: "number"
       currency:
         type: "string"
   Cart_books:
-    type: "object"
     properties:
       id:
         type: "number"
