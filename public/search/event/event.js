@@ -59,7 +59,7 @@ $(() => {
         let get_filter = (key, _default = undefined) => args.has(key) ? args.get(key) : (_default !== undefined ? _default : 'default');
 
         let filters = {
-            date: get_filter('date'),
+            date: get_filter('date', ''),
             query: get_filter('q'),
             page: parseInt(get_filter('page', 0))
         };

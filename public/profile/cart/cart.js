@@ -103,6 +103,7 @@ $(() => {
                         .then(chart => {
                             let order = {};
                             order.address = addresses_map[address_id.attr('id')];
+                            delete order.address.address_line_2;
                             order.books = chart.Books;
                             order.books.forEach(book => {
                                 book.book.theme = {
