@@ -21,7 +21,7 @@
 <div class="section container main text-white">
     <div class="row" id="registration-form">
         <div class="col-12 mt-5">
-            <h2 class="font-weight-bold text-warning ml-3 mt-5 mb-4">Welcome!</h2>
+            <h2 class="font-weight-bold text-warning ml-3 mt-5 mb-4">Welcome, register here!</h2>
             <div class="container" style="border-width: 2px !important;">
                 <form class="needs-validation form-warning" id="register-form" novalidate>
                     <div class="form-row">
@@ -92,9 +92,12 @@
                                 Please repeat the password.
                             </div>
 
-                            <div class="container pr-0 my-3">
+                            <div class="container pr-0 my-3 d-flex justify-content-end">
+                                <button onclick="window.history.back();"
+                                        class="btn btn-outline-warning font-weight-bold rounded-pill my-5 mr-3">Cancel
+                                </button>
                                 <button type="submit"
-                                        class="btn btn-warning font-weight-bold rounded-pill my-5 float-right">Submit
+                                        class="btn btn-warning font-weight-bold rounded-pill my-5">Submit
                                 </button>
                             </div>
                         </div>
