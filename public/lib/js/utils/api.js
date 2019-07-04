@@ -192,7 +192,7 @@ export let get = {
     },
     address: () => {
         return make.get('/api/user/addresses')
-    }, //TODO: FIX THIS AND PUT IT INSIDE USER KEY!!!!! ASAP!!!!!
+    },
     chart: () => {
         return make.get('/api/user/cart')
     },
