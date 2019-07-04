@@ -30,9 +30,9 @@
 <body>
 <div class="container my-5">
     <h1 id="documentation-of-the-backend-part">Documentation of the Backend part</h1>
-    <div class="alert alert-primary">
-        <p>Deliverable D1</p>
-    </div>
+    <h4>
+        <div class="badge badge-primary">Deliverable D1</div>
+    </h4>
     <h3 id="general-group-information">General group information</h3>
     <table class="table">
         <thead class="thead-light">
@@ -74,22 +74,61 @@
     </table>
     <h3 id="links-to-other-deliverables">Links to other deliverables</h3>
     <ul class="list-group">
-        <li class="list-group-item">Deliverable D0: the web application is accessible at <a
-                href="https://bobooky.herokuapp.com">this
-            address</a>.
+        <li class="list-group-item">
+            <h4>
+                <div class="badge badge-primary">Deliverable D0</div>
+            </h4>
+            The web application is accessible at <a
+                href="https://bobooky.herokuapp.com"><b>this
+            address</b></a>.
         </li>
-        <li class="list-group-item">Deliverable D2: the YAML file containing the specification of the app API can be
+        <li class="list-group-item">
+            <h4>
+                <div class="badge badge-primary">Deliverable D2</div>
+            </h4>
+            The YAML file containing the specification of the app API can be
             found at <a
-                    href="https://bobooky.herokuapp.com/backend/spec.yaml">this address</a>.
+                href="https://bobooky.herokuapp.com/backend/spec.yaml"><b>this address</b></a>.
         </li>
-        <li class="list-group-item">Deliverable D3: the SwaggerUI page of the same API is available at <a
-                href="https://bobooky.herokuapp.com/backend/swaggerui">this address</a>.
+        <li class="list-group-item">
+            <h4>
+                <div class="badge badge-primary">Deliverable D3</div>
+            </h4>
+            The SwaggerUI page of the same API is available at <a
+                href="https://bobooky.herokuapp.com/backend/swaggerui"><b>this address</b></a>.
         </li>
-        <li class="list-group-item">Deliverable D4: the source code of D0 is available as a zip file at <a
-                href="https://bobooky.herokuapp.com/backend/app.zip">this address</a>.
+        <li class="list-group-item">
+            <h4>
+                <div class="badge badge-primary">Deliverable D4</div>
+            </h4>
+            The source code of D0 is available as a zip file at <a
+                href="https://bobooky.herokuapp.com/backend/app.zip"><b>this address</b></a>.
+            <div class="mt-4">
+                <h6>
+                    <div class="badge badge-warning">How to authenticate API requests</div>
+                </h6>
+                <p><a href="https://bobooky.herokuapp.com">Open D0 and login</a> (top right user icon) with the
+                    following credentials:</p>
+                <h6>Username
+                    <div class="badge badge-secondary">mario.rossi@fakemail.com</div>
+                </h6>
+                <h6>Password
+                    <div class="badge badge-secondary">12345678</div>
+                </h6>
+                <p>At this point you can access protected API requests.
+                    <br>
+                    <b>Note:</b> the swaggerUI login functionality does
+                    not work with our PassportJS strategy. so this is the only way to authenticate and test secure api
+                    requests</p>
+
+            </div>
         </li>
-        <li class="list-group-item">Deliverable D5: the address of the online source control repository is available <a
-                href="https://github.com/ab3llini/BoBooky">this address</a>.
+        <li class="list-group-item">
+            <h4>
+                <div class="badge badge-primary">Deliverable D5</div>
+            </h4>
+            The address of the online source control repository is available <a
+                href="https://github.com/ab3llini/BoBooky"><b>this address</b></a>.
             <br>We hereby declare that this is a private
             repository and, upon request, we will give access to the instructors.
         </li>
@@ -303,7 +342,8 @@
 
     <h5 id="runtimes">Runtimes</h5>
     <ul class="list-group">
-        <li class="list-group-item"><strong>NodeJS</strong> : We used the NodeJs JavaScript runtime built on Chrome's V8 JavaScript engine to fully develop our whole backend server.
+        <li class="list-group-item"><strong>NodeJS</strong> : We used the NodeJs JavaScript runtime built on Chrome's V8
+            JavaScript engine to fully develop our whole backend server.
         </li>
     </ul>
 
@@ -453,7 +493,8 @@
         <p><em>Describe here how development tasks have been subdivided among members of the group</em></p>
     </div>
     <ul class="list-group">
-        <li class="list-group-item"><p><strong>Alberto Mario Bellini</strong> worked both on the backend and on the frontend of the
+        <li class="list-group-item"><p><strong>Alberto Mario Bellini</strong> worked both on the backend and on the
+            frontend of the
             application. For what
             concerns
             the backend he helped developing the OpenAPI specification (50%) and implemented 30% of the queries to the
@@ -474,7 +515,8 @@
             developing a series of utilities for interacting with the API Interface and others to load HTML components
             and
             handle user session.</p></li>
-        <li class="list-group-item"><p><strong>Gianpaolo Di Pietro</strong> worked both on the frontend and backend of the application.
+        <li class="list-group-item"><p><strong>Gianpaolo Di Pietro</strong> worked both on the frontend and backend of
+            the application.
             For the backend part he
             wrote
             the API specification (5% of the time) and he implemented most of the queries in order to map the
@@ -490,11 +532,19 @@
             we
             have in the database and upload them using SQL queries (5% of the time).</p></li>
         <li class="list-group-item"><p>
-            <strong>Luna Alessia Rota</strong> as designer worked mainly on the website layout and content organization and on the frontend of the application.
-            For the realization of the website layout Luna planned at first the desired User Experience, in order to build an easy-to-use and entertaining website.
-            She focused her attention on the wireframe design on Adobe XD and Illustrator (30% of the time) and then on the realization of all the UI element necessary for the application frontend development.
-            While planning the content organization on the website she worked simultaneously on the C-IDM and L-IDM schemes (5% of the time) and at the same time she wrote the draft of the ER diagram (5%) following the technical instructions of her collegues, in order to keep logically aligned all the components of the application.
-            For what concern the frontend Luna implemented some of the web pages working mainly on the HTML and SCSS, but she spend most of her time fixing all the pages alignment and style (60% of the time) through Bootstrap personalized functions and SCSS.
+            <strong>Luna Alessia Rota</strong> as designer worked mainly on the website layout and content organization
+            and on the frontend of the application.
+            For the realization of the website layout Luna planned at first the desired User Experience, in order to
+            build an easy-to-use and entertaining website.
+            She focused her attention on the wireframe design on Adobe XD and Illustrator (30% of the time) and then on
+            the realization of all the UI element necessary for the application frontend development.
+            While planning the content organization on the website she worked simultaneously on the C-IDM and L-IDM
+            schemes (5% of the time) and at the same time she wrote the draft of the ER diagram (5%) following the
+            technical instructions of her collegues, in order to keep logically aligned all the components of the
+            application.
+            For what concern the frontend Luna implemented some of the web pages working mainly on the HTML and SCSS,
+            but she spend most of her time fixing all the pages alignment and style (60% of the time) through Bootstrap
+            personalized functions and SCSS.
         </p></li>
     </ul>
     <h5 id="analysis-of-existing-api">Analysis of existing API</h5>
@@ -550,10 +600,16 @@
             responsive to different screen sizes, how to manage the communication between the application server, the
             database and the front-end application.</p></li>
         <li class="list-group-item"><p>
-            <strong>Luna Alessia Rota</strong> learned how to design a website from a complete new point of view. She now knows what there is behind a simple UI decision and how much it can affect the development work.
-            She improved her HTML skills and she learned how to use the potentiality of SCSS in a proper way. She learned how to design more efficient web pages and now she is used to think by container, row and column from the first draft of wireframes.
-            Thanks to Bootstrap she now knows how to quickly build a responsive web page from zero and she finally understood what it is needed to make a working website for real.
-            Luna is currently doing an internship where her main works consist in designing wireframes and UI on graphic programs, but she noticed the improvement she obtained with this course when she was able to understand and collaborate with the web developers of the company.
+            <strong>Luna Alessia Rota</strong> learned how to design a website from a complete new point of view. She
+            now knows what there is behind a simple UI decision and how much it can affect the development work.
+            She improved her HTML skills and she learned how to use the potentiality of SCSS in a proper way. She
+            learned how to design more efficient web pages and now she is used to think by container, row and column
+            from the first draft of wireframes.
+            Thanks to Bootstrap she now knows how to quickly build a responsive web page from zero and she finally
+            understood what it is needed to make a working website for real.
+            Luna is currently doing an internship where her main works consist in designing wireframes and UI on graphic
+            programs, but she noticed the improvement she obtained with this course when she was able to understand and
+            collaborate with the web developers of the company.
             She would like to deepen JS, and she will continue for sure to experiment on website development.
         </p></li>
     </ul>

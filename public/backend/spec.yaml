@@ -70,6 +70,10 @@ paths:
       responses:
         200:
           description: "Status 200"
+          examples:
+            application/json: "{\n    \"image_url\": \"image_url\",\n    \"name\"\
+              : \"name\",\n    \"description\": \"description\",\n    \"id\": 0\n\
+              \  }"
           schema:
             $ref: "#/definitions/Author"
         400:
@@ -126,6 +130,12 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/Review"
+          x-examples:
+            application/json: "{\n   \"author\":{\n      \"id\":1,\n      \"name\":\"\
+            Alan\",\n      \"surname\":\"Turing\",\n      \"email\":\"alan.turing@example.com\"\
+            ,\n      \"birthdate\":\"1989-01-01\"\n   },\n   \"rating\":6.027456183070403,\n\
+            \   \"id\":0,\n   \"title\":\"title\",\n   \"body\":\"body\",\n   \"timestamp\"\
+            :\"2000-01-23T04:56:07.000+00:00\"\n}"
       responses:
         200:
           description: "Status 200"
@@ -200,7 +210,8 @@ paths:
               : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
               \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
               ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-              ,\n    \"dystopian\",\n    \"dystopia\"\n  ]\n}\n]"
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }\n]"
           schema:
             type: "array"
             items:
@@ -227,6 +238,22 @@ paths:
       responses:
         200:
           description: "successful operation"
+          examples:
+            application/json: "{\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
+              \ #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\": \"Veronica\
+              \ Roth\",\n    \"description\": \"Veronica Roth, born in 1988, is a\
+              \ renowned novelist and short story writer of American origin.\",\n\
+              \    \"image_url\": \"https://images.gr-assets.com/authors/1544540525p8/4039811.jpg\"\
+              \n  },\n  \"description\": \"The Traitor takes place two years after\
+              \ \\\"The Son\\\" and runs parallel with the early events in Divergent.\"\
+              ,\n  \"publisher\": \"Katherine Tegen Books\",\n  \"price\": 20.25,\n\
+              \  \"isbn\": \"006228567X\",\n  \"isbn13\": \"9780062285676\",\n  \"\
+              publication_year\": 2014,\n  \"publication_month\": 7,\n  \"image_href\"\
+              : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
+              \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
+              ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }"
           schema:
             $ref: "#/definitions/Book"
         400:
@@ -251,7 +278,7 @@ paths:
         200:
           description: "Status 200"
           examples:
-            application/json: "[\n  {\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
+            application/json: "[\n{\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
               \ #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\": \"Veronica\
               \ Roth\",\n    \"description\": \"Veronica Roth, born in 1988, is a\
               \ renowned novelist and short story writer of American origin.\",\n\
@@ -264,7 +291,8 @@ paths:
               : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
               \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
               ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-              ,\n    \"dystopian\",\n    \"dystopia\"\n  ]\n}\n]"
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }\n]"
           schema:
             type: "array"
             items:
@@ -292,7 +320,7 @@ paths:
             application/json: "[\n  {\n   \"author\":{\n      \"id\":1,\n      \"\
               name\":\"Alan\",\n      \"surname\":\"Turing\",\n      \"email\":\"\
               alan.turing@example.com\",\n      \"birthdate\":\"1989-01-01\"\n   },\n\
-              \   \"rating\":6.027456183070403,\n   \"id\":0,\n   \"title\":\"title\"\
+              \   \"rating\":4.027456183070403,\n   \"id\":0,\n   \"title\":\"title\"\
               ,\n   \"body\":\"body\",\n   \"timestamp\":\"2000-01-23T04:56:07.000+00:00\"\
               \n}\n]"
           schema:
@@ -321,6 +349,12 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/Review"
+          x-examples:
+            application/json: "{\n   \"author\":{\n      \"id\":1,\n      \"name\":\"\
+            Alan\",\n      \"surname\":\"Turing\",\n      \"email\":\"alan.turing@example.com\"\
+            ,\n      \"birthdate\":\"1989-01-01\"\n   },\n   \"rating\":4.027456183070403,\n\
+            \   \"id\":0,\n   \"title\":\"title\",\n   \"body\":\"body\",\n   \"timestamp\"\
+            :\"2000-01-23T04:56:07.000+00:00\"\n}"
       responses:
         200:
           description: "Status 200"
@@ -362,6 +396,8 @@ paths:
       responses:
         200:
           description: "Status 200"
+          examples:
+            application/json: "[\n  {\n  \"name\": \"name\",\n  \"id\": 0\n}\n]"
           schema:
             type: "array"
             items:
@@ -467,7 +503,7 @@ paths:
         200:
           description: "successful operation"
           examples:
-            application/json: "[\n  {\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
+            application/json: "[\n{\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
               \ #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\": \"Veronica\
               \ Roth\",\n    \"description\": \"Veronica Roth, born in 1988, is a\
               \ renowned novelist and short story writer of American origin.\",\n\
@@ -480,7 +516,8 @@ paths:
               : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
               \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
               ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-              ,\n    \"dystopian\",\n    \"dystopia\"\n  ]\n}\n]"
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }\n]"
           schema:
             type: "array"
             items:
@@ -505,6 +542,11 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/User"
+          x-examples:
+            application/json: "{\n\n   \"id\":45,\n\n   \"name\":\"Alberto\",\n\n  \
+            \ \"surname\":\"Rossi\",\n\n   \"email\":\"alberto.rossi@gmail.com\",\n\
+            \n   \"birthdate\":\"1989-01-01\",\n\n   \"password\":\"abcde1234\"\n\n\
+            }"
       responses:
         200:
           description: "succesfull registration"
@@ -528,6 +570,9 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/login_request"
+          x-examples:
+            application/json: "{\n  \"username\":\"alberto.rossi@gmail.com\",\n   \"\
+            password\":\"abcde1234\"\n}"
       responses:
         200:
           description: "succesfull login"
@@ -584,6 +629,11 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/Address"
+          x-examples:
+            application/json: "{\n    \"id\": 14,\n    \"name\": \"aaaa bbb\",\n   \
+            \ \"address_line_1\": \"afadf\",\n    \"address_line_2\": \"asDASda\"\
+            ,\n    \"cap\": 3423,\n    \"city\": \"DADSAD\",\n    \"country\": \"\
+            ASAGGAS\"\n  }"
       responses:
         200:
           description: "Status 200"
@@ -610,6 +660,11 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/Address"
+          x-examples:
+            application/json: "{\n    \"id\": 14,\n    \"name\": \"aaaa bbb\",\n   \
+            \ \"address_line_1\": \"afadf\",\n    \"address_line_2\": \"asDASda\"\
+            ,\n    \"cap\": 3423,\n    \"city\": \"DADSAD\",\n    \"country\": \"\
+            ASAGGAS\"\n  }"
       responses:
         200:
           description: "Status 200"
@@ -652,7 +707,7 @@ paths:
         200:
           description: "Status 200"
           examples:
-            application/json: "[\n  {\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
+            application/json: "[\n{\n  \"id\": 10,\n  \"title\": \"The Traitor (Divergent,\
               \ #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\": \"Veronica\
               \ Roth\",\n    \"description\": \"Veronica Roth, born in 1988, is a\
               \ renowned novelist and short story writer of American origin.\",\n\
@@ -665,7 +720,8 @@ paths:
               : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
               \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
               ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-              ,\n    \"dystopian\",\n    \"dystopia\"\n  ]\n}\n]"
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }\n]"
           schema:
             type: "array"
             items:
@@ -740,15 +796,22 @@ paths:
             application/json: "[\n  {\n   \"OrderID\":123456789,\n   \"user\":{\n\
               \      \"id\":1,\n      \"name\":\"Alan\",\n      \"surname\":\"Turing\"\
               ,\n      \"email\":\"alan.turing@example.com\",\n      \"birthdate\"\
-              :\"1989-01-01\"\n   },\n   \"books\":[\n      {\n         \"id\":0,\n\
-              \         \"title\":\"Il deserto dei tartari\",\n         \"author\"\
-              :\"Dino Buzzati\",\n         \"price\":{\n            \"value\":10,\n\
-              \            \"currency\":\"eur\"\n         }\n      },\n      {\n \
-              \        \"id\":1,\n         \"title\":\"Il deserto dei tartari\",\n\
-              \         \"author\":\"Dino Buzzati\",\n         \"price\":{\n     \
-              \       \"value\":10,\n            \"currency\":\"eur\"\n         }\n\
-              \      }\n   ],\n  \"amount\" : 450,\n  \"timestamp\": \"1989-01-01\"\
-              \n}\n]"
+              :\"1989-01-01\"\n   },\n   \"books\":[\n     {\n  \"id\": 10,\n  \"\
+              title\": \"The Traitor (Divergent, #0.4)\",\n  \"author\": {\n    \"\
+              id\": 10,\n    \"name\": \"Veronica Roth\",\n    \"description\": \"\
+              Veronica Roth, born in 1988, is a renowned novelist and short story\
+              \ writer of American origin.\",\n    \"image_url\": \"https://images.gr-assets.com/authors/1544540525p8/4039811.jpg\"\
+              \n  },\n  \"description\": \"The Traitor takes place two years after\
+              \ \\\"The Son\\\" and runs parallel with the early events in Divergent.\"\
+              ,\n  \"publisher\": \"Katherine Tegen Books\",\n  \"price\": 20.25,\n\
+              \  \"isbn\": \"006228567X\",\n  \"isbn13\": \"9780062285676\",\n  \"\
+              publication_year\": 2014,\n  \"publication_month\": 7,\n  \"image_href\"\
+              : \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\",\n\
+              \  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
+              ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
+              ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"\
+              id\"; 0,\n   \"name\": \"literature\"\n }\n }\n   ],\n  \"amount\" :\
+              \ 450,\n  \"timestamp\": \"1989-01-01\"\n}\n]"
           schema:
             type: "array"
             items:
@@ -771,6 +834,8 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/Order"
+          x-examples:
+            application/json: "This request is too complicated to provide an example. For instance the order address must exist. Please do it through D0"
       responses:
         200:
           description: "Status 200"
@@ -790,6 +855,19 @@ paths:
       responses:
         200:
           description: "Status 200"
+          examples:
+            application/json: "{\n\n   \"user\":{\n\n      \"id\":1,\n\n      \"name\"\
+              :\"Alan\",\n\n      \"surname\":\"Turing\",\n\n      \"email\":\"alan.turing@example.com\"\
+              ,\n\n      \"birthdate\":\"1989-01-01\"\n\n   },\n\n   \"books\":[\n\
+              \n      {\n\n         \"id\":0,\n\n         \"title\":\"Il deserto dei\
+              \ tartari\",\n\n         \"author\":\"Dino Buzzati\",\n\n         \"\
+              price\":{\n\n            \"value\":10,\n\n            \"currency\":\"\
+              eur\"\n\n         }\n\n      },\n\n      {\n\n         \"id\":1,\n\n\
+              \         \"title\":\"Il deserto dei tartari\",\n\n         \"author\"\
+              :\"Dino Buzzati\",\n\n         \"price\":{\n\n            \"value\"\
+              :10,\n\n            \"currency\":\"eur\"\n\n         }\n\n      }\n\n\
+              \   ],\n\n  \"amount\" : 450,\n\n  \"timestamp\": \"1989-01-01\"\n\n\
+              }"
           schema:
             $ref: "#/definitions/Cart"
         404:
@@ -810,6 +888,8 @@ paths:
           required: true
           schema:
             $ref: "#/definitions/update_cart_request"
+          x-examples:
+            application/json: "{\n  \"bookID\": 0,\n  \"qty\": 3\n}"
       responses:
         200:
           description: "Status 200"
@@ -843,14 +923,24 @@ paths:
         200:
           description: "Status 200"
           examples:
-            application/json: "[\n  {\n    \"related_book\": 1,\n    \"related_author\"\
-              : 6,\n    \"name\": \"name\",\n    \"description\": \"description\"\
-              ,\n    \"image_urls\": [\n      \"image_urls\",\n      \"image_urls\"\
-              \n    ],\n    \"location\": {\n      \"country\": \"country\",\n   \
-              \   \"cap\": 6,\n      \"city\": \"city\",\n      \"name\": \"name\"\
-              ,\n      \"address_line_1\": \"address_line_1\",\n      \"id\": 0,\n\
-              \      \"address_line_2\": \"address_line_2\"\n    },\n    \"id\": 0,\n\
-              \    \"timestamp\": \"2000-01-23T04:56:07.000+00:00\"\n  }\n]"
+            application/json: "[\n {\n    \"id\": 244,\n    \"name\": \"Robert Kirkman's\
+              \ Event\",\n    \"description\": \"The event will take place on Monday,\
+              \ September 16 at 09PM at the Ney York Public Theater. The famous author\
+              \ Robert Kirkman will be our special guest presenting the book \\\"\
+              The Walking Dead, Vol. 01: Days Gone Bye\\\" by Scott Snyder and Greg\
+              \ Capullo. All sales of the book will benefit the Robert Kirkman Foundation.\
+              \ Please RSVP to the event page to be taken to the event. The event\
+              \ will take place at the Public Theater between 9AM and 10AM, and the\
+              \ book will be available for purchase at the bookstore that same evening.\"\
+              ,\n    \"timestamp\": \"2019-09-16T19:00:00.000Z\",\n    \"related_author\"\
+              : {\n      \"id\": 70,\n      \"name\": \"Robert Kirkman\"\n    },\n\
+              \    \"relater_book\": {\n      \"id\": 8845,\n      \"title\": \"The\
+              \ Walking Dead, Vol. 01: Days Gone Bye\"\n    },\n    \"image_urls\"\
+              : [\n      null,\n      null\n    ],\n    \"location\": {\n      \"\
+              id\": 50,\n      \"name\": \"Public Theater\",\n      \"address_line_1\"\
+              : \"425 Lafayette St\",\n      \"address_line_2\": null,\n      \"cap\"\
+              : 10003,\n      \"city\": \"Ney York\",\n      \"country\": \"USA\"\n\
+              \    }\n  }\n]"
           schema:
             type: "array"
             items:
@@ -874,6 +964,25 @@ paths:
       responses:
         200:
           description: "Status 200"
+          examples:
+            application/json: "{\n    \"id\": 244,\n    \"name\": \"Robert Kirkman's\
+              \ Event\",\n    \"description\": \"The event will take place on Monday,\
+              \ September 16 at 09PM at the Ney York Public Theater. The famous author\
+              \ Robert Kirkman will be our special guest presenting the book \\\"\
+              The Walking Dead, Vol. 01: Days Gone Bye\\\" by Scott Snyder and Greg\
+              \ Capullo. All sales of the book will benefit the Robert Kirkman Foundation.\
+              \ Please RSVP to the event page to be taken to the event. The event\
+              \ will take place at the Public Theater between 9AM and 10AM, and the\
+              \ book will be available for purchase at the bookstore that same evening.\"\
+              ,\n    \"timestamp\": \"2019-09-16T19:00:00.000Z\",\n    \"related_author\"\
+              : {\n      \"id\": 70,\n      \"name\": \"Robert Kirkman\"\n    },\n\
+              \    \"relater_book\": {\n      \"id\": 8845,\n      \"title\": \"The\
+              \ Walking Dead, Vol. 01: Days Gone Bye\"\n    },\n    \"image_urls\"\
+              : [\n      null,\n      null\n    ],\n    \"location\": {\n      \"\
+              id\": 50,\n      \"name\": \"Public Theater\",\n      \"address_line_1\"\
+              : \"425 Lafayette St\",\n      \"address_line_2\": null,\n      \"cap\"\
+              : 10003,\n      \"city\": \"Ney York\",\n      \"country\": \"USA\"\n\
+              \    }\n  }"
           schema:
             $ref: "#/definitions/Event"
         404:
@@ -954,6 +1063,25 @@ paths:
       responses:
         200:
           description: "Status 200"
+          examples:
+            application/json: "[\n  {\n    \"id\": 244,\n    \"name\": \"Robert Kirkman's\
+              \ Event\",\n    \"description\": \"The event will take place on Monday,\
+              \ September 16 at 09PM at the Ney York Public Theater. The famous author\
+              \ Robert Kirkman will be our special guest presenting the book \\\"\
+              The Walking Dead, Vol. 01: Days Gone Bye\\\" by Scott Snyder and Greg\
+              \ Capullo. All sales of the book will benefit the Robert Kirkman Foundation.\
+              \ Please RSVP to the event page to be taken to the event. The event\
+              \ will take place at the Public Theater between 9AM and 10AM, and the\
+              \ book will be available for purchase at the bookstore that same evening.\"\
+              ,\n    \"timestamp\": \"2019-09-16T19:00:00.000Z\",\n    \"related_author\"\
+              : {\n      \"id\": 70,\n      \"name\": \"Robert Kirkman\"\n    },\n\
+              \    \"relater_book\": {\n      \"id\": 8845,\n      \"title\": \"The\
+              \ Walking Dead, Vol. 01: Days Gone Bye\"\n    },\n    \"image_urls\"\
+              : [\n      null,\n      null\n    ],\n    \"location\": {\n      \"\
+              id\": 50,\n      \"name\": \"Public Theater\",\n      \"address_line_1\"\
+              : \"425 Lafayette St\",\n      \"address_line_2\": null,\n      \"cap\"\
+              : 10003,\n      \"city\": \"Ney York\",\n      \"country\": \"USA\"\n\
+              \    }\n  }\n]"
           schema:
             type: "array"
             items:
@@ -1060,7 +1188,8 @@ definitions:
       : 7,\n  \"image_href\": \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\"\
       ,\n  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
       ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-      ,\n    \"dystopian\",\n    \"dystopia\"\n  ]\n}"
+      ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"id\"; 0,\n\
+      \   \"name\": \"literature\"\n }\n }"
   Genre:
     type: "object"
     properties:
@@ -1197,17 +1326,23 @@ definitions:
       timestamp:
         type: "string"
     description: "An order for some books"
-    example: "{\r\n   \"user\":{\r\n      \"id\":1,\r\n      \"name\":\"Alan\",\r\n\
-      \      \"surname\":\"Turing\",\r\n      \"email\":\"alan.turing@example.com\"\
-      ,\r\n      \"birthdate\":\"1989-01-01\"\r\n   },\r\n   \"books\":[\r\n     \
-      \ {\r\n         \"id\":0,\r\n         \"title\":\"Il deserto dei tartari\",\r\
-      \n         \"author\":\"Dino Buzzati\",\r\n         \"price\":{\r\n        \
-      \    \"value\":10,\r\n            \"currency\":\"eur\"\r\n         }\r\n   \
-      \   },\r\n      {\r\n         \"id\":1,\r\n         \"title\":\"Il deserto dei\
-      \ tartari\",\r\n         \"author\":\"Dino Buzzati\",\r\n         \"price\"\
-      :{\r\n            \"value\":10,\r\n            \"currency\":\"eur\"\r\n    \
-      \     }\r\n      }\r\n   ],\r\n  \"amount\" : 450,\r\n  \"timestamp\": \"1989-01-01\"\
-      \r\n}"
+    example: "{\n   \"user\":{\n      \"id\":1,\n      \"name\":\"Alan\",\n      \"\
+      surname\":\"Turing\",\n      \"email\":\"alan.turing@example.com\",\n      \"\
+      birthdate\":\"1989-01-01\"\n   },\n   \"books\":[\n      {\n  \"id\": 10,\n\
+      \  \"title\": \"The Traitor (Divergent, #0.4)\",\n  \"author\": {\n    \"id\"\
+      : 10,\n    \"name\": \"Veronica Roth\",\n    \"description\": \"Veronica Roth,\
+      \ born in 1988, is a renowned novelist and short story writer of American origin.\"\
+      ,\n    \"image_url\": \"https://images.gr-assets.com/authors/1544540525p8/4039811.jpg\"\
+      \n  },\n  \"description\": \"The Traitor takes place two years after \\\"The\
+      \ Son\\\" and runs parallel with the early events in Divergent.\",\n  \"publisher\"\
+      : \"Katherine Tegen Books\",\n  \"price\": 20.25,\n  \"isbn\": \"006228567X\"\
+      ,\n  \"isbn13\": \"9780062285676\",\n  \"publication_year\": 2014,\n  \"publication_month\"\
+      : 7,\n  \"image_href\": \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\"\
+      ,\n  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
+      ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
+      ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"id\"; 0,\n\
+      \   \"name\": \"literature\"\n }\n }\n   ],\n  \"amount\" : 450,\n  \"timestamp\"\
+      : \"1989-01-01\"\n}"
   CartBook:
     type: "object"
     required:
