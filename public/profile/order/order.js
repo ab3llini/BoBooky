@@ -7,7 +7,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 ];
 
 function processOrders(orders, idx=0) {
-    if(idx === orders.length - 1)
+    if(idx === orders.length)
         return;
 
     let order = orders[idx];
@@ -24,7 +24,6 @@ function processOrders(orders, idx=0) {
         else {
             o.find('.address-name').html('Deleted address');
         }
-
 
         order.Books.forEach((book, idx) => {
             loader.append_map(o.find('.book-element-container'), '/components/order/order-book-element.html', id + '_' + book.book.id, elem => {
