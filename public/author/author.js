@@ -35,8 +35,42 @@ $(() => {
                     return
                 }
 
-                $('.author-rating-qty').html(reviews.length);
+                let reviewJob = worker.newJob(reviews.length, () => {
 
+                    avg_rating = parseInt(avg_rating / reviews.length);
+
+                    // Retrieve and map author
+                    api.get.author.get(id)
+                        .then(author => {
+
+                            // Set page title
+                            document.title = author.name;
+
+                            let ad_arr = author.description.split(' ');
+
+
+                            // Load JSON
+                            api.map({
+                                '.author-name': author.name,
+                                '.author-rating-val': avg_rating,
+                                '.author-description': ad_arr.slice(0, 80).join(' '),
+                                '.author-full-description': ad_arr.slice(80, ad_arr.length).join(' '),
+                            });
+
+                            $('.author-image > .img').css("background-image", "url(" + author.image_url + ")");
+                            $('.author-events').attr('href', '/search/event/?q=' + author.name);
+
+                            //Inject rating
+                            rating.append_rating('.author-rating', avg_rating).then(o => { loadingJob.completeTask() })
+
+                        })
+                        .catch(e => {
+                            modal.error(e)
+                        });
+                });
+
+
+                $('.author-rating-qty').html(reviews.length);
                 reviews.forEach(function (review) {
                     loader.append_map('.author-reviews-container', '/components/review/review.html', review.id, (o) => {
                         o.find('.author').html(review.author.name + ' ' + review.author.surname);
@@ -45,42 +79,14 @@ $(() => {
                         avg_rating += review.rating;
                         rating.append_rating(o.find('.rating'), review.rating)
                     }).then(() => {
-                        avg_rating /= reviews.length;
-                        loadingJob.completeTask()
+                        reviewJob.completeTask()
                     })
                 })
             }).catch(e => {
                 modal.error(e)
             });
 
-            // Retrieve and map author
-            api.get.author.get(id)
-                .then(author => {
 
-                    // Set page title
-                    document.title = author.name;
-
-                    let ad_arr = author.description.split(' ');
-
-
-                    // Load JSON
-                    api.map({
-                        '.author-name': author.name,
-                        '.author-rating-val': avg_rating,
-                        '.author-description': ad_arr.slice(0, 80).join(' '),
-                        '.author-full-description': ad_arr.slice(80, ad_arr.length).join(' '),
-                    });
-
-                    $('.author-image > .img').css("background-image", "url(" + author.image_url + ")");
-                    $('.author-events').attr('href', '/search/event/?q=' + author.name);
-
-                    //Inject rating
-                    rating.append_rating('.author-rating', avg_rating).then(o => { loadingJob.completeTask() })
-
-                })
-                .catch(e => {
-                    modal.error(e)
-                });
 
             // Inject related books carousel
             loader.append('.related-container', '/components/carousel/container.html', 'related-carousel')

@@ -10,4 +10,8 @@
   }
 }
 
+.section.books {
+  min-height: calc(100vh - 650px);
+}
+
 /*# sourceMappingURL=wishlist.css.map */

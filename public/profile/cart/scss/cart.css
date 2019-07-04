@@ -7,4 +7,8 @@
   top: 100px;
 }
 
+.shopping-cart {
+  min-height: calc(100vh - 650px);
+}
+
 /*# sourceMappingURL=cart.css.map */

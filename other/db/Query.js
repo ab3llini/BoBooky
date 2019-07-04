@@ -94,7 +94,6 @@ module.exports.authorSearch = (query, theme, genre, offset = 0, limit = 20) => {
 
 module.exports.bookSearch = (query, isbn, genre, year, author, author_id, publisher, publisher_id, theme,
                              offset = 0, limit = 20, orderby, extra) => {
-    //TODO: Fix error when searching by year
     let q = `select distinct b.id, b.title, a.id as author, a.name as author_name, b.description, p.name as publisher, b.price, b.isbn,
                 b.isbn13, b.publication_year, b.publication_month, b.avg_rating, i.href as image_href,
                 i.href_small as image_href_small, b.theme
@@ -313,12 +312,10 @@ module.exports.deleteAuthorReview = (id, reviewID, userID) => {
 
 module.exports.event = () => {
     return {
-        text: `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
+        text: `select e.id, e.name, e.description, e.timestamp, e.related_author, e.related_book,
                 a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country,
                 b.title, a2.name as author_name
             from event e
-                left join event_to_image eti on e.id = eti.event_id
-                left join image i on eti.image_id = i.id
                 join address a on e.location = a.id
                 join author a2 on e.related_author = a2.id
                 join book b on e.related_book = b.id
@@ -328,12 +325,10 @@ module.exports.event = () => {
 
 module.exports.eventByID = (id) => {
     return {
-        text: `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
+        text: `select e.id, e.name, e.description, e.timestamp, e.related_author, e.related_book,
                 a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country,
                 b.title, a2.name as author_name
             from event e
-                left join event_to_image eti on e.id = eti.event_id
-                left join image i on eti.image_id = i.id
                 join address a on e.location = a.id
                 join author a2 on e.related_author = a2.id
                 join book b on e.related_book = b.id
@@ -343,12 +338,10 @@ module.exports.eventByID = (id) => {
 };
 
 module.exports.eventSearch = (query_string, name, author_name, author_id, book_name, book_id, date, date_from, date_to, location, offset, limit, oderby, extra) => {
-    let q = `select e.id, e.name, e.description, e.timestamp, i.href, i.href_small, e.related_author, e.related_book,
+    let q = `select e.id, e.name, e.description, e.timestamp, e.related_author, e.related_book,
                     a.id as address_id, a.name as address_name, a.address_line_1, a.address_line_2, a.cap, a.city, a.country,
                     a2.name as author_name, b.title
              from event e
-                      left join event_to_image eti on e.id = eti.event_id
-                      left join image i on eti.image_id = i.id
                       join address a on e.location = a.id
                       left join author a2 on e.related_author = a2.id
                       left join book b on e.related_book = b.id` + ' ';
@@ -358,9 +351,9 @@ module.exports.eventSearch = (query_string, name, author_name, author_id, book_n
     let values = [];
 
     if (query_string !== undefined) {
-        q += clause + ' ((lower(e.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') ' +
+        q += clause + ' ((lower(e.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') or (lower(a.city) LIKE \'%\' || lower($' + placeholder + ') || \'%\')' +
             'or (lower(a2.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\') or (lower(b.title) LIKE \'%\' || lower($' + placeholder + ') || \'%\')) ' +
-            ' ';
+            'or  (lower(a.name) LIKE \'%\' || lower($' + placeholder + ') || \'%\')';
         clause = 'and';
         placeholder += 1;
         values.push(query_string)

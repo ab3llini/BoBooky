@@ -29,6 +29,7 @@
 .search-bar .form-control {
   font-size: 24px;
   font-weight: 400;
+  color: #fff;
 }
 
 .search-bar .form-control, .search-bar .btn.round {

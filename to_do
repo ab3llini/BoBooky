@@ -1,41 +1,13 @@
-
-Gianpy
-----------------------------------------------------------------------------
-Ti ho fixato tutti gli events. Ora per favore fixami tu la search che fa pena. Nel senso che se cerco qualcosa non cerca nulla
-se non il nome autore e altre 2 cose. Se guardi la query per search events, dato in ingresso query_string, confronta con 3 o 4 colonne e stop.
-Deve guardare anche location, titolo libro, etc etc. Grazie.
-
-
-Albi
-----------------------------------------------------------------------------
-
 Luna - style
 -----------------------------------------------------------------------------
 - single book
 - single author
 - single event
 - stile dei filtri di ricerca (responsive)
-- Carrello: allineamenti bottoni - e + ; barra bottom mobile bianca
 - CONTROLLA IL RESTO -> events, orders, register, add new address
 - ! definire grandezza font coerenti in tutto il sito !
-- Footer links pls ? (albi)
 
 
-Tutti
----------------------------------------------------------------------------------------------------------------
-- Tutti i link dentro a genres/themes sono rotti (o quasi tutti). Tra l'a
-
-//MISSING LINKS
-- Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
-- Navbar
-- profile nella navbar: sezione "my reviews da togliere" (?)
-- Tutti i generi / temi (da controllare se fungono)
-
-
-//Optional to implement
-
-- Navbar: JS far trasformare icona hamburger in una X quando cliccata, far trasformare le frecce da down a up quando cliccate
-- (404 page)
 - accessibilità (valutata ahime non si sa su cosa): ritrovare e rimettere voci leggibili navbar + aggiungere nel footer o navbar possibilità di ingrandire i font
 
 

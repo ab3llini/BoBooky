@@ -5,6 +5,7 @@ var fs = require('fs'),
     http = require('http');
 
 var serveStatic = require('serve-static');
+const swaggerUi = require('swagger-ui-express');
 
 var express = require('express');
 var app = express();
@@ -29,9 +30,7 @@ passport.use(new Strategy(
             password: password
         })
             .then((result) => {
-                console.warn('1 username = ' + username + ' pass=' + password);
-
-                console.log('New login: ' + username);
+                console.log('New login from: ' + username);
                 done(null, {
                     name: result.name,
                     surname: result.surname,
@@ -41,8 +40,7 @@ passport.use(new Strategy(
                 })
             })
             .catch(e => {
-                console.warn(e);
-                console.log('Login failed: ' + username);
+                console.log('New login attempt failed from: ' + username);
                 done(null, false)
             })
     }
@@ -50,9 +48,8 @@ passport.use(new Strategy(
 
 // swaggerRouter configuration
 var options = {
-    swaggerUi: path.join(__dirname, '/swagger.json'),
     controllers: path.join(__dirname, './other/controllers'),
-    useStubs: process.env.NODE_ENV === 'development' // Conditionally turn on stubs (mock mode)
+    useStubs: process.env.NODE_ENV === 'development', // Conditionally turn on stubs (mock mode)
 };
 
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
@@ -86,11 +83,14 @@ app.use('/api/user/logout', function (req, res, next) {
     writer.writeJson(res, {massage: 'Logout successful'})
 });
 
+app.use('/backend/swaggerui', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+
+
 app.get('/profile/*', (req, res, next) => {
     if (req.user !== undefined)
         return next();
     return res.status(401).json({
-        error: 'User not authenticated'
+        error: 'Forbidden section: user not authenticated'
     })
 
 }, function (req, res, next) {
@@ -120,17 +120,16 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
     // Route validated requests to appropriate controller
     app.use(middleware.swaggerRouter(options));
 
-    // Serve the Swagger documents and Swagger UI
-    app.use(middleware.swaggerUi());
-
     app.use(serveStatic(path.join(__dirname, 'node_modules')));
     app.use(serveStatic(path.join(__dirname, 'public')));
 
 
     // Start the server
     http.createServer(app).listen(serverPort, function () {
-        console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
-        console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
+        console.log('Server up and running.')
+        console.log('Backend docs served at /backend/main.html')
+        console.log('Swagger docs served at /backend/swaggerui')
+
     });
 
 });

@@ -16,7 +16,7 @@ body {
 }
 
 .navbar {
-  background: #21263F;
+  background: #21263f;
 }
 
 .address-card {
@@ -36,7 +36,7 @@ body {
 }
 
 .dropdown-menu > li > a:hover {
-  background-color: #21263F;
+  background-color: #21263f;
   opacity: 0.9;
   background-image: none;
 }

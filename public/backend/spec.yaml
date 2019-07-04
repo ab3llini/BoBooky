@@ -12,7 +12,7 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "bobooky.herokuapp.com"
+host: "localhost"
 basePath: "/api"
 schemes:
   - "http"
@@ -835,24 +835,7 @@ paths:
           schema:
             $ref: "#/definitions/Order"
           x-examples:
-            application/json: "{\n   \"OrderID\":123456789,\n   \"user\":{\n      \"\
-            id\":1,\n      \"name\":\"Alan\",\n      \"surname\":\"Turing\",\n   \
-            \   \"email\":\"alan.turing@example.com\",\n      \"birthdate\":\"1989-01-01\"\
-            \n   },\n   \"books\":[\n     {\n  \"id\": 10,\n  \"title\": \"The Traitor\
-            \ (Divergent, #0.4)\",\n  \"author\": {\n    \"id\": 10,\n    \"name\"\
-            : \"Veronica Roth\",\n    \"description\": \"Veronica Roth, born in 1988,\
-            \ is a renowned novelist and short story writer of American origin.\"\
-            ,\n    \"image_url\": \"https://images.gr-assets.com/authors/1544540525p8/4039811.jpg\"\
-            \n  },\n  \"description\": \"The Traitor takes place two years after \\\
-            \"The Son\\\" and runs parallel with the early events in Divergent.\"\
-            ,\n  \"publisher\": \"Katherine Tegen Books\",\n  \"price\": 20.25,\n\
-            \  \"isbn\": \"006228567X\",\n  \"isbn13\": \"9780062285676\",\n  \"publication_year\"\
-            : 2014,\n  \"publication_month\": 7,\n  \"image_href\": \"https://images.gr-assets.com/books/1393687607l/18080923.jpg\"\
-            ,\n  \"image_href_small\": \"https://images.gr-assets.com/books/1393687607m/18080923.jpg\"\
-            ,\n  \"avg_rating\": 5,\n  \"genres\": [\n    \"to-read\",\n    \"young-adult\"\
-            ,\n    \"dystopian\",\n    \"dystopia\"\n  ], \n \"theme\": {\n   \"id\"\
-            ; 0,\n   \"name\": \"literature\"\n }\n }\n   ],\n  \"amount\" : 450,\n\
-            \  \"timestamp\": \"1989-01-01\"\n}"
+            application/json: "This request is too complicated to provide an example. For instance the order address must exist. Please do it through D0"
       responses:
         200:
           description: "Status 200"
@@ -1391,7 +1374,6 @@ definitions:
       qty:
         type: "integer"
   Book_author:
-    type: "object"
     properties:
       id:
         type: "number"
@@ -1402,7 +1384,6 @@ definitions:
       image_url:
         type: "string"
   Review_author:
-    type: "object"
     properties:
       id:
         type: "number"
@@ -1415,7 +1396,6 @@ definitions:
       birthdate:
         type: "string"
   Event_location:
-    type: "object"
     properties:
       country:
         type: "string"
@@ -1432,14 +1412,12 @@ definitions:
       address_line_2:
         type: "string"
   Cart_price:
-    type: "object"
     properties:
       value:
         type: "number"
       currency:
         type: "string"
   Cart_books:
-    type: "object"
     properties:
       id:
         type: "number"

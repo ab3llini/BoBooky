@@ -19,7 +19,7 @@ $(() => {
         // append books
         books.forEach(book => {
             // Add book to results
-            loader.append_map('.books-container', '/components/search/book.html', book.id, function (book_obj) {
+            loader.append_map('.books-container', '/components/wishlist/book.html', book.id, function (book_obj) {
                 book_obj.find('.book-href').attr('href', '/book/?id=' + book.id);
                 book_obj.find('.author-href').attr('href', '/author/?id=' + book.author.id);
                 book_obj.find('.image').css("background-image", "url(" + book.image_href + ")");
@@ -30,14 +30,12 @@ $(() => {
                 book_obj.find('.genres').html(book.genres.map(genre => '<a class="text-decoration-none text-gray" href="/search/genre/?genre=' + genre.name + '">' + genre.name + '</a>').join(' / '));
                 book_obj.find('.theme').html('<a class="text-decoration-none text-gray" href="/search/theme/?theme=' + book.theme + '">' + book.theme + '</a>');
                 book_obj.find('.price').html(book.price);
-                book_obj.find('.book-rating-val').html(book.avg_rating);
+                book_obj.find('.book-rating-val').html(parseInt(book.avg_rating));
 
                 // Setup in wishlist
                 if (inWishlist.indexOf(book.id) >= 0) {
                     let $btn = book_obj.find('.wishlist');
                     let $heart = $btn.find('.fa');
-                    $heart.removeClass('fa-heart-o');
-                    $heart.addClass('fa-heart')
                 }
 
                 // Bind handlers for wishlist
@@ -48,8 +46,7 @@ $(() => {
                         api.post.user.wishlist.delete(book.id).then(() => {
                             console.log('Removed');
                             let $heart = $(this).find('.fa');
-                            $heart.removeClass('fa-heart');
-                            $heart.addClass('fa-heart-o');
+
                             inWishlist.splice(idx, 1)
                             $(this).parents('.book').first().slideUp()
                         }).catch(e => modal.error(e))
@@ -57,14 +54,12 @@ $(() => {
                         api.post.user.wishlist.add(book.id).then(() => {
                             console.log('Added');
                             let $heart = $(this).find('.fa');
-                            $heart.removeClass('fa-heart-o');
-                            $heart.addClass('fa-heart');
                             inWishlist.push(book.id)
                         }).catch(e => modal.error(e))
                     }
                 });
 
-                rating.append_rating(book_obj.find('.rating'), book.avg_rating);
+                rating.append_rating(book_obj.find('.rating'), parseInt(book.avg_rating));
 
                 api.get.book.reviews(book.id).then(reviews => {
                     if (reviews === undefined) {

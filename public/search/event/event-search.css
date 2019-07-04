@@ -19,11 +19,11 @@
 }
 
 .search-bar-wrapper {
-  border: 1px solid #21263F;
+  border: 1px solid #21263f;
   transition: 0.2s ease-in-out;
   border-radius: 34px;
   overflow: hidden;
-  color: #21263F;
+  color: #21263f;
 }
 
 .search-bar-wrapper .form-control {
@@ -36,18 +36,18 @@
 }
 
 .search-bar-wrapper .form-control::placeholder {
-  color: #21263F;
+  color: #21263f;
 }
 
 .search-bar-wrapper .form-control {
   outline: none !important;
   box-shadow: none !important;
-  color: #21263F;
+  color: #21263f;
   transition: 0.2s ease-in-out;
 }
 
 .search-bar-wrapper i {
-  color: #21263F;
+  color: #21263f;
   transition: 0.2s ease-in-out;
 }
 

@@ -11,14 +11,14 @@
 
 div .blurred-bg {
   position: relative;
-  background: #21263F;
+  background: #21263f;
   opacity: 0.9;
 }
 
 div .blurred-bg:before {
   content: "";
   position: absolute;
-  background: #21263F;
+  background: #21263f;
   filter: blur(5px);
 }
 
@@ -46,6 +46,10 @@ div .blurred-bg:before {
  */
 .navbar .fa {
   font-size: 20px;
+}
+
+.nav-link {
+  cursor: pointer;
 }
 
 #books-expanded {
