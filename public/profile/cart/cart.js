@@ -19,8 +19,9 @@ function process_cart(cart, idx = 0) {
         let qty = b.qty;
         o.find('.book-title').html(book.title);
         o.find('.book-author').html(book.author);
+        o.find('.book-title-href').attr('href', '/book/?id=' + book.id);
         o.find('.book-qty').html(qty);
-        o.find('.book-price').html('€ ' + (qty * book.price).toFixed(2));
+        o.find('.book-price').html('€ ' + book.price.toFixed(2));
         o.find('.book-image').attr('src', book.image_href);
         o.find('.plus-button').click(function () {
             let $item = $(this).parents('.shopping-item').first();

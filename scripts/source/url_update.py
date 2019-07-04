@@ -185,10 +185,30 @@ def insert_reviews(connection):
 
     connection.commit()
 
+def fix_prices(connection):
+    q_fetch_books = 'select id from book'
+    cursor = connection.cursor()
+    cursor.execute(q_fetch_books)
+
+    # 4 stands for User = "User"
+    q_update_price = 'update book set price = %s where id = %s'
+
+    for row in tqdm(cursor.fetchall()):
+        book_id = row[0]
+
+        price = random.randint(9, 35)
+        decimal = random.choice([29, 69, 99])
+        price = price + decimal / 100
+
+        cursor.execute(q_update_price, (price, book_id))
+
+    connection.commit()
+
+
 if __name__ == '__main__':
     conn = psycopg2.connect(host="ec2-79-125-2-142.eu-west-1.compute.amazonaws.com",
                             database="d3k4sooera9fsh",
                             user="kaxtczmqrauqfc",
                             password="a46181c55c68f90d53b029a88daa5800f4b13f203287f0df528a993ef18e5b14")
-    insert_reviews(conn)
+    fix_prices(conn)
     conn.close()

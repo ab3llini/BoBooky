@@ -16,7 +16,7 @@ function processOrders(orders, idx=0) {
         let ts = new Date(order.timestamp);
 
         o.find('.order-date').html(ts.getDate() + ' ' + monthNames[ts.getMonth()] + ' ' + ts.getFullYear());
-        o.find('.order-amount').html('Total € ' + order.amount.split('$')[1]);
+        o.find('.order-amount').html('€ ' + order.amount.split('$')[1]);
         o.find('.address-name').html(order.address.name + ' (' + order.address.city + ', ' + order.address.country + ')');
         order.Books.forEach((book, idx) => {
             loader.append_map(o.find('.book-element-container'), '/components/order/order-book-element.html', id + '_' + book.book.id, elem => {

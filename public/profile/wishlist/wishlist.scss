@@ -16,3 +16,7 @@ $book-width: 14rem;
         height: 1.6 * $book-width;
     }
 }
+
+.section.books {
+    min-height: calc(100vh - 650px);
+}

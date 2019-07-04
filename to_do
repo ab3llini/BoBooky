@@ -1,20 +1,3 @@
-Albi & Gianpy
-----------------------------------------------------------------------------
-- Ho creato una cartella backend e iniziato a mettere dentro le varie cose.
-- Leggiti le guidelines (pdf nella cartella)
-- Aiutami a scrivere il file MD che poi lo convertiamo a html
-- nella spec dobbiamo mettere gli esempi che vanno
-- aggiungere le reviews ai libri/autori.
-- diagrammi er etc etc etc. CE N'E' DI ROBA DA FARE.
-
-- il footer continua a dare problemi nella visualizzazione mobile del carrello vuoto e del discover :(
-- Events: rendere cliccabile anche il titolo dell'evento
-- My orders: togliere "total" da dove iniettiamo il dato del prezzo pls
-
-gian
-----
-events crasha. si crasha.
-
 Luna - style
 -----------------------------------------------------------------------------
 - single book
@@ -25,21 +8,6 @@ Luna - style
 - ! definire grandezza font coerenti in tutto il sito !
 
 
-Tutti
----------------------------------------------------------------------------------------------------------------
-- Tutti i link dentro a genres/themes sono rotti (o quasi tutti). Tra l'a
-
-//MISSING LINKS
-- Aggiungere il link all'evento dalla pagina del libro + il fake "write a review"
-- Navbar
-- profile nella navbar: sezione "my reviews da togliere" (?)
-- Tutti i generi / temi (da controllare se fungono)
-
-
-//Optional to implement
-
-- Navbar: JS far trasformare icona hamburger in una X quando cliccata, far trasformare le frecce da down a up quando cliccate
-- (404 page)
 - accessibilità (valutata ahime non si sa su cosa): ritrovare e rimettere voci leggibili navbar + aggiungere nel footer o navbar possibilità di ingrandire i font
 
 

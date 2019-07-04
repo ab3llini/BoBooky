@@ -30,9 +30,7 @@ passport.use(new Strategy(
             password: password
         })
             .then((result) => {
-                console.warn('1 username = ' + username + ' pass=' + password);
-
-                console.log('New login: ' + username);
+                console.log('New login from: ' + username);
                 done(null, {
                     name: result.name,
                     surname: result.surname,
@@ -42,8 +40,7 @@ passport.use(new Strategy(
                 })
             })
             .catch(e => {
-                console.warn(e);
-                console.log('Login failed: ' + username);
+                console.log('New login attempt failed from: ' + username);
                 done(null, false)
             })
     }
@@ -93,7 +90,7 @@ app.get('/profile/*', (req, res, next) => {
     if (req.user !== undefined)
         return next();
     return res.status(401).json({
-        error: 'User not authenticated'
+        error: 'Forbidden section: user not authenticated'
     })
 
 }, function (req, res, next) {
